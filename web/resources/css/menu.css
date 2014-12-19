@@ -1,0 +1,38 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 160px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #3186A8;
+    text-align: center;
+    padding: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover, a:active {
+    background-color: #124357;
+}
+
+
+.imagenUdc{
+    
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 0px;
+    left:500px;
+    
+    
+}

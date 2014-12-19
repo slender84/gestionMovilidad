@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Ver contrato</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <h:outputScript library="js" name="funciones.js"/>
+    </h:head>
+    <h:body styleClass="blue">
+         
+       
+        
+            
+       
+        
+        <h:form id="formTablaEquivalencias">
+            
+            <p:dataTable id="tablaEquivalencias"
+                         emptyMessage="no hay equivalencias"
+                         selection="#{misEquivalenciasController.selectedEquivalencias}"
+                         value="#{misEquivalenciasController.listaAuxEquivalencias}"
+                         var="equivalencia"
+                         styleClass="verTablaEquivalencias"
+                         rowKey="#{equivalencia.idequivalencia}"
+                         widgetVar="equivalenciaTable">
+                         
+                <f:facet name="header">Estado del contrato:
+                    <h:outputText value=" #{misEquivalenciasController.selectedContrato.estado}"/><br/>última modificación
+                    <h:outputText value="#{misEquivalenciasController.selectedContrato.fecha}">
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                           
+                </f:facet>
+                
+                
+                
+                <p:column headerText="UDC" styleClass="verAsignatura">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="Cr" styleClass="verCreditos">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="Periodo" styleClass="verPeriodo">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.periodo}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="verAsignatura">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                       <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                         <br/>
+                    </ui:repeat>
+                   
+                </p:column>
+                
+                <p:column headerText="Cr" styleClass="verCreditos">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos} "/>
+                        
+                        <br/>
+                    </ui:repeat>
+                   
+                </p:column>
+                
+                <p:column headerText="Periodo" styleClass="verPeriodo">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.periodo} "/>
+                        
+                        <br/>
+                    </ui:repeat>
+                   
+                </p:column>
+                 
+                 
+                 
+         <p:columnGroup type="footer">
+            <p:row>
+                <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
+                <p:column footerText="#{misEquivalenciasController.creditosA}" styleClass="creditos"/>
+                <p:column/>
+                <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
+                <p:column footerText="#{misEquivalenciasController.creditosB}" styleClass="creditos"/>
+                <p:column />
+            </p:row>
+            
+                </p:columnGroup>
+               
+            </p:dataTable>
+            
+           <br/>
+           <p:commandLink value="crear contrato nuevo a partir de este" action="#{misEquivalenciasController.nuevoAceptado}" rendered="#{misEquivalenciasController.ultimo}" ajax="false"/>
+            
+        </h:form>
+
+    <br/>
+    
+            <h:outputLink value="verMisMovilidades.xhtml" ><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+<br/>
+        <h:form>
+            
+             <p:commandButton value="cerrar sesión"  action="#{beanUtilidades.salir}" ajax="false"/>
+            
+            </h:form>
+            
+            <br />
+        
+        
+      
+       
+         
+        
+        
+        
+        
+    </h:body>
+</html>
+

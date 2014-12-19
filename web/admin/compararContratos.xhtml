@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Gestión de contrato</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <h:outputScript library="js" name="funciones.js"/>
+    </h:head>
+    <h:body styleClass="blue">
+      
+        <p:panel id="headerContratos">
+        
+            <h:outputLabel value="Contratos de: "/>
+            <h:outputText value="#{equivalenciasController.selectedMovilidad.usuario.nombre }"/>
+            
+            <h:outputText value=" #{equivalenciasController.selectedMovilidad.usuario.apellido1}"/>
+            <br/>
+            <h:outputLabel value="país: "/>
+            <h:outputText value="#{equivalenciasController.selectedMovilidad.universidad.pais.nombre}"/><br/>
+            <h:outputLabel value="Universidad: "/>
+            <h:outputText value=" #{equivalenciasController.selectedMovilidad.universidad.nombre} "/>
+            <br/>
+            <p:outputLabel value="inicio: "/>
+            <h:outputText value="#{equivalenciasController.selectedMovilidad.fechaInicio}">
+            
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:outputText><br/>
+             
+            <p:outputLabel value="fin: "/>               
+            <h:outputText value="#{equivalenciasController.selectedMovilidad.fechaFin}">
+                
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:outputText>
+            
+        </p:panel>
+        
+        
+        <h:form id="formTablaEquivalencias" styleClass="tablaEquivalenciasAdmin" >
+            <p:growl id="msgs" />
+               <p:dataTable id="tablaEquivalenciasAdmin"
+                         emptyMessage="no hay equivalencias"
+                         selection="#{equivalenciasController.selectedEquivalencias}"
+                         value="#{equivalenciasController.equivalenciasRevisadas}"
+                         var="equivalencia"
+                         rowStyleClass="#{equivalencia.igual eq 'true'?'gold':null}"
+                         rowKey="#{equivalencia.equivalencia.idequivalencia}"
+                         widgetVar="equivalenciaTable">
+                         
+                <f:facet name="header">Estado del contrato:
+                    <h:outputText value=" #{equivalenciasController.selectedContrato.estado}"/><br/>última modificación
+                    <h:outputText value="#{equivalenciasController.selectedContrato.fecha}">
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                           
+                </f:facet>
+                
+                <p:column headerText="UDC" styleClass="nuevoAsignaturaAdmin">
+                    <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
+                    <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column> 
+                       
+                   
+                <p:column headerText="P" styleClass="nuevoPeriodoAdmin">
+                    <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                         <h:outputText value="A"  rendered="#{asignatura.asignatura.periodo eq 'anual'}"/>
+                         <h:outputText value="P"  rendered="#{asignatura.asignatura.periodo eq 'primavera'}"/>
+                         <h:outputText value="I"  rendered="#{asignatura.asignatura.periodo eq 'invierno'}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                       
+                
+                   <p:column headerText="#{equivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="nuevoAsignaturaAdmin">
+                       <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                    <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
+                        <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column> 
+                       
+                   
+                <p:column headerText="P" styleClass="nuevoPeriodoAdmin">
+                    <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                         <h:outputText value="A"  rendered="#{asignatura.asignatura.periodo eq 'anual'}"/>
+                         <h:outputText value="P"  rendered="#{asignatura.asignatura.periodo eq 'primavera'}"/>
+                         <h:outputText value="I"  rendered="#{asignatura.asignatura.periodo eq 'invierno'}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                   
+                <p:column styleClass="visible" headerText="Vi" sortBy="#{equivalencia.equivalencia.visible}">
+                    
+                    <h:outputText value="#{equivalencia.equivalencia.visible}"/>
+                    
+                </p:column>
+                   
+                <p:column selectionMode="multiple" styleClass="nuevoMultipleAdmin"/>
+                
+                <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column footerText="Total créditos:"/>
+                        <p:column footerText="#{equivalenciasController.creditosA}" />
+                        <p:column/>
+                        <p:column footerText="Total créditos:"/>
+                        <p:column footerText="#{equivalenciasController.creditosB}" />
+                        <p:column/>
+                        <p:column/>
+                        <p:column/>
+                        
+                    </p:row>
+                   
+                </p:columnGroup>
+                
+                <f:facet name="footer" >
+                    <p:commandButton  id="publicaBtn"  update=":formTablaEquivalencias:" icon="ui-icon-search" value="publicar" action="#{equivalenciasController.publicarEquivalencia}"
+                                      oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{equivalenciasController.user.tipoUsuario eq 0}"/>
+                    <p:commandButton   process=":formTablaEquivalencias:" update=":formTablaEquivalencias" icon="ui-icon-search" value="invisible" action="#{equivalenciasController.noPublicar}"
+                                   oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{equivalenciasController.user.tipoUsuario eq 0}"/>
+                    
+                </f:facet>
+           
+            </p:dataTable>
+            
+        </h:form>
+        <h:form id="tablaEquivalenciasComparadoAdmin" styleClass="tablaEquivalenciasComparadoAdmin">
+            
+            <p:dataTable id="tablaComparado"
+                         value="#{equivalenciasController.equivalenciasRevisadasComparado}"
+                         rowStyleClass="#{equivalenciaB.igual eq 'true'?'red':null}"
+                         var="equivalenciaB"
+                         rowKey="#{equivalenciaB.equivalencia.idequivalencia}"
+                         widgetVar="equivalenciaComparado"
+                         emptyMessage="no hay equivalencias">
+                <f:facet name="header">Estado del contrato:
+                    <h:outputText value=" #{equivalenciasController.contratoComparado.estado}"/><br/>última modificación
+                    <h:outputText value="#{equivalenciasController.contratoComparado.fecha}">
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                </f:facet>
+                  <p:column headerText="UDC" styleClass="nuevoAsignaturaAdmin">
+                      <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
+                    <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column> 
+                       
+                   
+                <p:column headerText="P" styleClass="nuevoPeriodoAdmin">
+                    <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                         <h:outputText value="A"  rendered="#{asignatura.asignatura.periodo eq 'anual'}"/>
+                         <h:outputText value="P"  rendered="#{asignatura.asignatura.periodo eq 'primavera'}"/>
+                         <h:outputText value="I"  rendered="#{asignatura.asignatura.periodo eq 'invierno'}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                       
+                
+                <p:column headerText="#{equivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="nuevoAsignaturaAdmin">
+                    <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                    <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
+                        <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column> 
+                       
+                   
+                <p:column headerText="P" styleClass="nuevoPeriodoAdmin">
+                    <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                         <h:outputText value="A"  rendered="#{asignatura.asignatura.periodo eq 'anual'}"/>
+                         <h:outputText value="P"  rendered="#{asignatura.asignatura.periodo eq 'primavera'}"/>
+                         <h:outputText value="I"  rendered="#{asignatura.asignatura.periodo eq 'invierno'}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                <p:column headerText="Vi" styleClass="visible" sortBy="#{equivalenciaB.equivalencia.visible}">
+                    
+                    <h:outputText value="#{equivalenciaB.equivalencia.visible}"/>
+                    
+                </p:column>
+                
+                 <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column footerText="Total créditos:"/>
+                        <p:column footerText="#{equivalenciasController.creditosComparadoA}"/>
+                        <p:column/>
+                        <p:column footerText="Total créditos:"/>
+                        <p:column footerText="#{equivalenciasController.creditosComparadoB}"/>
+                        <p:column/>
+                        <p:column/>
+                        
+                        
+                    </p:row>
+                   
+                </p:columnGroup>
+                
+            </p:dataTable>
+                
+            
+        </h:form>
+        <br/>
+        
+        
+        
+        
+        <p:outputPanel rendered="#{equivalenciasController.user.tipoUsuario eq 0}">
+            <p:outputLabel value="Cambiar estado del contrato"/>
+        <h:form id="aprobarContrato" rendered="#{equivalenciasController.user.tipoUsuario eq 0}">
+            
+            
+            <p:selectOneMenu value="#{equivalenciasController.apruebaOrechaza}" required="true"
+                             requiredMessage="hay que seleccionar un estado">
+            
+                <f:selectItem noSelectionOption="true" itemValue="#{null}" itemLabel="selecciona una opción"/>
+                <f:selectItems value="#{beanUtilidades.listaEstados}" var="estado" itemLabel="#{estado.estado}" itemValue="#{estado.estado}"/>
+            
+            
+            </p:selectOneMenu>
+            <br/>
+           
+            <p:commandButton value="Confirmar" action="#{equivalenciasController.cambiarEstadoContrato}" update=":formTablaEquivalencias" oncomplete="PF('equivalenciaTable').unselectAllRows();"/>
+         
+             
+          
+        </h:form>
+        </p:outputPanel>   
+    
+    
+       <br/>
+       <br/>
+       <h:outputLink value="verContratos.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        <br/>
+         <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+        
+        
+        <br />
+        
+        
+       
+        
+    </h:body>
+</html>
+
+

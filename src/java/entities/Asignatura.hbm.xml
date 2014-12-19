@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-dic-2014 9:35:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Asignatura" table="asignatura" catalog="gestordb" optimistic-lock="version">
+        <composite-id name="id" class="entities.AsignaturaId">
+            <key-property name="codAsignatura" type="int">
+                <column name="codAsignatura" />
+            </key-property>
+            <key-property name="nombreUniversidad" type="string">
+                <column name="nombreUniversidad" length="45" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="universidad" class="entities.Universidad" update="false" insert="false" fetch="select">
+            <column name="nombreUniversidad" length="45" not-null="true" />
+        </many-to-one>
+        <property name="nombreAsignatura" type="string">
+            <column name="nombreAsignatura" length="50" />
+        </property>
+        <property name="creditos" type="java.lang.Short">
+            <column name="creditos" />
+        </property>
+        <property name="periodo" type="string">
+            <column name="periodo" length="10" />
+        </property>
+        <property name="infoAsigantura" type="string">
+            <column name="infoAsigantura" />
+        </property>
+        <property name="webAsignatura" type="string">
+            <column name="webAsignatura" length="200" />
+        </property>
+        <property name="facultad" type="string">
+            <column name="facultad" length="50" />
+        </property>
+        <property name="titulacion" type="string">
+            <column name="titulacion" length="45" />
+        </property>
+        <set name="miembroGrupoAsignaturaBs" table="miembro_grupo_asignatura_b" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codAsignatura" />
+                <column name="nombreUniversidad" length="45" />
+            </key>
+            <one-to-many class="entities.MiembroGrupoAsignaturaB" />
+        </set>
+        <set name="miembroGrupoAsignaturaAs" table="miembro_grupo_asignatura_a" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codAsignatura" />
+                <column name="nombreUniversidad" length="45" />
+            </key>
+            <one-to-many class="entities.MiembroGrupoAsignaturaA" />
+        </set>
+    </class>
+</hibernate-mapping>

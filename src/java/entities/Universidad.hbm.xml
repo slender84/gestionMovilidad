@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-dic-2014 9:35:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Universidad" table="universidad" catalog="gestordb" optimistic-lock="version">
+        <id name="nombre" type="string">
+            <column name="nombre" length="45" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pais" class="entities.Pais" fetch="select">
+            <column name="pais" length="45" />
+        </many-to-one>
+        <property name="info" type="string">
+            <column name="info" />
+        </property>
+        <property name="web" type="string">
+            <column name="web" length="50" />
+        </property>
+        <property name="codUniversidad" type="string">
+            <column name="codUniversidad" length="15" not-null="true" unique="true" />
+        </property>
+        <set name="movilidads" table="movilidad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nombreUniversidad" length="45" not-null="true" />
+            </key>
+            <one-to-many class="entities.Movilidad" />
+        </set>
+        <set name="asignaturas" table="asignatura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="nombreUniversidad" length="45" not-null="true" />
+            </key>
+            <one-to-many class="entities.Asignatura" />
+        </set>
+    </class>
+</hibernate-mapping>

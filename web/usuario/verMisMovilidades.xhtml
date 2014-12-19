@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    
+    <h:head>
+        <title>Mis movilidades</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body onload="PF('movTable').filter()" styleClass="blue">
+        
+        
+        
+        
+        <p:panel>
+            
+            
+            <h:outputLabel value="movilidades de: "/>
+            <h:outputText value="#{misMovilidadesController.usuario.login}"/>
+            
+        </p:panel>
+        
+        <br/>
+        
+        <h:form id="formMovilidad">
+            
+            <p:growl id="msgs"/>
+            
+            <p:dataTable id="t1" var="movilidad" value="#{misMovilidadesController.listaMisMovilidades}"
+                         emptyMessage="no hay movilidades"
+                         filteredValue="#{misMovilidadesController.filteredMovilidades}"
+                         widgetVar="movTable"
+                         rowKey="#{movilidad.codMovilidad}"
+                         styleClass="borderless">
+                
+                <p:panel>
+                    
+                    <h:outputText value="#{movilidad.usuario.login}"/>
+                    
+                </p:panel>
+                
+                    
+               
+                
+                <p:column headerText="universidad" sortBy="#{movilidad.universidad.nombre}">
+                
+                    <h:outputText value="#{movilidad.universidad.nombre}"/>
+                    
+                
+                
+                </p:column>
+                
+                <p:column headerText="curso académico" sortBy="#{movilidad.cursoacademico.cursoAcademico}" styleClass="centrar">
+                    
+                    <h:outputText value="#{movilidad.cursoacademico.cursoAcademico}"/>
+                    
+                </p:column>
+                
+               
+                <p:column headerText="fecha inicio" sortBy="#{movilidad.fechaInicio}" styleClass="centrar">
+                    
+                    <h:outputText value="#{movilidad.fechaInicio}">
+                                  <f:convertDateTime pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                    
+                    
+                </p:column>
+            
+                <p:column headerText="fecha fin" sortBy="#{movilidad.fechaFin}" styleClass="centrar">
+                    
+                    <h:outputText value="#{movilidad.fechaFin}">
+                                  <f:convertDateTime pattern="dd-MM-yyyy" />
+                    </h:outputText>
+                </p:column>
+                
+                <p:column filterBy="#{movilidad.estado}" filterMatchMode="exact" headerText="estado" styleClass="centrar" >
+                
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('movTable').filter()">
+                            <f:selectItem itemLabel="todas" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems var="estados" value="#{beanUtilidades.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
+                        </p:selectOneMenu>
+                            
+                    </f:facet>
+                    <h:outputText value="#{movilidad.estado}"/>
+                </p:column>
+                
+                <p:column headerText="ver contratos" styleClass="centrar">
+                         
+                     <p:commandButton value="contratos" action="#{verMisContratosController.verContratos}" update=":panelContratos" rendered="#{movilidad.estado eq 'aceptada'}">
+                         
+                             <f:setPropertyActionListener value="#{movilidad}" target="#{verMisContratosController.selectedMovilidad}"/>
+                             
+                         </p:commandButton>
+                         
+                         
+                     </p:column>
+                
+                
+                <p:column headerText="eliminar" styleClass="centrar">
+                    
+                    <p:commandButton  value="eliminar" action="#{misMovilidadesController.eliminarMovilidad}" update=":formMovilidad" onclick= "if (! confirm('¿seguro que quieres borrar?'))return false"
+                                      icon="edit_icon"  oncomplete="PF('movTable').filter()"> <!--clearFilters() tb vale-->
+                        <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
+                    
+                    </p:commandButton>
+                    
+                </p:column>
+                
+                 
+                 
+                
+            </p:dataTable> 
+            
+            
+        </h:form>
+        <br/>
+        <br/>
+        
+         <p:outputPanel id="panelContratos">
+        <h:form id="formContratos">
+            
+            <p:dataTable widgetVar="tablaContratos"
+                         rendered="#{verMisContratosController.visibleContratos}"  
+                         value="#{verMisContratosController.listaContratos}"
+                         var="contrato"
+                         filteredValue="#{verMisContratosController.filteredContratos}"
+                         rowKey="#{contrato.idContrato}"
+                         emptyMessage="no hay contratos">
+                <p:column headerText="fecha" sortBy="#{contrato.fecha}">
+                    <h:outputText value="#{contrato.fecha}">
+                                  <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="estado" sortBy="#{contrato.estado}" styleClass="centrar">
+                    <h:outputText value="#{contrato.estado}"/>
+                </p:column>
+                
+                <p:column headerText="ver contrato/editar" styleClass="centrar">
+                     
+                     <p:commandButton value="ver contrato/editar" action="#{verMisContratosController.editarContrato}" ajax="false" rendered="#{contrato.estado eq 'pendiente'||contrato.estado eq 'rechazado'}">
+                        <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
+                    </p:commandButton>
+                     <p:commandButton value="Ver contrato" action="#{verMisContratosController.revisarContrato}" ajax="false" rendered="#{contrato.estado eq 'aceptado' and verMisContratosController.verAceptado==true}">
+                        <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
+                    </p:commandButton>
+                </p:column>
+                
+                
+                <p:column headerText="eliminar" styleClass="centrar">
+                    
+                    <p:commandButton value="eliminar" action="#{verMisContratosController.eliminarContrato}" update=":panelContratos :formMovilidad" rendered="#{contrato.estado eq 'pendiente'||contrato.estado eq 'rechazado'}"
+                                     onclick="if (! confirm('¿seguro que quieres borrar?')) return false" oncomplete="PF('tablaContratos').filter();" ajax="false">
+                    
+                        <f:setPropertyActionListener target="#{verMisContratosController.selectedContrato}" value="#{contrato}"/>
+                    
+                    </p:commandButton>  
+                    
+                </p:column>
+                
+               
+                
+                
+               
+            
+                <f:facet name="footer">
+                    
+                    <p:commandButton value="cerrar" action="#{verMisContratosController.cerrarContratos}" update=":panelContratos"/>
+                    <p:commandButton value="crear contrato" action="#{verMisContratosController.crearContrato}" rendered="#{verMisContratosController.nuevo}" ajax="false"/>
+                </f:facet> 
+            
+            </p:dataTable>
+           
+        </h:form>
+        </p:outputPanel>
+        
+        
+        <br/>
+        
+        <h:outputLink value="crearMovilidad.xhtml">Crear movilidad</h:outputLink>
+            
+            <br/><br/>
+            
+            
+             <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        
+        
+            
+                
+        <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+            
+        
+        
+        
+    </h:body>
+</html>
+

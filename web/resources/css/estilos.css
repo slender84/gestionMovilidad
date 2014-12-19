@@ -1,0 +1,484 @@
+.red{
+    background-color: #FFA8B4;
+}
+
+
+.green{
+    
+ background-color: green;   
+    
+}
+
+.gold{
+    
+    background-color: #FAE60F;
+    
+}
+
+
+body.green{
+    
+    background-color: greenyellow;
+    
+    
+}
+
+body.blue{
+    
+    background-color: #F2FAFA;
+}
+
+body.red{
+    
+    background-color: #F70727;
+}
+
+
+.tablaFic{
+    height: 45%;
+    width: 45%;
+    font-size: 15px;
+    position: absolute;
+    top: 58px;
+    
+}
+
+
+.asignatura{
+    
+    font-size: 15px;
+    height: 20%;
+    width: 12%;
+  
+}
+
+.creditos{
+    font-size: 15px;
+    height: 15%;
+    width: 3%;
+}
+
+.periodo{
+    font-size: 15px;
+    height: 15%;
+    width: 6%;
+}
+
+.asignatura{
+    
+    font-size: 15px;
+    height: 20%;
+    width: 12%;
+  
+}
+
+.creditos{
+    font-size: 15px;
+    height: 15%;
+    width: 3%;
+    text-align: center;
+}
+
+.periodo{
+    font-size: 15px;
+    height: 15%;
+    width: 6%;
+    text-align: center;
+}
+
+.web{
+    text-align: center;
+    font-size: 15px;
+    width: 3%;
+    height: 3%;
+}
+
+.info{
+    text-align: center;
+    font-size: 15px;
+    width: 3%;
+    height: 3%;
+    
+}
+
+.multiple{
+   width:3% ;
+   text-align:center;
+}
+
+
+.añadir{
+    
+    position: absolute;
+    top: 535px;
+    left: 580px;
+    text-align:center; 
+}
+
+.areaTexto{
+    
+    position: absolute;
+    top: 535px;
+}
+
+.cerrarAreaTexto{
+    
+    position: absolute;
+    top: 620px;
+    
+}
+
+.tablaUniversidad{
+    width: 45%;
+    height: 45%;
+    font-size: 15px;
+    position:absolute;
+    top: 58px;
+    left: 650px; 
+}
+
+
+        
+.tablaEquivalencias{
+    height: 65%;
+    width: 80%;
+    position:absolute;
+    top: 700px;
+    left:140px;
+    text-align: center;
+    font-size: 15px;
+   
+}
+
+.verTablaEquivalencias{
+    height: 65%;
+    
+    position:relative;
+    
+    //left:140px;
+    text-align: center;
+    font-size: 15px;
+   
+}
+
+
+.tablaEquivalenciasPublicas{
+    //height: 65%;
+    //width: 100%;
+    //position:absolute;
+    
+    //left:120px;
+    text-align: center;
+    font-size: 15px;
+   
+}
+
+.tablaEquivalenciasAdmin{
+    //top: 200px;
+    //left: 200px;
+    height: 50%;
+    width: 51%;
+    position:relative;
+    //text-align: center;
+    font-size: 15px;
+    
+}
+.tablaEquivalenciasAdminUnico{
+    
+    
+    position:relative;
+    //text-align: center;
+    font-size: 15px;
+    
+}
+
+
+
+.tablaEquivalenciasComparadoAdmin{
+    top:140px;
+    left: 730px;
+    height: 50%;
+    width: 45%;
+    position:absolute;
+    //text-align: center;
+    font-size: 15px;
+    
+}
+
+
+        
+    
+.tablaEquivalenciasAceptado{
+    top: 700px;
+    //left: 140px;
+    height: 45%;
+    width: 45%;
+    position:absolute;
+    text-align: left;
+    font-size: 15px;
+  
+}
+
+.tablaEquivalenciasAceptadoNuevo{
+    top: 700px;
+    left: 650px;
+    height: 45%;
+    width: 50%;
+    position:absolute;
+    text-align: left;
+    font-size: 15px;
+  
+}
+
+
+
+.movilidadAdmin{
+    
+    width: 10%;
+    
+}
+
+
+
+.codAsignatura{
+    
+    width: 5%;
+    font-size: 15px;
+    text-align: center;
+   
+}
+
+.nombreAsignatura{
+    width: 8%;
+    font-size: 15px;
+   text-align: center;
+}
+
+.periodoAsignatura{
+    
+    width: 6%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.creditosAsignatura{
+    
+    width: 6%;
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+.detallesAsignatura{
+    
+    width: 8%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.webAsignatura{
+    
+    width: 6%;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+.campoUsuario{
+   
+    width: 8%;
+    font-size: 15px;
+    
+}
+
+.asignaturaPublica{
+    width: 60%;
+    font-size: 15px;
+    text-align: left;
+}
+
+.creditosPublica{
+    
+    width: 10%;
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+.periodoPublica{
+    
+    width: 12%;
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+.multiplePublica{
+    width: 6%;
+    text-align: center;
+        
+}
+
+
+
+
+
+.nuevoCreditos{
+    
+    width: 9%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.nuevoAsignatura{
+    
+    width: 74%;
+    font-size: 15px;
+}
+
+
+
+.nuevoMultiple{
+    
+    width: 9%;
+    font-size: 15px;
+    text-align: center;
+}
+    
+.nuevoCreditosAdmin{
+    
+    width: 8%;
+    font-size: 14px;
+    text-align: left;
+        
+}
+
+.nuevoAsignaturaAdmin{
+    
+    width: 59%;
+    font-size: 14px;
+}
+
+.nuevoPeriodoAdmin{
+    width: 7%;
+    font-size: 14px;
+    
+}
+
+.nuevoMultipleAdmin{
+    
+    width: 8%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.visible{
+    
+    
+    font-size: 15px;
+    height: 15%;
+    width: 8%;
+    
+}
+
+.verAsignatura{
+    text-align: left;
+    width: 60%;
+    font-size: 16px;
+    
+}
+
+.verCreditos{
+    text-align: center;
+    width: 20%;
+    font-size: 16px;
+    
+    
+}
+
+.verPeriodo{
+    text-align: center;
+     width: 20%;
+    font-size: 16px;
+    
+}
+
+.escribeMensajesMultiple{
+    
+    text-align: center;
+}
+
+.fechaEnviados,.asuntoEnviados,.multipleEnviados,.leerEnviados,.centrar{
+    
+    text-align: center;
+}
+
+.asignaturaPublicaAdmin{
+    width: 55%;
+    font-size: 15px;
+    text-align: left;
+}
+
+.creditosPublicaAdmin{
+    
+    width: 10%;
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+.periodoPublicaAdmin{
+    
+    width: 12%;
+    font-size: 15px;
+    text-align: center;
+    
+}
+
+.verPublicaAdmin{
+    width: 15%;
+    text-align: center;
+        
+}
+
+
+
+
+
+.nuevoCreditos{
+    
+    width: 9%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.nuevoAsignatura{
+    
+    width: 74%;
+    font-size: 15px;
+}
+
+
+
+
+.borderless.ui-datatable .ui-datatable-data tr,
+.borderless.ui-datatable .ui-datatable-data-empty tr,
+.borderless.ui-datatable .ui-datatable-data td,
+.borderless.ui-datatable .ui-datatable-data-empty td 
+.borderless.ui-datatable .ui-datatable-data th{
+    border-style: none;
+    
+    
+    
+}
+
+
+.form{
+    margin-left: 15%;      //centrar los form
+    margin-right:15%;
+    width: 100%;
+    }
+

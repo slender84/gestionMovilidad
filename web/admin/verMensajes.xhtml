@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Ver mensajes</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        
+        <h:form id="recibidos">
+           <p:growl id="msgsRecibidos" />
+            
+           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosAdminController.listaMensajesRecibidos}" rows="10"
+                         emptyMessage="no hay mensajes"
+                         widgetVar="mensTabla"
+                         filteredValue="#{mensajesRecibidosAdminController.filteredMensajesRecibidos}"
+                         selection="#{mensajesRecibidosAdminController.selectedMensajesRecibidos}"
+                         rowKey="#{mensaje.idmensaje}"
+                         paginator="true"
+                         >
+                         
+               <f:facet name="header">Mensajes recibidos</f:facet>
+                
+               <p:column headerText="Login:" sortBy="#{mensaje.usuarioByOrigen.login}" filterBy="#{mensaje.usuarioByOrigen.login}">
+                   <h:outputText value="#{mensaje.usuarioByOrigen.login}"/>
+               </p:column>
+                    
+               <p:column headerText="Nombre:" sortBy="#{mensaje.usuarioByOrigen.nombre}">
+                   <h:outputText value="#{mensaje.usuarioByOrigen.nombre}"/>
+               </p:column>
+               
+               <p:column headerText="apellido" sortBy="#{mensaje.usuarioByOrigen.apellido1}" filterBy="#{mensaje.usuarioByOrigen.apellido1}">
+                   <h:outputText value="#{mensaje.usuarioByOrigen.apellido1}"/>
+               </p:column>
+               
+                      <p:column headerText="asunto">
+                         <h:outputText value="#{mensaje.tema}"/>
+                      </p:column>
+               
+                    
+               <p:column headerText="fecha" sortBy="#{mensaje.fecha}">
+                          <h:outputText value="#{mensaje.fecha}">
+                             <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                          </h:outputText>
+                      </p:column>
+               
+               <p:column filterBy="#{mensaje.leidoDestino}" headerText="leido" filterMatchMode="exact" styleClass="leerEnviados">
+                   <f:facet name="filter">
+                       <p:selectOneMenu onchange="PF('mensTabla').filter()">
+                            <f:selectItem itemLabel="no" itemValue="no" />
+                            <f:selectItem itemLabel="si" itemValue="si"/>
+                            <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
+                        </p:selectOneMenu>
+                            
+                    </f:facet>
+                  
+                   <h:outputText value="#{mensaje.leidoDestino}"/>
+                   
+               </p:column>
+               <p:column headerText="leer" styleClass="leerEnviados">
+                   <p:commandButton value="leer" update=":recibidos :panelRecibidos" action="#{mensajesRecibidosAdminController.leerMensajeRecibido}">
+                       <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesRecibidosAdminController.selectedMensajeRecibido}"/>
+                           </p:commandButton>
+                      </p:column>
+               
+               <p:column selectionMode="multiple" styleClass="multipleEnviados"/>
+               
+                         <f:facet name="footer">
+                             <p:commandButton update=":recibidos :panelRecibidos" icon="ui-icon-search" value="Borrar" action="#{mensajesRecibidosAdminController.eliminarMensajesRecibidos}" 
+                                              oncomplete="PF('mensTabla').clearFilters()"/>
+                         </f:facet>
+                </p:dataTable> 
+        </h:form>
+        <br/>
+        <h:form id="panelRecibidos">
+           
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{mensajesRecibidosAdminController.activaRecibido}">
+                <p:outputLabel id="labelTemaRecibido" value="asunto:" />
+                <p:inputText id="temaRecibido" value="#{mensajesRecibidosAdminController.temaRecibido}" readonly="true"/>
+                <p:outputLabel id="labelTextoRecibido" for="textoRecibido" />
+                <p:inputTextarea id="textoRecibido" value="#{mensajesRecibidosAdminController.textAreaRecibido}"
+                                 readonly="true" autoResize="true" cols="80" rows="10"/>
+                
+                <p:commandButton value="cerrar" process="@this" action="#{mensajesRecibidosAdminController.cerrarMensajeRecibido}" update=":panelRecibidos"/>
+           </h:panelGrid>
+    
+           
+         </h:form>    
+                    
+                    
+    
+       
+            
+            <br/>
+            <br/>
+            
+            <h:form id="enviados">
+            <p:growl id="msgsEnviados" />
+            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosAdminController.listaMensajesEnviados}" rows="10"
+                         emptyMessage="no hay mensajes"
+                         selection="#{mensajesEnviadosAdminController.selectedMensajesEnviados}"
+                         rowKey="#{mensaje.idmensaje}"
+                         paginator="true"
+                         >
+                        
+                         <f:facet name="header">Mensajes enviados</f:facet>
+                         
+                         <p:column headerText="login" sortBy="#{mensaje.usuarioByDestino.login}" filterBy="#{mensaje.usuarioByDestino.login}">
+                             <h:outputText value="#{mensaje.usuarioByDestino.login}"/>
+                         </p:column>
+                         
+                         <p:column headerText="nombre" sortBy="#{mensaje.usuarioByDestino.nombre}">
+                             <h:outputText value="#{mensaje.usuarioByDestino.nombre}"/>
+                         </p:column>
+                         
+                         <p:column headerText="apellido" sortBy="#{mensaje.usuarioByDestino.apellido1}" filterBy="#{mensaje.usuarioByDestino.apellido1}">
+                             <h:outputText value="#{mensaje.usuarioByDestino.apellido1}"/>
+                         </p:column>
+                         
+                         <p:column headerText="asunto">
+                                 <h:outputText value="#{mensaje.tema}"/>
+                              </p:column>
+                         
+                         
+                         <p:column sortBy="#{mensaje.fecha}" headerText="fecha" styleClass="fechaEnviados" >
+                                   <h:outputText value="#{mensaje.fecha}">
+                                   <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                                   </h:outputText>
+                              </p:column>
+                        
+                         
+                         <p:column styleClass="leerEnviados" headerText="Leer">
+                                  <p:commandButton value="leer" update=":enviados :panelEnviados" action="#{mensajesEnviadosAdminController.leerMensajeEnviado}" >
+                                      <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosAdminController.selectedMensajeEnviado}"/>
+                                  </p:commandButton>
+                              </p:column>
+                         
+                         <p:column selectionMode="multiple" styleClass="multipleEnviados"/>
+               
+                         <f:facet name="footer">
+                             <p:commandButton update=":enviados :panelEnviados" icon="ui-icon-search" value="Borrar" action="#{mensajesEnviadosAdminController.eliminarMensajesEnviados}" />
+                         </f:facet>
+                             
+                        </p:dataTable>   
+                        
+                    <br/>              
+                
+            </h:form>
+            <br/>
+            <h:form id="panelEnviados">
+                <h:panelGrid columns="2" cellpadding="5" rendered="#{mensajesEnviadosAdminController.activaEnviado}">
+                
+                <p:outputLabel id="labelTemaEnviado" value="tema" />
+                <p:inputText id="temaEnviado" value="#{mensajesEnviadosAdminController.temaEnviado}" readonly="true" />
+                <p:outputLabel id="labelTextoEnviado" for="textoEnviado" />
+                <p:inputTextarea id="textoEnviado" value="#{mensajesEnviadosAdminController.textAreaEnviado}"
+                                  readonly="true" autoResize="true" cols="80" rows="10"/>
+                
+                <p:commandButton value="cerrar" process="@this" action="#{mensajesEnviadosAdminController.cerrarMensajeEnviado}"   update=":panelEnviados" />
+                </h:panelGrid>
+                    
+            </h:form>        
+                
+           <br/>
+           
+           <h:outputLink value="escribeMensaje.xhtml">escribir mensaje a usuario</h:outputLink>
+           
+           <br/>
+           <br/>
+       
+           
+            
+           <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        <br/>
+        
+             <h:form>
+                 <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            </h:form>
+        
+        
+    </h:body>
+</html>
+
+        
+        
+    

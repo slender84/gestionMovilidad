@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <h:head>
+        
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        
+    <!--    <script type='text/javascript' src=""/> -->
+       
+        <title>lista de usuarios</title>
+    </h:head>
+    <h:body styleClass="blue">
+       
+        <h:form id="formTabla">
+            
+            <p:growl />
+            
+            <p:dataTable id="tabla" var="usuario" value="#{eliminarUsuarioController.listaUsuarios}"
+                         filteredValue="#{eliminarUsuarioController.filteredUsuarios}"
+                         selection="#{eliminarUsuarioController.selectedUsuarios}"
+                         widgetVar="usTable"
+                         emptyMessage="no se han encontrado usuarios"
+                         rowKey="#{usuario.login}"
+                         styleClass="borderless">
+                
+                <p:column headerText="login" sortBy="#{usuario.nombre}" filterBy="#{usuario.login}"  styleClass="campoUsuario">
+                    
+                    <h:outputText value="#{usuario.login}"/>
+                </p:column>
+            
+                <p:column headerText="nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}" styleClass="campoUsuario">
+                
+                          <h:outputText value="#{usuario.nombre}"/>
+                          
+                </p:column>
+                
+                <p:column headerText="apellido" sortBy="#{usuario.apellido1}" filterBy="#{usuario.apellido1}"  styleClass="campoUsuario">
+                
+                    <h:outputText value="#{usuario.apellido1}"/>
+                
+                </p:column>
+                
+                <p:column headerText="apellido2" sortBy="#{usuario.apellido2}" styleClass="campoUsuario">
+                
+                    <h:outputText value="#{usuario.apellido2}"/>
+                </p:column> 
+                          
+                <p:column headerText="titulacion" filterBy="#{usuario.titulacion}" filterMatchMode="exact" styleClass="campoUsuario">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('usTable').filter()">
+                    <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{crearUsuarioController.listaTitulaciones}" />
+                </p:selectOneMenu>
+            </f:facet>
+            
+            <h:outputText value="#{usuario.titulacion}"/>
+                </p:column>
+                
+                    <p:column selectionMode="multiple" styleClass="multiple"/>
+               
+                         <f:facet name="footer">
+                             <p:commandButton onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formTabla:" icon="ui-icon-search" value="Eliminar" action="#{eliminarUsuarioController.eliminaUsuariosLista}" 
+                                              oncomplete="PF('usTable').filter()" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}" />
+                         </f:facet>
+                
+            </p:dataTable>
+          
+        </h:form>
+        
+        <br/><br/>
+        <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+       <br/>
+            
+            
+            
+                
+        <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+            
+        
+        
+        
+        
+        <br />
+        
+    </h:body>
+</html>

@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Equivalencias públicas admin</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <h:outputScript library="js" name="funciones.js"/>
+    </h:head>
+    <h:body styleClass="blue">
+      
+        <h:form id="formPais">
+             <p:growl id="msgs" />
+            <p:selectOneMenu value="#{equivalenciasPublicasController.paisStr}" required="true" requiredMessage="hay que elegir un pais">
+                <p:ajax event="change" listener="#{equivalenciasPublicasController.onChangePais()}" update=":formUniversidad :formPais:msgs :formTablaEquivalencias"/>
+                <f:selectItem itemLabel="elige un país"  noSelectionOption="true"/>
+                <f:selectItems var="pais" value="#{paisController.listaPaises}" itemValue="#{pais.nombre}" itemLabel="#{pais.nombre}"/>
+            
+            </p:selectOneMenu>
+            
+        </h:form>
+        <br/>
+        <h:form id="formUniversidad">
+            <p:selectOneMenu value="#{equivalenciasPublicasController.universidadStr}" required="true" requiredMessage="hay que elegir una universidad de destino" rendered="#{equivalenciasPublicasController.checkPais}">
+                <p:ajax event="change" listener="#{equivalenciasPublicasController.onChangeUni}" update=":formUniversidad :formPais :formTablaEquivalencias"/>
+                <f:selectItem itemLabel="elige una universidad" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{equivalenciasPublicasController.listaUniversidad}" var="universidad" itemLabel="#{universidad.nombre}" itemValue="#{universidad.nombre}"/>
+                
+            </p:selectOneMenu>
+            <br/><br/>
+            <p:commandButton value="mostrar" action="#{equivalenciasPublicasController.buscar()}" update=":formTablaEquivalencias :formPais" rendered="#{equivalenciasPublicasController.checkUni}"/>
+            
+        </h:form>
+        
+        <br/><br/><br/>
+        
+        <h:form id="formTablaEquivalencias">
+           
+               <p:dataTable id="tablaEquivalencias"
+                         emptyMessage="no hay equivalencias publicas"
+                         value="#{equivalenciasPublicasController.listaEquivalencias}"
+                         var="equivalencia"
+                         styleClass="tablaEquivalenciasPublicas"
+                         rowKey="#{equivalencia.idequivalencia}"
+                         widgetVar="equivalenciaTable"
+                         >
+                   
+                   
+                   
+                   <p:column headerText="nombre" styleClass="asignaturaPublicaAdmin">
+                    <f:facet name="header">UDC</f:facet> 
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                   <p:column headerText="Cr" styleClass="creditosPublicaAdmin">
+                       <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                    <p:column headerText="periodo" styleClass="periodoPublicaAdmin">
+                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        
+                        <h:outputText value="#{asignatura.asignatura.periodo}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                   
+                   <p:column headerText="#{equivalenciasPublicasController.universidadStr}" styleClass="asignaturaPublicaAdmin">
+                       <f:facet name="header">#{equivalenciasPublicasController.universidadStr}</f:facet>
+                       <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
+                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                         <br/>
+                    </ui:repeat>
+                </p:column>
+                       <p:column headerText="Cr" styleClass="creditosPublicaAdmin">
+                           <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                   <p:column headerText="periodo" styleClass="periodoPublicaAdmin">
+                       <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        
+                        <h:outputText value="#{asignatura.asignatura.periodo}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                    
+                   <p:column headerText="contrato" styleClass="verPublicaAdmin" >
+                       <p:commandButton value="ver contrato" action="#{equivalenciasPublicasController.verContrato}" ajax="true" update=":formPais:msgs">
+                           <f:setPropertyActionListener value="#{equivalencia}" target="#{equivalenciasPublicasController.selectedEquivalencia}"/>
+                       </p:commandButton>
+                       
+                   </p:column> 
+           
+            </p:dataTable>
+            
+        </h:form>
+        
+        <br />
+        
+        
+        <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        <br/>
+         <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+        
+    </h:body>
+</html>
+
+
+
+

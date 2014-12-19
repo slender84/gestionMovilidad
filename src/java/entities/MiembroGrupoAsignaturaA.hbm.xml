@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-dic-2014 9:35:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.MiembroGrupoAsignaturaA" table="miembro_grupo_asignatura_a" catalog="gestordb" optimistic-lock="version">
+        <id name="idmiembroGrupoAsignaturaA" type="java.lang.Integer">
+            <column name="idmiembro_grupo_asignatura_a" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="asignatura" class="entities.Asignatura" fetch="select">
+            <column name="codAsignatura" />
+            <column name="nombreUniversidad" length="45" />
+        </many-to-one>
+        <many-to-one name="equivalencia" class="entities.Equivalencia" fetch="select">
+            <column name="idEquivalencia" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

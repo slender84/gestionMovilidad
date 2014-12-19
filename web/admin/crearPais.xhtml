@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Crear país</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        <h:form id="formPais">
+            
+            <p:outputPanel id="panelForm">
+            
+                <p:growl  />
+            
+            <p:inputText value="#{paisController.paisStr}"
+                         required="true"
+                         requiredMessage="el campo pais está vacío"/>
+            <p:commandButton value="crear país" action="#{paisController.creaPais}" update="formPais"/>
+            
+            </p:outputPanel>
+            <br/>
+            
+            <p:outputPanel id="panelTable" >
+                
+                <p:dataTable id="tabla1" value="#{paisController.listaPaises}" var="pais"
+                             emptyMessage="no hay países" paginator="true" rows="10"
+                             styleClass="borderless"
+                             >
+                    
+                    <p:column headerText="pais" sortBy="#{pais.nombre}" styleClass="centrar">
+                        
+                        <h:outputText value="#{pais.nombre}"/>
+                        
+                    </p:column>
+                    <p:column headerText="eliminar" styleClass="centrar">
+                        
+                        <p:commandButton id="button1" value="eliminar" action="#{paisController.eliminaPais}" update=":formPais"
+                                         process="button1"  
+                                         onclick= "if (! confirm('¿seguro que quieres borrar?'))return false">
+                            <f:setPropertyActionListener target="#{paisController.pais}" value="#{pais}"/>
+                        
+                        </p:commandButton>
+                        
+                    </p:column>
+                    
+                    
+                </p:dataTable>
+                
+                
+                
+            </p:outputPanel>
+            
+            
+        </h:form>
+        
+         <br/><br/>
+       
+           <h:outputLink value="crearUniversidad.xhtml">Universidades</h:outputLink>
+            <br/><br/>
+           <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            <br/>
+            
+       <br/>
+             <h:form>
+                 <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir()}"/>
+            </h:form>
+        
+        
+        
+    </h:body>
+</html>
+

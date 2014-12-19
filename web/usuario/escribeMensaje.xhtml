@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Escribir mensaje al coordinador</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        
+       
+            
+                <h:form id="formEnvio">
+                  <p:growl />
+                <h:panelGrid columns="2" cellpadding="5">    
+               <p:outputLabel value="Asunto:"/>
+               <p:inputText value="#{escribeMensajeAdminController.tema}" />
+               <p:outputLabel />
+               <p:inputTextarea value="#{escribeMensajeAdminController.texto}" required="true" requiredMessage="el texto está vacío" cols="50" rows="6"/>
+               <p:commandButton value="enviar" action="#{escribeMensajeAdminController.enviarMensajeCoordinador}" update="formEnvio"/>
+                </h:panelGrid>
+            </h:form>
+        
+        
+        <br/>
+       
+           
+            
+           <h:outputLink value="verMisMensajes.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        
+       <br/>
+           
+             <h:form>
+                 <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            </h:form>
+       
+        
+    
+        
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Ver contratos</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body onload="PF('tablaContratos').filter();" styleClass="blue">
+        
+        
+       
+            
+        <p:panel id="headerContratos">
+        
+            <h:outputLabel value="Contratos de: "/>
+            <h:outputText value="#{verContratosController.selectedMovilidad.usuario.nombre }"/>
+            
+            <h:outputText value=" #{verContratosController.selectedMovilidad.usuario.apellido1}"/>
+            <br/>
+            <h:outputLabel value="país: "/>
+            <h:outputText value="#{verContratosController.selectedMovilidad.universidad.pais.nombre}"/><br/>
+            <h:outputLabel value="Universidad: "/>
+            <h:outputText value=" #{verContratosController.selectedMovilidad.universidad.nombre} "/>
+            <br/>
+            <p:outputLabel value="inicio: "/>
+            <h:outputText value="#{verContratosController.selectedMovilidad.fechaInicio}">
+            
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:outputText><br/>
+             
+            <p:outputLabel value="fin: "/>               
+            <h:outputText value="#{verContratosController.selectedMovilidad.fechaFin}">
+                
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:outputText>
+        </p:panel>
+        
+        
+        
+        <br/>
+        <br/>
+        <p:outputPanel id="panelContratos">
+            <h:form id="formContratos">
+               <p:growl/> 
+            
+                
+            
+            <p:dataTable widgetVar="tablaContratos"
+                         
+                         value="#{verContratosController.listaContratos}"
+                         var="contrato"
+                         filteredValue="#{verContratosController.filteredContratos}"
+                         rowKey="#{contrato.idContrato}"
+                         emptyMessage="no hay contratos"
+                         styleClass="borderless"
+                         selection="#{verContratosController.selectedContratos}">
+                <p:column headerText="fecha" sortBy="#{contrato.fecha}" styleClass="centrar">
+                    <h:outputText value="#{contrato.fecha}">
+                                  <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                </p:column>
+                
+                <p:column filterBy="#{contrato.estado}" filterMatchMode="exact" headerText="ver estado" styleClass="centrar" >
+                
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tablaContratos').filter()" style="width: 100%">
+                            <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems var="estados" value="#{beanUtilidades.listaEstados}" itemLabel="#{estados.estado}" itemValue="#{estados.estado}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    
+                    
+                    <h:outputText value="#{contrato.estado}"/>
+                    
+                </p:column>     
+                    
+                <p:column selectionMode="multiple" styleClass="multiple"/>
+                
+                <f:facet name="footer">
+                    
+                    <p:commandButton value="editar/comparar" action="#{verContratosController.compararContratos}"  update=":panelContratos"/>
+                    <p:commandButton rendered="#{movilidadesController.usuario.tipoUsuario eq 0}" value="eliminar" action="#{verContratosController.eliminarContratos}" update=":panelContratos :headerContratos" 
+                                     onclick="if (! confirm('¿seguro que quieres borrar?')) return false" oncomplete="PF('tablaContratos').filter();"
+                                     >
+                    
+                    </p:commandButton>      
+                   
+                    
+                </f:facet>
+               
+            
+            </p:dataTable>
+           
+        </h:form>
+        </p:outputPanel>
+        
+       <br/>
+       <br/>
+        
+         <h:outputLink value="verMovilidades.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+        <br/>
+        
+        
+        
+             <h:form>
+                <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            </h:form>
+        
+        
+        
+        
+    </h:body>
+</html>
+

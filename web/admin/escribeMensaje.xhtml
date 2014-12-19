@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Escribir mensaje a usuario</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <h:outputScript library="js" name="functions.js"/>
+    </h:head>
+    <h:body styleClass="blue">
+
+        <h:form id="usuario">
+            
+            <p:dataTable id="tabla" filteredValue="#{eliminarUsuarioController.filteredUsuarios}"
+                         var="usuario" value="#{eliminarUsuarioController.listaUsuarios}" 
+                         widgetVar="usTable"
+                         emptyMessage="no hay usuarios"
+                         selection="#{escribeMensajeController.selectedUsuarios}"
+                         rowKey="#{usuario.login}"
+                         styleClass="borderless">
+            
+                <p:column headerText="login" filterBy="#{usuario.login}" >
+                
+                    <h:outputText value="#{usuario.login}"/>
+                    
+                </p:column>
+                
+                <p:column headerText="nombre" sortBy="#{usuario.nombre}">
+                
+                    <h:outputText value="#{usuario.nombre}"/>
+                
+                </p:column>
+                
+                <p:column headerText="apellido" filterBy="#{usuario.apellido1}" sortBy="#{usuario.apellido1}" >
+                
+                    <h:outputText value="#{usuario.apellido1}"/>
+                
+                </p:column>
+                
+                <p:column headerText="titulacion" sortBy="#{usuario.titulacion}">
+                
+                    <h:outputText value="#{usuario.titulacion}"/>
+                
+                </p:column>
+                
+                <p:column selectionMode="multiple" headerText="seleccion" styleClass="escribeMensajesMultiple"/>
+               
+                <f:facet name="footer">
+                    <p:commandButton value="enviar mensaje" action="#{escribeMensajeController.activarTexto}" update=":usuario :panelEnvio"/>  
+                </f:facet>
+                
+                
+            </p:dataTable>
+            
+            
+        </h:form>
+        <br/>
+        
+        <h:form id="panelEnvio">
+            <p:growl />
+          
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{escribeMensajeController.activaTexto}" id="panelGrid">
+               <p:outputLabel value="asunto" />
+               <p:inputText value="#{escribeMensajeController.tema}" />
+               <p:outputLabel/>
+               <p:inputTextarea value="#{escribeMensajeController.texto}" required="true" requiredMessage="el texto está vacío" cols="50" rows="6" />
+               
+               <p:commandButton value="enviar" action="#{escribeMensajeController.enviarMensajesVarios()}"  update=":usuario :panelEnvio" oncomplete="PF('usTable').unselectAllRows();PF('usTable').filter();"/>
+               <p:commandButton value="cancelar" action="#{escribeMensajeController.cancelarEnvioCoordinador()}"  process="@this" update=":usuario :panelEnvio"
+                                oncomplete="PF('usTable').unselectAllRows();PF('usTable').filter();"/>
+                         
+            
+            </h:panelGrid>
+        
+      </h:form>
+        <br/><br/>
+       
+           
+            
+           <h:outputLink value="verMensajes.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            <br/>
+        
+        
+             <h:form>
+                 <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            </h:form>
+        
+        
+    
+        
+        
+    </h:body>
+</html>
+

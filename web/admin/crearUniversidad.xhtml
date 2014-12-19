@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <h:head>
+        <title>crear universidad</title>
+        
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        
+    </h:head>
+    <h:body styleClass="blue" >
+        
+        <br/><br/>
+            
+        <h:form id="formUniversidad">
+             
+             <p:growl id="msgs"/>
+                
+             <h:panelGrid columns="2" cellpadding="6">
+                
+                    <p:outputLabel  value="pais" />
+                    <p:selectOneMenu id="p1" value="#{crearUniversidadController.paisStr}"
+                                 required="true"
+                                 requiredMessage="el campo pais está vacío"
+                                 >
+                        <p:ajax event="change" listener="#{crearUniversidadController.onChangePais}" update=":formTabla :formUniversidad" oncomplete="PF('universidadTabla').filter();" />
+                                 
+                    
+                    <f:selectItem itemLabel="elige un pais" noSelectionOption="true"/>
+                    <f:selectItems var="pais" value="#{paisController.listaPaises}" itemValue="#{pais.nombre}" itemLabel="#{pais.nombre}" />
+                    
+                </p:selectOneMenu>
+                
+                
+          
+                
+                
+                <p:outputLabel value="nombre" style="text-align: left"/>
+                <p:inputText value="#{crearUniversidadController.nombre}"
+                             required="true"
+                             requiredMessage="el campo nombre está vacío">
+                    
+                </p:inputText>
+                
+                
+                
+               <p:outputLabel value="código universidad"/>
+               <p:inputText value="#{crearUniversidadController.codUniversidad}"
+                             required="true"
+                             requiredMessage="el campo Coduniversidad está vacío">
+                    
+                </p:inputText>
+               
+                
+               
+                <p:outputLabel value="pagina web"/>
+                <p:inputText id="text1" value="#{crearUniversidadController.web}"/>
+                <p:watermark for="text1" value="http://"/>
+                <h:outputLabel/>
+                 <p:outputLabel  value="información adicional"/>
+                 <p:inputTextarea value="#{crearUniversidadController.info}"/>
+                
+                 <p:commandButton value="crear universidad" action="#{crearUniversidadController.creaUniversidad}" update=":formTabla :formUniversidad :formDetalles" 
+                                  oncomplete="PF('universidadTabla').filter();" />
+                                   
+             </h:panelGrid>
+          </h:form>
+        
+                 <br/><br/> 
+                 
+                 <h:form id="formTabla">
+                     <p:outputPanel>
+                       <p:dataTable id="universidadTable" var="universidad" value="#{crearUniversidadController.listaUniversidades}"  emptyMessage="No hay universidades" 
+                             widgetVar="universidadTabla" paginator="true" rows="10"
+                             selection="#{crearUniversidadController.selectedUniversidades}"
+                             rowKey="#{universidad.nombre}"
+                             styleClass="borderless"
+                             filteredValue="#{crearUniversidadController.filteredUniversidades}"
+                             >
+                                        
+                         <f:facet name="header">Lista de Universidades de #{crearUniversidadController.paisStr}</f:facet>
+                           <p:column headerText="código" sortBy="#{universidad.codUniversidad}">
+                        
+                              <h:outputText value="#{universidad.codUniversidad}"/>
+                            
+                           </p:column>
+                         
+                         <p:column headerText="nombre" sortBy="#{universidad.nombre}" filterBy="#{universidad.nombre}" filterMatchMode="startsWith">
+                        
+                            
+                              <h:outputText value="#{universidad.nombre}"/>
+                        
+                        
+                           </p:column>
+                    
+                         <p:column sortBy="#{universidad.web}" headerText="web">
+                    
+                             <h:outputLink value="#{universidad.web}" target="_blank" rendered="#{not empty universidad.web}"><h:outputText value="link"/></h:outputLink>
+                             
+                           </p:column>
+                    
+                           
+                                           
+                               <p:column headerText="ver detalles/editar">
+                                   
+                                   <p:commandButton value="ver detalles/editar" action="#{crearUniversidadController.verDetalles}" update=":formDetalles">
+                                   
+                                       <f:setPropertyActionListener value="#{universidad}" target="#{crearUniversidadController.selectedUniversidad}"/>
+                                       
+                                   </p:commandButton>
+                                   
+                               </p:column>   
+                         
+                         <p:column selectionMode="multiple" styleClass="multiple"/>
+                               
+                               <f:facet name="footer">
+                                   <p:commandButton  id="b1" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"
+                                                 value="eliminar" action="#{crearUniversidadController.eliminaUniversidadLista}" process=":formTabla"  icon="edit_icon" update=":formTabla :formUniversidad :formDetalles"
+                                                 oncomplete="PF('universidadTabla').filter();" />
+                                                 
+                               
+                               </f:facet>
+                
+                       </p:dataTable>
+                             
+                     </p:outputPanel>    
+                         
+                  </h:form>
+            
+            <br/><br/>
+            
+           <h:form id="formDetalles">
+               <h:panelGrid id="detallesAsignatura" columns="2" cellpadding="6" rendered="#{crearUniversidadController.checkDetalles}">
+                
+                <p:outputLabel value="codUniversidad" />
+                <p:inputText value="#{crearUniversidadController.selectedUniversidad.codUniversidad}" />
+                 
+                <p:outputLabel value="web" />
+                <p:inputText id="text2" value="#{crearUniversidadController.selectedUniversidad.web}" />
+                <p:watermark for="text2" value="http://"/>
+                <h:outputLabel/>
+                <p:outputLabel value="info" />
+                <p:inputTextarea value="#{crearUniversidadController.selectedUniversidad.info}" />
+                
+               
+                
+                
+                <p:commandButton process=":formDetalles:" id="actualizaBtn" value="editar" action="#{crearUniversidadController.editar()}" update=":formDetalles: :formTabla: :formUniversidad:msgs"
+                                 rendered="#{crearUniversidadController.checkDetalles}" />
+                <p:commandButton id="cancelBtn" value="cerrar" action="#{crearUniversidadController.cerrar}" update=":formDetalles" process="cancelBtn"
+                                 rendered="#{crearUniversidadController.checkDetalles}" />
+                
+            </h:panelGrid>
+          </h:form>   
+               <br/>
+        <h:outputLink value="crearAsignatura.xhtml">Asignaturas</h:outputLink>
+        <br/><br/><br/>
+        <h:form>
+            
+             <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+                    <br/><br/>
+                    <p:commandButton value="Cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+        </h:form>  
+           
+        
+        <br/>
+    
+    </h:body>
+    
+</html>
+
+

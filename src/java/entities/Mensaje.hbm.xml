@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-dic-2014 9:35:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Mensaje" table="mensaje" catalog="gestordb" optimistic-lock="version">
+        <id name="idmensaje" type="java.lang.Integer">
+            <column name="idmensaje" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuarioByDestino" class="entities.Usuario" fetch="select" lazy="false">
+            <column name="destino" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuarioByOrigen" class="entities.Usuario" fetch="select" lazy="false">
+            <column name="origen" length="20" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" not-null="true" />
+        </property>
+        <property name="tema" type="string">
+            <column name="tema" length="16777215" />
+        </property>
+        <property name="texto" type="string">
+            <column name="texto" not-null="true" />
+        </property>
+        <property name="leidoDestino" type="string">
+            <column name="leidoDestino" length="2" not-null="true" />
+        </property>
+        <property name="eliminadoOrigen" type="string">
+            <column name="eliminadoOrigen" length="2" not-null="true" />
+        </property>
+        <property name="eliminadoDestino" type="string">
+            <column name="eliminadoDestino" length="2" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

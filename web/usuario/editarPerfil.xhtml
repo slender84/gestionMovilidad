@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Editar perfil</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        
+        
+        
+        
+        <h:form id="formPerfil"> 
+            <p:growl/>
+            <h:panelGrid columns="2" cellpadding="6">
+                <p:outputLabel value="Antiguo password: "/>
+                <p:password value="#{editarPerfilController.password}"
+                            required="true"
+                            requiredMessage="el password está vacío"/>
+               
+                <p:outputLabel/>
+                <p:outputLabel/>
+                
+                
+                <p:outputLabel value="nuevo password"/>
+                <p:password value="#{editarPerfilController.nuevoPassword}" 
+                            required="true"
+                            requiredMessage="El nuevo password está vacío"/>
+                
+                <p:outputLabel value="repite password"/>
+                <p:password value="#{editarPerfilController.repitePassword}"
+                            required="true"
+                            requiredMessage="el campo de confirmar password está vacío"/>
+                <p:commandButton value="confirmar" action="#{editarPerfilController.editar}" update="formPerfil"/>
+            
+            </h:panelGrid>
+        </h:form>  
+        
+        <br/><br/>
+            <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        <br/>
+        
+             <h:form>
+                 <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir()}"/>
+            </h:form>
+        
+    </h:body>
+</html>

@@ -1,0 +1,31 @@
+.loginUsuario{
+    
+    width: 8%;
+    font-size: 15px;
+    
+}
+
+.nombreUsuario{
+    
+    width: 8%;
+    font-size: 15px;
+    
+}
+
+.apellidoUsuario{
+    
+    width: 8%;
+    font-size: 15px;
+}
+
+.titulacionUsuario{
+    
+    width: 8%;
+    font-size: 15px;
+    
+}
+
+.multiple{
+   width:3% ;
+   text-align:center;
+}

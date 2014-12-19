@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-dic-2014 9:35:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Usuario" table="usuario" catalog="gestordb" optimistic-lock="version">
+        <id name="login" type="string">
+            <column name="login" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="40" not-null="true" />
+        </property>
+        <property name="tipoUsuario" type="short">
+            <column name="tipo_usuario" not-null="true" />
+        </property>
+        <property name="titulacion" type="string">
+            <column name="titulacion" length="25" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="apellido1" length="45" not-null="true" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="apellido2" length="45" />
+        </property>
+        <set name="mensajesForDestino" table="mensaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="destino" length="20" not-null="true" />
+            </key>
+            <one-to-many class="entities.Mensaje" />
+        </set>
+        <set name="movilidads" table="movilidad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="loginUsuario" length="20" not-null="true" />
+            </key>
+            <one-to-many class="entities.Movilidad" />
+        </set>
+        <set name="mensajesForOrigen" table="mensaje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="origen" length="20" not-null="true" />
+            </key>
+            <one-to-many class="entities.Mensaje" />
+        </set>
+    </class>
+</hibernate-mapping>

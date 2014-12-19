@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+      
+    <h:head>
+        <title>pagina autenticacion usuario</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+       
+        <p:panel>
+        <h:form id="p1">
+            
+                <h:panelGrid columns="2" cellpadding="6">
+                <p:focus context="p1"/>
+            <p:growl/>
+            
+                  <p:outputLabel value="login"/>
+                  <p:inputText value="#{autenticarUsuarioController.login}"
+                         required="true"
+                         requiredMessage="el campo login esta vacio"
+                         autocomplete="false"/>
+                      
+           
+            <p:outputLabel value="password"/>
+            <p:password value="#{autenticarUsuarioController.password}"
+                        required="true"
+                        requiredMessage="el campo password esta vacio"/>
+           
+            
+            <p:commandButton value="autenticar" action="#{autenticarUsuarioController.autenticarUsuario}" ajax="false"/>
+                </h:panelGrid>
+            
+        </h:form>
+        </p:panel>
+        
+        <br/>
+        <br/>
+        
+        <p:panel>
+            <h:outputLink value="crearUsuario.xhtml">Crear usuario</h:outputLink>
+        </p:panel>
+        <br/>
+        <h:outputLink value="principal.xhtml"><h:graphicImage value="resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+        
+        
+        
+        <br />
+        
+    </h:body>
+</html>

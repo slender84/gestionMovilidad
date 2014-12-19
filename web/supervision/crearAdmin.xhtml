@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Crear admin</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        
+     <h:form id="form1">
+         <p:growl/>
+         <h:panelGrid id="panel1" columns="2" cellpadding="5">
+             <p:outputLabel value="login"/>
+            <p:inputText value="#{crearAdminController.login}" required="true" requiredMessage="El campo login está vacío"/>
+            <p:outputLabel value="password"/>
+            <p:password value="#{crearAdminController.password}" required="true" requiredMessage="El campo password está vacío"/>
+            <p:outputLabel value="repetir password"/>
+            <p:password value="#{crearAdminController.passwordAux}" required="true" requiredMessage="El campo repetir password está vacío"/>
+            <p:commandButton value="crear" action="#{crearAdminController.crearAdmin}" update="form1"/>
+           </h:panelGrid>
+           
+      </h:form>
+        
+        <br/><br/>
+       <h:outputLink value="#{request.contextPath}/admin/index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        
+        
+          <br/>  
+                
+        <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+            
+        
+    </h:body>
+
+    
+</html>

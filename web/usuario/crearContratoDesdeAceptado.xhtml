@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Elaborar nuevo contrato</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <h:outputScript library="js" name="funciones.js"/>
+    </h:head>
+    <h:body styleClass="blue">
+        
+        
+        <p:outputPanel id="panelFic">
+        
+            <h:form id="formEquivalenciaFic">
+                
+                <p:outputPanel>
+            
+            <p:growl id="msgs"/> 
+            <p:dataTable id="tablaFic" value="#{misEquivalenciasController.listaAsignaturasFic}" var="asigFic" rows="10"
+                         emptyMessage="no hay asignaturas"
+                         widgetVar="asigFicBtn"
+                         rowKey="#{asigFic.id.codAsignatura}"
+                         selection="#{misEquivalenciasController.selectedAsignaturasFic}"               
+                         paginator="true"
+                         styleClass="tablaFic"
+                         filteredValue="#{misEquivalenciasController.filteredAsignaturasFic}"
+                         >
+               <!-- <p:ajax event="rowSelectCheckbox" listener="{misEquivalenciasController.seleccionaFila}" update=":formEquivalenciaFic"/>
+                <p:ajax event="rowUnselectCheckbox" listener="{misEquivalenciasController.deseleccionarFila}" update=":formEquivalenciaFic"/>    
+                <p:ajax event="toggleSelect" listener="{misEquivalenciasController.unToggle}" update=":formEquivalenciaFic"/>-->
+                
+               
+               
+                <f:facet name="header">ORIGEN: UDC</f:facet>
+                <p:column headerText="asignatura"  sortBy="#{asigFic.nombreAsignatura}" styleClass="asignatura" filterBy="#{asigFic.nombreAsignatura}">
+                    <h:outputLink target="_blank" value="#{asigFic.webAsignatura}" rendered="#{not empty asigFic.webAsignatura}">#{asigFic.nombreAsignatura}</h:outputLink>
+                    <h:outputText value="#{asigFic.nombreAsignatura}" rendered="#{empty asigFic.webAsignatura}" />
+                
+                </p:column>
+            
+                <p:column id="creditos" headerText="Cred" sortBy="#{asigFic.creditos}" styleClass="creditos" >
+                
+                    <h:outputText value="#{asigFic.creditos}"/>
+                
+                </p:column>
+                
+                <p:column headerText="periodo" sortBy="#{asigFic.periodo}" styleClass="periodo">
+                
+                    <h:outputText value="#{asigFic.periodo}"/>
+                
+                </p:column>
+                
+                
+                <p:column styleClass="info" headerText="+info">
+                        
+                        <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" rendered="#{not empty asigFic.infoAsigantura}">
+                        
+                            <f:setPropertyActionListener value="#{asigFic}" target="#{misEquivalenciasController.selectedAsignatura}"/>
+                            
+                        </p:commandLink>
+                        
+                    </p:column>  
+                
+                <p:column selectionMode="multiple" styleClass="multiple"/>
+               
+                
+            </p:dataTable>
+       
+            
+            <p:inputTextarea id="info" readonly="true" cols="33" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}"
+                             rendered="#{misEquivalenciasController.verInfo}"/>
+            <p:commandButton styleClass="cerrarAreaTexto" value="cerrar" action="#{misEquivalenciasController.cerrarDetallesAsign}" update=":formEquivalenciaFic"
+                             rendered="#{misEquivalenciasController.verInfo}"/> 
+       
+       </p:outputPanel>
+           
+
+        
+                <p:outputPanel>
+      
+            
+            <p:dataTable id="tablaUniversidad"
+                         emptyMessage="no hay asignaturas"
+                         value="#{misEquivalenciasController.listaAsignaturasUniversidad}"
+                         var="asigUni"
+                         widgetVar="asigUniBtn"
+                         selection="#{misEquivalenciasController.selectedAsignaturasUni}"
+                         filteredValue="#{misEquivalenciasController.filteredAsignaturasUni}"
+                         rowKey="#{asigUni.id.codAsignatura}"
+                         paginator="true"
+                         rows="10"
+                         styleClass="tablaUniversidad" 
+                         >
+                
+                <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.universidad.nombre}</f:facet>
+                
+                <p:column headerText="asignatura" sortBy="#{asigUni.nombreAsignatura}"  filterBy="#{asigUni.nombreAsignatura}" styleClass="asignatura">
+                    <h:outputLink target="_blank" value="#{asigUni.webAsignatura}" rendered="#{not empty asigUni.webAsignatura}">#{asigUni.nombreAsignatura}</h:outputLink>
+                    <h:outputText value="#{asigUni.nombreAsignatura}" rendered="#{empty asigUni.webAsignatura}" />
+                
+                </p:column>
+            
+                <p:column headerText="Cred" sortBy="#{asigUni.creditos}" styleClass="creditos">
+                
+                    <h:outputText value="#{asigUni.creditos}"/>
+                
+                </p:column>
+                
+                <p:column headerText="periodo" sortBy="#{asigUni.periodo}" styleClass="periodo">
+                
+                    <h:outputText value="#{asigUni.periodo}"/>
+                
+                </p:column>
+                
+                <p:column headerText="+info" styleClass="info">
+                        
+                     <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic:info" rendered="#{not empty asigUni.infoAsigantura}">
+                        
+                            <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasController.selectedAsignatura}"/>
+                            
+                        </p:commandLink>
+                        
+                    </p:column> 
+                
+                <p:column selectionMode="multiple" styleClass="multiple"/>
+              
+            </p:dataTable>
+                         
+        </p:outputPanel>             
+            <p:commandButton styleClass="añadir" id="addBtn" process=":formEquivalenciaFic:" update=":formEquivalenciaFic:  :formTablaEquivalenciasNuevo " value="Añadir" action="#{misEquivalenciasController.asignaturasTotales}"  
+                                                oncomplete="PF('asigUniBtn').unselectAllRows();PF('asigUniBtn').filter();PF('asigFicBtn').unselectAllRows();PF('asigFicBtn').filter();PF('equivalenciaTableNuevo').unselectAllRows();"
+                                                rendered="#{misEquivalenciasController.verConfirmar}"/> 
+                         
+        
+             </h:form>
+       
+           </p:outputPanel> 
+        
+            
+       
+        
+        <h:form id="formTablaEquivalencias">
+            
+            <p:dataTable id="tablaEquivalencias"
+                         emptyMessage="no hay equivalencias"
+                         selection="#{misEquivalenciasController.selectedEquivalencias}"
+                         value="#{misEquivalenciasController.listaAuxEquivalenciasComparado}"
+                         var="equivalencia"
+                         styleClass="tablaEquivalenciasAceptado"
+                         rowKey="#{equivalencia.idequivalencia}"
+                         widgetVar="equivalenciaTable">
+                         
+               <f:facet name="header">Estado del contrato:
+                    <h:outputText value=" #{misEquivalenciasController.selectedContrato.estado}"/><br/>última modificación
+                    <h:outputText value="#{misEquivalenciasController.selectedContrato.fecha}">
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                           
+                </f:facet>
+                
+                
+                <p:column headerText="UDC" styleClass="asignatura">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="Cr" styleClass="creditos">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="asignatura">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura} "/>
+                        
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                <p:column headerText="Cr" styleClass="creditos">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos} "/>
+                        
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                <p:columnGroup type="footer">
+            <p:row>
+                <p:column footerText="total créditos: " />
+                <p:column footerText="#{misEquivalenciasController.creditosA}"/>    
+                   
+                
+                <p:column  footerText="total créditos:  " />
+                <p:column footerText="#{misEquivalenciasController.creditosB}"/>
+                
+            </p:row>
+            
+                </p:columnGroup>
+               
+            </p:dataTable>
+            
+        </h:form>
+
+   <h:form id="formTablaEquivalenciasNuevo" styleClass="tablaEquivalenciasAceptadoNuevo">
+            
+            <p:dataTable id="tablaEquivalencias"
+                         emptyMessage="no hay equivalencias"
+                         selection="#{misEquivalenciasController.selectedEquivalencias}"
+                         value="#{misEquivalenciasController.listaAuxEquivalencias}"
+                         var="equivalencia"
+                         
+                         rowKey="#{equivalencia.idequivalencia}"
+                         widgetVar="equivalenciaTableNuevo">
+                         
+                <f:facet name="header">CONTRATO NUEVO</f:facet>
+                
+                
+                <p:column headerText="UDC" styleClass="nuevoAsignatura">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="Cr" styleClass="nuevoCreditos">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="nuevoAsignatura">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura} "/>
+                        
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column headerText="Cr" styleClass="nuevoCreditos">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.creditos} "/>
+                        
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                
+                <p:column selectionMode="multiple" styleClass="nuevoMultiple" rendered="#{misEquivalenciasController.verConfirmar}"/>
+                
+                <p:columnGroup type="footer">
+            <p:row>
+                <p:column footerText="total créditos: " />
+                <p:column footerText="#{misEquivalenciasController.creditosA}" />    
+                   
+                
+                <p:column  footerText="total créditos: "  />
+                <p:column footerText="#{misEquivalenciasController.creditosB}" />
+                <p:column/>
+            </p:row>
+            
+                </p:columnGroup>
+                
+                <f:facet name="footer">
+                    
+                    <p:commandButton id="deleteBtn"  process=":formTablaEquivalenciasNuevo:" update=":formTablaEquivalenciasNuevo :formEquivalenciaFic:msgs"  icon="ui-icon-search" value="Borrar" action="#{misEquivalenciasController.eliminaEquivalenciasLista}"
+                                              oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{misEquivalenciasController.verConfirmar}"/>
+                    <p:commandButton id="confirmBtn" value="confirmar contrato"  action="#{misEquivalenciasController.crearContratoDesdeAceptado}" update=":formEquivalenciaFic :formTablaEquivalenciasNuevo" oncomplete="PF('equivalenciaTableNuevo').unselectAllRows();"
+                                              rendered="#{misEquivalenciasController.verConfirmar}"/>
+                    
+                    
+                </f:facet>
+               
+               
+           
+            </p:dataTable>
+        
+       
+            
+        </h:form>
+    
+       
+      
+        <h:form style="position: absolute;top: 600px;left: 1100px">
+            
+           <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+        
+        
+        <br />
+        
+        
+        <h:outputLink value="verMisMovilidades.xhtml" style="position: absolute;top:600px;left: 1050px"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+    </h:body>
+</html>
+

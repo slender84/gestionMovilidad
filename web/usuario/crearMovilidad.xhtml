@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+      
+    <h:head>
+        <title>Crear movilidad</title>
+         <h:outputScript library="js" name="calendar_es.js"/>
+         <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+       
+       
+                
+                 <h:form id="formMovilidad"> 
+                     
+                     <p:growl  id="msgs1"  />
+                
+                        <p:outputPanel>
+                         
+                         
+                         <p:selectOneMenu id="pais" value="#{crearMovilidadController.selectedPais}" required="true" requiredMessage="hay que introducir un pais">
+                        <p:ajax  listener="#{crearMovilidadController.onDropboxChangePais}" update=":formMovilidad: :formMovilidad:msgs1 "/>
+                        <f:selectItem itemLabel="selecciona pais" noSelectionOption="true"/>
+                        <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
+            
+            
+                        </p:selectOneMenu>
+                     </p:outputPanel> 
+               
+                
+                <p:outputPanel id="universidad" >
+                    <p:selectOneMenu  value="#{crearMovilidadController.selectedUniversidad}" rendered="#{crearMovilidadController.checkPais}" required="true" requiredMessage="hay que introducir una universidad"  >
+                
+                <p:ajax listener="#{crearMovilidadController.onDropboxchangeUni()}" update=":formMovilidad:info "/>
+                <f:selectItem itemLabel="selecciona universidad" noSelectionOption="true" />
+                <f:selectItems value="#{crearMovilidadController.listaUniversidades}" var="universidad" itemLabel="#{universidad.nombre}" itemValue="#{universidad.nombre}"
+                               />
+            
+                 </p:selectOneMenu>
+                </p:outputPanel>
+            <br/>
+                
+            
+            <h:panelGrid id="info" columns="2" cellpadding="6">
+                
+                <p:outputLabel value="web: "  rendered="#{not empty crearMovilidadController.universidad.web}" />
+                <h:outputLink value="#{crearMovilidadController.universidad.web}" rendered="#{not empty crearMovilidadController.universidad.web}">link</h:outputLink>
+                <p:outputLabel value="información:"  rendered="#{not empty crearMovilidadController.universidad.info}"/>
+                <p:inputTextarea value="#{crearMovilidadController.universidad.info}"
+                                 readonly="true" rows="8" cols="50" rendered="#{not empty crearMovilidadController.universidad.info}"/>
+                
+                
+                
+                
+            </h:panelGrid>
+            
+            
+            <h:panelGrid id="horario" columns="2" cellpadding="6">
+              
+                <p:outputLabel value="Fecha de inicio"/>
+                <p:calendar id="cal1" value="#{crearMovilidadController.fechaInicio}" 
+                            
+                            required="true"
+                            requiredMessage="hay que insertar una fecha de inicio"
+                            locale="es"
+                            mindate="#{crearMovilidadController.fechaMin}"
+                            maxdate="#{crearMovilidadController.fechaMax}"
+                            pattern="dd-MM-yyyy">
+                   
+                
+                </p:calendar>
+               
+                
+                <p:outputLabel  value="fecha de fin"/>
+                <p:calendar id="cal2" value="#{crearMovilidadController.fechaFin}" 
+                            
+                            required="true"
+                            requiredMessage="hay que insertar una fecha de fin"
+                            locale="es"
+                            mindate="#{crearMovilidadController.fechaMin}"
+                            pattern="dd-MM-yyyy"
+                            >
+                
+                    
+                
+                </p:calendar>
+                 
+            
+            
+            
+            <p:commandButton value="crear movilidad" action="#{crearMovilidadController.crearMovilidad}" ajax="true" update=":formMovilidad"/>
+            </h:panelGrid>  
+                
+        </h:form>
+   
+        
+            <br/>
+            <br/>
+            
+            <h:outputLink value="verMisMovilidades.xhtml">ver mis movilidades</h:outputLink>
+            <br/><br/>
+            
+            
+             <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+                
+        <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+        </h:form>
+           
+        <br />
+        
+       
+        
+                
+           
+            
+            
+            
+        
+        
+           
+    </h:body>
+</html>

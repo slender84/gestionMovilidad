@@ -1,0 +1,97 @@
+
+body.blue{
+    
+    background-color: #F2FAFA;
+}
+
+.login{
+    
+    width: 5%;
+    font-size: 14px;
+    text-align: left;
+    
+}
+
+.nombre{
+    
+    width: 4%;
+    font-size: 14px;
+    text-align: left;
+}
+
+
+.apellido1{
+    
+    width: 5%;
+    font-size: 14px;
+    text-align: left;
+    
+}
+
+.universidad{
+    
+   width: 7%;
+   font-size: 14px;  
+   text-align: left;
+    
+}
+
+
+.estado{
+    
+    width: 6%;
+   font-size: 14px;  
+   text-align: left;
+    
+}
+
+.contratos{
+    
+    width: 5%;
+   font-size: 14px;  
+   text-align: left;
+    
+}
+
+.cambiar{
+    
+   width: 3%;
+   font-size: 14px;  
+   text-align: left;
+}
+
+.multiple{
+   width:3% ;
+   text-align:center;
+}
+
+.cursoAcademico{
+    
+    
+    width: 4%;
+    font-size: 14px;
+    text-align: left;
+}
+
+.fecha{
+    
+    width: 4%;
+    font-size: 14px;
+    text-align: left;
+}
+
+.pais{
+    
+    width: 5%;
+    font-size: 14px;
+    text-align: left;
+}
+
+
+.ui-datatable.borderless  .ui-datatable-data tr,
+.ui-datatable.borderless .ui-datatable-data-empty tr,
+.ui-datatable.borderless .ui-datatable-data td,
+.ui-datatable.borderless .ui-datatable-data-empty td {
+    border-style: none;
+    
+}

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Configuración de correo</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        
+        <h:form id="f1">
+            <p:growl id="msgs" />
+            <h:panelGrid columns="2" cellpadding="6">
+                
+                <p:outputLabel value="dirección completa"/>
+                <p:inputText value="#{configuracionCorreoController.correoConf.direccion}" required="true"
+                             requiredMessage="el campo direccion está vacío"/>
+                <p:outputLabel value="password"/>
+                <p:password value="#{configuracionCorreoController.correoConf.password}" required="true" requiredMessage="el campo password está vacío"/>
+                <p:outputLabel value="smtpPort"/>
+                <p:inputText value="#{configuracionCorreoController.correoConf.smtpPort}" required="true" requiredMessage="El campo smtpPort está vacío"/>
+                <p:outputLabel value="host name"/>
+                <p:inputText value="#{configuracionCorreoController.correoConf.hostName}" required="true" requiredMessage="El campo hostName está vacío"/>
+                <p:outputLabel value="dominio del receptor"/>
+                <p:inputText value="#{configuracionCorreoController.correoConf.addTo}" required="true" requiredMessage="El campo de dominio del receptor está vacío"
+                             validatorMessage="el la expresión del dominio es incorrecta, debe ser por ejemplo udc.es">
+                    <f:validateRegex pattern="[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                </p:inputText>
+                
+            </h:panelGrid>
+            
+            <p:commandButton  value="editar" action="#{configuracionCorreoController.editarConfiguracion}" update=":f1:msgs"/>    
+            
+            
+        </h:form>
+        
+        <br/><br/>
+       <h:outputLink value="#{request.contextPath}/admin/index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        
+        
+          <br/>  
+                
+        <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+        
+        
+        
+        
+    </h:body>
+    
+</html>

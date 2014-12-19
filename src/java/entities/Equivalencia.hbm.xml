@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-dic-2014 9:35:11 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Equivalencia" table="equivalencia" catalog="gestordb" optimistic-lock="version">
+        <id name="idequivalencia" type="java.lang.Integer">
+            <column name="idequivalencia" />
+            <generator class="identity" />
+        </id>
+        <property name="visible" type="string">
+            <column name="visible" length="2" />
+        </property>
+        <set name="miembroGrupoAsignaturaBs" table="miembro_grupo_asignatura_b" inverse="true" lazy="true" fetch="select" cascade="save-update">
+            <key>
+                <column name="idEquivalencia" />
+            </key>
+            <one-to-many class="entities.MiembroGrupoAsignaturaB" />
+        </set>
+        <set name="miembroGrupoAsignaturaAs" table="miembro_grupo_asignatura_a" inverse="true" lazy="true" fetch="select" cascade="save-update">
+            <key>
+                <column name="idEquivalencia" />
+            </key>
+            <one-to-many class="entities.MiembroGrupoAsignaturaA" />
+        </set>
+        <set name="contratos" table="contrato_equivalencia" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idEquivalencia" not-null="true" />
+            </key>
+            <many-to-many entity-name="entities.Contrato">
+                <column name="idContrato" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      
+      
+    <h:head>
+        <title>pagina principal admin</title>
+        <h:outputStylesheet library="css" name="menu.css"/>
+    </h:head>
+    <h:body>
+       
+        
+            
+            <h:form>
+              
+          
+            
+            
+             <h:outputLink value="#{request.contextPath}/supervision/configuracionCorreo.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Configuración de correo</h:outputLink>
+
+             <h:outputLink value="#{request.contextPath}/supervision/crearAdmin.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Crear tutor</h:outputLink>
+                
+             <h:outputLink value="listaUsuarios.xhtml">Lista de usuarios</h:outputLink>
+            
+            <h:outputLink value="crearPais.xhtml">Paises</h:outputLink>
+            
+            <h:outputLink value="crearUniversidad.xhtml">Universidades</h:outputLink>
+            
+            <h:outputLink value="crearAsignatura.xhtml">Asignaturas</h:outputLink>
+            
+            <h:outputLink value="verMovilidades.xhtml">Movilidades</h:outputLink>
+            
+            <h:outputLink value="verMensajes.xhtml">Mensajes</h:outputLink> 
+            
+            <h:outputLink value="crearCursoAcademico.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Cursos academicos</h:outputLink>
+            
+            <h:outputLink value="estados.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Estados</h:outputLink>
+            
+            <h:outputLink value="estadosMovilidad.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Estados de movilidad</h:outputLink>
+            
+            <h:outputLink value="cambiarPasswordAdmin.xhtml">Cambiar password</h:outputLink>
+            
+            <h:outputLink value="equivalenciasPublicasAdmin.xhtml">equivalencias públicas</h:outputLink>
+            
+             <br/><br/>
+            
+        </h:form>
+                
+                <h:form>
+            
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir()}" ajax="false" />
+            
+        </h:form>
+                
+           
+        <p:graphicImage library="img" name="udc.png" styleClass="imagenUdc"/>
+           
+       
+       
+       
+        
+        
+        <br/><br/>
+        
+        
+        
+        
+        <br />
+        
+    </h:body>
+</html>
