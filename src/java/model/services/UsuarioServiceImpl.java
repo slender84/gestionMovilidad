@@ -139,7 +139,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         //email.setHostName("smtp.googlemail.com");
         //email.setHostName("smtp.gmail.com");
         email.setHostName(correoConf.getHostName());
-        
+        //email.setSmtpPort(489);    
         //email.setSmtpPort(465);
         email.setSmtpPort(correoConf.getSmtpPort());
         //email.setAuthenticator(new DefaultAuthenticator("registroerasmus@gmail.com", "registrousers"));
