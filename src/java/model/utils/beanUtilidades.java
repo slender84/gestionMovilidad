@@ -12,7 +12,7 @@ import entities.Estado;
 import entities.EstadoMovilidad;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +21,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.configuration.ConfigurationException;
+
 
 
 
@@ -251,7 +251,7 @@ public class beanUtilidades implements Serializable{
     
         
     
-    public void setCorreoConf(CorreoConf correoConf) throws ConfigurationException{
+    public void setCorreoConf(CorreoConf correoConf) {
         
         utilidadService.setCorreoConf(correoConf);
         
