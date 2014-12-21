@@ -60,17 +60,13 @@ public class beanUtilidades implements Serializable{
     public void init(){
         HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         
-       // if (request.getRequestURI().equals("/pfc/admin/estados.xhtml")==true){
+      
             
             setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
-        //}else{
-          //  if (request.getRequestURI().equals("/pfc/admin/estadosMovilidad.xhtml")==true){
+        
             
             setListaEstadosMovilidad((ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad());
-            setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
-        //}
-      
-    //}
+        
     }
 
     public ArrayList<Estado> getListaEstados() {
