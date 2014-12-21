@@ -75,7 +75,7 @@ public class ConfiguracionCorreoController implements Serializable{
     correoConf.setPassword(Encrypter.encrypt(correoConf.getPassword()));
     beanUtilidades.setCorreoConf(correoConf);
     }catch(Exception ex){
-        ex.printStackTrace();
+        
         beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
     }
     
