@@ -40,7 +40,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         this.usuarioDao = usuarioDao;
     }
     
-    @Autowired
+   /* @Autowired
     private UserDao userDao;
 
     public UserDao getUserDao() {
@@ -49,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
+    }*/
     
     
     
@@ -79,12 +79,12 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         
         
-        /*List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
+        List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
         Usuario u=usuarioDao.find("admin");
         lista.remove(u);
-        return lista;*/
+        return lista;
         
-        return userDao.list();
+        //return userDao.list();
     }
     
     
