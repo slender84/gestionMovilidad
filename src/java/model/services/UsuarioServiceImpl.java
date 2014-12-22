@@ -14,6 +14,7 @@ import exceptions.UsuarioNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import model.dao.UserDao;
 import model.dao.UsuarioDao;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -39,6 +40,20 @@ public class UsuarioServiceImpl implements UsuarioService{
         this.usuarioDao = usuarioDao;
     }
     
+    @Autowired
+    private UserDao userDao;
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+    
+    
+    
+    
     @Override
     @Transactional(readOnly = true)
     public Usuario find(String nombre)throws UsuarioNotFoundException{
@@ -62,11 +77,17 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Transactional(readOnly = true)
     public List<Usuario>listar(){
         
-        List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
+        
+        
+        /*List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
         Usuario u=usuarioDao.find("admin");
         lista.remove(u);
-        return lista;
+        return lista;*/
+        
+        return userDao.list();
     }
+    
+    
     
     
     @Override
