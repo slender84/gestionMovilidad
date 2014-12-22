@@ -79,7 +79,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         
         
-        /*List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
+       /* List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
         Usuario u=usuarioDao.find("admin");
         lista.remove(u);
         return lista;*/
