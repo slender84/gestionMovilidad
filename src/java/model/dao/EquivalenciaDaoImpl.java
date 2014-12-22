@@ -7,14 +7,13 @@ package model.dao;
 
 import entities.Equivalencia;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
 @Repository("equivalenciaDao")
 public class EquivalenciaDaoImpl extends GenericDaoHibernate<Equivalencia, Integer> implements EquivalenciaDao {
     
-@Autowired    
+  
 
     
     

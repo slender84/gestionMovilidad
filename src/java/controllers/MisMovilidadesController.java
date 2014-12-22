@@ -156,7 +156,7 @@ public class MisMovilidadesController implements Serializable{
             try{
             movilidadService.eliminarMovilidad(selectedMovilidad);
             }catch(RuntimeException ex){
-                    beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+                    beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                     return "verMisMovilidades.xhtml";
                     }
             Mensaje mensaje=new Mensaje(admin,usuario,Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" ha eliminado una movilidad", "no","no","no");
@@ -182,7 +182,7 @@ public class MisMovilidadesController implements Serializable{
                     try{
                 movilidadService.eliminarMovilidad(selectedMovilidad);    
                     }catch(RuntimeException ex){
-                        beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+                        beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                         return "verMisMovilidades.xhtml";
                     }
                 actualizar();     

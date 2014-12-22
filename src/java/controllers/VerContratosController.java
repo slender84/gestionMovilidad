@@ -4,7 +4,6 @@ import entities.Contrato;
 import entities.Equivalencia;
 import entities.Movilidad;
 import entities.Usuario;
-import exceptions.ContratoNotFoundException;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;

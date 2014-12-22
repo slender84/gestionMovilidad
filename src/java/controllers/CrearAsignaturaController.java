@@ -373,8 +373,9 @@ public class CrearAsignaturaController implements Serializable{
         checkUniversidadStr=false;
         checkTabla=false;
         checkPaisStr=false;
-        paisStr="";
-        universidadStr="";
+          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        //paisStr="";
+        //universidadStr="";
         return null;
         }
             checkDetalles=false;
@@ -403,14 +404,20 @@ public class CrearAsignaturaController implements Serializable{
             try{
                 asignaturaService.eliminaAsignatura(a);
             }catch(InstanceNotFoundException|RuntimeException ex){
-                ex.printStackTrace();
-                  beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
-                 checkDetalles=false;
-                 checkTabla=false;
-                 checkUniversidadStr=false;
-                 checkPaisStr=false;
-                 paisStr="";
-                 return null;
+              
+            ex.printStackTrace();
+            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+           checkDetalles=false;
+        checkTabla=false;
+        checkUniversidadStr=false;
+        checkPaisStr=false;
+          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        //paisStr="";
+        //universidadStr="";
+        return null;
+                 
+                 
+                 
                  
             }
         }

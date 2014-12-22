@@ -206,9 +206,9 @@ public class MovilidadesController implements Serializable{
         
         m.setEstado(changeEstado);
         try{
-        movilidadService.crearMovilidad(m);
+        movilidadService.editar(m);
         }catch(RuntimeException ex){
-            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
             return "verMovilidades.xhtml";
         }
@@ -227,7 +227,7 @@ public class MovilidadesController implements Serializable{
             try{
         movilidadService.eliminarMovilidad(m);
             }catch(RuntimeException ex){
-                beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+                beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                 return "verMovilidades.xhtml";
             }
         }

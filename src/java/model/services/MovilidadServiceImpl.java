@@ -199,5 +199,11 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
               
     }
     
+    @Override
+    public void editar(Movilidad m){
+        
+        movilidadDao.edit(m);
+        
+    }
     
 }

@@ -60,7 +60,7 @@ public class beanUtilidades implements Serializable{
     public void init(){
         HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         
-      
+            setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
             
             setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
         

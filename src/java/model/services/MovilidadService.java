@@ -30,5 +30,5 @@ public interface MovilidadService {
     public void eliminarMovilidad(Movilidad m);
     public Movilidad findMovilidad(Integer id) throws InstanceNotFoundException;
     public void crearMovilidad(Date fechaInicio,Date fechaFin,Usuario user,Universidad u,Cursoacademico ca) throws DuracionException,NumeroDeMovilidadesException;
-   
+    public void editar(Movilidad m);
 }

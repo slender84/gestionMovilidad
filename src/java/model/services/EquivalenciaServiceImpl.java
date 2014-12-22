@@ -9,7 +9,6 @@ import entities.Equivalencia;
 import entities.MiembroGrupoAsignaturaA;
 import entities.MiembroGrupoAsignaturaB;
 import entities.Movilidad;
-import exceptions.ContratoNotFoundException;
 import exceptions.InstanceNotFoundException;
 import exceptions.MovilidadNotFoundException;
 import java.util.ArrayList;

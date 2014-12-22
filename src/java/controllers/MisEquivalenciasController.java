@@ -468,7 +468,7 @@ public class MisEquivalenciasController implements Serializable{
         }catch(RuntimeException ex){
          
              try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/verMisMovilidades.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");
             }catch(IOException ex2){
                     
                     }
