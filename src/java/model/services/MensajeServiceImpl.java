@@ -8,6 +8,7 @@ package model.services;
 
 
 import entities.Mensaje;
+import exceptions.InstanceNotFoundException;
 import java.util.List;
 import model.dao.MensajeDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class MensajeServiceImpl implements MensajeService{
     
     
     @Override
-    public void eliminarMensaje(Mensaje m,String accion){
+    public void eliminarMensaje(Mensaje m,String accion)throws InstanceNotFoundException{
         
         
          Mensaje aux=find(m.getIdmensaje());
@@ -80,7 +81,7 @@ public class MensajeServiceImpl implements MensajeService{
              
                 if(aux.getEliminadoOrigen().equals("si")){
                     
-                    mensajeDao.eliminarMensaje(aux);
+                    mensajeDao.delete(aux);
                 }else{
                     
                      enviarMensaje(aux);
@@ -92,7 +93,7 @@ public class MensajeServiceImpl implements MensajeService{
              
                 if(aux.getEliminadoDestino().equals("si")){
                     
-                    mensajeDao.eliminarMensaje(aux);
+                    mensajeDao.delete(aux);
                 }else{
                     
                      enviarMensaje(aux);
@@ -106,7 +107,7 @@ public class MensajeServiceImpl implements MensajeService{
     
     @Override
     @Transactional(readOnly = true)
-    public Mensaje find(Integer msgId){
+    public Mensaje find(Integer msgId) throws InstanceNotFoundException{
         
         return mensajeDao.find(msgId);
     }
@@ -114,7 +115,7 @@ public class MensajeServiceImpl implements MensajeService{
 
 
     @Override
-    public void leerMensajeRecibido(Mensaje selectedMensajeRecibido){
+    public void leerMensajeRecibido(Mensaje selectedMensajeRecibido) throws InstanceNotFoundException{
 
             Mensaje aux=find(selectedMensajeRecibido.getIdmensaje());
             

@@ -5,6 +5,7 @@ import entities.Equivalencia;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.ContratoNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -69,7 +70,16 @@ public class VerContratosController implements Serializable{
        if(context.getSessionMap().containsKey("movilidad")==true){
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            context.getSessionMap().remove("Movilidad");
-           selectedMovilidad=movilidadService.findMovilidad(selectedMovilidad.getCodMovilidad());
+           try{
+               selectedMovilidad=movilidadService.findMovilidad(selectedMovilidad.getCodMovilidad());
+           }catch(InstanceNotFoundException ex){
+               try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/verMovilidades.xhtml");
+            }catch(IOException ex2){
+                    
+                    }
+           }
+           
            listaContratos=(ArrayList < Contrato >)equivalenciaService.listaContratos(selectedMovilidad);
            
        }
@@ -164,7 +174,7 @@ public class VerContratosController implements Serializable{
         
             try{
             c=equivalenciaService.findContrato(c.getIdContrato());
-            }catch(ContratoNotFoundException ex){
+            }catch(InstanceNotFoundException ex){
              listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
               beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
              return null;

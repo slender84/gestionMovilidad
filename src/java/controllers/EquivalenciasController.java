@@ -9,6 +9,7 @@ import entities.Mensaje;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.ContratoNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class EquivalenciasController implements Serializable{
            context.getSessionMap().remove("movilidad");
            try{
            selectedContrato=equivalenciaService.findContrato(selectedContrato.getIdContrato());
-           }catch(ContratoNotFoundException ex){
+           }catch(InstanceNotFoundException ex){
                try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
             }catch(IOException ex2){
@@ -115,7 +116,7 @@ public class EquivalenciasController implements Serializable{
         context.getSessionMap().remove("contratoComparado");
              try{
         contratoComparado=equivalenciaService.findContrato(contratoComparado.getIdContrato());
-             }catch(ContratoNotFoundException ex3){
+             }catch(InstanceNotFoundException ex3){
                  try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
             }catch(IOException ex4){
@@ -406,7 +407,7 @@ public class EquivalenciasController implements Serializable{
         
         try{
         selectedContrato=equivalenciaService.findContrato(selectedContrato.getIdContrato());
-        }catch(ContratoNotFoundException ex){
+        }catch(InstanceNotFoundException ex){
             try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
             }catch(IOException ex2){

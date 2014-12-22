@@ -12,6 +12,7 @@ import entities.Movilidad;
 import entities.Universidad;
 import entities.Usuario;
 import exceptions.DuracionException;
+import exceptions.InstanceNotFoundException;
 import exceptions.NumeroDeMovilidadesException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -48,22 +49,15 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     @Transactional(readOnly = true)
     public List<Movilidad> listarTodasMovilidades(){
         
-       List<Movilidad> aux=movilidadDao.listarMovilidad();
+       List<Movilidad> aux=movilidadDao.list();
         for(Movilidad m:aux){
             Hibernate.initialize(m.getUniversidad());
         }
         return aux;
         
     }
-    @Override
-    @Transactional(readOnly = true)
-    public List<Movilidad> listarMovilidadesPendientes(){
-        
-        String estado="pendiente";
-        return movilidadDao.listarPorEstado(estado);
-        
-        
-    }
+    
+    
     
     @Override
     public Date fechaMin(){
@@ -85,7 +79,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     @Override
     public void crearMovilidad(Movilidad m){
         
-        movilidadDao.crearMovilidad(m);
+        movilidadDao.insert(m);
     }
     
     @Override
@@ -106,39 +100,20 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
         }
         return aux;
     }
-    @Override
-    @Transactional(readOnly = true)
-    public List<Movilidad> listarMisMovilidadesPorEstado(String user, String estado){
-        return movilidadDao.listarMisMovilidadesPorEstado(user, estado);
-    }
+    
     @Override
     public void eliminarMovilidad(Movilidad m){
         
-        movilidadDao.eliminarMovilidad(m);
+        movilidadDao.delete(m);
     }
     
-    @Override
-    public List<Object> doJoin(){
-        
-        return movilidadDao.doJoin();
-        
-    }
     
     
     @Override
     @Transactional(readOnly = true)
-    public List<Movilidad> listarMovilidadesValidas(String user){
+    public Movilidad findMovilidad(Integer id)throws InstanceNotFoundException{
         
-        return movilidadDao.listarMovilidadesValidas(user);
-        
-        
-    }
-    
-    @Override
-    @Transactional(readOnly = true)
-    public Movilidad findMovilidad(Integer id){
-        
-        Movilidad m=movilidadDao.findMovilidad(id);
+        Movilidad m=movilidadDao.find(id);
         Hibernate.initialize(m.getUniversidad());
         return m;
     }

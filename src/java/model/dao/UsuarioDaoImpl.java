@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository("usuarioDao")
-public class UsuarioDaoImpl implements UsuarioDao{
-    @Autowired
+public class UsuarioDaoImpl extends GenericDaoHibernate<Usuario, String> implements UsuarioDao{
+   /* @Autowired
     private SessionFactory sessionFactory;
     
     
@@ -87,6 +87,6 @@ public class UsuarioDaoImpl implements UsuarioDao{
         
     }
     
-   
-    
+  
+    */
 }

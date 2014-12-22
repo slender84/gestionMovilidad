@@ -1,8 +1,8 @@
 package controllers;
 
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
-import exceptions.UsuarioNotFoundException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -98,7 +98,7 @@ public class AutenticarUsuarioController implements Serializable{
         
              try{
              u=usuarioService.find(getLogin());
-             }catch(UsuarioNotFoundException ex){
+             }catch(InstanceNotFoundException ex){
              beanUtilidades.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
               return null; 
              }

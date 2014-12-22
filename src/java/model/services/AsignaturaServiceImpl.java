@@ -4,6 +4,7 @@ package model.services;
 
 
 import entities.Asignatura;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.List;
 import model.dao.AsignaturaDao;
@@ -30,12 +31,12 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     @Override
     public void crearAsignatura(Asignatura a){
         
-        asignaturaDao.crearAsignatura(a);
+        asignaturaDao.insert(a);
     }
     
     @Override
     public List<Asignatura> listarAsignaturas(){
-        return asignaturaDao.listarAsignaturas();
+        return asignaturaDao.list();
     }
     
     
@@ -48,17 +49,20 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
                 
     }
     @Override
-    public void eliminaAsignatura(Asignatura a){
+    public void eliminaAsignatura(Asignatura a) throws InstanceNotFoundException{
+        if(asignaturaDao.exists(a.getId())==false)
+                throw new InstanceNotFoundException();
         
-        asignaturaDao.eliminaAsignatura(a);
+        asignaturaDao.delete(a);
         
     }
     
     
     @Override
-    public void actualizarAsignatura(Asignatura a){
-        
-        asignaturaDao.actualizarAsignatura(a);
+    public void actualizarAsignatura(Asignatura a)throws InstanceNotFoundException{
+        if(asignaturaDao.exists(a.getId())==false)
+                throw new InstanceNotFoundException();
+        asignaturaDao.edit(a);
     }
     
     @Override

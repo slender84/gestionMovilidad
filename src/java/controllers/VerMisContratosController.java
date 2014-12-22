@@ -7,6 +7,7 @@ import entities.Equivalencia;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.ContratoNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -151,7 +152,7 @@ public class VerMisContratosController implements Serializable{
     public String eliminarContrato(){
         try{
         selectedContrato=equivalenciaService.findContrato(selectedContrato.getIdContrato());
-        }catch(ContratoNotFoundException ex){
+        }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
             verContratos();
             return null;

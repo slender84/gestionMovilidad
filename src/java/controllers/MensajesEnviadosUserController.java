@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Mensaje;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -165,8 +166,11 @@ public class MensajesEnviadosUserController implements Serializable{
         }
         
         for(Mensaje m:selectedMensajesEnviados){
-            
+            try{
             mensajeService.eliminarMensaje(m,"enviado");
+            }catch(InstanceNotFoundException ex){
+                
+            }
         }
      
         //beanUtilidades.creaMensaje("mensajes eliminados correctamente", FacesMessage.SEVERITY_INFO);

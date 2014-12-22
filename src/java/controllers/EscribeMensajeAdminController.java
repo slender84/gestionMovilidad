@@ -2,7 +2,7 @@ package controllers;
 
 import entities.Mensaje;
 import entities.Usuario;
-import exceptions.UsuarioNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.annotation.PostConstruct;
@@ -103,7 +103,7 @@ public class EscribeMensajeAdminController implements Serializable{
         Usuario destino=null;
         try{
         destino=usuarioService.find("admin");
-        }catch(UsuarioNotFoundException ex){
+        }catch(InstanceNotFoundException ex){
             
         }
         

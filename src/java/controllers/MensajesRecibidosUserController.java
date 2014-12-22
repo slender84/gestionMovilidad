@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Mensaje;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -139,7 +140,11 @@ public class MensajesRecibidosUserController implements Serializable{
         temaRecibido=selectedMensajeRecibido.getTema();
         textAreaRecibido=selectedMensajeRecibido.getTexto();
          selectedMensajeRecibido.setLeidoDestino("si");
+         try{
         mensajeService.leerMensajeRecibido(selectedMensajeRecibido);
+         }catch(InstanceNotFoundException ex){
+             
+         }
          return null;
     }
      
@@ -163,9 +168,11 @@ public class MensajesRecibidosUserController implements Serializable{
         }
         
         for(Mensaje m:selectedMensajesRecibidos){
-         
+         try{
             mensajeService.eliminarMensaje(m,"recibido");
-           
+         }catch(InstanceNotFoundException ex){
+             
+         }  
             
         actualizarRecibidos();
         

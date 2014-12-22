@@ -37,8 +37,16 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
     @Override
     public void insert(T entity){
         
-        getSession().saveOrUpdate(entity);
+        getSession().save(entity);
     }
+    
+    @Override
+    public void edit(T entity){
+        
+        getSession().update(entity);
+        
+    }
+    
     
     @Override
     public boolean exists(PK id) {
@@ -56,11 +64,17 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
 		return entity;
 	}
         
-        
+        @Override
         public List<T> list(){
             
             return getSession().createCriteria(entityClass).list();
             
+        }
+        
+        @Override
+        public void delete(T entity){
+            
+            getSession().delete(entity);
         }
 
     

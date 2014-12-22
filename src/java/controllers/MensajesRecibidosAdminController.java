@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Mensaje;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -166,7 +167,7 @@ public class MensajesRecibidosAdminController implements Serializable{
         selectedMensajeRecibido.setLeidoDestino("si");
         try{
         mensajeService.leerMensajeRecibido(selectedMensajeRecibido);
-        }catch(RuntimeException ex){
+        }catch(InstanceNotFoundException ex){
             
         }
         actualizarRecibidos();
@@ -197,7 +198,7 @@ public class MensajesRecibidosAdminController implements Serializable{
          
             try{
             mensajeService.eliminarMensaje(m,"recibido");
-            }catch(RuntimeException ex){
+            }catch(InstanceNotFoundException ex){
                 
             }
             

@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Mensaje;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -174,7 +175,7 @@ public class MensajesEnviadosAdminController implements Serializable{
             
             try{
             mensajeService.eliminarMensaje(m,"enviado");
-            }catch(RuntimeException ex){
+            }catch(InstanceNotFoundException ex){
                 
             }
         }

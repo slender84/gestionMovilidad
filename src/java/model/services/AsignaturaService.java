@@ -7,6 +7,7 @@
 package model.services;
 
 import entities.Asignatura;
+import exceptions.InstanceNotFoundException;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface AsignaturaService {
     public void crearAsignatura(Asignatura a);
     public List<Asignatura> listarAsignaturas();
     public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
-    public void eliminaAsignatura(Asignatura a);
-    public void actualizarAsignatura(Asignatura a);
+    public void eliminaAsignatura(Asignatura a)throws InstanceNotFoundException;
+    public void actualizarAsignatura(Asignatura a)throws InstanceNotFoundException;
     public List<Asignatura> listarPorCriterio();
 }

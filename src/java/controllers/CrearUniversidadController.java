@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Pais;
 import entities.Universidad;
+import exceptions.InstanceNotFoundException;
 import exceptions.PaisException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -243,7 +244,7 @@ public class CrearUniversidadController implements Serializable{
        Pais p;
        try{
         p=universidadService.findPais(paisStr);
-       }catch(PaisException ex){
+       }catch(InstanceNotFoundException ex){
           beanUtilidades.creaMensaje("se ha producido un error,no existe ese país", FacesMessage.SEVERITY_ERROR);
            return "crearUniversidad.xhtml";
        }
@@ -298,9 +299,10 @@ public class CrearUniversidadController implements Serializable{
                
                 try{
                     universidadService.delete(u);
-                }catch(RuntimeException ex){
+                }catch(InstanceNotFoundException|RuntimeException ex){
+                    ex.printStackTrace();
                     listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
-                   beanUtilidades.creaMensaje("Error eliminando", FacesMessage.SEVERITY_INFO); 
+                   beanUtilidades.creaMensaje("Error eliminando", FacesMessage.SEVERITY_ERROR); 
                    
                     return null;
                 }    
@@ -320,10 +322,11 @@ public class CrearUniversidadController implements Serializable{
         try{
         universidadService.actualizar(selectedUniversidad);
         listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
-        }catch(RuntimeException ex){
+        }catch(InstanceNotFoundException|RuntimeException ex){
+            ex.printStackTrace();
             beanUtilidades.creaMensaje("se ha producido un error ", FacesMessage.SEVERITY_ERROR);
             checkDetalles=false;
-            listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
+            listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
             return "crearUniversidad.xhtml?faces-redirect=true";
         }
         beanUtilidades.creaMensaje("edición correcta", FacesMessage.SEVERITY_INFO);

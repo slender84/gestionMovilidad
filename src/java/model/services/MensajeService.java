@@ -7,6 +7,7 @@
 package model.services;
 
 import entities.Mensaje;
+import exceptions.InstanceNotFoundException;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public List<Mensaje> mensajesRecibidos(String origen,String destino);
 public void enviarMensaje(Mensaje m);
 public List<Mensaje> mensajesRecibidosTotal(String destino);
 public List<Mensaje> mensajesEnviadosTotal(String origen);
-public void eliminarMensaje(Mensaje m,String accion);
-public Mensaje find(Integer msgId);
-public void leerMensajeRecibido(Mensaje m);
+public void eliminarMensaje(Mensaje m,String accion) throws InstanceNotFoundException ;
+public Mensaje find(Integer msgId) throws InstanceNotFoundException;
+public void leerMensajeRecibido(Mensaje m) throws InstanceNotFoundException;
 }

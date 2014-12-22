@@ -7,6 +7,7 @@ import entities.Mensaje;
 import entities.Universidad;
 import entities.Usuario;
 import exceptions.DuracionException;
+import exceptions.InstanceNotFoundException;
 import exceptions.NumeroDeMovilidadesException;
 import exceptions.UniversidadException;
 import exceptions.UsuarioNotFoundException;
@@ -220,7 +221,7 @@ public class CrearMovilidadController implements Serializable{
         
         try{
         universidad=universidadService.findUniversidad(selectedUniversidad);
-        }catch(UniversidadException ex){
+        }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
             
         }
@@ -235,7 +236,7 @@ public String crearMovilidad(){
          Universidad u;
         try{
        u=universidadService.findUniversidad(selectedUniversidad);
-        }catch(UniversidadException ex){
+        }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
             selectedUniversidad="";
                 selectedPais="";
@@ -276,7 +277,7 @@ public String crearMovilidad(){
               Usuario admin=null;
                try{
                     admin=usuarioService.find("admin");
-               }catch(UsuarioNotFoundException ex){
+               }catch(InstanceNotFoundException ex){
                    
                }
                 

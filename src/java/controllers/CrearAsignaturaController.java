@@ -6,7 +6,8 @@ import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.Pais;
 import entities.Universidad;
-import exceptions.UniversidadException;
+import exceptions.InstanceNotFoundException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -316,7 +317,7 @@ public class CrearAsignaturaController implements Serializable{
         Universidad uni;
         try{
         uni=universidadService.findUniversidad(universidadStr);
-        }catch(UniversidadException ex){
+        }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("no existe la universidad", FacesMessage.SEVERITY_ERROR);
             universidadStr="";
             listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
@@ -365,7 +366,8 @@ public class CrearAsignaturaController implements Serializable{
         try{
             asignaturaService.actualizarAsignatura(SelectedAsignatura);
             listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
-        }catch(RuntimeException ex){
+        }catch(InstanceNotFoundException|RuntimeException ex){
+            ex.printStackTrace();
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            checkDetalles=false;
         checkUniversidadStr=false;
@@ -400,7 +402,8 @@ public class CrearAsignaturaController implements Serializable{
         for (Asignatura a:selectedAsignaturas){
             try{
                 asignaturaService.eliminaAsignatura(a);
-            }catch(RuntimeException ex){
+            }catch(InstanceNotFoundException|RuntimeException ex){
+                ex.printStackTrace();
                   beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
                  checkDetalles=false;
                  checkTabla=false;

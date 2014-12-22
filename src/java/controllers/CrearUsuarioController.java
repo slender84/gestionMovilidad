@@ -3,7 +3,7 @@ package controllers;
 import entities.CorreoConf;
 import entities.Mensaje;
 import entities.Usuario;
-import exceptions.UsuarioNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -217,7 +217,7 @@ public class CrearUsuarioController implements Serializable{
         m.setTema("usuario creado");
         m.setTexto("el usuario "+login+" se ha dado de alta en el sistema");
         mensajeService.enviarMensaje(m);
-        }catch(UsuarioNotFoundException|RuntimeException ex){
+        }catch(InstanceNotFoundException|RuntimeException ex){
             
             beanUtilidades.creaMensaje("se ha producido un error. Inténtalo más tarde", FacesMessage.SEVERITY_ERROR);
                 return null;

@@ -8,8 +8,8 @@ package model.services;
 
 import entities.CorreoConf;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
-import exceptions.UsuarioNotFoundException;
 import java.util.List;
 import org.apache.commons.mail.EmailException;
 
@@ -17,7 +17,7 @@ import org.apache.commons.mail.EmailException;
 
 public interface UsuarioService {
     
-    public Usuario find(String nombre)throws UsuarioNotFoundException;
+    public Usuario find(String nombre)throws InstanceNotFoundException;
     public void delete(Usuario u);
     public List<Usuario> listar();
     

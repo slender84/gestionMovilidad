@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package model.services;
 
 
 import entities.CorreoConf;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
-import exceptions.UsuarioNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import model.dao.UserDao;
 import model.dao.UsuarioDao;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -40,35 +35,18 @@ public class UsuarioServiceImpl implements UsuarioService{
         this.usuarioDao = usuarioDao;
     }
     
-    @Autowired
-    private UserDao userDao;
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-    
-    
     
     
     @Override
     @Transactional(readOnly = true)
-    public Usuario find(String nombre)throws UsuarioNotFoundException{
+    public Usuario find(String nombre)throws InstanceNotFoundException{
         
-        Usuario u=usuarioDao.find(nombre);
-        if(u==null){
-            throw new UsuarioNotFoundException();
-        }
-        
-        return u;
+        return usuarioDao.find(nombre);
     }
     
     @Override
     public void delete(Usuario u){
-        
+        if(usuarioDao.exists(u.getLogin()))
         usuarioDao.delete(u);
        
     }
@@ -79,12 +57,17 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         
         
-       /* List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
-        Usuario u=usuarioDao.find("admin");
+        List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.list();
+        Usuario u=null;
+        try{
+        u=usuarioDao.find("admin");
+        }catch(InstanceNotFoundException ex){
+            
+        }
         lista.remove(u);
-        return lista;*/
+        return lista;
         
-        return userDao.list();
+        
     }
     
     
@@ -95,13 +78,13 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         
             
-            usuarioDao.insertarUsuario(u);
+            usuarioDao.insert(u);
 }
     @Override
     public void actualizar(Usuario u){
         
-        
-        usuarioDao.actualizar(u);
+        if(usuarioDao.exists(u.getLogin()))
+        usuarioDao.edit(u);
         
         
     }

@@ -5,7 +5,7 @@ package controllers;
 import entities.Mensaje;
 import entities.Movilidad;
 import entities.Usuario;
-import exceptions.UsuarioNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -147,7 +147,7 @@ public class MisMovilidadesController implements Serializable{
         Usuario admin=null;
         try{
          admin=usuarioService.find(("admin"));
-        }catch(UsuarioNotFoundException ex){
+        }catch(InstanceNotFoundException ex){
         }
         
         

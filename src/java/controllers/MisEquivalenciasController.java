@@ -16,7 +16,7 @@ import entities.MiembroGrupoAsignaturaB;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.ContratoNotFoundException;
-import exceptions.UsuarioNotFoundException;
+import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -137,7 +137,7 @@ public class MisEquivalenciasController implements Serializable{
         context.getSessionMap().remove("contrato");
         try{
         c=equivalenciaService.findContrato(selectedContrato.getIdContrato());
-        }catch(ContratoNotFoundException ex){
+        }catch(InstanceNotFoundException ex){
              try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");
             }catch(IOException ex2){
@@ -479,7 +479,7 @@ public class MisEquivalenciasController implements Serializable{
         try{
         Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
         mensajeService.enviarMensaje(m);
-        }catch(UsuarioNotFoundException ex){
+        }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
         }
         verConfirmar=false;
@@ -561,7 +561,7 @@ public class MisEquivalenciasController implements Serializable{
      try{
      Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha modificado un contrato","no","no","no");
      mensajeService.enviarMensaje(m);
-     }catch(UsuarioNotFoundException ex){
+     }catch(InstanceNotFoundException ex){
          
      }
         verConfirmar=false;
