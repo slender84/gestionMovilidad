@@ -379,6 +379,11 @@ public class CrearAsignaturaController implements Serializable{
         return null;
         }
             checkDetalles=false;
+            codAsignatura=null;
+            creditosAsignatura=null;
+            facultadAsignatura="";
+            infoAsignatura="";
+            nombreAsignatura="";
             beanUtilidades.creaMensaje("Edición correcta", FacesMessage.SEVERITY_INFO);
            return null;
         

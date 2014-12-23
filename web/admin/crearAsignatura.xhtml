@@ -200,7 +200,7 @@
                 </p:selectOneMenu>
                 
                 <p:commandButton process=":formDetalles:" id="actualizaBtn" value="editar" action="#{crearAsignaturaController.editar()}" update=":formDetalles: :formTabla: :formUniversidad :formAsignatura"
-                                  oncomplete="PF('asignaturaBtn').filter();"/>
+                                  />
                 <p:commandButton id="cancelBtn" value="cerrar" action="#{crearAsignaturaController.cerrar}" update=":formDetalles" process="cancelBtn"
                                   onclick=""/>
                 

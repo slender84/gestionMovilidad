@@ -326,13 +326,17 @@ public class CrearUniversidadController implements Serializable{
         universidadService.actualizar(selectedUniversidad);
        // listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
         }catch(InstanceNotFoundException|RuntimeException ex){
-            ex.printStackTrace();
+           
             beanUtilidades.creaMensaje("se ha producido un error ", FacesMessage.SEVERITY_ERROR);
             checkDetalles=false;
-            listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+            //listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
             return "crearUniversidad.xhtml?faces-redirect=true";
         }
         beanUtilidades.creaMensaje("edición correcta", FacesMessage.SEVERITY_INFO);
+        codUniversidad="";
+        nombre="";
+        web="";
+        info="";
         return null;
     }
     

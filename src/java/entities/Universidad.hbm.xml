@@ -20,7 +20,7 @@
         <property name="codUniversidad" type="string">
             <column name="codUniversidad" length="15" not-null="true" unique="true" />
         </property>
-        <set name="movilidads" table="movilidad" inverse="true" lazy="true" fetch="select">
+        <set name="movilidads" cascade="delete" table="movilidad" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="nombreUniversidad" length="45" not-null="true" />
             </key>
