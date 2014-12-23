@@ -106,6 +106,7 @@ public class beanUtilidades implements Serializable{
         Estado e=new Estado(estado);
         try{
         utilidadService.crearEstado(e);
+        //listaEstados.add(e);
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
             creaMensaje("El estado ya existe", FacesMessage.SEVERITY_ERROR);
             estado="";
@@ -126,7 +127,9 @@ public class beanUtilidades implements Serializable{
         
         try{
         utilidadService.eliminaEstado(e);
+        //listaEstados.remove(e);
         }catch(Exception ex){
+            setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
             creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;
         }
@@ -142,7 +145,9 @@ public class beanUtilidades implements Serializable{
         EstadoMovilidad e=new EstadoMovilidad(estadoMovilidad);
         try{
         utilidadService.crearEstadoMovilidad(e);
+        //listaEstadosMovilidad.add(e);
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
+            listaEstadosMovilidad=(ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad();
             creaMensaje("El estado de la movilidad ya existe", FacesMessage.SEVERITY_ERROR);
             estadoMovilidad="";
             return null;
@@ -157,15 +162,15 @@ public class beanUtilidades implements Serializable{
         EstadoMovilidad e=new EstadoMovilidad(estadoMovilidad);
         try{
             utilidadService.eliminaEstadoMovilidad(e);
-            
+            //listaEstadosMovilidad.remove(e);
         }catch(Exception ex){
-            
+            listaEstadosMovilidad=(ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad();
             creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;
         }
-        
-        creaMensaje("estado eliminado", FacesMessage.SEVERITY_INFO);
         listaEstadosMovilidad=(ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad();
+        creaMensaje("estado eliminado", FacesMessage.SEVERITY_INFO);
+        
         estadoMovilidad="";
         return null;
     }

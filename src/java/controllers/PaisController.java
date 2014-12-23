@@ -84,7 +84,9 @@ public class PaisController implements Serializable{
       
       
       try{
-      universidadService.insertarPais(paisStr);
+          Pais p=new Pais(paisStr);
+      universidadService.insertarPais(p);
+      listaPaises.add(pais);
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
           
           beanUtilidades.creaMensaje("Ya existe ese país", FacesMessage.SEVERITY_ERROR);
@@ -93,7 +95,7 @@ public class PaisController implements Serializable{
           
           beanUtilidades.creaMensaje("se ha creado el país correctamente", FacesMessage.SEVERITY_INFO);
           paisStr="";
-          listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
+          
       return null;
       
       
@@ -104,16 +106,16 @@ public class PaisController implements Serializable{
       try{
           
           universidadService.deletePais(pais);
-          
+          listaPaises.remove(pais);
           
       }catch(DataAccessException ex){
-          
+           listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
           beanUtilidades.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;
       }
       
       beanUtilidades.creaMensaje("se ha eliminado correctamente el pais", FacesMessage.SEVERITY_INFO);
-      listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
+     
       return null;
   }
   

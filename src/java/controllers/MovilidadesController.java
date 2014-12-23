@@ -70,6 +70,7 @@ public class MovilidadesController implements Serializable{
       
        usuario=(Usuario)session.getAttribute("admin");
        listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+       Collections.reverse(listaMovilidades);
       
        }
 
@@ -210,7 +211,7 @@ public class MovilidadesController implements Serializable{
         }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
-            return "verMovilidades.xhtml";
+            return null;
         }
         Mensaje mensaje=new Mensaje(m.getUsuario() ,usuario, Calendar.getInstance().getTime(),"cambio de estado de movilidad","destino:"+m.getUniversidad().getNombre()+" \n"+"fecha de inicio:"+sdf.format(m.getFechaInicio())+" \n"+"fecha fin:"+sdf.format(m.getFechaFin())+"\n\n"+ "el estado de la movilidad ahora es: "+m.getEstado(), "no","no","no");
             mensajeService.enviarMensaje(mensaje);
@@ -226,13 +227,15 @@ public class MovilidadesController implements Serializable{
         for(Movilidad m:selectedMovilidades){
             try{
         movilidadService.eliminarMovilidad(m);
+        listaMovilidades.remove(m);
             }catch(RuntimeException ex){
+                actualizarTodasMovilidades();
                 beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
-                return "verMovilidades.xhtml";
+                return null;
             }
         }
         
-        actualizarTodasMovilidades();
+        //actualizarTodasMovilidades();
         beanUtilidades.creaMensaje("movilidad eliminada correctamente", FacesMessage.SEVERITY_INFO);
         return null;
         
@@ -241,7 +244,7 @@ public class MovilidadesController implements Serializable{
      public void actualizarTodasMovilidades(){
         
         listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
-        
+        Collections.reverse(listaMovilidades);
     }
     
     public void activaTexto(){

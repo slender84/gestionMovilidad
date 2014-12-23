@@ -23,10 +23,10 @@ import model.utils.beanUtilidades;
 public class AutenticarUsuarioController implements Serializable{
 
      @ManagedProperty(value="#{beanUtilidades}")
-    private transient beanUtilidades beanUtilidades;
+    private beanUtilidades beanUtilidades;
     
     @ManagedProperty(value="#{usuarioService}")  
-    private transient UsuarioService usuarioService;
+    private UsuarioService usuarioService;
     
    
     

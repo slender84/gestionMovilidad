@@ -5,12 +5,10 @@ package controllers;
 import entities.Cursoacademico;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import model.services.UniversidadService;
 import model.utils.beanUtilidades;
@@ -92,7 +90,7 @@ public class CursoAcademicoController implements Serializable{
           Cursoacademico c=new Cursoacademico(cursoAcademico);
           cursoAcademico="";
           universidadService.crearCursoAcademico(c);
-          
+          listaCursoAcademico.add(c);
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
           
           beanUtilidades.creaMensaje("El año "+cursoAcademico+" ya existe", FacesMessage.SEVERITY_ERROR);
@@ -100,7 +98,8 @@ public class CursoAcademicoController implements Serializable{
       }
         beanUtilidades.creaMensaje("curso creado correctamente", FacesMessage.SEVERITY_INFO);
         cursoAcademico="";
-        setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listaCursosAcademicos());
+        //setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listaCursosAcademicos());
+        
       return null;
     }
       
@@ -111,6 +110,7 @@ public class CursoAcademicoController implements Serializable{
         Cursoacademico c=new Cursoacademico(cursoAcademico);
          try{
         universidadService.eliminarCursoAcademico(c);
+        listaCursoAcademico.remove(c);
     }catch(RuntimeException ex){
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;

@@ -67,7 +67,7 @@ public class MisMovilidadesController implements Serializable{
        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
        usuario=(Usuario)session.getAttribute("user");
        listaMisMovilidades=(ArrayList < Movilidad >)movilidadService.listarMisMovilidades(usuario.getLogin());
-       Collections.reverse(listaMisMovilidades);
+       
        
         
        }
@@ -155,8 +155,10 @@ public class MisMovilidadesController implements Serializable{
            
             try{
             movilidadService.eliminarMovilidad(selectedMovilidad);
+            listaMisMovilidades.remove(selectedMovilidad);
             }catch(RuntimeException ex){
                     beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
+                    actualizar();
                     return "verMisMovilidades.xhtml";
                     }
             Mensaje mensaje=new Mensaje(admin,usuario,Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" ha eliminado una movilidad", "no","no","no");
@@ -180,12 +182,15 @@ public class MisMovilidadesController implements Serializable{
                 
                 if(selectedMovilidad.getEstado().equalsIgnoreCase("rechazada")){
                     try{
-                movilidadService.eliminarMovilidad(selectedMovilidad);    
+                movilidadService.eliminarMovilidad(selectedMovilidad);   
+                listaMisMovilidades.remove(selectedMovilidad);
                     }catch(RuntimeException ex){
+                        actualizar();
                         beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                         return "verMisMovilidades.xhtml";
                     }
-                actualizar();     
+                //actualizar();  
+                    
                 beanUtilidades.creaMensaje("movilidad eliminada correctamente", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;
                 return null;

@@ -22,7 +22,7 @@
                          required="true"
                          requiredMessage="el campo estado está vacío"/>
                 <h:outputLabel value=""/>
-                <p:commandButton id="insBtn" value="crear estado" action="#{beanUtilidades.creaEstado}" ajax="false" process=":formEstado"/>
+                <p:commandButton id="insBtn" value="crear estado" action="#{beanUtilidades.creaEstado}" ajax="false" update=":formEstado :formListaEstados"/>
             </h:panelGrid>
          </h:form>
         
@@ -38,7 +38,7 @@
                   <f:selectItems id="sel1" var="estado" value="#{beanUtilidades.listaEstados}" itemLabel="#{estado.estado}" itemValue="#{estado.estado}"/>
                  </p:selectOneMenu>
              
-                 <p:commandButton id="delBtn" value="eliminar estado" action="#{beanUtilidades.eliminaEstado}" ajax="false" process=":formListaEstados" />
+                 <p:commandButton id="delBtn" value="eliminar estado" action="#{beanUtilidades.eliminaEstado}" ajax="false" update=":formListaEstados" />
                 </h:panelGrid>
             </h:form>
         <br/><br/>

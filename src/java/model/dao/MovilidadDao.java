@@ -14,7 +14,7 @@ import java.util.List;
 public interface MovilidadDao extends GenericDao<Movilidad, Integer>{
    
     public List<Movilidad> listarMisMovilidades(String user);
-    
+   
     
   
         

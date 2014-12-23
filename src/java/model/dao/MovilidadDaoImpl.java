@@ -8,11 +8,8 @@ package model.dao;
 
 
 import entities.Movilidad;
-import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -25,15 +22,19 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
     @Override
     public List<Movilidad> listarMisMovilidades(String user){
         
-        Query q= getSession().createQuery("select m from Movilidad m where m.usuario.login=:user");
+        Query q= getSession().createQuery("select m from Movilidad m where m.usuario.login=:user order by m.fechaInicio desc");
         q.setParameter("user", user);
         return q.list();
         
+    }
+   
+    
+    @Override
+    public List<Movilidad> list(){
         
+        return getSession().createQuery("select m from Movilidad m order by m.fechaInicio desc").list();
     }
    
    
-    
-    
     
 }

@@ -32,7 +32,7 @@
                          styleClass="borderless"
                          
                          >
-                <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable').unselectAllRows();" update=":formMovilidades:t1 :formMovilidades:msgs"/>
+                <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable').unselectAllRows();PF('movTable').filter();" update=":formMovilidades:t1 :formMovilidades:msgs"/>
                 <p:ajax event="rowEditCancel" listener="#{movilidadesController.onRowCancel}" />
                    
                 <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="login" filterBy="#{movilidad.usuario.login}">

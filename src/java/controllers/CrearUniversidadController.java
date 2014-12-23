@@ -268,12 +268,13 @@ public class CrearUniversidadController implements Serializable{
         }
         
         beanUtilidades.creaMensaje("universidad creada", FacesMessage.SEVERITY_INFO);
+        listaUniversidades.add(u);
         nombre="";
         web="";
         info="";
         //paisStr="";
         codUniversidad="";
-        listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+        //listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
         return null;
         
     }
@@ -305,7 +306,9 @@ public class CrearUniversidadController implements Serializable{
                    beanUtilidades.creaMensaje("Error eliminando", FacesMessage.SEVERITY_ERROR); 
                    
                     return null;
-                }    
+                }  
+                
+                listaUniversidades.remove(u);
             }
             beanUtilidades.creaMensaje("se han eliminado las universidades correctamente", FacesMessage.SEVERITY_INFO);
             listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
@@ -321,7 +324,7 @@ public class CrearUniversidadController implements Serializable{
                  
         try{
         universidadService.actualizar(selectedUniversidad);
-        listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
+       // listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
         }catch(InstanceNotFoundException|RuntimeException ex){
             ex.printStackTrace();
             beanUtilidades.creaMensaje("se ha producido un error ", FacesMessage.SEVERITY_ERROR);

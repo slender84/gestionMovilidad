@@ -18,7 +18,7 @@ public interface UniversidadService {
     public List<Pais>listaPaises();
     public List<Universidad>listaUniversidades();
     public Pais findPais(String pais) throws InstanceNotFoundException;
-    public void insertarPais(String pais);
+    public void insertarPais(Pais pais);
     public void deletePais(Pais p);
     public void delete(Universidad u) throws InstanceNotFoundException ;
     public void insertarUniversidad(Universidad u);

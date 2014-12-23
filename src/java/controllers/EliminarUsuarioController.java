@@ -87,10 +87,11 @@ public class EliminarUsuarioController implements Serializable{
         
         for(Usuario u:selectedUsuarios){
         usuarioService.delete(u);
+        listaUsuarios.remove(u);
         }
         
          beanUtilidades.creaMensaje("usuarios borrados ", FacesMessage.SEVERITY_INFO);
-        setListaUsuarios((ArrayList < Usuario >)usuarioService.listar());
+        //setListaUsuarios((ArrayList < Usuario >)usuarioService.listar());
         return null;
       
         

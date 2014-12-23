@@ -149,7 +149,8 @@
                 
                 
                 <p:commandButton process=":formDetalles:" id="actualizaBtn" value="editar" action="#{crearUniversidadController.editar()}" update=":formDetalles: :formTabla: :formUniversidad:msgs"
-                                 rendered="#{crearUniversidadController.checkDetalles}" />
+                                 rendered="#{crearUniversidadController.checkDetalles}"
+                                 oncomplete="PF('universidadTabla').filter();"/>
                 <p:commandButton id="cancelBtn" value="cerrar" action="#{crearUniversidadController.cerrar}" update=":formDetalles" process="cancelBtn"
                                  rendered="#{crearUniversidadController.checkDetalles}" />
                 

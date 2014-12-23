@@ -82,11 +82,11 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
     
     
     @Override
-    public void insertarPais(String pais){
+    public void insertarPais(Pais pais){
         
         
-        Pais p=new Pais(pais);
-        paisDao.insert(p);
+        
+        paisDao.insert(pais);
         
             
         

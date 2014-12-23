@@ -12,7 +12,7 @@ public class ContratoDaoImpl extends GenericDaoHibernate<Contrato, Integer> impl
     @Override
     public List<Contrato> listaContratos(Movilidad m){
         
-        return getSession().createQuery("select c from Contrato c where c.movilidad=:movilidad").setParameter("movilidad", m).list();
+        return getSession().createQuery("select c from Contrato c where c.movilidad=:movilidad order by c.fecha desc").setParameter("movilidad", m).list();
     
 }
 }

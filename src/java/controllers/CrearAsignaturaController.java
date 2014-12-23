@@ -337,7 +337,7 @@ public class CrearAsignaturaController implements Serializable{
             beanUtilidades.creaMensaje("La asignatura ya existe", FacesMessage.SEVERITY_ERROR);
             return null;
         }
-        
+        listaAsignaturas.add(a);
         beanUtilidades.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
         nombreAsignatura="";
         codAsignatura=null;
@@ -347,7 +347,7 @@ public class CrearAsignaturaController implements Serializable{
         facultadAsignatura="";
         infoAsignatura="";
         webAsignatura="";
-        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        //listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
         
         return null;
     }
@@ -365,9 +365,9 @@ public class CrearAsignaturaController implements Serializable{
     public String editar(){
         try{
             asignaturaService.actualizarAsignatura(SelectedAsignatura);
-            listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+            //listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
         }catch(InstanceNotFoundException|RuntimeException ex){
-            ex.printStackTrace();
+            
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            checkDetalles=false;
         checkUniversidadStr=false;
@@ -405,7 +405,7 @@ public class CrearAsignaturaController implements Serializable{
                 asignaturaService.eliminaAsignatura(a);
             }catch(InstanceNotFoundException|RuntimeException ex){
               
-            ex.printStackTrace();
+           
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            checkDetalles=false;
         checkTabla=false;
@@ -420,10 +420,11 @@ public class CrearAsignaturaController implements Serializable{
                  
                  
             }
+            listaAsignaturas.remove(a);
         }
         
         beanUtilidades.creaMensaje("se han eliminado correctamente las asignaturas",FacesMessage.SEVERITY_INFO);
-        listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        //listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
         //checkUniversidadStr=false;
         checkDetalles=false;
         return null;
