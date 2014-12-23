@@ -183,7 +183,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
                            
                             if( (fechaInicio.compareTo(enCurso.getFechaInicio())>-1 && fechaInicio.compareTo(enCurso.getFechaFin())<1)||(fechaFin.compareTo(enCurso.getFechaInicio())>-1  && fechaFin.compareTo(enCurso.getFechaFin())<1)||(fechaInicio.compareTo(enCurso.getFechaInicio())<1  && fechaFin.compareTo(enCurso.getFechaFin())>-1)){
                                 //creaMensaje(Boolean.toString((fechaInicio.compareTo(enCurso.getFechaInicio())<1  && fechaFin.compareTo(enCurso.getFechaFin())<1)), FacesMessage.SEVERITY_INFO);
-                                throw new NumeroDeMovilidadesException("las fechas se solapan");
+                                throw new NumeroDeMovilidadesException("las fechas se solapan con otra movilidad");
                        }
                        }
                     }

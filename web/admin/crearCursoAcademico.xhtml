@@ -15,11 +15,11 @@
             <p:growl id="messages1"/>
             <h:panelGrid columns="2" cellpadding="6">
             <p:outputLabel value="Curso académico"/>
-            <p:inputMask id="msk1" value="#{beanUtilidades.cursoAcademico}" mask="9999/9999"
+            <p:inputMask id="msk1" value="#{cursoAcademicoController.cursoAcademico}" mask="9999/9999"
                          required="true"
                          requiredMessage="el campo curso académico está vacío"/>
             <h:outputLabel value=""/>
-             <p:commandButton id="insBtn" value="crear curso académico" action="#{beanUtilidades.creaCursoAcademico}" ajax="false"  process="msk1 insBtn"/>
+             <p:commandButton id="insBtn" value="crear curso académico" action="#{cursoAcademicoController.creaCursoAcademico}" ajax="false"  process="msk1 insBtn"/>
             </h:panelGrid>
             
             
@@ -31,12 +31,12 @@
              
              <h:form id="f2">
                  <h:panelGrid columns="2" cellpadding="6">
-             <p:selectOneMenu id="m1" value="#{beanUtilidades.cursoAcademico}" required="true" requiredMessage="hay que elegir un curso académico">
+             <p:selectOneMenu id="m1" value="#{cursoAcademicoController.cursoAcademico}" required="true" requiredMessage="hay que elegir un curso académico">
                  <f:selectItem itemValue="#{null}" itemLabel="lista de cursos academicos" noSelectionOption="true"/>
-                 <f:selectItems id="sel1" var="curso" value="#{beanUtilidades.listaCursoAcademico}" itemLabel="#{curso.cursoAcademico}" itemValue="#{curso.cursoAcademico}"/>
+                 <f:selectItems id="sel1" var="curso" value="#{cursoAcademicoController.listaCursoAcademico}" itemLabel="#{curso.cursoAcademico}" itemValue="#{curso.cursoAcademico}"/>
              </p:selectOneMenu>
              
-             <p:commandButton id="delBtn" value="eliminar curso académico" action="#{beanUtilidades.eliminaCursoAcademico()}" ajax="false" process="m1 delBtn" />
+             <p:commandButton id="delBtn" value="eliminar curso académico" action="#{cursoAcademicoController.eliminaCursoAcademico()}" ajax="false" process="m1 delBtn" />
                  </h:panelGrid>
         </h:form>
         <br/><br/>

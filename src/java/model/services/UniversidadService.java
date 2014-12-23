@@ -25,7 +25,7 @@ public interface UniversidadService {
     public void actualizar(Universidad u) throws InstanceNotFoundException;
     public List<Universidad> listarPorPais(String pais);
     public void crearCursoAcademico(Cursoacademico cursoAcademico);
-    public void eliminarCursoAcademico(String c);
+    public void eliminarCursoAcademico(Cursoacademico c);
     public List<Cursoacademico> listaCursosAcademicos();
     public Universidad findUniversidad(String universidad) throws InstanceNotFoundException;
     public Cursoacademico buscarCursoAcademico(Date fechaInicio,Date fechaFin);

@@ -9,8 +9,6 @@ import entities.Usuario;
 import exceptions.DuracionException;
 import exceptions.InstanceNotFoundException;
 import exceptions.NumeroDeMovilidadesException;
-import exceptions.UniversidadException;
-import exceptions.UsuarioNotFoundException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

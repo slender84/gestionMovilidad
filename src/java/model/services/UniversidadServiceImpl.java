@@ -146,10 +146,10 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
        
    }
    @Override
-   public void eliminarCursoAcademico(String cursoAcademico){
+   public void eliminarCursoAcademico(Cursoacademico cursoAcademico){
        
-       Cursoacademico c=new Cursoacademico(cursoAcademico);
-       cursoacademicoDao.delete(c);
+       
+       cursoacademicoDao.delete(cursoAcademico);
        
        
    }
@@ -169,18 +169,26 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
     cal2.setTime(fechaFin);
     Cursoacademico ca=new Cursoacademico();
                     
-                    if(cal1.get(2)>8){
-                       
+                    if(cal1.get(1)==cal2.get(1)){
+                        if(cal1.get(2)>=8){
+                        System.out.println(cal1.get(1)+"/"+cal1.get(2));
                         ca.setCursoAcademico(cal1.get(1)+"/"+(cal1.get(1)+1));
+                     
+                    }else{
+                            ca.setCursoAcademico((cal1.get(1)-1)+"/"+(cal1.get(1)));
+    
+                            } 
+                        
                     }else{
                         
-                        ca.setCursoAcademico(cal1.get(1)-1+"/"+(cal1.get(1)));
+                        ca.setCursoAcademico(cal1.get(1)+"/"+(cal1.get(1)+1));
+                        
                     }
                     
                     for(Cursoacademico c:listaCursosAcademicos()){
                         if (c.getCursoAcademico().equals(ca.getCursoAcademico())){
                             return ca;
-                        }
+                        } 
                         
                     }
                     
@@ -188,7 +196,7 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
                     return ca;
     
     
-}
+   }
    
    
    @Override

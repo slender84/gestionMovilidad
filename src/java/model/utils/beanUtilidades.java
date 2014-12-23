@@ -7,7 +7,7 @@ package model.utils;
 
 
 import entities.CorreoConf;
-import entities.Cursoacademico;
+
 import entities.Estado;
 import entities.EstadoMovilidad;
 import java.io.Serializable;
@@ -48,8 +48,7 @@ public class beanUtilidades implements Serializable{
     private ArrayList<EstadoMovilidad> listaEstadosMovilidad;
     private String estadoMovilidad;
     
-    private String cursoAcademico;
-    private ArrayList<Cursoacademico> listaCursoAcademico;
+   
     
     
     public beanUtilidades() {
@@ -58,9 +57,9 @@ public class beanUtilidades implements Serializable{
     
     @PostConstruct
     public void init(){
-        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         
-            setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
+        
+            
             
             setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
         
@@ -101,25 +100,6 @@ public class beanUtilidades implements Serializable{
         this.estadoMovilidad = estadoMovilidad;
     }
 
-    public String getCursoAcademico() {
-        return cursoAcademico;
-    }
-
-    public void setCursoAcademico(String cursoAcademico) {
-        this.cursoAcademico = cursoAcademico;
-    }
-
-    public ArrayList<Cursoacademico> getListaCursoAcademico() {
-        return listaCursoAcademico;
-    }
-
-    public void setListaCursoAcademico(ArrayList<Cursoacademico> listaCursoAcademico) {
-        this.listaCursoAcademico = listaCursoAcademico;
-    }
-    
-    
-    
-    
     
     public String creaEstado(){
         
@@ -192,47 +172,7 @@ public class beanUtilidades implements Serializable{
     
    
     
-    public String creaCursoAcademico(){
-      
-      if(cursoAcademico.substring(0, 4).compareTo(cursoAcademico.substring(5, 9))!=-1){
-          
-          creaMensaje("el curso académico no puede empezar más tarde de lo que acaba",FacesMessage.SEVERITY_ERROR);
-          return null;
-      }
-      
-      try{
-          Cursoacademico c=new Cursoacademico(cursoAcademico);
-          cursoAcademico="";
-          utilidadService.crearCursoAcademico(c);
-          
-      }catch(org.springframework.dao.DataIntegrityViolationException ex){
-          
-          creaMensaje("El año "+cursoAcademico+" ya existe", FacesMessage.SEVERITY_ERROR);
-          return null;
-      }
-        creaMensaje("curso creado correctamente", FacesMessage.SEVERITY_INFO);
-        cursoAcademico="";
-        setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
-      return null;
-    }
-      
     
-    
-    public String eliminaCursoAcademico(){
-        
-        Cursoacademico c=new Cursoacademico(cursoAcademico);
-         try{
-        utilidadService.eliminaCursoAcademico(c);
-    }catch(Exception ex){
-            creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
-            return null;
-            
-    }
-         cursoAcademico="";
-         setListaCursoAcademico((ArrayList<Cursoacademico>)utilidadService.listaCursoAcademico());
-        creaMensaje("curso académico eliminado correctamente", FacesMessage.SEVERITY_INFO);
-        return null;
-    }
         
     public CorreoConf getCorreoConf(){
         
