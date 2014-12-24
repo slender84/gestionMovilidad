@@ -12,16 +12,10 @@
     </h:head>
     <h:body onload="PF('movTable').filter()" styleClass="blue">
         
+         <h2 style="text-align: center">Movilidades</h2>
         
         
-        
-        <p:panel>
-            
-            
-            <h:outputLabel value="movilidades de: "/>
-            <h:outputText value="#{misMovilidadesController.usuario.login}"/>
-            
-        </p:panel>
+       
         
         <br/>
         
@@ -192,11 +186,11 @@
             
                 
         <h:form>
-            
+             
             <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
             
         </h:form>
-            
+              
         
         
         

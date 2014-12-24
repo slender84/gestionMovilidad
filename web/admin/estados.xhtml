@@ -9,7 +9,7 @@
         <h:outputStylesheet library="css" name="estilos.css"/>
     </h:head>
     <h:body styleClass="blue">
-        
+         <h2 style="text-align: center">Estados de los oontratos</h2>
         
         <h:form id="formEstado">
             
@@ -32,6 +32,7 @@
              
              
              <h:form id="formListaEstados">
+                 
                 <h:panelGrid columns="2" cellpadding="6">
                  <p:selectOneMenu id="m1" value="#{beanUtilidades.estado}" required="true" requiredMessage="hay que elegir un estado">
                   <f:selectItem itemValue="#{null}" itemLabel="lista de estados" noSelectionOption="true"/>
