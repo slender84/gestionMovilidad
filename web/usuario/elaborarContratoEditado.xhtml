@@ -11,7 +11,7 @@
         <h:outputScript library="js" name="funciones.js"/>
     </h:head>
     <h:body styleClass="blue">
-         
+         <h2 style="text-align: center">Editar contrato</h2>
         <p:outputPanel id="panelFic">
         
             <h:form id="formEquivalenciaFic">
@@ -219,7 +219,13 @@
                          rowKey="#{equivalencia.idequivalencia}"
                          widgetVar="equivalenciaTableNuevo">
                          
-                <f:facet name="header">CONTRATO EDITADO</f:facet>
+                 <f:facet name="header">
+                   <h:outputText style="font-size: 15px"  value="Contrato editado"/><br/>
+                    <h:outputText style="font-size: 15px" value="última modificación: "/>
+                        
+                    
+                           
+                </f:facet>
                 
                 
                 <p:column headerText="UDC" styleClass="nuevoAsignatura">

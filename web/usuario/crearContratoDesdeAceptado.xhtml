@@ -12,6 +12,7 @@
     </h:head>
     <h:body styleClass="blue">
         
+        <h2 style="text-align: center">Crear contrato a partir de otro</h2>
         
         <p:outputPanel id="panelFic">
         
@@ -219,7 +220,14 @@
                          rowKey="#{equivalencia.idequivalencia}"
                          widgetVar="equivalenciaTableNuevo">
                          
-                <f:facet name="header">CONTRATO NUEVO</f:facet>
+               <f:facet name="header">
+                   <h:outputText style="font-size: 15px"  value="Nuevo contrato"/><br/>
+                    <h:outputText style="font-size: 15px" value="última modificación: "/>
+                        
+                    
+                           
+                </f:facet>
+                    
                 
                 
                 <p:column headerText="UDC" styleClass="nuevoAsignatura">
