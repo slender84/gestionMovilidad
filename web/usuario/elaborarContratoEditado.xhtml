@@ -11,7 +11,7 @@
         <h:outputScript library="js" name="funciones.js"/>
     </h:head>
     <h:body styleClass="blue">
-         <h2 style="text-align: center">Editar contrato</h2>
+         <h2 style="text-align: left">Editar contrato</h2>
         <p:outputPanel id="panelFic">
         
             <h:form id="formEquivalenciaFic">
@@ -71,7 +71,7 @@
             </p:dataTable>
        
             
-            <p:inputTextarea id="info" readonly="true" cols="33" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}"
+            <p:inputTextarea id="info" readonly="true" cols="58" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}"
                              rendered="#{misEquivalenciasController.verInfo}"/>
             <p:commandButton styleClass="cerrarAreaTexto" value="cerrar" action="#{misEquivalenciasController.cerrarDetallesAsign}" update=":formEquivalenciaFic"
                              rendered="#{misEquivalenciasController.verInfo}"/> 
@@ -118,7 +118,7 @@
                 
                 <p:column headerText="+info" styleClass="info">
                         
-                     <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic:info" rendered="#{not empty asigUni.infoAsigantura}">
+                     <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" rendered="#{not empty asigUni.infoAsigantura}">
                         
                             <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             

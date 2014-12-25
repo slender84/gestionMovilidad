@@ -40,7 +40,7 @@ body.red{
     font-size: 15px;
     position: absolute;
     top: 58px;
-    left:50px;
+    //left:50px;
 }
 
 
@@ -111,7 +111,7 @@ body.red{
     
     position: absolute;
     top: 535px;
-    left: 630px;
+    left: 580px;
     text-align:center; 
 }
 
@@ -123,8 +123,8 @@ body.red{
 
 .cerrarAreaTexto{
     
-    position: absolute;
-    top: 620px;
+    position: relative;
+    top: 590px;
     
 }
 
@@ -134,7 +134,7 @@ body.red{
     font-size: 15px;
     position:absolute;
     top: 58px;
-    left: 700px; 
+    left: 650px; 
 }
 
 
@@ -210,7 +210,7 @@ body.red{
     
 .tablaEquivalenciasAceptado{
     top: 700px;
-    left: 50px;
+    //left: 50px;
     height: 45%;
     width: 45%;
     position:absolute;
@@ -221,7 +221,7 @@ body.red{
 
 .tablaEquivalenciasAceptadoNuevo{
     top: 700px;
-    left: 670px;
+    left: 650px;
     height: 45%;
     width: 50%;
     position:absolute;
