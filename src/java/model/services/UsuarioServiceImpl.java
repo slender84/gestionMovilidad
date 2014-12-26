@@ -4,12 +4,14 @@ package model.services;
 
 
 import entities.CorreoConf;
+import entities.Intentos;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import model.dao.IntentosDao;
 import model.dao.UsuarioDao;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -34,6 +36,18 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void setUsuarioDao(UsuarioDao usuarioDao) {
         this.usuarioDao = usuarioDao;
     }
+    
+    @Autowired
+    private IntentosDao intentosDao;
+
+    public IntentosDao getIntentosDao() {
+        return intentosDao;
+    }
+
+    public void setIntentosDao(IntentosDao intentosDao) {
+        this.intentosDao = intentosDao;
+    }
+    
     
     
     
@@ -158,6 +172,20 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         email.send();
         
+        
+    }
+    
+    @Override
+    public Intentos recuperarIntentos(String login){
+        
+        return intentosDao.recuperarIntentos(login);
+        
+    }
+    
+    @Override
+    public void actualizarIntentos(Intentos intentos){
+        
+        intentosDao.actualizarIntentos(intentos);
         
     }
     

@@ -1,5 +1,6 @@
 package controllers;
 
+import entities.Intentos;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
@@ -33,6 +34,10 @@ public class AutenticarUsuarioController implements Serializable{
     private String login;
     private String password; 
     private Usuario user;
+    
+    private boolean checkCaptcha;
+    private String volverAPantallaInicial;
+    
     
     public AutenticarUsuarioController() {
     }
@@ -89,6 +94,42 @@ public class AutenticarUsuarioController implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean isCheckCaptcha() {
+        return checkCaptcha;
+    }
+
+    public void setCheckCaptcha(boolean checkCaptcha) {
+        this.checkCaptcha = checkCaptcha;
+    }
+
+    public String getVolverAPantallaInicial() {
+        return volverAPantallaInicial;
+    }
+
+    public void setVolverAPantallaInicial(String volverAPantallaInicial) {
+        this.volverAPantallaInicial = volverAPantallaInicial;
+    }
+    
+    public String comprobarAccesoHumano(){
+        
+        if(volverAPantallaInicial.equals("volver"))
+            return "principalUsuario.xhtml?faces-redirect=true";
+       
+        volverAPantallaInicial="";
+        return null;
+        
+        
+    }
+    
+    
+    
+    
+    
+    public void changeCaptcha(boolean cambio ){
+        
+        checkCaptcha=cambio;
+    }
     
     
     
@@ -105,13 +146,32 @@ public class AutenticarUsuarioController implements Serializable{
               return null; 
              }
              
-             
+            Intentos i=u.getIntentos();
             try{ 
             usuarioService.autenticarUsuario(password,u);
             }catch(PasswordIncorrectoException ex){
                beanUtilidades.creaMensaje("password incorrecto", FacesMessage.SEVERITY_ERROR);
+               
+               
+               i.setNumero(i.getNumero()+1);
+               usuarioService.actualizarIntentos(u.getIntentos());
+               
+              
+               
+               if(i.getNumero()>=3){
+                   
+                   //changeCaptcha(true);
+                   return "tresIntentos.xhtml?faces-redirect=true";
+               }
+               
                return null;
             }
+                if(u.getIntentos().getNumero()>0){
+                u.getIntentos().setNumero(0);
+                changeCaptcha(false);
+                usuarioService.actualizarIntentos(u.getIntentos());
+                }
+                
                 
                 if(u.getTipoUsuario()==1){          
             

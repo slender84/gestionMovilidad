@@ -29,7 +29,12 @@
             <p:password value="#{autenticarUsuarioController.password}"
                         required="true"
                         requiredMessage="el campo password esta vacio"/>
-           
+            <h:outputLabel/>
+            <p:captcha required="true" requiredMessage="Es necesario cubrir el captcha" validatorMessage="El valor no es válido"
+                       rendered="false"/>
+                       <!--rendered="{autenticarUsuarioController.checkCaptcha}"/>-->
+                        
+            
             
             <p:commandButton value="autenticar" action="#{autenticarUsuarioController.autenticarUsuario}" ajax="false"/>
                 </h:panelGrid>

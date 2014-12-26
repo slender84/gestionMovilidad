@@ -1,5 +1,5 @@
 package entities;
-// Generated 16-dic-2014 9:35:09 by Hibernate Tools 4.3.1
+// Generated 26-dic-2014 18:13:18 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,6 +30,7 @@ public class Usuario  implements java.io.Serializable {
      private String apellido1;
      private String apellido2;
      private Set<Mensaje> mensajesForDestino = new HashSet<Mensaje>(0);
+     private Intentos intentos;
      private Set<Movilidad> movilidads = new HashSet<Movilidad>(0);
      private Set<Mensaje> mensajesForOrigen = new HashSet<Mensaje>(0);
 
@@ -44,7 +46,7 @@ public class Usuario  implements java.io.Serializable {
         this.nombre = nombre;
         this.apellido1 = apellido1;
     }
-    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, Set<Mensaje> mensajesForOrigen) {
+    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Intentos intentos, Set<Movilidad> movilidads, Set<Mensaje> mensajesForOrigen) {
        this.login = login;
        this.password = password;
        this.tipoUsuario = tipoUsuario;
@@ -53,6 +55,7 @@ public class Usuario  implements java.io.Serializable {
        this.apellido1 = apellido1;
        this.apellido2 = apellido2;
        this.mensajesForDestino = mensajesForDestino;
+       this.intentos = intentos;
        this.movilidads = movilidads;
        this.mensajesForOrigen = mensajesForOrigen;
     }
@@ -136,6 +139,15 @@ public class Usuario  implements java.io.Serializable {
     
     public void setMensajesForDestino(Set<Mensaje> mensajesForDestino) {
         this.mensajesForDestino = mensajesForDestino;
+    }
+
+@OneToOne(fetch=FetchType.LAZY, mappedBy="usuario")
+    public Intentos getIntentos() {
+        return this.intentos;
+    }
+    
+    public void setIntentos(Intentos intentos) {
+        this.intentos = intentos;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")

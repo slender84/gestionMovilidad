@@ -9,6 +9,17 @@
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <context-param>
+        <param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+        <param-value>6Lc-u_8SAAAAAAhtHfZfJ74Czmo4VyT5HFlumoFi</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+        <param-value>6Lc-u_8SAAAAADpu63EHK8ZbOf22ZNKB2uaHBG3L</param-value>
+    </context-param>
+    
+    
+    <context-param>
     <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
     <param-value>true</param-value>
     </context-param>

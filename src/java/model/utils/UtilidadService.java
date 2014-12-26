@@ -5,6 +5,7 @@ import entities.CorreoConf;
 import entities.Cursoacademico;
 import entities.Estado;
 import entities.EstadoMovilidad;
+import entities.Intentos;
 import java.util.List;
 
 
@@ -23,5 +24,6 @@ public interface UtilidadService {
     public void eliminaCursoAcademico(Cursoacademico c);
     public CorreoConf getCorreoConf();
     public void setCorreoConf(CorreoConf correoConf);
+    
             
 }

@@ -7,21 +7,20 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gestordb?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">admin</property>
-    <property name="hibernate.show_sql">true</property>
-    <mapping resource="entities/Universidad.hbm.xml"/>
-    <mapping resource="entities/MiembroGrupoAsignaturaA.hbm.xml"/>
-    <mapping resource="entities/Mensaje.hbm.xml"/>
-    <mapping resource="entities/Movilidad.hbm.xml"/>
-    <mapping resource="entities/Estado.hbm.xml"/>
+    <mapping resource="entities/Pais.hbm.xml"/>
     <mapping resource="entities/Cursoacademico.hbm.xml"/>
-    <mapping resource="entities/EstadoMovilidad.hbm.xml"/>
-    <mapping resource="entities/Asignatura.hbm.xml"/>
+    <mapping resource="entities/Intentos.hbm.xml"/>
     <mapping resource="entities/Contrato.hbm.xml"/>
+    <mapping resource="entities/Movilidad.hbm.xml"/>
+    <mapping resource="entities/Universidad.hbm.xml"/>
+    <mapping resource="entities/Asignatura.hbm.xml"/>
+    <mapping resource="entities/EstadoMovilidad.hbm.xml"/>
     <mapping resource="entities/Usuario.hbm.xml"/>
+    <mapping resource="entities/MiembroGrupoAsignaturaA.hbm.xml"/>
+    <mapping resource="entities/Estado.hbm.xml"/>
+    <mapping resource="entities/CorreoConf.hbm.xml"/>
+    <mapping resource="entities/Mensaje.hbm.xml"/>
     <mapping resource="entities/Equivalencia.hbm.xml"/>
     <mapping resource="entities/MiembroGrupoAsignaturaB.hbm.xml"/>
-    <mapping resource="entities/Pais.hbm.xml"/>
-    <mapping resource="entities/CorreoConf.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
-

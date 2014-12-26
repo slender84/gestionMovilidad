@@ -10,6 +10,7 @@ import entities.CorreoConf;
 
 import entities.Estado;
 import entities.EstadoMovilidad;
+import entities.Intentos;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -198,6 +199,8 @@ public class beanUtilidades implements Serializable{
         
     }
         
+    
+   
     
     
     

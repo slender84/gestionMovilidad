@@ -7,6 +7,7 @@
 package model.services;
 
 import entities.CorreoConf;
+import entities.Intentos;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
@@ -27,4 +28,6 @@ public interface UsuarioService {
     public void autenticarUsuario(String password,Usuario u) throws PasswordIncorrectoException;
     public String generarPassword();
      public void enviarEmail(String login,String password,CorreoConf correoConf) throws EmailException;
+     public Intentos recuperarIntentos(String login);
+     public void actualizarIntentos(Intentos intentos);
 }
