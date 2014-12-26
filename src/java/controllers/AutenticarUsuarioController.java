@@ -100,6 +100,8 @@ public class AutenticarUsuarioController implements Serializable{
              u=usuarioService.find(getLogin());
              }catch(InstanceNotFoundException ex){
              beanUtilidades.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
+             login="";
+             password="";
               return null; 
              }
              
