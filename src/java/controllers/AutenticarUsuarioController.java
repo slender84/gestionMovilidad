@@ -160,8 +160,8 @@ public class AutenticarUsuarioController implements Serializable{
                
                if(i.getNumero()>=3){
                    
-                   //changeCaptcha(true);
-                   return "tresIntentos.xhtml?faces-redirect=true";
+                   changeCaptcha(true);
+                   //return "tresIntentos.xhtml?faces-redirect=true";
                }
                
                return null;
