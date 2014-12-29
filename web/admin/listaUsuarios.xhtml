@@ -21,7 +21,7 @@
             
             <p:growl />
             
-            <p:dataTable id="tabla" var="usuario" value="#{eliminarUsuarioController.listaUsuarios}"
+            <p:dataTable id="tabla" var="usuario" value="#{eliminarUsuarioController.listaUsuarios}" paginator="true" rows="10"
                          filteredValue="#{eliminarUsuarioController.filteredUsuarios}"
                          selection="#{eliminarUsuarioController.selectedUsuarios}"
                          widgetVar="usTable"
