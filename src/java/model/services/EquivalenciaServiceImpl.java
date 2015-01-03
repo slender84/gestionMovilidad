@@ -338,7 +338,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
                            if(listaAsignaturas.size()==listaAsignaturasComp.size()){
                                  if(contiene(listaAsignaturas, listaAsignaturasComp)){
                               
-                                   System.out.println(listaAsignaturasComp.get(0).getNombreAsignatura());
+                                   
                                    ArrayList<Asignatura> listaAsignaturasCompB=new ArrayList<Asignatura>();
                                       j=eComp.getMiembroGrupoAsignaturaBs().iterator();
                                       
@@ -369,23 +369,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
      
  
      
-  /*   @Override
-     public ArrayList<EquivalenciaRevisada> compararEquivalencias(ArrayList<Equivalencia> listaAuxEquivalencias,ArrayList<Equivalencia> listaAuxEquivalenciasComparado){
-         
-         ArrayList<EquivalenciaRevisada> listaRevisada=new ArrayList<EquivalenciaRevisada>();
-         
-         for(Equivalencia e:listaAuxEquivalencias){
-             EquivalenciaRevisada er=new EquivalenciaRevisada(e);
-             
-             if(listaAuxEquivalenciasComparado.contains(e)==false){
-                 er.setIgual(true);
-             }
-             listaRevisada.add(er);
-         }
-          
-         return listaRevisada;
-        
-     }*/
+ 
      
      
      public boolean contiene(ArrayList<Asignatura> listaA, ArrayList<Asignatura> listaB){

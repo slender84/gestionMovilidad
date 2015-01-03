@@ -78,8 +78,8 @@
         <h:form id="panelRecibidos">
            
             <h:panelGrid columns="2" cellpadding="5" rendered="#{mensajesRecibidosAdminController.activaRecibido}">
-                <p:outputLabel id="labelTemaRecibido" value="asunto:" />
-                <p:inputText id="temaRecibido" value="#{mensajesRecibidosAdminController.temaRecibido}" readonly="true"/>
+                <p:outputLabel id="labelTemaRecibido" value="Asunto:" />
+                <p:inputText id="temaRecibido" value="#{mensajesRecibidosAdminController.temaRecibido}" readonly="true" size="40"/>
                 <p:outputLabel id="labelTextoRecibido" for="textoRecibido" />
                 <p:inputTextarea id="textoRecibido" value="#{mensajesRecibidosAdminController.textAreaRecibido}"
                                  readonly="true" autoResize="true" cols="80" rows="10"/>
@@ -153,8 +153,8 @@
             <h:form id="panelEnviados">
                 <h:panelGrid columns="2" cellpadding="5" rendered="#{mensajesEnviadosAdminController.activaEnviado}">
                 
-                <p:outputLabel id="labelTemaEnviado" value="tema" />
-                <p:inputText id="temaEnviado" value="#{mensajesEnviadosAdminController.temaEnviado}" readonly="true" />
+                <p:outputLabel id="labelTemaEnviado" value="Asunto:" />
+                <p:inputText id="temaEnviado" value="#{mensajesEnviadosAdminController.temaEnviado}" readonly="true" size="40" />
                 <p:outputLabel id="labelTextoEnviado" for="textoEnviado" />
                 <p:inputTextarea id="textoEnviado" value="#{mensajesEnviadosAdminController.textAreaEnviado}"
                                   readonly="true" autoResize="true" cols="80" rows="10"/>

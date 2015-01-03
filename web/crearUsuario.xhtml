@@ -17,12 +17,12 @@
                
                 <h:panelGrid columns="2" cellpadding="5">
                 
-                <p:outputLabel value="Nombre:"/>
-                <p:inputText value="#{crearUsuarioController.nombre}"
+                <p:outputLabel for="nombre" value="Nombre:"/>
+                <p:inputText id="nombre" value="#{crearUsuarioController.nombre}"
                              required="true"
                              requiredMessage="el campo nombre está vacío"/>
-                <p:outputLabel value="Primer apellido"/>
-                <p:inputText value="#{crearUsuarioController.apellido1}"
+                <p:outputLabel for="ap1" value="Primer apellido"/>
+                <p:inputText id="ap1" value="#{crearUsuarioController.apellido1}"
                              required="true"
                              requiredMessage="el campo apellido1 está vacío"/>
                 
@@ -31,16 +31,16 @@
                 <p:inputText id="ii1" value="#{crearUsuarioController.apellido2}"/>
                              
                
-                <p:outputLabel value="Login de la UDC"/>
-                <p:inputText value="#{crearUsuarioController.login}"
+                <p:outputLabel for="login" value="Login de la UDC"/>
+                <p:inputText id="login" value="#{crearUsuarioController.login}"
                              required="true"
                              requiredMessage="el campo login está vacío"
                              autocomplete="off"/>
                 
                 
               
-                <p:outputLabel value="titulacion"/>
-                <p:selectOneMenu id="select1" value="#{crearUsuarioController.titulacion}" 
+                <p:outputLabel for="ti" value="titulacion"/>
+                <p:selectOneMenu id="ti" value="#{crearUsuarioController.titulacion}" 
                                  required="true"  
                                  requiredMessage="hay que intrododucir una titulacion">
                 

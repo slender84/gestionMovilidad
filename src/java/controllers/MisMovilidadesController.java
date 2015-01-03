@@ -161,9 +161,9 @@ public class MisMovilidadesController implements Serializable{
                     actualizar();
                     return "verMisMovilidades.xhtml";
                     }
-            Mensaje mensaje=new Mensaje(admin,usuario,Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" ha eliminado una movilidad", "no","no","no");
-                mensajeService.enviarMensaje(mensaje);
-                beanUtilidades.creaMensaje("movilidad eliminada correctamente, se ha enviado un mensaje al coordinador ", FacesMessage.SEVERITY_INFO);
+           // Mensaje mensaje=new Mensaje(admin,usuario,Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" ha eliminado una movilidad", "no","no","no");
+             //   mensajeService.enviarMensaje(mensaje);
+                beanUtilidades.creaMensaje("movilidad eliminada correctamente ", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;
                 actualizar();
                 return null;

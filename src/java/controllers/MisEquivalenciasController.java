@@ -559,7 +559,7 @@ public class MisEquivalenciasController implements Serializable{
         
      beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha modificado un contrato","no","no","no");
+     Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
      mensajeService.enviarMensaje(m);
      }catch(InstanceNotFoundException ex){
          

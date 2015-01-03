@@ -27,7 +27,10 @@
                 <p:outputLabel value="nuevo password"/>
                 <p:password value="#{editarPerfilController.nuevoPassword}" 
                             required="true"
-                            requiredMessage="El nuevo password está vacío"/>
+                            requiredMessage="El nuevo password está vacío"
+                            feedback="true"
+                            promptLabel="Introducir el password" weakLabel="Débil"
+                    goodLabel="Medio" strongLabel="Fuerte"/>
                 
                 <p:outputLabel value="repite password"/>
                 <p:password value="#{editarPerfilController.repitePassword}"

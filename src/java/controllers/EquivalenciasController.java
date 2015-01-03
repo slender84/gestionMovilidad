@@ -8,7 +8,6 @@ import entities.Equivalencia;
 import entities.Mensaje;
 import entities.Movilidad;
 import entities.Usuario;
-import exceptions.ContratoNotFoundException;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -423,7 +422,7 @@ public class EquivalenciasController implements Serializable{
             equivalenciaService.modificaContrato(selectedContrato);
             
         beanUtilidades.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
-        Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ha sido modificado", "no", "no", "no");
+        Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, "no", "no", "no");
         mensajeService.enviarMensaje(m);
         context.getSessionMap().remove("contrato");
         
