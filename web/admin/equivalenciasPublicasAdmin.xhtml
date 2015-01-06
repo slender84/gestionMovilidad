@@ -14,7 +14,8 @@
        <h2 style="text-align: center">Equivalencias públicas</h2>
         <h:form id="formPais">
              <p:growl id="msgs" />
-            <p:selectOneMenu value="#{equivalenciasPublicasController.paisStr}" required="true" requiredMessage="hay que elegir un pais">
+            <p:selectOneMenu value="#{equivalenciasPublicasController.paisStr}" required="true" requiredMessage="hay que elegir un pais"
+                             filter="true" filterMatchMode="startsWith">
                 <p:ajax event="change" listener="#{equivalenciasPublicasController.onChangePais()}" update=":formUniversidad :formPais:msgs :formTablaEquivalencias"/>
                 <f:selectItem itemLabel="elige un país"  noSelectionOption="true"/>
                 <f:selectItems var="pais" value="#{paisController.listaPaises}" itemValue="#{pais.nombre}" itemLabel="#{pais.nombre}"/>
@@ -24,7 +25,8 @@
         </h:form>
         <br/>
         <h:form id="formUniversidad">
-            <p:selectOneMenu value="#{equivalenciasPublicasController.universidadStr}" required="true" requiredMessage="hay que elegir una universidad de destino" rendered="#{equivalenciasPublicasController.checkPais}">
+            <p:selectOneMenu value="#{equivalenciasPublicasController.universidadStr}" required="true" requiredMessage="hay que elegir una universidad de destino" rendered="#{equivalenciasPublicasController.checkPais}"
+                             filter="true" filterMatchMode="startsWith">
                 <p:ajax event="change" listener="#{equivalenciasPublicasController.onChangeUni}" update=":formUniversidad :formPais :formTablaEquivalencias"/>
                 <f:selectItem itemLabel="elige una universidad" itemValue="#{null}" noSelectionOption="true"/>
                 <f:selectItems value="#{equivalenciasPublicasController.listaUniversidad}" var="universidad" itemLabel="#{universidad.nombre}" itemValue="#{universidad.nombre}"/>

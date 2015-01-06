@@ -24,7 +24,7 @@
                     <p:outputLabel  value="pais" />
                     <p:selectOneMenu id="p1" value="#{crearUniversidadController.paisStr}"
                                  required="true"
-                                 requiredMessage="el campo pais está vacío"
+                                 requiredMessage="el campo pais está vacío" filter="true" filterMatchMode="startsWith"
                                  >
                         <p:ajax event="change" listener="#{crearUniversidadController.onChangePais}" update=":formTabla :formUniversidad" oncomplete="PF('universidadTabla').filter();" />
                                  

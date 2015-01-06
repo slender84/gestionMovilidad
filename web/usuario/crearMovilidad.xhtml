@@ -22,7 +22,8 @@
                         <p:outputPanel>
                          
                          
-                         <p:selectOneMenu id="pais" value="#{crearMovilidadController.selectedPais}" required="true" requiredMessage="hay que introducir un pais">
+                         <p:selectOneMenu id="pais" value="#{crearMovilidadController.selectedPais}" required="true" requiredMessage="hay que introducir un pais"
+                                          filter="true" filterMatchMode="startsWith">
                         <p:ajax  listener="#{crearMovilidadController.onDropboxChangePais}" update=":formMovilidad: :formMovilidad:msgs1 "/>
                         <f:selectItem itemLabel="selecciona pais" noSelectionOption="true"/>
                         <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
@@ -33,7 +34,8 @@
                <br/>
                 
                 <p:outputPanel id="universidad" >
-                    <p:selectOneMenu  value="#{crearMovilidadController.selectedUniversidad}" rendered="#{crearMovilidadController.checkPais}" required="true" requiredMessage="hay que introducir una universidad"  >
+                    <p:selectOneMenu  value="#{crearMovilidadController.selectedUniversidad}" rendered="#{crearMovilidadController.checkPais}" required="true" requiredMessage="hay que introducir una universidad"
+                                      filter="true" filterMatchMode="startsWith">
                 
                 <p:ajax listener="#{crearMovilidadController.onDropboxchangeUni()}" update=":formMovilidad:info "/>
                 <f:selectItem itemLabel="selecciona universidad" noSelectionOption="true" />

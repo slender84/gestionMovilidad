@@ -23,7 +23,8 @@
                      
                      <h:panelGrid cellpadding="5" columns="2">
                          <p:outputLabel value="Pais"/>
-                         <p:selectOneMenu id="pais" value="#{crearAsignaturaController.paisStr}" required="true" requiredMessage="hay que introducir un pais">
+                         <p:selectOneMenu id="pais" value="#{crearAsignaturaController.paisStr}" required="true" requiredMessage="hay que introducir un pais"
+                                          filter="true" filterMatchMode="startsWith">
                          <p:ajax  listener="#{crearAsignaturaController.onChangePais}" update=":formUniversidad :formDetalles :formTabla :formAsignatura"/>
                         <f:selectItem itemLabel="selecciona pais" noSelectionOption="true"/>
                         <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
@@ -33,7 +34,8 @@
                 
                    
                         <p:outputLabel value="Universidad" rendered="#{crearAsignaturaController.checkPaisStr}"/>
-                       <p:selectOneMenu  value="#{crearAsignaturaController.universidadStr}" rendered="#{crearAsignaturaController.checkPaisStr}" required="true" requiredMessage="hay que introducir una universidad"  >
+                       <p:selectOneMenu  value="#{crearAsignaturaController.universidadStr}" rendered="#{crearAsignaturaController.checkPaisStr}" required="true" requiredMessage="hay que introducir una universidad"
+                                         filter="true" filterMatchMode="startsWith">
                 
                         <p:ajax listener="#{crearAsignaturaController.onChangeUniversidad}" update=":formTabla :formAsignatura :formUniversidad" oncomplete="PF('asignaturaBtn').filter();"/>
                        <f:selectItem itemLabel="selecciona universidad" noSelectionOption="true" id="uni3" />
