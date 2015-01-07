@@ -86,7 +86,7 @@ public class PaisController implements Serializable{
       try{
           Pais p=new Pais(paisStr);
       universidadService.insertarPais(p);
-      listaPaises.add(pais);
+      listaPaises.add(p);
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
           
           beanUtilidades.creaMensaje("Ya existe ese país", FacesMessage.SEVERITY_ERROR);
