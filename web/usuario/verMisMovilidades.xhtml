@@ -97,10 +97,10 @@
                 <p:column headerText="eliminar" styleClass="centrar">
                     
                     <p:commandButton  value="eliminar" action="#{misMovilidadesController.eliminarMovilidad}" update=":formMovilidad" onclick= "if (! confirm('¿seguro que quieres borrar?'))return false"
-                                      icon="edit_icon"  oncomplete="PF('movTable').filter()"> <!--clearFilters() tb vale-->
+                                      icon="edit_icon"  oncomplete="PF('movTable').filter()" rendered="#{movilidad.estado ne 'cancelada' and movilidad.estado ne 'terminada'}"> 
                         <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
                     
-                    </p:commandButton>
+                    </p:commandButton>                                                                         
                     
                 </p:column>
                 

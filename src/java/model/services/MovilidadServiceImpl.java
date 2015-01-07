@@ -46,13 +46,20 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     }
     
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<Movilidad> listarTodasMovilidades(){
         
        List<Movilidad> aux=movilidadDao.list();
         for(Movilidad m:aux){
             Hibernate.initialize(m.getUniversidad());
+            if(m.getFechaFin().compareTo(new Date())==-1){
+                m.setEstado("terminada");
+                editar(m);
+                
+            }
         }
+        
+        
         return aux;
         
     }
@@ -83,7 +90,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     }
     
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public List<Movilidad> listarMisMovilidades(String user){
         
         List<Movilidad> aux= movilidadDao.listarMisMovilidades(user);
@@ -157,17 +164,10 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
                     for(Movilidad mov:aux){
                         
                         if(mov.getEstado().equalsIgnoreCase("pendiente")){
-                            
-                            if(mov.getEstado().equalsIgnoreCase("pendiente")){
-                            
-                            throw new NumeroDeMovilidadesException("hay una movilidad pendiente que debe ser aceptada por el coordinador o eliminada");
-                            
-                        }
-                                    
-                        
+                           throw new NumeroDeMovilidadesException("hay una movilidad pendiente que debe ser aceptada por el coordinador o eliminada");
                         }
                         
-                       if(mov.getEstado().equalsIgnoreCase("aceptada")){
+                       if(mov.getEstado().equalsIgnoreCase("aceptada")||mov.getEstado().equalsIgnoreCase("terminada")){
                            i=i+1;
                            enCurso=mov;
                            if(i>1){
