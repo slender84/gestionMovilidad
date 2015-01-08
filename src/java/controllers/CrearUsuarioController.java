@@ -180,7 +180,8 @@ public class CrearUsuarioController implements Serializable{
         
         try{
         usuarioService.insertarUsuario(u);
-        }catch(RuntimeException ex){
+        }catch(org.springframework.dao.DataIntegrityViolationException ex){
+            ex.printStackTrace();
             beanUtilidades.creaMensaje("ya existe ese login", FacesMessage.SEVERITY_ERROR);
             return null;
             
