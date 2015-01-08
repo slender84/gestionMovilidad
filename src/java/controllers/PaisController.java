@@ -8,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import org.springframework.dao.DataAccessException;
 import model.services.UniversidadService;
 import model.utils.beanUtilidades;
 
@@ -108,7 +107,7 @@ public class PaisController implements Serializable{
           universidadService.deletePais(pais);
           listaPaises.remove(pais);
           
-      }catch(DataAccessException ex){
+      }catch(RuntimeException ex){
            listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
           beanUtilidades.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;

@@ -181,7 +181,7 @@ public class CrearUsuarioController implements Serializable{
         try{
         usuarioService.insertarUsuario(u);
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
-            ex.printStackTrace();
+            
             beanUtilidades.creaMensaje("ya existe ese login", FacesMessage.SEVERITY_ERROR);
             return null;
             
@@ -191,7 +191,7 @@ public class CrearUsuarioController implements Serializable{
             usuarioService.enviarEmail(login,password,correoConf);
             
         }catch(EmailException ex){
-            ex.printStackTrace();
+            
             usuarioService.delete(u);
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;

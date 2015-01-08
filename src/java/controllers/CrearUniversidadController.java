@@ -310,7 +310,7 @@ public class CrearUniversidadController implements Serializable{
                 listaUniversidades.remove(u);
             }
             beanUtilidades.creaMensaje("se han eliminado las universidades correctamente", FacesMessage.SEVERITY_INFO);
-            listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
+            //listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
             checkDetalles=false;
         }
         return null;
