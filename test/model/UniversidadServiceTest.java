@@ -5,11 +5,13 @@
  */
 package model;
 
+import entities.Pais;
 import entities.Universidad;
 import exceptions.InstanceNotFoundException;
 import static junit.framework.Assert.assertEquals;
 import static model.UniversidadServiceTest.SPRING_CONFIG_FILE;
 import model.services.UniversidadService;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class UniversidadServiceTest {
     public static final String SPRING_CONFIG_FILE =
         "classpath:/applicationContext.xml";
    private final long NON_EXISTENT_UNI_ID = -1;
-    private final long NON_EXISTENT_PAIS_ID = -1;
+    private final String NON_EXISTENT_PAIS = "NonExistentPais";
     private final long NON_EXISTENT_PAIS_ID2 = -2;
     
     private final String NON_EXISTENT_UNI="NonExistentUni";
@@ -41,7 +43,24 @@ public class UniversidadServiceTest {
         this.universidadService = universidadService;
     }
    
-   
+   @Test
+    public void testCrearPaisYBuscarPais()throws InstanceNotFoundException{
+        
+        Pais pais=new Pais("pais1");
+        universidadService.insertarPais(pais);
+        Pais pais2=universidadService.findPais(pais.getNombre());
+        assertEquals(pais2, pais);
+        
+    }
+    
+    
+     @Test(expected = InstanceNotFoundException.class)
+    public void testBuscarPaisNoExistente() throws InstanceNotFoundException {
+
+        universidadService.findPais(NON_EXISTENT_PAIS);
+
+    }
+    
    
    
     @Test
@@ -50,7 +69,7 @@ public class UniversidadServiceTest {
 
         Universidad universidad=new Universidad("uni1", "1");
         universidadService.insertarUniversidad(universidad);
-        Universidad universidad2 = universidadService.findUniversidad("1");
+        Universidad universidad2 = universidadService.findUniversidad("uni1");
 
         assertEquals(universidad, universidad2);
 
@@ -65,6 +84,25 @@ public class UniversidadServiceTest {
     }
     
     
+    @Test(expected = InstanceNotFoundException.class)
+    public void testEliminarUniversidad() throws InstanceNotFoundException{
+        
+        Universidad u=new Universidad();
+        universidadService.delete(u);
+        
+        try{
+            
+            Universidad u2=universidadService.findUniversidad(u.getNombre());
+            
+        }catch(InstanceNotFoundException ex){
+            
+            
+            
+        } 
+        
+       
+       
+    }
     
     
 }
