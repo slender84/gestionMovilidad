@@ -34,15 +34,6 @@ body.red{
 }
 
 
-.tablaFic{
-    height: 45%;
-    width: 45%;
-    font-size: 15px;
-    position: absolute;
-    top: 58px;
-    //left:50px;
-}
-
 
 .asignatura{
     
@@ -101,10 +92,7 @@ body.red{
     
 }
 
-.multiple{
-   width:3% ;
-   text-align:center;
-}
+
 
 
 .añadir{
@@ -126,6 +114,78 @@ body.red{
     position: relative;
     top: 590px;
     
+}
+
+
+@media only screen 
+and (max-width : 1199px) {
+
+    .tablaFic{
+    height: 45%;
+    width: 45%;
+    font-size: 15px;
+    position: absolute;
+    top: 58px;
+    //left:50px;
+}
+
+.tablaUniversidad{
+    width: 45%;
+    height: 45%;
+    font-size: 15px;
+    position:absolute;
+    top: 58px;
+    left: 650px; 
+}
+
+    
+    
+    
+    
+}
+
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1200px) {
+
+    
+    .tablaFic{
+    height: 45%;
+    width: 45%;
+    font-size: 15px;
+    position: absolute;
+    top: 58px;
+    //left:50px;
+}
+
+.tablaUniversidad{
+    width: 45%;
+    height: 45%;
+    font-size: 15px;
+    position:absolute;
+    top: 58px;
+    left: 1950px; 
+}
+
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+.tablaFic{
+    height: 45%;
+    width: 45%;
+    font-size: 15px;
+    position: absolute;
+    top: 58px;
+    //left:50px;
 }
 
 .tablaUniversidad{
@@ -321,7 +381,10 @@ body.red{
     text-align: center;
         
 }
-
+.multiple{
+   width:3% ;
+   text-align:center;
+}
 
 
 
@@ -481,4 +544,7 @@ body.red{
     margin-right:15%;
     width: 100%;
     }
+    
+    
+    
 

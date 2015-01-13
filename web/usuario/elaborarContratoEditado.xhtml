@@ -6,17 +6,24 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
+        
         <title>Elaborar nuevo contrato</title>
-        <h:outputStylesheet library="css" name="estilos.css"/>
-        <h:outputScript library="js" name="funciones.js"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1199px)" href="/gestionMovilidad/javax.faces.resource/style1024.css.xhtml?ln=css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1365px)" href="/gestionMovilidad/javax.faces.resource/style1366.css.xhtml?ln=css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1600px)" href="/gestionMovilidad/javax.faces.resource/styleBig.css.xhtml?ln=css"/>
+        
     </h:head>
+    
+    
+        
+    
     <h:body styleClass="blue">
          <h2 style="text-align: left">Editar contrato</h2>
         <p:outputPanel id="panelFic">
         
             <h:form id="formEquivalenciaFic">
                 
-                <p:outputPanel id="outputPanel1">
+                
             
             <p:growl id="msgs"/> 
             <p:dataTable id="tablaFic" value="#{misEquivalenciasController.listaAsignaturasFic}" var="asigFic" rows="10"
@@ -69,14 +76,14 @@
                
                 
             </p:dataTable>
-       
+                
             
             <p:inputTextarea id="info" readonly="true" cols="58" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}"
                              rendered="#{misEquivalenciasController.verInfo}"/>
             <p:commandButton styleClass="cerrarAreaTexto" value="cerrar" action="#{misEquivalenciasController.cerrarDetallesAsign}" update=":formEquivalenciaFic"
                              rendered="#{misEquivalenciasController.verInfo}"/> 
        
-       </p:outputPanel>
+       
            
 
         

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 
 
 
-@WebFilter(filterName = "filtroSupervision",urlPatterns = {"/supervision/*"})
+@WebFilter(filterName = "filtroSupervision",urlPatterns = {"/adminGeneral/*"})
 public class filtroSupervision implements Filter {
 
     @Override
