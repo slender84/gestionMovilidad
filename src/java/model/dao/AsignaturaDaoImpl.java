@@ -17,6 +17,15 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
     @Override
     public List<Asignatura> listarAsignaturasPorUniversidad(String nombre){
         
+        if(nombre.equalsIgnoreCase("Universidade da Coruña")){
+            
+            Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre like '%coruña%' order by a.universidad.nombre desc" );
+        //q.setParameter("nombre", nombre);
+        return q.list();
+            
+        }
+        
+        
         Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre=:nombre order by a.universidad.nombre desc" );
         q.setParameter("nombre", nombre);
         return q.list();

@@ -46,8 +46,8 @@ public class EquivalenciasServiceTest {
     public void testCrearYBuscarContrato()throws InstanceNotFoundException{
         
         Contrato c=new Contrato();
-        equivalenciaService.creaContrato(c);
-        Contrato c2=equivalenciaService.findContrato(c.getIdContrato());
+        equivalenciaService.crearContrato(c);
+        Contrato c2=equivalenciaService.buscarContrato(c.getIdContrato());
         
         assertEquals(c, c2);
         
@@ -57,7 +57,7 @@ public class EquivalenciasServiceTest {
     @Test(expected = InstanceNotFoundException.class)
     public void testBuscarContratoNoExistente() throws InstanceNotFoundException{
         
-        equivalenciaService.findContrato(contrato_non_existent_id);
+        equivalenciaService.buscarContrato(contrato_non_existent_id);
         
     }
     
@@ -68,9 +68,9 @@ public class EquivalenciasServiceTest {
         Equivalencia e=new Equivalencia();
         equivalenciaService.crearEquivalencia(e);
         c.getEquivalencias().add(e);
-        equivalenciaService.creaContrato(c);
+        equivalenciaService.crearContrato(c);
         
-        Contrato c2=equivalenciaService.findContrato(c.getIdContrato());
+        Contrato c2=equivalenciaService.buscarContrato(c.getIdContrato());
         
         Assert.assertTrue(c2.getEquivalencias().size()==1);
         
@@ -83,9 +83,9 @@ public class EquivalenciasServiceTest {
         Contrato c=new Contrato();
         Equivalencia e=new Equivalencia();
         c.getEquivalencias().add(e);
-        equivalenciaService.creaContrato(c);
-        equivalenciaService.eliminaContrato(c);
-        Contrato aux=equivalenciaService.findContrato(c.getIdContrato());
+        equivalenciaService.crearContrato(c);
+        equivalenciaService.eliminarContrato(c);
+        Contrato aux=equivalenciaService.buscarContrato(c.getIdContrato());
         Iterator i=aux.getEquivalencias().iterator();
         
         
@@ -97,15 +97,32 @@ public class EquivalenciasServiceTest {
         Contrato c2=new Contrato();
         Equivalencia e=new Equivalencia();
         equivalenciaService.crearEquivalencia(e);
+        System.out.println("equivalencia id es "+e.getIdequivalencia());
         c1.getEquivalencias().add(e);
         c2.getEquivalencias().add(e);
-        equivalenciaService.creaContrato(c1);
-        equivalenciaService.creaContrato(c2);
-       Contrato aux=equivalenciaService.findContrato(c1.getIdContrato());
+        equivalenciaService.crearContrato(c1);
+        equivalenciaService.crearContrato(c2);
+        System.out.println("c1 id es "+c1.getIdContrato());
+        System.out.println("c2 id es "+c2.getIdContrato());
+
+       Contrato aux=equivalenciaService.buscarContrato(c1.getIdContrato());
+        System.out.println("contrato aux es "+aux.getIdContrato());
        Iterator i=aux.getEquivalencias().iterator();
        Equivalencia aux2=(Equivalencia)i.next();
+        System.out.println("equivalenciaAux id "+aux2.getIdequivalencia());
+       equivalenciaService.eliminarEquivalencia(e);
+       equivalenciaService.eliminarContrato(aux);
+       System.out.println("equivalenciaAux id "+aux2.getIdequivalencia());
        
-       equivalenciaService.eliminaContrato(aux);
+       
+       
+       
+       
+       Contrato auxc2=equivalenciaService.buscarContrato(c2.getIdContrato());
+        i=auxc2.getEquivalencias().iterator();
+       Equivalencia eaux=(Equivalencia)i.next();
+       System.out.println("equivalenciaAux2 id "+eaux.getIdequivalencia());
+       
         
     }
     

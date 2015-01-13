@@ -35,13 +35,13 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
 	}
 
     @Override
-    public void insert(T entity){
+    public void insertar(T entity){
         
         getSession().save(entity);
     }
     
     @Override
-    public void edit(T entity){
+    public void editar(T entity){
         
         getSession().update(entity);
         
@@ -49,14 +49,14 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
     
     
     @Override
-    public boolean exists(PK id) {
+    public boolean existe(PK id) {
 		return getSession().createCriteria(entityClass).add(
 				Restrictions.idEq(id)).setProjection(Projections.id())
 				.uniqueResult() != null;
 	}
     @Override
     @SuppressWarnings("unchecked")
-	public T find(PK id) throws InstanceNotFoundException {
+	public T buscar(PK id) throws InstanceNotFoundException {
 		T entity = (T) getSession().get(entityClass, id);
 		if (entity == null) {
 			throw new InstanceNotFoundException();
@@ -65,14 +65,14 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
 	}
         
         @Override
-        public List<T> list(){
+        public List<T> listar(){
             
             return getSession().createCriteria(entityClass).list();
             
         }
         
         @Override
-        public void delete(T entity){
+        public void eliminar(T entity){
             
             getSession().delete(entity);
         }

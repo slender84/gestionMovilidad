@@ -101,7 +101,7 @@ public class CrearAsignaturaController implements Serializable{
     @PostConstruct
     public void init(){
         
-        setListaPaises((ArrayList<Pais>)universidadService.listaPaises());
+        setListaPaises((ArrayList<Pais>)universidadService.listarPaises());
         
     }
     
@@ -316,7 +316,7 @@ public class CrearAsignaturaController implements Serializable{
     public String creaAsignatura(){
         Universidad uni;
         try{
-        uni=universidadService.findUniversidad(universidadStr);
+        uni=universidadService.buscarUniversidad(universidadStr);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("no existe la universidad", FacesMessage.SEVERITY_ERROR);
             universidadStr="";
@@ -330,11 +330,11 @@ public class CrearAsignaturaController implements Serializable{
         Asignatura a=new Asignatura(id,uni, nombreAsignatura, creditosAsignatura.shortValue(),periodoAsignatura,infoAsignatura,webAsignatura,facultadAsignatura,titulacionAsignatura,null,null);
         
         try{
-            
+           // org.springframework.dao.DuplicateKeyException ex
             asignaturaService.crearAsignatura(a);
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
             
-            beanUtilidades.creaMensaje("La asignatura ya existe", FacesMessage.SEVERITY_ERROR);
+            beanUtilidades.creaMensaje("ya existe esa universidad", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         listaAsignaturas.add(a);
@@ -407,7 +407,7 @@ public class CrearAsignaturaController implements Serializable{
             
         for (Asignatura a:selectedAsignaturas){
             try{
-                asignaturaService.eliminaAsignatura(a);
+                asignaturaService.eliminarAsignatura(a);
             }catch(InstanceNotFoundException|RuntimeException ex){
               
            

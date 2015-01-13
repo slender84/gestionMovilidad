@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.services.UsuarioService;
+import model.utils.Seguridad;
 import model.utils.beanUtilidades;
 
 
@@ -95,7 +96,7 @@ public class CrearAdminController implements Serializable{
         
         Short s=2;
        
-        Usuario u=new Usuario(login,usuarioService.md5Password(password),s,"tutor","tutor","tutor");
+        Usuario u=new Usuario(login,Seguridad.md5Password(password),s,"tutor","tutor","tutor");
         u.setIntentos(new Intentos(u,0));
         try{
         usuarioService.insertarUsuario(u);
@@ -117,7 +118,7 @@ public class CrearAdminController implements Serializable{
         
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         Usuario u=(Usuario)session.getAttribute("admin");
-        if(usuarioService.md5Password(password).equals(u.getPassword())==false){
+        if(Seguridad.md5Password(password).equals(u.getPassword())==false){
             beanUtilidades.creaMensaje("password erróneo", FacesMessage.SEVERITY_ERROR);
             return null;
         }
@@ -127,8 +128,8 @@ public class CrearAdminController implements Serializable{
             return null;
         }
         
-        u.setPassword(usuarioService.md5Password(nuevoPassword));
-        usuarioService.actualizar(u);
+        u.setPassword(Seguridad.md5Password(nuevoPassword));
+        usuarioService.actualizarUsuario(u);
         beanUtilidades.creaMensaje("password modificado", FacesMessage.SEVERITY_INFO);
         password="";
         passwordAux="";

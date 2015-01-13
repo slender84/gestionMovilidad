@@ -61,22 +61,22 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
     
     @Override
     @Transactional(readOnly = true)
-    public List<Pais> listaPaises(){
+    public List<Pais> listarPaises(){
         
-        return paisDao.list();
+        return paisDao.listar();
     }
     
     @Override
     @Transactional(readOnly = true)
-    public List<Universidad> listaUniversidades(){
+    public List<Universidad> listarUniversidades(){
         
-        return universidadDao.list();
+        return universidadDao.listar();
     }
     
     @Override
     @Transactional(readOnly = true)
-    public Pais findPais(String pais) throws InstanceNotFoundException{
-        Pais p=paisDao.find(pais);
+    public Pais buscarPais(String pais) throws InstanceNotFoundException{
+        Pais p=paisDao.buscar(pais);
         return p;
     }
     
@@ -86,15 +86,15 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
         
         
         
-        paisDao.insert(pais);
+        paisDao.insertar(pais);
         
             
         
     }
     @Override
-    public void deletePais(Pais p){
+    public void eliminarPais(Pais p){
         
-        paisDao.delete(p);
+        paisDao.eliminar(p);
     }
     
     
@@ -102,11 +102,11 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
    
     
     @Override
-    public void delete(Universidad u)throws InstanceNotFoundException{
+    public void eliminarUniversidad(Universidad u)throws InstanceNotFoundException{
         //u=universidadDao.find(u.getNombre());
-         if(universidadDao.exists(u.getNombre())==false)
+         if(universidadDao.existe(u.getNombre())==false)
                 throw new InstanceNotFoundException();
-        universidadDao.delete(u);
+        universidadDao.eliminar(u);
         
     }
     
@@ -116,16 +116,16 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
     @Override
     public void insertarUniversidad(Universidad u){
         
-     universidadDao.insert(u);
+     universidadDao.insertar(u);
         
         
     }
     @Override
-    public void actualizar(Universidad u) throws InstanceNotFoundException{
+    public void actualizarUniversidad(Universidad u) throws InstanceNotFoundException{
         //u=universidadDao.find(u.getNombre());
-        if(universidadDao.exists(u.getNombre())==false)
+        if(universidadDao.existe(u.getNombre())==false)
                 throw new InstanceNotFoundException();
-        universidadDao.edit(u);
+        universidadDao.editar(u);
         
     }
     
@@ -142,23 +142,23 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
    public void crearCursoAcademico(Cursoacademico cursoAcademico){
        
        
-       cursoacademicoDao.insert(cursoAcademico);
+       cursoacademicoDao.insertar(cursoAcademico);
        
    }
    @Override
    public void eliminarCursoAcademico(Cursoacademico cursoAcademico){
        
        
-       cursoacademicoDao.delete(cursoAcademico);
+       cursoacademicoDao.eliminar(cursoAcademico);
        
        
    }
     
    @Override
    @Transactional(readOnly = true)
-   public List<Cursoacademico> listaCursosAcademicos(){
+   public List<Cursoacademico> listarCursosAcademicos(){
        
-       return cursoacademicoDao.list();
+       return cursoacademicoDao.listar();
    }
    
    @Override
@@ -185,7 +185,7 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
                         
                     }
                     
-                    for(Cursoacademico c:listaCursosAcademicos()){
+                    for(Cursoacademico c:listarCursosAcademicos()){
                         if (c.getCursoAcademico().equals(ca.getCursoAcademico())){
                             return ca;
                         } 
@@ -201,9 +201,9 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
    
    @Override
    @Transactional(readOnly = true)
-   public Universidad findUniversidad(String universidad) throws InstanceNotFoundException{
+   public Universidad buscarUniversidad(String universidad) throws InstanceNotFoundException{
        
-       Universidad u=universidadDao.find(universidad);
+       Universidad u=universidadDao.buscar(universidad);
        
        return u;
    }

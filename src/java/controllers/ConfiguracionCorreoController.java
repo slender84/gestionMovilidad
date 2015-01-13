@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.UsuarioService;
-import model.utils.Encrypter;
+import model.utils.Seguridad;
 import model.utils.beanUtilidades;
 
 
@@ -72,7 +72,7 @@ public class ConfiguracionCorreoController implements Serializable{
         
         
     try{    
-    correoConf.setPassword(Encrypter.encrypt(correoConf.getPassword()));
+    correoConf.setPassword(Seguridad.encrypt(correoConf.getPassword()));
     beanUtilidades.setCorreoConf(correoConf);
     }catch(Exception ex){
         

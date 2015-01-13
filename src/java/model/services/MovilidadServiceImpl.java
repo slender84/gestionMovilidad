@@ -49,12 +49,12 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     @Transactional
     public List<Movilidad> listarTodasMovilidades(){
         
-       List<Movilidad> aux=movilidadDao.list();
+       List<Movilidad> aux=movilidadDao.listar();
         for(Movilidad m:aux){
             Hibernate.initialize(m.getUniversidad());
             if(m.getFechaFin().compareTo(new Date())==-1){
                 m.setEstado("terminada");
-                editar(m);
+                editarMovilidad(m);
                 
             }
         }
@@ -86,7 +86,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     @Override
     public void crearMovilidad(Movilidad m){
         
-        movilidadDao.insert(m);
+        movilidadDao.insertar(m);
     }
     
     @Override
@@ -99,7 +99,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
             
             if(m.getFechaFin().compareTo(new Date())==-1){
                 m.setEstado("terminada");
-                editar(m);
+                editarMovilidad(m);
                 
             }
             
@@ -111,16 +111,16 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     @Override
     public void eliminarMovilidad(Movilidad m){
         
-        movilidadDao.delete(m);
+        movilidadDao.eliminar(m);
     }
     
     
     
     @Override
     @Transactional(readOnly = true)
-    public Movilidad findMovilidad(Integer id)throws InstanceNotFoundException{
+    public Movilidad buscarMovilidad(Integer id)throws InstanceNotFoundException{
         
-        Movilidad m=movilidadDao.find(id);
+        Movilidad m=movilidadDao.buscar(id);
         Hibernate.initialize(m.getUniversidad());
         return m;
     }
@@ -200,9 +200,9 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     }
     
     @Override
-    public void editar(Movilidad m){
+    public void editarMovilidad(Movilidad m){
         
-        movilidadDao.edit(m);
+        movilidadDao.editar(m);
         
     }
     

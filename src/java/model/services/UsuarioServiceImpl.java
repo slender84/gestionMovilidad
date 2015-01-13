@@ -10,9 +10,9 @@ import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import model.dao.IntentosDao;
 import model.dao.UsuarioDao;
+import model.utils.Seguridad;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -53,28 +53,28 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     @Override
     @Transactional(readOnly = true)
-    public Usuario find(String nombre)throws InstanceNotFoundException{
+    public Usuario buscarUsuario(String nombre)throws InstanceNotFoundException{
         
-        return usuarioDao.find(nombre);
+        return usuarioDao.buscar(nombre);
     }
     
     @Override
-    public void delete(Usuario u){
-        if(usuarioDao.exists(u.getLogin()))
-        usuarioDao.delete(u);
+    public void eliminarUsuario(Usuario u){
+        if(usuarioDao.existe(u.getLogin()))
+        usuarioDao.eliminar(u);
        
     }
     
     @Override
     @Transactional(readOnly = true)
-    public List<Usuario>listar(){
+    public List<Usuario>listarUsuarios(){
         
         
         
-        List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.list();
+        List<Usuario> lista= (ArrayList<Usuario>)usuarioDao.listar();
         Usuario u=null;
         try{
-        u=usuarioDao.find("admin");
+        u=usuarioDao.buscar("admin");
         }catch(InstanceNotFoundException ex){
             
         }
@@ -92,13 +92,13 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         
             
-            usuarioDao.insert(u);
+            usuarioDao.insertar(u);
 }
     @Override
-    public void actualizar(Usuario u){
+    public void actualizarUsuario(Usuario u){
         
-        if(usuarioDao.exists(u.getLogin()))
-        usuarioDao.edit(u);
+        if(usuarioDao.existe(u.getLogin()))
+        usuarioDao.editar(u);
         
         
     }
@@ -108,7 +108,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public void autenticarUsuario(String password,Usuario u)throws PasswordIncorrectoException{
         
-        password=md5Password(password);
+        password=Seguridad.md5Password(password);
             String pass=u.getPassword();
             if((pass.equals(password)==false)){
                 
@@ -121,13 +121,13 @@ public class UsuarioServiceImpl implements UsuarioService{
    @Override
    public String generarPassword(){
        
-       return UUID.randomUUID().toString();
+       //return UUID.randomUUID().toString();
        
-       
+       return Seguridad.generarPassword();
    }
    
    
-   @Override
+   /*@Override
     public String md5Password(String password){
         
         
@@ -145,7 +145,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         
         
-    }
+    }*/
    
    @Override
     public void enviarEmail(String login,String password,CorreoConf correoConf) throws EmailException{

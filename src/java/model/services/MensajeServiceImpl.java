@@ -70,7 +70,7 @@ public class MensajeServiceImpl implements MensajeService{
     public void eliminarMensaje(Mensaje m,String accion)throws InstanceNotFoundException{
         
         
-         Mensaje aux=find(m.getIdmensaje());
+         Mensaje aux=buscarMensaje(m.getIdmensaje());
             
             if(aux!=null){
                 
@@ -81,7 +81,7 @@ public class MensajeServiceImpl implements MensajeService{
              
                 if(aux.getEliminadoOrigen().equals("si")){
                     
-                    mensajeDao.delete(aux);
+                    mensajeDao.eliminar(aux);
                 }else{
                     
                      enviarMensaje(aux);
@@ -93,7 +93,7 @@ public class MensajeServiceImpl implements MensajeService{
              
                 if(aux.getEliminadoDestino().equals("si")){
                     
-                    mensajeDao.delete(aux);
+                    mensajeDao.eliminar(aux);
                 }else{
                     
                      enviarMensaje(aux);
@@ -107,9 +107,9 @@ public class MensajeServiceImpl implements MensajeService{
     
     @Override
     @Transactional(readOnly = true)
-    public Mensaje find(Integer msgId) throws InstanceNotFoundException{
+    public Mensaje buscarMensaje(Integer msgId) throws InstanceNotFoundException{
         
-        return mensajeDao.find(msgId);
+        return mensajeDao.buscar(msgId);
     }
     
 
@@ -117,7 +117,7 @@ public class MensajeServiceImpl implements MensajeService{
     @Override
     public void leerMensajeRecibido(Mensaje selectedMensajeRecibido) throws InstanceNotFoundException{
 
-            Mensaje aux=find(selectedMensajeRecibido.getIdmensaje());
+            Mensaje aux=buscarMensaje(selectedMensajeRecibido.getIdmensaje());
             
             
             if(aux!=null){

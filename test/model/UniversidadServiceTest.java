@@ -48,7 +48,7 @@ public class UniversidadServiceTest {
         
         Pais pais=new Pais("pais1");
         universidadService.insertarPais(pais);
-        Pais pais2=universidadService.findPais(pais.getNombre());
+        Pais pais2=universidadService.buscarPais(pais.getNombre());
         assertEquals(pais2, pais);
         
     }
@@ -57,7 +57,7 @@ public class UniversidadServiceTest {
      @Test(expected = InstanceNotFoundException.class)
     public void testBuscarPaisNoExistente() throws InstanceNotFoundException {
 
-        universidadService.findPais(NON_EXISTENT_PAIS);
+        universidadService.buscarPais(NON_EXISTENT_PAIS);
 
     }
     
@@ -69,7 +69,7 @@ public class UniversidadServiceTest {
 
         Universidad universidad=new Universidad("uni1", "1");
         universidadService.insertarUniversidad(universidad);
-        Universidad universidad2 = universidadService.findUniversidad("uni1");
+        Universidad universidad2 = universidadService.buscarUniversidad("uni1");
 
         assertEquals(universidad, universidad2);
 
@@ -79,7 +79,7 @@ public class UniversidadServiceTest {
     @Test(expected = InstanceNotFoundException.class)
     public void testBuscarUniversidadNoExistente() throws InstanceNotFoundException {
 
-        universidadService.findUniversidad(NON_EXISTENT_UNI);
+        universidadService.buscarUniversidad(NON_EXISTENT_UNI);
 
     }
     
@@ -88,11 +88,11 @@ public class UniversidadServiceTest {
     public void testEliminarUniversidad() throws InstanceNotFoundException{
         
         Universidad u=new Universidad();
-        universidadService.delete(u);
+        universidadService.eliminarUniversidad(u);
         
         try{
             
-            Universidad u2=universidadService.findUniversidad(u.getNombre());
+            Universidad u2=universidadService.buscarUniversidad(u.getNombre());
             
         }catch(InstanceNotFoundException ex){
             

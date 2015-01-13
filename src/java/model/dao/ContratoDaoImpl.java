@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class ContratoDaoImpl extends GenericDaoHibernate<Contrato, Integer> implements ContratoDao{
     
     @Override
-    public List<Contrato> listaContratos(Movilidad m){
+    public List<Contrato> listarContratos(Movilidad m){
         
         return getSession().createQuery("select c from Contrato c where c.movilidad=:movilidad order by c.fecha desc").setParameter("movilidad", m).list();
     

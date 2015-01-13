@@ -130,13 +130,15 @@ public class MisEquivalenciasController implements Serializable{
         selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
         context.getSessionMap().remove("movilidad");
         listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("UDC");
+        if(listaAsignaturasFic.isEmpty())
+            listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("Universidade da Coruña");
         listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(selectedMovilidad.getUniversidad().getNombre());
         
          if(context.getSessionMap().containsKey("contrato")){
         selectedContrato=(Contrato)context.getSessionMap().get("contrato");
         context.getSessionMap().remove("contrato");
         try{
-        c=equivalenciaService.findContrato(selectedContrato.getIdContrato());
+        c=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
         }catch(InstanceNotFoundException ex){
              try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");
@@ -477,7 +479,7 @@ public class MisEquivalenciasController implements Serializable{
         
         beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
         try{
-        Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
+        Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
         mensajeService.enviarMensaje(m);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
@@ -517,7 +519,7 @@ public class MisEquivalenciasController implements Serializable{
         
         beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato","no","no","no");
+     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato","no","no","no");
      mensajeService.enviarMensaje(m);
      }catch(Exception ex){
          
@@ -559,7 +561,7 @@ public class MisEquivalenciasController implements Serializable{
         
      beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.find("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
+     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
      mensajeService.enviarMensaje(m);
      }catch(InstanceNotFoundException ex){
          

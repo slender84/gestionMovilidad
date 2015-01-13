@@ -70,7 +70,7 @@ public class VerContratosController implements Serializable{
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            context.getSessionMap().remove("Movilidad");
            try{
-               selectedMovilidad=movilidadService.findMovilidad(selectedMovilidad.getCodMovilidad());
+               selectedMovilidad=movilidadService.buscarMovilidad(selectedMovilidad.getCodMovilidad());
            }catch(InstanceNotFoundException ex){
                try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/verMovilidades.xhtml");
@@ -79,7 +79,7 @@ public class VerContratosController implements Serializable{
                     }
            }
            
-           listaContratos=(ArrayList < Contrato >)equivalenciaService.listaContratos(selectedMovilidad);
+           listaContratos=(ArrayList < Contrato >)equivalenciaService.listarContratos(selectedMovilidad);
            
        }
        else{
@@ -172,16 +172,16 @@ public class VerContratosController implements Serializable{
         for(Contrato c:selectedContratos){
         
             try{
-            c=equivalenciaService.findContrato(c.getIdContrato());
+            c=equivalenciaService.buscarContrato(c.getIdContrato());
             }catch(InstanceNotFoundException ex){
-             listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
+             listaContratos=(ArrayList<Contrato>)equivalenciaService.listarContratos(selectedMovilidad);
               beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
              return null;
             }
             listaCopia=new ArrayList<>(c.getEquivalencias());
             
             c.setEquivalencias(null);
-            equivalenciaService.eliminaContrato(c);
+            equivalenciaService.eliminarContrato(c);
             
             for(Equivalencia e:listaCopia){
             
@@ -197,7 +197,7 @@ public class VerContratosController implements Serializable{
         
         
         beanUtilidades.creaMensaje("contrato eliminado correctamente", FacesMessage.SEVERITY_INFO);
-        listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
+        listaContratos=(ArrayList<Contrato>)equivalenciaService.listarContratos(selectedMovilidad);
         selectedContratos=null;
         
         return null;

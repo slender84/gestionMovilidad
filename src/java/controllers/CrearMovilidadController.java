@@ -218,7 +218,7 @@ public class CrearMovilidadController implements Serializable{
     public void onDropboxchangeUni(){
         
         try{
-        universidad=universidadService.findUniversidad(selectedUniversidad);
+        universidad=universidadService.buscarUniversidad(selectedUniversidad);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
             
@@ -233,7 +233,7 @@ public String crearMovilidad(){
         
          Universidad u;
         try{
-       u=universidadService.findUniversidad(selectedUniversidad);
+       u=universidadService.buscarUniversidad(selectedUniversidad);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
             selectedUniversidad="";
@@ -274,7 +274,7 @@ public String crearMovilidad(){
               
               Usuario admin=null;
                try{
-                    admin=usuarioService.find("admin");
+                    admin=usuarioService.buscarUsuario("admin");
                }catch(InstanceNotFoundException ex){
                    
                }

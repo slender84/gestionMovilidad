@@ -20,22 +20,36 @@
                 <p:outputLabel for="nombre" value="Nombre:"/>
                 <p:inputText id="nombre" value="#{crearUsuarioController.nombre}"
                              required="true"
-                             requiredMessage="el campo nombre está vacío"/>
+                             requiredMessage="el campo nombre está vacío"
+                             validatorMessage="Máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
+                    
+                    
                 <p:outputLabel for="ap1" value="Primer apellido"/>
                 <p:inputText id="ap1" value="#{crearUsuarioController.apellido1}"
                              required="true"
-                             requiredMessage="el campo apellido1 está vacío"/>
+                             requiredMessage="el campo apellido1 está vacío"
+                             validatorMessage="Máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
                 
                 
                 <p:outputLabel value="Segundo apellido"/>
-                <p:inputText id="ii1" value="#{crearUsuarioController.apellido2}"/>
+                <p:inputText id="ii1" value="#{crearUsuarioController.apellido2}"
+                             validatorMessage="Máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
                              
                
                 <p:outputLabel for="login" value="Login de la UDC"/>
                 <p:inputText id="login" value="#{crearUsuarioController.login}"
                              required="true"
                              requiredMessage="el campo login está vacío"
-                             autocomplete="off"/>
+                             autocomplete="off"
+                             validatorMessage="Máximo 20 caracteres">
+                    <f:validateLength maximum="20"/>
+                </p:inputText>
                 
                 
               

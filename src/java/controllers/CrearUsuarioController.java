@@ -16,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.mail.EmailException;
 import model.services.MensajeService;
 import model.services.UsuarioService;
+import model.utils.Seguridad;
 import model.utils.beanUtilidades;
 
 
@@ -165,7 +166,7 @@ public class CrearUsuarioController implements Serializable{
         u.setLogin(login);
         password=usuarioService.generarPassword();
         password=password.substring(0, 8);
-        u.setPassword(usuarioService.md5Password(password));
+        u.setPassword(Seguridad.md5Password(password));
         short s=1;
         u.setTipoUsuario(s);
         u.setNombre(nombre);
@@ -192,7 +193,7 @@ public class CrearUsuarioController implements Serializable{
             
         }catch(EmailException ex){
             
-            usuarioService.delete(u);
+            usuarioService.eliminarUsuario(u);
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;
         }
@@ -204,7 +205,7 @@ public class CrearUsuarioController implements Serializable{
         Usuario destino;
         try{
             
-            destino=usuarioService.find("admin");
+            destino=usuarioService.buscarUsuario("admin");
             
         
             

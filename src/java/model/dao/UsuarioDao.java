@@ -8,17 +8,12 @@ package model.dao;
 
 
 import entities.Usuario;
-import java.io.Serializable;
-import java.util.List;
+
 
 
 public interface UsuarioDao extends GenericDao<Usuario, String>{
 
-    //public Usuario find(String name);
-    //public void delete(Usuario u);
-    //public List<Usuario> listar();
-    //public void insertarUsuario(Usuario u)throws org.springframework.dao.DataIntegrityViolationException;
-    //public void actualizar(Usuario u);
+    
    
     
         

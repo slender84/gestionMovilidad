@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Editar perfil</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
@@ -19,6 +20,7 @@
                 <p:password value="#{editarPerfilController.password}"
                             required="true"
                             requiredMessage="el password está vacío"/>
+                            
                
                 <p:outputLabel/>
                 <p:outputLabel/>
@@ -30,12 +32,18 @@
                             requiredMessage="El nuevo password está vacío"
                             feedback="true"
                             promptLabel="Introducir el password" weakLabel="Débil"
-                    goodLabel="Medio" strongLabel="Fuerte"/>
+                    goodLabel="Medio" strongLabel="Fuerte"
+                    validatorMessage="Máximo 40 caracteres">
+                    <f:validateLength maximum="50"/>
+                </p:password>
                 
                 <p:outputLabel value="repite password"/>
                 <p:password value="#{editarPerfilController.repitePassword}"
                             required="true"
-                            requiredMessage="el campo de confirmar password está vacío"/>
+                            requiredMessage="el campo de confirmar password está vacío"
+                            validatorMessage="Máximo 40 caracteres">
+                    <f:validateLength maximum="50"/>
+                </p:password>
                 <p:commandButton value="confirmar" action="#{editarPerfilController.editar}" update="formPerfil"/>
             
             </h:panelGrid>

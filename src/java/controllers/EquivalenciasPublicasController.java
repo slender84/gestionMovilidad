@@ -207,7 +207,7 @@ public class EquivalenciasPublicasController implements Serializable{
         
         
         try{
-        universidad=universidadService.findUniversidad(universidadStr);
+        universidad=universidadService.buscarUniversidad(universidadStr);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("no existe esa universidad", FacesMessage.SEVERITY_ERROR);
             universidadStr="";

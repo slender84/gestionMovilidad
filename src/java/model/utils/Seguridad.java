@@ -2,6 +2,7 @@
 package model.utils;
 
 import java.security.Key;
+import java.util.UUID;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -9,7 +10,7 @@ import javax.xml.bind.DatatypeConverter;
 
 
 
-public class Encrypter {
+public class Seguridad {
     
     private static String algorithm = "AES";
 private static byte[] keyValue=new byte[] {'0','2','3','4','5','6','7','8','9','1','2','3','4','5','6','7'};
@@ -45,6 +46,32 @@ private static byte[] keyValue=new byte[] {'0','2','3','4','5','6','7','8','9','
             Key key = new SecretKeySpec(keyValue, algorithm);
             return key;
     }
-
     
+    
+     public static String md5Password(String password){
+        
+        
+        try {
+        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+        byte[] array = md.digest(password.getBytes());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < array.length; ++i) {
+          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+       }
+        return sb.toString();
+    } catch (java.security.NoSuchAlgorithmException e) {
+    }
+    return null;
+        
+        
+        
+    }
+
+     
+      public static String generarPassword(){
+       
+       return UUID.randomUUID().toString();
+     
+    
+}
 }

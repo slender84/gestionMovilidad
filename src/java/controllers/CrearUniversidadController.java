@@ -242,7 +242,7 @@ public class CrearUniversidadController implements Serializable{
        
        Pais p;
        try{
-        p=universidadService.findPais(paisStr);
+        p=universidadService.buscarPais(paisStr);
        }catch(InstanceNotFoundException ex){
           beanUtilidades.creaMensaje("se ha producido un error,no existe ese país", FacesMessage.SEVERITY_ERROR);
            return "crearUniversidad.xhtml";
@@ -298,7 +298,7 @@ public class CrearUniversidadController implements Serializable{
             for(Universidad u:selectedUniversidades){
                
                 try{
-                    universidadService.delete(u);
+                    universidadService.eliminarUniversidad(u);
                 }catch(InstanceNotFoundException|RuntimeException ex){
                     ex.printStackTrace();
                     listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
@@ -322,7 +322,7 @@ public class CrearUniversidadController implements Serializable{
         checkDetalles=false;
                  
         try{
-        universidadService.actualizar(selectedUniversidad);
+        universidadService.actualizarUniversidad(selectedUniversidad);
        // listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
         }catch(InstanceNotFoundException|RuntimeException ex){
            

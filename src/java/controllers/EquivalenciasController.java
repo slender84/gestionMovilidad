@@ -97,7 +97,7 @@ public class EquivalenciasController implements Serializable{
            context.getSessionMap().remove("contrato");
            context.getSessionMap().remove("movilidad");
            try{
-           selectedContrato=equivalenciaService.findContrato(selectedContrato.getIdContrato());
+           selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
            }catch(InstanceNotFoundException ex){
                try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
@@ -114,7 +114,7 @@ public class EquivalenciasController implements Serializable{
         contratoComparado=(Contrato)context.getSessionMap().get("contratoComparado");
         context.getSessionMap().remove("contratoComparado");
              try{
-        contratoComparado=equivalenciaService.findContrato(contratoComparado.getIdContrato());
+        contratoComparado=equivalenciaService.buscarContrato(contratoComparado.getIdContrato());
              }catch(InstanceNotFoundException ex3){
                  try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
@@ -405,7 +405,7 @@ public class EquivalenciasController implements Serializable{
     public String cambiarEstadoContrato(){
         
         try{
-        selectedContrato=equivalenciaService.findContrato(selectedContrato.getIdContrato());
+        selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
         }catch(InstanceNotFoundException ex){
             try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
@@ -419,7 +419,7 @@ public class EquivalenciasController implements Serializable{
         selectedContrato.setEstado(apruebaOrechaza);
         
             
-            equivalenciaService.modificaContrato(selectedContrato);
+            equivalenciaService.modificarContrato(selectedContrato);
             
         beanUtilidades.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
         Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, "no", "no", "no");

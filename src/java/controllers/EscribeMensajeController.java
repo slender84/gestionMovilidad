@@ -137,7 +137,7 @@ public class EscribeMensajeController implements Serializable{
     Usuario aux=null;
          try{
          
-         aux=usuarioService.find("admin");
+         aux=usuarioService.buscarUsuario("admin");
          }catch(InstanceNotFoundException ex){
              
          }

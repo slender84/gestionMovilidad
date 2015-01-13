@@ -58,19 +58,19 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     @Override
     public void crearEquivalencia(Equivalencia e){
         
-        equivalenciaDao.insert(e);
+        equivalenciaDao.insertar(e);
     }
     
     @Override
     public void eliminarEquivalencia(Equivalencia e){
         
-        equivalenciaDao.delete(e);
+        equivalenciaDao.eliminar(e);
         
     }
     @Override
     public void actualizarEquivalencia(Equivalencia e){
         
-        equivalenciaDao.edit(e);
+        equivalenciaDao.editar(e);
         
     }
     
@@ -78,30 +78,30 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     @Transactional(readOnly = true)
     public List<Equivalencia> listarEquivalencias(){
         
-        return equivalenciaDao.list();
+        return equivalenciaDao.listar();
     }
     
    
     @Override
-    public void creaContrato(Contrato c){
-        contratoDao.insert(c);
+    public void crearContrato(Contrato c){
+        contratoDao.insertar(c);
         
     }
     
     @Override
-    public void modificaContrato(Contrato c){
-        contratoDao.edit(c);
+    public void modificarContrato(Contrato c){
+        contratoDao.editar(c);
     }
     @Override
     @Transactional(readOnly = true)
-    public List<Contrato> listaContratos(Movilidad m){
-        return contratoDao.listaContratos(m);
+    public List<Contrato> listarContratos(Movilidad m){
+        return contratoDao.listarContratos(m);
     }
     @Override
-    public void eliminaContrato(Contrato c){
+    public void eliminarContrato(Contrato c){
         
         
-       contratoDao.delete(c);
+       contratoDao.eliminar(c);
        
     }
     @Override
@@ -131,9 +131,9 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     
     @Override
     @Transactional(readOnly = true)
-    public Contrato findContrato(Integer id) throws InstanceNotFoundException{
+    public Contrato buscarContrato(Integer id) throws InstanceNotFoundException{
         
-        Contrato c=contratoDao.find(id);
+        Contrato c=contratoDao.buscar(id);
         if (c==null)
                 throw new InstanceNotFoundException();
         Hibernate.initialize(c.getEquivalencias());
@@ -223,7 +223,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
            
         }
         
-        creaContrato(c);
+        crearContrato(c);
         
     }
     
@@ -246,7 +246,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
            
             c.getEquivalencias().remove(e);
            
-            modificaContrato(c);
+            modificarContrato(c);
             
             
         
@@ -267,7 +267,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
        
             c.setEstado("pendiente");
             c.setFecha(Calendar.getInstance().getTime());
-            modificaContrato(c);
+            modificarContrato(c);
             return listaCopia;
         
     }
@@ -291,7 +291,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
        
     }
         
-        creaContrato(cNuevo);
+        crearContrato(cNuevo);
         
     }
      
@@ -418,7 +418,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
      
      @Override
      public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException,MovilidadNotFoundException{
-        c=findContrato(c.getIdContrato());
+        c=buscarContrato(c.getIdContrato());
         Hibernate.initialize(c.getMovilidad());
         if(c.getMovilidad()==null)
             throw new MovilidadNotFoundException();

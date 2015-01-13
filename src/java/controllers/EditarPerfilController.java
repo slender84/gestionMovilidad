@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.services.UsuarioService;
+import model.utils.Seguridad;
 import model.utils.beanUtilidades;
 
 
@@ -91,7 +92,7 @@ public class EditarPerfilController implements Serializable{
     
     public String editar(){
         
-        if(user.getPassword().equals(usuarioService.md5Password(password))==false){
+        if(user.getPassword().equals(Seguridad.md5Password(password))==false){
             
             beanUtilidades.creaMensaje("el password es incorrecto", FacesMessage.SEVERITY_ERROR);
             return null;
@@ -102,8 +103,8 @@ public class EditarPerfilController implements Serializable{
             return null;
         }
         
-        user.setPassword(usuarioService.md5Password(nuevoPassword));
-        usuarioService.actualizar(user);
+        user.setPassword(Seguridad.md5Password(nuevoPassword));
+        usuarioService.actualizarUsuario(user);
         
         beanUtilidades.creaMensaje("password modificado correctamente", FacesMessage.SEVERITY_INFO);
         return null;

@@ -41,7 +41,9 @@
                 <p:outputLabel value="nombre" style="text-align: left"/>
                 <p:inputText value="#{crearUniversidadController.nombre}"
                              required="true"
-                             requiredMessage="el campo nombre está vacío">
+                             requiredMessage="el campo nombre está vacío"
+                             validatorMessage="El nombre debe tener entre 1 y 45 caracteres">
+                    <f:validateLength minimum="1" maximum="50"/>
                     
                 </p:inputText>
                 
@@ -50,18 +52,26 @@
                <p:outputLabel value="código universidad"/>
                <p:inputText value="#{crearUniversidadController.codUniversidad}"
                              required="true"
-                             requiredMessage="el campo Coduniversidad está vacío">
+                             requiredMessage="el campo Coduniversidad está vacío"
+                             validatorMessage="El código de la universidad debe tener como máximo 15 caracteres">
+                   
+                   <f:validateLength minimum="1" maximum="15"/>
                     
                 </p:inputText>
                
                 
                
                 <p:outputLabel value="pagina web"/>
-                <p:inputText id="text1" value="#{crearUniversidadController.web}"/>
+                <p:inputText id="text1" value="#{crearUniversidadController.web}"
+                             validatorMessage="Como maxímo la web debe tener 50 caracteres">
+                    <f:validateLength maximum="50"/>
+                </p:inputText>
                 <p:watermark for="text1" value="http://"/>
                 <h:outputLabel/>
                  <p:outputLabel  value="información adicional"/>
                  <p:inputTextarea value="#{crearUniversidadController.info}"/>
+                     
+                     
                 
                  <p:commandButton value="crear universidad" action="#{crearUniversidadController.creaUniversidad}" update=":formTabla :formUniversidad :formDetalles" 
                                   oncomplete="PF('universidadTabla').filter();" />
@@ -139,7 +149,10 @@
                 <p:inputText value="#{crearUniversidadController.selectedUniversidad.codUniversidad}" />
                  
                 <p:outputLabel value="web" />
-                <p:inputText id="text2" value="#{crearUniversidadController.selectedUniversidad.web}" />
+                <p:inputText id="text2" value="#{crearUniversidadController.selectedUniversidad.web}"
+                             validatorMessage="Máximo 50 caracteres">
+                    <f:validateLength maximum="50"/>
+                </p:inputText>
                 <p:watermark for="text2" value="http://"/>
                 <h:outputLabel/>
                 <p:outputLabel value="info" />

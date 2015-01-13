@@ -33,7 +33,7 @@ public class EliminarUsuarioController implements Serializable{
     @PostConstruct
     public void init(){
         
-        setListaUsuarios((ArrayList < Usuario >)usuarioService.listar());
+        setListaUsuarios((ArrayList < Usuario >)usuarioService.listarUsuarios());
         
     }
 
@@ -86,7 +86,7 @@ public class EliminarUsuarioController implements Serializable{
         }
         
         for(Usuario u:selectedUsuarios){
-        usuarioService.delete(u);
+        usuarioService.eliminarUsuario(u);
         listaUsuarios.remove(u);
         }
         

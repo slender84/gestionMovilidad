@@ -46,7 +46,7 @@ public class PaisController implements Serializable{
      @PostConstruct
     public void init(){
         
-        setListaPaises((ArrayList<Pais>)universidadService.listaPaises());
+        setListaPaises((ArrayList<Pais>)universidadService.listarPaises());
         
     }
 
@@ -104,11 +104,11 @@ public class PaisController implements Serializable{
       
       try{
           
-          universidadService.deletePais(pais);
+          universidadService.eliminarPais(pais);
           listaPaises.remove(pais);
           
       }catch(RuntimeException ex){
-           listaPaises=(ArrayList<Pais>)universidadService.listaPaises();
+           listaPaises=(ArrayList<Pais>)universidadService.listarPaises();
           beanUtilidades.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;
       }

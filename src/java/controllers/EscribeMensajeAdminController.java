@@ -102,7 +102,7 @@ public class EscribeMensajeAdminController implements Serializable{
         
         Usuario destino=null;
         try{
-        destino=usuarioService.find("admin");
+        destino=usuarioService.buscarUsuario("admin");
         }catch(InstanceNotFoundException ex){
             
         }

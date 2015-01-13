@@ -184,7 +184,7 @@ public class beanUtilidades implements Serializable{
         
         CorreoConf correoConf=utilidadService.getCorreoConf();
         try{
-        correoConf.setPassword(Encrypter.decrypt(correoConf.getPassword()));
+        correoConf.setPassword(Seguridad.decrypt(correoConf.getPassword()));
         }catch(Exception ex){
             
         }

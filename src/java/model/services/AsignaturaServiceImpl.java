@@ -31,12 +31,12 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     @Override
     public void crearAsignatura(Asignatura a){
         
-        asignaturaDao.insert(a);
+        asignaturaDao.insertar(a);
     }
     
     @Override
     public List<Asignatura> listarAsignaturas(){
-        return asignaturaDao.list();
+        return asignaturaDao.listar();
     }
     
     
@@ -49,20 +49,20 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
                 
     }
     @Override
-    public void eliminaAsignatura(Asignatura a) throws InstanceNotFoundException{
-        if(asignaturaDao.exists(a.getId())==false)
+    public void eliminarAsignatura(Asignatura a) throws InstanceNotFoundException{
+        if(asignaturaDao.existe(a.getId())==false)
                 throw new InstanceNotFoundException();
         
-        asignaturaDao.delete(a);
+        asignaturaDao.eliminar(a);
         
     }
     
     
     @Override
     public void actualizarAsignatura(Asignatura a)throws InstanceNotFoundException{
-        if(asignaturaDao.exists(a.getId())==false)
+        if(asignaturaDao.existe(a.getId())==false)
                 throw new InstanceNotFoundException();
-        asignaturaDao.edit(a);
+        asignaturaDao.editar(a);
     }
     
     @Override

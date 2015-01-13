@@ -30,7 +30,7 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
    
     
     @Override
-    public List<Movilidad> list(){
+    public List<Movilidad> listar(){
         
         return getSession().createQuery("select m from Movilidad m order by m.fechaInicio desc").list();
     }

@@ -150,7 +150,7 @@ public class VerMisContratosController implements Serializable{
     
     public String eliminarContrato(){
         try{
-        selectedContrato=equivalenciaService.findContrato(selectedContrato.getIdContrato());
+        selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
             verContratos();
@@ -161,7 +161,7 @@ public class VerMisContratosController implements Serializable{
         
            
            selectedContrato.setEquivalencias(null);
-           equivalenciaService.eliminaContrato(selectedContrato);
+           equivalenciaService.eliminarContrato(selectedContrato);
             
             for(Equivalencia e:listaCopia){
               
@@ -187,7 +187,7 @@ public class VerMisContratosController implements Serializable{
         visibleContratos=true;
         
         
-        listaContratos=(ArrayList<Contrato>)equivalenciaService.listaContratos(selectedMovilidad);
+        listaContratos=(ArrayList<Contrato>)equivalenciaService.listarContratos(selectedMovilidad);
         
         if(listaContratos.isEmpty()){
         nuevo=true;

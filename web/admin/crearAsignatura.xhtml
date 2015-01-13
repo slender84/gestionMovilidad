@@ -58,16 +58,29 @@
                 <p:outputLabel value="Código" />
                 <p:inputText value="#{crearAsignaturaController.codAsignatura}"  required="true"
                              requiredMessage="el campo código está vacío"
-                             validatorMessage="debe ser un número" />
+                             validatorMessage=" Código debe ser un número válido">
+                
+                    <f:validateLongRange minimum="1" maximum="2000000"/>
+                
+                </p:inputText>
+                             
                     
                 
                 <p:outputLabel value="nombre " />
                 <p:inputText value="#{crearAsignaturaController.nombreAsignatura}"  required="true"
-                             requiredMessage="el campo nombre está vacío"/>
+                             requiredMessage="el campo nombre está vacío"
+                             validatorMessage="El nombre debe tener menos de 50 caracteres">
+                    <f:validateLength maximum="50"/>
+                </p:inputText>
                 
                 <p:outputLabel value="creditos" />
                 <p:inputText value="#{crearAsignaturaController.creditosAsignatura}"  required="true"
-                             requiredMessage="el campo créditos está vacío"/>
+                             requiredMessage="el campo créditos está vacío"
+                             validatorMessage=" créditos debe ser un número entre 1 y 100">
+                             
+                    <f:validateLongRange minimum="1" maximum="100"/>
+                    
+                </p:inputText>
                
                 <p:outputLabel value="periodo" />
                 <p:selectOneMenu value="#{crearAsignaturaController.periodoAsignatura}" >
@@ -78,17 +91,31 @@
                 
                 
                 <p:outputLabel value="web" />
-                <p:inputText id="texto1" value="#{crearAsignaturaController.webAsignatura}" />
+                <p:inputText id="texto1" value="#{crearAsignaturaController.webAsignatura}" 
+                             validatorMessage="La web debe tener como máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
+                </p:inputText>
+                    
                 <p:watermark for="texto1" value="http://"/>
                 <h:outputLabel/>
                 <p:outputLabel value="info" />
                 <p:inputTextarea value="#{crearAsignaturaController.infoAsignatura}" cols="22" />
                 
                 <p:outputLabel value="titulacion" />
-                <p:inputText value="#{crearAsignaturaController.titulacionAsignatura}" />
-                
+                              
+                    
+                    
+                    
+                <p:inputText value="#{crearAsignaturaController.titulacionAsignatura}"
+                             validatorMessage="Máximo 50 caracteres">
+                    <f:validateLength maximum="50"/>
+                    
+                </p:inputText>
                 <p:outputLabel value="Facultad" />
-                <p:inputText value="#{crearAsignaturaController.facultadAsignatura}" />
+                <p:inputText value="#{crearAsignaturaController.facultadAsignatura}"
+                             validatorMessage="Máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
                 
                 <p:commandButton  oncomplete="PF('asignaturaBtn').filter()" value="crear asignatura" action="#{crearAsignaturaController.creaAsignatura}"  ajax="true"  update=":formAsignatura :formTabla: :formUniversidad"/>
                 
@@ -184,21 +211,33 @@
             <h:panelGrid id="detallesAsignatura" columns="2" cellpadding="6" rendered="#{crearAsignaturaController.checkDetalles}">
                 
                 <p:outputLabel value="creditos" />
-                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.creditos}" />
+                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.creditos}" 
+                             validatorMessage="Debe de ser un número entre 1 y 100">
+                    <f:validateLongRange minimum="1" maximum="100"/>
+                </p:inputText>
                     
                 
                 <p:outputLabel value="web" />
-                <p:inputText id="texto2" value="#{crearAsignaturaController.selectedAsignatura.webAsignatura}" />
+                <p:inputText id="texto2" value="#{crearAsignaturaController.selectedAsignatura.webAsignatura}"
+                             validatorMessage="Máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
+                </p:inputText>    
                 <p:watermark for="texto2" value="http://"/>
                 <h:outputLabel/>
                 <p:outputLabel value="info" />
                 <p:inputTextarea value="#{crearAsignaturaController.selectedAsignatura.infoAsigantura}" cols="22" />
                 
                 <p:outputLabel value="titulacion" />
-                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.titulacion}" />
+                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.titulacion}" 
+                             validatorMessage="Máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
                 
                 <p:outputLabel value="Facultad" />
-                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.facultad}" />
+                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.facultad}"
+                             validatorMessage="Máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
                 <p:outputLabel value="periodo" />
                 <p:selectOneMenu value="#{crearAsignaturaController.selectedAsignatura.periodo}" >
                     <f:selectItem itemLabel="anual" itemValue="anual"/>

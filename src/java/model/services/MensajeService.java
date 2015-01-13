@@ -19,6 +19,6 @@ public void enviarMensaje(Mensaje m);
 public List<Mensaje> mensajesRecibidosTotal(String destino);
 public List<Mensaje> mensajesEnviadosTotal(String origen);
 public void eliminarMensaje(Mensaje m,String accion) throws InstanceNotFoundException ;
-public Mensaje find(Integer msgId) throws InstanceNotFoundException;
+public Mensaje buscarMensaje(Integer msgId) throws InstanceNotFoundException;
 public void leerMensajeRecibido(Mensaje m) throws InstanceNotFoundException;
 }

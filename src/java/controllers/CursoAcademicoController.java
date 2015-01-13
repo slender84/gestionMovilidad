@@ -73,7 +73,7 @@ public class CursoAcademicoController implements Serializable{
     @PostConstruct
     public void init(){
         
-        setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listaCursosAcademicos());
+        setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listarCursosAcademicos());
         
     }
     
@@ -117,7 +117,7 @@ public class CursoAcademicoController implements Serializable{
             
     }
          cursoAcademico="";
-         setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listaCursosAcademicos());
+         setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listarCursosAcademicos());
         beanUtilidades.creaMensaje("curso académico eliminado correctamente", FacesMessage.SEVERITY_INFO);
         return null;
     }

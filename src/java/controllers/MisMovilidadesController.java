@@ -146,7 +146,7 @@ public class MisMovilidadesController implements Serializable{
     public String eliminarMovilidad(){
         Usuario admin=null;
         try{
-         admin=usuarioService.find(("admin"));
+         admin=usuarioService.buscarUsuario(("admin"));
         }catch(InstanceNotFoundException ex){
         }
         

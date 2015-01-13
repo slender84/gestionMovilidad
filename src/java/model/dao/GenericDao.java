@@ -11,10 +11,10 @@ import java.util.List;
 public interface GenericDao<T, PK extends Serializable>{ 
     
    
-   public void insert(T entity);
-   public T find(PK id) throws InstanceNotFoundException;
-   public void edit(T entity);
-   public List<T> list();
-   public boolean exists(PK id); 
-   public void delete(T entity);
+   public void insertar(T entity);
+   public T buscar(PK id) throws InstanceNotFoundException;
+   public void editar(T entity);
+   public List<T> listar();
+   public boolean existe(PK id); 
+   public void eliminar(T entity);
 }
