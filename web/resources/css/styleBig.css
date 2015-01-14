@@ -113,3 +113,87 @@
   
 }
 
+///////////////////////////////////////////////////////
+.red{
+    background-color: #FFA8B4;
+}
+
+
+.gold{
+    
+    background-color: #FAE60F;
+    
+}
+
+
+
+
+body.blue{
+    
+    background-color: #F2FAFA;
+}
+
+
+
+
+
+
+.nuevoAsignaturaAdmin{
+    
+    width: 59%;
+    font-size: 14px;
+}
+
+.tablaEquivalenciasAdmin{
+    //top: 200px;
+    //left: 200px;
+    height: 50%;
+    width: 51%;
+    position:relative;
+    //text-align: center;
+    font-size: 15px;
+    
+}
+
+.nuevoCreditosAdmin{
+    
+    width: 8%;
+    font-size: 14px;
+    text-align: left;
+        
+}
+
+
+
+.nuevoPeriodoAdmin{
+    width: 7%;
+    font-size: 14px;
+    
+}
+
+.nuevoMultipleAdmin{
+    
+    width: 8%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.visible{
+    
+    
+    font-size: 15px;
+    height: 15%;
+    width: 8%;
+    
+}
+
+.tablaEquivalenciasComparadoAdmin{
+    top:198px;
+    left: 880px;
+    height: 50%;
+    width: 45%;
+    position:absolute;
+    //text-align: center;
+    font-size: 15px;
+    
+}
