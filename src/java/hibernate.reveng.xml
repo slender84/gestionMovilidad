@@ -2,20 +2,21 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="gestordb"/>
-  <table-filter match-name="cursoacademico"/>
   <table-filter match-name="mensaje"/>
-  <table-filter match-name="contrato"/>
-  <table-filter match-name="movilidad"/>
-  <table-filter match-name="intentos"/>
-  <table-filter match-name="miembro_grupo_asignatura_b"/>
-  <table-filter match-name="pais"/>
-  <table-filter match-name="asignatura"/>
-  <table-filter match-name="equivalencia"/>
-  <table-filter match-name="usuario"/>
+  <table-filter match-name="cronica"/>
   <table-filter match-name="universidad"/>
-  <table-filter match-name="correo_conf"/>
   <table-filter match-name="contrato_equivalencia"/>
   <table-filter match-name="estado_movilidad"/>
   <table-filter match-name="estado"/>
   <table-filter match-name="miembro_grupo_asignatura_a"/>
+  <table-filter match-name="movilidad"/>
+  <table-filter match-name="pais"/>
+  <table-filter match-name="equivalencia"/>
+  <table-filter match-name="intentos"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="miembro_grupo_asignatura_b"/>
+  <table-filter match-name="asignatura"/>
+  <table-filter match-name="correo_conf"/>
+  <table-filter match-name="contrato"/>
+  <table-filter match-name="cursoacademico"/>
 </hibernate-reverse-engineering>

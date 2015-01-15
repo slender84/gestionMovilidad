@@ -144,4 +144,3 @@ public class Movilidad  implements java.io.Serializable {
 
 }
 
-

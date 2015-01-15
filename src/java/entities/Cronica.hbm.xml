@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-ene-2015 23:57:04 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Cronica" table="cronica" catalog="gestordb" optimistic-lock="version">
+        <id name="idcronica" type="java.lang.Integer">
+            <column name="idcronica" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="universidad" class="entities.Universidad" fetch="select">
+            <column name="universidad" length="45" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="entities.Usuario" fetch="select">
+            <column name="login" length="20" />
+        </many-to-one>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="10" not-null="true" />
+        </property>
+        <property name="alias" type="string">
+            <column name="alias" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

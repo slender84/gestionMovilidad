@@ -1,5 +1,5 @@
 package entities;
-// Generated 26-dic-2014 18:13:18 by Hibernate Tools 4.3.1
+// Generated 15-ene-2015 23:57:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -30,8 +30,9 @@ public class Usuario  implements java.io.Serializable {
      private String apellido1;
      private String apellido2;
      private Set<Mensaje> mensajesForDestino = new HashSet<Mensaje>(0);
-     private Intentos intentos;
      private Set<Movilidad> movilidads = new HashSet<Movilidad>(0);
+     private Intentos intentos;
+     private Set<Cronica> cronicas = new HashSet<Cronica>(0);
      private Set<Mensaje> mensajesForOrigen = new HashSet<Mensaje>(0);
 
     public Usuario() {
@@ -46,7 +47,7 @@ public class Usuario  implements java.io.Serializable {
         this.nombre = nombre;
         this.apellido1 = apellido1;
     }
-    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Intentos intentos, Set<Movilidad> movilidads, Set<Mensaje> mensajesForOrigen) {
+    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, Intentos intentos, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen) {
        this.login = login;
        this.password = password;
        this.tipoUsuario = tipoUsuario;
@@ -55,8 +56,9 @@ public class Usuario  implements java.io.Serializable {
        this.apellido1 = apellido1;
        this.apellido2 = apellido2;
        this.mensajesForDestino = mensajesForDestino;
-       this.intentos = intentos;
        this.movilidads = movilidads;
+       this.intentos = intentos;
+       this.cronicas = cronicas;
        this.mensajesForOrigen = mensajesForOrigen;
     }
    
@@ -141,6 +143,15 @@ public class Usuario  implements java.io.Serializable {
         this.mensajesForDestino = mensajesForDestino;
     }
 
+@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
+    public Set<Movilidad> getMovilidads() {
+        return this.movilidads;
+    }
+    
+    public void setMovilidads(Set<Movilidad> movilidads) {
+        this.movilidads = movilidads;
+    }
+
 @OneToOne(fetch=FetchType.LAZY, mappedBy="usuario")
     public Intentos getIntentos() {
         return this.intentos;
@@ -151,12 +162,12 @@ public class Usuario  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
-    public Set<Movilidad> getMovilidads() {
-        return this.movilidads;
+    public Set<Cronica> getCronicas() {
+        return this.cronicas;
     }
     
-    public void setMovilidads(Set<Movilidad> movilidads) {
-        this.movilidads = movilidads;
+    public void setCronicas(Set<Cronica> cronicas) {
+        this.cronicas = cronicas;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuarioByOrigen")

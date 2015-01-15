@@ -66,4 +66,3 @@ public class AsignaturaId  implements java.io.Serializable {
 
 }
 
-

@@ -1,5 +1,5 @@
 package entities;
-// Generated 16-dic-2014 9:35:09 by Hibernate Tools 4.3.1
+// Generated 15-ene-2015 23:57:01 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -31,6 +31,7 @@ public class Universidad  implements java.io.Serializable {
      private String web;
      private String codUniversidad;
      private Set<Movilidad> movilidads = new HashSet<Movilidad>(0);
+     private Set<Cronica> cronicas = new HashSet<Cronica>(0);
      private Set<Asignatura> asignaturas = new HashSet<Asignatura>(0);
 
     public Universidad() {
@@ -41,13 +42,14 @@ public class Universidad  implements java.io.Serializable {
         this.nombre = nombre;
         this.codUniversidad = codUniversidad;
     }
-    public Universidad(String nombre, Pais pais, String info, String web, String codUniversidad, Set<Movilidad> movilidads, Set<Asignatura> asignaturas) {
+    public Universidad(String nombre, Pais pais, String info, String web, String codUniversidad, Set<Movilidad> movilidads, Set<Cronica> cronicas, Set<Asignatura> asignaturas) {
        this.nombre = nombre;
        this.pais = pais;
        this.info = info;
        this.web = web;
        this.codUniversidad = codUniversidad;
        this.movilidads = movilidads;
+       this.cronicas = cronicas;
        this.asignaturas = asignaturas;
     }
    
@@ -110,6 +112,15 @@ public class Universidad  implements java.io.Serializable {
     
     public void setMovilidads(Set<Movilidad> movilidads) {
         this.movilidads = movilidads;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="universidad")
+    public Set<Cronica> getCronicas() {
+        return this.cronicas;
+    }
+    
+    public void setCronicas(Set<Cronica> cronicas) {
+        this.cronicas = cronicas;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="universidad")
