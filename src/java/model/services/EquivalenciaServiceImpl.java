@@ -231,6 +231,9 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     @Override
     public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia> listaAuxEquivalencias,Contrato c){
         
+        
+        
+        
         ArrayList<Equivalencia> listaCopia=new ArrayList<Equivalencia>();
                
         
@@ -261,7 +264,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
             c.getEquivalencias().add(e2);
             crearEquivalencia(e2);
             
-         
+             
         }
        
     }
