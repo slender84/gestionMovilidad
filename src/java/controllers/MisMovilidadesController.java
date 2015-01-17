@@ -204,6 +204,11 @@ public class MisMovilidadesController implements Serializable{
         Collections.reverse(listaMisMovilidades);
     }
     
+    public String escribirCronica(){
+         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movilidad", selectedMovilidad);
+        return "escribirCronica.xhtml?faces-redirect=true";
+    }
+    
    
     }
     

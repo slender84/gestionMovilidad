@@ -31,23 +31,26 @@ public class Cronica  implements java.io.Serializable {
      private Date fecha;
      private String estado;
      private String alias;
+     private String texto;
 
     public Cronica() {
     }
 
 	
-    public Cronica(Universidad universidad, Date fecha, String estado, String alias) {
+    public Cronica(Universidad universidad, Date fecha, String estado, String alias,String texto) {
         this.universidad = universidad;
         this.fecha = fecha;
         this.estado = estado;
         this.alias = alias;
+        this.texto=texto;
     }
-    public Cronica(Universidad universidad, Usuario usuario, Date fecha, String estado, String alias) {
+    public Cronica(Universidad universidad, Usuario usuario, Date fecha, String estado, String alias,String texto) {
        this.universidad = universidad;
        this.usuario = usuario;
        this.fecha = fecha;
        this.estado = estado;
        this.alias = alias;
+       this.texto=texto;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -110,6 +113,15 @@ public class Cronica  implements java.io.Serializable {
     
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+    
+    @Column(name="texto", nullable=false)
+    public String getTexto() {
+        return this.texto;
+    }
+    
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
 
 

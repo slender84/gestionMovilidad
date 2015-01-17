@@ -1,6 +1,7 @@
 package model.services;
 
 
+import entities.Cronica;
 import entities.Cursoacademico;
 import entities.Pais;
 import entities.Universidad;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import model.dao.CronicaDao;
 import model.dao.CursoAcademicoDao;
 import model.dao.PaisDao;
 import model.dao.UniversidadDao;
@@ -30,6 +32,9 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
     
     @Autowired
     private PaisDao paisDao;
+    
+    @Autowired
+    private CronicaDao cronicaDao;
 
     public CursoAcademicoDao getCursoacademicoDao() {
         return cursoacademicoDao;
@@ -45,6 +50,14 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
 
     public void setPaisDao(PaisDao paisDao) {
         this.paisDao = paisDao;
+    }
+
+    public CronicaDao getCronicaDao() {
+        return cronicaDao;
+    }
+
+    public void setCronicaDao(CronicaDao cronicaDao) {
+        this.cronicaDao = cronicaDao;
     }
     
     
@@ -207,6 +220,32 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
        
        return u;
    }
+   
+   
+   
+   @Override
+   public List<Cronica> listarCronicasPorUniversidad(Universidad universidad){
+       
+      
+       
+       return cronicaDao.listarCronicasPorUniversidad(universidad);
+       
+       
+       
+   }
+   
+   
+   @Override
+   public void enviarCronica(Cronica c){
+       
+       
+       
+       cronicaDao.insertar(c);
+       
+   }
+   
+   
+   
     
 }
 

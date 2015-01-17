@@ -18,6 +18,14 @@ function clearCheckboxes(widgetVar)
                 widgetVar.toggleCheckAll();
             }
  }
+ 
+ function hideBtn(widgetVar1,widgetVar2){
+     
+    widgetVar1.hide();
+    widgetVar2.hide();
+     
+     
+ }
         
         
         

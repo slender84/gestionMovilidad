@@ -39,7 +39,7 @@
             <one-to-many class="entities.Movilidad" />
         </set>
         <one-to-one cascade="save-update" name="intentos" class="entities.Intentos"></one-to-one>
-        <set name="cronicas" table="cronica" inverse="true" lazy="true" fetch="select">
+        <set name="cronicas" table="cronica" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="login" length="20" />
             </key>

@@ -1,5 +1,6 @@
 package model.services;
 
+import entities.Cronica;
 import entities.Cursoacademico;
 import entities.Pais;
 import entities.Universidad;
@@ -29,4 +30,6 @@ public interface UniversidadService {
     public List<Cursoacademico> listarCursosAcademicos();
     public Universidad buscarUniversidad(String universidad) throws InstanceNotFoundException;
     public Cursoacademico buscarCursoAcademico(Date fechaInicio,Date fechaFin);
+    public List<Cronica>listarCronicasPorUniversidad(Universidad universidad);
+    public void enviarCronica(Cronica c);
 }

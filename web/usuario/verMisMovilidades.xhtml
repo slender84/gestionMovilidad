@@ -84,7 +84,7 @@
                 
                 <p:column headerText="ver contratos" styleClass="centrar">
                          
-                     <p:commandButton value="contratos" action="#{verMisContratosController.verContratos}" update=":panelContratos" rendered="#{movilidad.estado eq 'aceptada'}">
+                    <p:commandButton value="contratos" action="#{verMisContratosController.verContratos}" update=":panelContratos" rendered="#{movilidad.estado eq 'aceptada'}">
                          
                              <f:setPropertyActionListener value="#{movilidad}" target="#{verMisContratosController.selectedMovilidad}"/>
                              
@@ -100,13 +100,16 @@
                                       icon="edit_icon"  oncomplete="PF('movTable').filter()" rendered="#{movilidad.estado ne 'cancelada' and movilidad.estado ne 'terminada'}"> 
                         <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
                     
-                    </p:commandButton>                                                                         
+                    </p:commandButton>
+                    <p:commandButton value="escribir comentario" action="#{misMovilidadesController.escribirCronica}" rendered="#{movilidad.estado eq 'terminada'}" update=":formMovilidad">
+                    
+                        <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
+                        
+                    </p:commandButton>
                     
                 </p:column>
                 
-                 
-                 
-                
+               
             </p:dataTable> 
             
             

@@ -23,5 +23,8 @@
         <property name="alias" type="string">
             <column name="alias" length="45" not-null="true" />
         </property>
+        <property name="texto" type="string">
+            <column name="texto" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>
