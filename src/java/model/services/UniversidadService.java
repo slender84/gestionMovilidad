@@ -4,6 +4,7 @@ import entities.Cronica;
 import entities.Cursoacademico;
 import entities.Pais;
 import entities.Universidad;
+import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.util.Date;
 import java.util.List;
@@ -32,4 +33,9 @@ public interface UniversidadService {
     public Cursoacademico buscarCursoAcademico(Date fechaInicio,Date fechaFin);
     public List<Cronica>listarCronicasPorUniversidad(Universidad universidad);
     public void enviarCronica(Cronica c);
+    public List<Cronica> listarMisCronicas(Usuario u);
+    public void editarCronica(Cronica c) throws InstanceNotFoundException;
+    public void eliminarCronica(Cronica c) throws InstanceNotFoundException;
+    public List<Cronica> listaCronicas();
+    
 }

@@ -90,6 +90,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     
     @Override
     public void modificarContrato(Contrato c){
+        
         contratoDao.editar(c);
     }
     @Override

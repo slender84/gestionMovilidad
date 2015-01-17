@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    
+    <h:head>
+        <title>Crónicas</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body onload="PF('cronicaTable').filter()" styleClass="blue">
+        
+         <h2 style="text-align: center">Comentarios</h2>
+        
+        
+       
+        
+        <br/>
+        
+        <h:form id="formCronica">
+            
+            <p:growl id="msgs"/>
+            
+            <p:dataTable id="t1" var="cronica" value="#{cronicasController.listaCronicas}" paginator="true" rows="10"
+                         emptyMessage="no hay crónicas"
+                         widgetVar="cronicaTable"
+                         rowKey="#{cronica.idcronica}"
+                         selection="#{cronicasController.selectedCronicas}"
+                         styleClass="borderless">
+                
+                <p:column headerText="autor" sortBy="#{cronica.usuario.login}" filterBy="#{cronica.usuario.login}" filterMatchMode="startsWith">
+                    
+                    <h:outputText value="#{cronica.usuario.login}"/>
+                    
+                </p:column>
+                
+                <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="startsWith">
+                
+                    <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value=#{cronica.universidad.nombre}/></h:outputLink>
+                    <h:outputText value="#{cronica.universidad.nombre}" rendered="#{empty cronica.universidad.web}"/>
+                </p:column>
+                    <p:column headerText="fecha" sortBy="#{cronica.fecha}">
+                        
+                        <h:outputText value="#{cronica.fecha}">
+                        
+                            <f:convertDateTime pattern="dd-MM-yyyy hh:mm"/>
+                        
+                        </h:outputText>
+                        
+                        
+                    </p:column>
+                
+               
+                    <p:column headerText="#{cronica.estado}" sortBy="#{cronica.estado}">
+                        <f:facet name="filter">
+                           
+                            <p:selectOneMenu onchange="PF('cronicaTable').filter()">
+                                <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
+                                <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>  
+                                <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
+                            
+                        </f:facet>
+                        <h:outputText value="#{cronica.estado}"/>
+                    </p:column>
+                
+                
+                
+                <p:column headerText="Ver/editar" styleClass="centrar">
+                    
+                    <p:commandButton  value="Ver/editar" action="#{cronicasController.verCronica}" update=":panelEdicion"
+                                      icon="edit_icon"   > 
+                        <f:setPropertyActionListener value="#{cronica}" target="#{cronicasController.selectedCronica}"/>
+                    
+                    </p:commandButton>
+                    
+                    
+                </p:column>
+                
+                    <p:column selectionMode="multiple" styleClass="multiple"/>    
+                    
+                    <f:facet name="footer">
+                        
+                        <p:commandButton value="eliminar" 
+                        
+                        
+                    </f:facet>    
+                
+               
+            </p:dataTable> 
+            
+            
+        </h:form>
+        <br/>
+        <br/>
+        
+        <p:outputPanel id="panelEdicion">
+            
+            <h:form id="formEdicion" rendered="#{cronicasController.panelTexto}">
+                <h:panelGrid cellpadding="1" columns="2">
+                <p:outputLabel value="Autor:"/>
+                <p:inputText value="#{cronicasController.selectedCronica.alias}"/>
+                <p:outputLabel value="texto:"
+                               <p:inputTextarea value="#{cronicasController.selectedCronica.texto}" readonly="true"/>
+                
+                <p:commandButton value="cerrar" action="#{cronicasController.cerrarEdicion}" update="panelEdicion" process="@this"/>
+                <p:outputLabel value="cambiar estado de la crónica"/>
+                <p:selectOneMenu value="#{cronicasController.nuevoEstado}" required="true" requiredMessage="Hay que elegir un estado">
+                    <f:selectItem itemLabel="elegir un estado" noSelectionOption="true" itemValue="#{null}" />
+                    <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
+                    <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>
+                    
+                </p:selectOneMenu>
+                
+                <p:commandButton value="modificar" action="#{cronicasController.modificarEstado}" update=":formCronica" />
+                
+                </h:panelGrid>
+               
+            </h:form>
+            
+            
+        </p:outputPanel>
+        
+        
+        <br/>
+        
+        <h:outputLink value="verMovilidades.xhtml">Ver mis movilidades</h:outputLink>
+            
+            <br/><br/>
+            
+            
+             <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        
+        
+            
+                
+        <h:form>
+             
+            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
+            
+        </h:form>
+              
+        
+        
+        
+    </h:body>
+</html>
+
+
+

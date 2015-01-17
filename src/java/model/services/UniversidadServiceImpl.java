@@ -5,6 +5,7 @@ import entities.Cronica;
 import entities.Cursoacademico;
 import entities.Pais;
 import entities.Universidad;
+import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -244,8 +245,45 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
        
    }
    
+   @Override
+   public List<Cronica> listarMisCronicas(Usuario u){
+       
+       
+       return cronicaDao.listarMisCronicas(u);
+       
+   }
    
+   @Override
+   public void editarCronica(Cronica c)throws InstanceNotFoundException{
+       
+        if(cronicaDao.existe(c.getIdcronica())==false){
+            throw new InstanceNotFoundException();
+        }
+        
+        cronicaDao.editar(c);
+       
+       
+   }
    
+   @Override
+   public void eliminarCronica(Cronica c) throws InstanceNotFoundException{
+       
+       if(cronicaDao.existe(c.getIdcronica())==false){
+           throw new InstanceNotFoundException();
+       }
+       cronicaDao.eliminar(c);
+       
+   }
+   
+   @Override
+       public List<Cronica> listaCronicas(){
+           
+           return cronicaDao.listar();
+           
+       }
+
+       
+  
     
 }
 

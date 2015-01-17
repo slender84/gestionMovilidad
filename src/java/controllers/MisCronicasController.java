@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
 import model.services.MovilidadService;
@@ -53,6 +54,16 @@ public class MisCronicasController implements Serializable{
         
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         usuario=(Usuario)session.getAttribute("user");
+        
+        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        if(request.getRequestURI().equals(request.getContentLength()+"/usuario/verMisCronicas.xhtml")){
+            
+            listaMisCronicas=(ArrayList<Cronica>)universidadService.listarMisCronicas(usuario);
+            
+        }
+        
+        
+        
         if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("movilidad")){
         selectedMovilidad=(Movilidad)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("movilidad");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("movilidad");
@@ -121,11 +132,18 @@ public class MisCronicasController implements Serializable{
     
     private Movilidad selectedMovilidad;
     
+    private ArrayList<Cronica> listaMisCronicas;
+    
+    
+    private Cronica selectedCronica;
+    
+    
     private Usuario usuario;
     private String texto;
     private String alias;
 
     private boolean btnActivados=true;
+    private boolean panelEdicion;
     
     public Movilidad getSelectedMovilidad() {
         return selectedMovilidad;
@@ -163,8 +181,36 @@ public class MisCronicasController implements Serializable{
         return btnActivados;
     }
 
+    public boolean isPanelEdicion() {
+        return panelEdicion;
+    }
+
+    public void setPanelEdicion(boolean panelEdicion) {
+        this.panelEdicion = panelEdicion;
+    }
+    
+    
+
     public void setBtnActivados(boolean btnActivados) {
         this.btnActivados = btnActivados;
+    }
+
+    public ArrayList<Cronica> getListaMisCronicas() {
+        return listaMisCronicas;
+    }
+
+    public void setListaMisCronicas(ArrayList<Cronica> listaMisCronicas) {
+        this.listaMisCronicas = listaMisCronicas;
+    }
+
+    
+
+    public Cronica getSelectedCronica() {
+        return selectedCronica;
+    }
+
+    public void setSelectedCronica(Cronica selectedCronica) {
+        this.selectedCronica = selectedCronica;
     }
     
     
@@ -221,6 +267,35 @@ public class MisCronicasController implements Serializable{
         
     }
     
+    public void verCronica(){
+        
+        
+        panelEdicion=true;
+        
+    }
+    
+    
+    public String editarCronica(){
+    
+    try{
+        universidadService.editarCronica(selectedCronica);
+        
+    }catch(InstanceNotFoundException ex){
+        
+        beanUtilidades.creaMensaje("No existe esa crónica",FacesMessage.SEVERITY_ERROR );
+        listaMisCronicas=(ArrayList<Cronica>)universidadService.listarMisCronicas(usuario);
+    }
+    
+    beanUtilidades.creaMensaje("Cronica actualizada, pendiente de moderación", FacesMessage.SEVERITY_INFO);
+    return null;
+    
+}
+    public void cerrarEdicion(){
+        
+        panelEdicion=false;
+        
+        
+    }
     
     
 }

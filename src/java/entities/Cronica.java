@@ -3,6 +3,7 @@ package entities;
 
 
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -122,6 +123,28 @@ public class Cronica  implements java.io.Serializable {
     
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.idcronica);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cronica other = (Cronica) obj;
+        if (!Objects.equals(this.idcronica, other.idcronica)) {
+            return false;
+        }
+        return true;
     }
 
 

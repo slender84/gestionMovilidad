@@ -7,6 +7,7 @@ package model.dao;
 
 import entities.Cronica;
 import entities.Universidad;
+import entities.Usuario;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,14 @@ public class CronicaDaoImpl extends GenericDaoHibernate<Cronica, Integer> implem
         
         return getSession().createQuery("select c from Cronica c where c.universidad=:universidad order by c.fecha desc").setParameter("universidad", universidad).list();
         
+        
+    }
+    
+    @Override
+    public List<Cronica> listarMisCronicas(Usuario usuario){
+        
+    return getSession().createQuery("select c from Cronica c where c.usuario=:usuario").setParameter("usuario", usuario).list();
+    
         
     }
     
