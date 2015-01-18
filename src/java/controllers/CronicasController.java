@@ -3,6 +3,7 @@ package controllers;
 
 import entities.Cronica;
 import exceptions.InstanceNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -17,7 +18,7 @@ import model.utils.beanUtilidades;
 
 @ManagedBean
 @ViewScoped
-public class CronicasController {
+public class CronicasController implements Serializable{
 
     @ManagedProperty(value="#{universidadService}")
     private UniversidadService universidadService;
@@ -150,9 +151,10 @@ public class CronicasController {
     public String modificarEstado(){
         
         
-        if(nuevoEstado.equals(selectedCronica.getEstado())==false){
+        if(nuevoEstado.equals(selectedCronica.getEstado())){
             
            return null;
+           
         }
         
         selectedCronica.setEstado(nuevoEstado);
@@ -160,7 +162,7 @@ public class CronicasController {
             universidadService.editarCronica(selectedCronica);
         }catch(InstanceNotFoundException ex){
             
-            beanUtilidades.creaMensaje("El recurso no existe", FacesMessage.SEVERITY_ERROR);
+            beanUtilidades.creaMensaje("El comentario no existe", FacesMessage.SEVERITY_ERROR);
             panelTexto=false;
             listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
             return null;
@@ -187,11 +189,13 @@ public class CronicasController {
                 beanUtilidades.creaMensaje("No existe ese comentario", FacesMessage.SEVERITY_ERROR);
                 listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
                 panelTexto=false;
+                return null;
             }
             listaCronicas.remove(c);
-            if(selectedCronica.equals(c))
+            if(selectedCronica!=null&&selectedCronica.equals(c))
                 panelTexto=false;
         }
+            
         
         beanUtilidades.creaMensaje("Comentarios eliminados", FacesMessage.SEVERITY_INFO);
         return null;

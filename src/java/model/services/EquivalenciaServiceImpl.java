@@ -89,8 +89,11 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     }
     
     @Override
-    public void modificarContrato(Contrato c){
+    public void modificarContrato(Contrato c) throws InstanceNotFoundException{
         
+        if(contratoDao.existe(c.getIdContrato())==false){
+            throw new InstanceNotFoundException();
+        }
         contratoDao.editar(c);
     }
     @Override
@@ -229,9 +232,13 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     }
     
     @Override
-    public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia> listaAuxEquivalencias,Contrato c){
+    public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia> listaAuxEquivalencias,Contrato c)throws InstanceNotFoundException{
         
-        
+        if(contratoDao.existe(c.getIdContrato())==false){
+            
+            throw new InstanceNotFoundException();
+            
+        }
         
         
         ArrayList<Equivalencia> listaCopia=new ArrayList<Equivalencia>();

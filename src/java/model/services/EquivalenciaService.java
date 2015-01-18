@@ -22,15 +22,15 @@ public interface EquivalenciaService {
     public List<Equivalencia> listarEquivalencias();
     public List<Equivalencia> listarEquivalenciasPorContrato(Integer id);
     public void crearContrato(Contrato c);
-    public void modificarContrato(Contrato c);
+    public void modificarContrato(Contrato c)throws InstanceNotFoundException;
     public List<Contrato> listarContratos(Movilidad m);
     public void eliminarContrato(Contrato c);
     public Contrato buscarContrato(Integer id) throws InstanceNotFoundException;
    public List<Equivalencia> equivalenciasPublicas(String universidad);
    public int[] totalCreditos(ArrayList<Equivalencia> lista);
    public void confirmarContrato(ArrayList<Equivalencia> lista,Contrato c);
-   public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c);
-   public void crearContratoDesdeAceptado(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c, Contrato cNuevo);
+   public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c)throws InstanceNotFoundException;
+   public void crearContratoDesdeAceptado(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c, Contrato cNuevo)throws InstanceNotFoundException;
    public ArrayList<EquivalenciaRevisada> compararEquivalencias(ArrayList<Equivalencia> listaAuxEquivalencias,ArrayList<Equivalencia> listaAuxEquivalenciasComparado);
     public Contrato verContratoPorEquivalencia(Equivalencia e)throws InstanceNotFoundException;
     public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException,MovilidadNotFoundException;

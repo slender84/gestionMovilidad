@@ -37,7 +37,7 @@
                 
                 <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="startsWith">
                 
-                    <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value=#{cronica.universidad.nombre}/></h:outputLink>
+                    <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value="#{cronica.universidad.nombre}"/></h:outputLink>
                     <h:outputText value="#{cronica.universidad.nombre}" rendered="#{empty cronica.universidad.web}"/>
                 </p:column>
                     
@@ -45,7 +45,7 @@
                         
                         <h:outputText value="#{cronica.fecha}">
                         
-                            <f:convertDateTime pattern="dd-MM-yyyy hh:mm"/>
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
                         
                         </h:outputText>
                         
@@ -53,7 +53,16 @@
                     </p:column>
                 
                
-                    <p:column headerText="#{cronica.estado}" sortBy="#{cronica.estado}">
+                <p:column headerText="estado" sortBy="#{cronica.estado}" filterBy="#{cronica.estado}" filterMatchMode="exact">
+                        <f:facet name="filter">
+                           
+                            <p:selectOneMenu onchange="PF('cronicaTable').filter()">
+                                <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
+                                <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>  
+                                
+                            </p:selectOneMenu>
+                        </f:facet>
                         <h:outputText value="#{cronica.estado}"/>
                     </p:column>
                 
@@ -81,14 +90,18 @@
         <p:outputPanel id="panelEdicion">
             
             <h:form id="formEdicion" rendered="#{misCronicasController.panelEdicion}">
-                <h:panelGrid cellpadding="1" columns="2">
+                <h:panelGrid cellpadding="3" columns="3">
                 <p:outputLabel value="Autor:"/>
-                <p:inputText value="#{misCronicasController.selectedCronica.alias}"/>
-                <p:outputLabel value="texto:"
-                <p:inputTextarea value="#{misCronicasController.selectedCronica.texto}" readonly="#{misCronicasController.selectedCronica.estado eq 'pendiente'}" cols="60" rows="20"/>
-                <p:commandButton value="editar" action="#{misCronicasController.editarCronica}" rendered="#{misCronicasController.selectedCronica.estado eq 'pediente'}"/>
-                <p:commandButton value="cerrar" action="#{misCronicasController.cerrarEdicion}" update="panelEdicion" process="@this"/>
-                
+                <p:inputText value="#{misCronicasController.selectedCronica.alias}" readonly="#{misCronicasController.selectedCronica.estado ne 'pendiente'}"/>
+                <p:outputLabel/>
+                <p:outputLabel value="texto:"/>
+                <p:inputTextarea value="#{misCronicasController.selectedCronica.texto}" readonly="#{misCronicasController.selectedCronica.estado ne 'pendiente'}" cols="60" rows="10"/>
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <p:commandButton value="editar" action="#{misCronicasController.editarCronica}" rendered="#{misCronicasController.selectedCronica.estado eq 'pendiente'}" update=":formCronica :panelEdicion"
+                                 oncomplete="PF('cronicaTable').filter();"/>
+                <p:commandButton value="cerrar" action="#{misCronicasController.cerrarEdicion}" update=":panelEdicion" process="@this"/>
+                <p:outputLabel/>
                 
                 
                 </h:panelGrid>

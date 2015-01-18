@@ -56,11 +56,12 @@ public class MisCronicasController implements Serializable{
         usuario=(Usuario)session.getAttribute("user");
         
         HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        if(request.getRequestURI().equals(request.getContentLength()+"/usuario/verMisCronicas.xhtml")){
+        if(request.getRequestURI().equals(request.getContextPath()+"/usuario/verMisCronicas.xhtml")){
+            
             
             listaMisCronicas=(ArrayList<Cronica>)universidadService.listarMisCronicas(usuario);
             
-        }
+        } else{
         
         
         
@@ -84,7 +85,7 @@ public class MisCronicasController implements Serializable{
                     }
     }
     }
-    
+    }
     
 
     public UniversidadService getUniversidadService() {
@@ -256,8 +257,8 @@ public class MisCronicasController implements Serializable{
             
         }
         
-        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Crónica creada ", "el usuario "+usuario.getLogin()+" ha escrito una crónica","no","no","no");
-        
+        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario creado ", "el usuario "+usuario.getLogin()+" ha escrito una crónica","no","no","no");
+        mensajeService.enviarMensaje(m);
         beanUtilidades.creaMensaje("crónica enviada correctamente, a la espera de moderación", FacesMessage.SEVERITY_INFO);
         btnActivados=false;
         texto="";
@@ -277,15 +278,28 @@ public class MisCronicasController implements Serializable{
     
     public String editarCronica(){
     
+        selectedCronica.setFecha(Calendar.getInstance().getTime());
     try{
         universidadService.editarCronica(selectedCronica);
         
     }catch(InstanceNotFoundException ex){
         
-        beanUtilidades.creaMensaje("No existe esa crónica",FacesMessage.SEVERITY_ERROR );
+        beanUtilidades.creaMensaje("No existe ese comentario",FacesMessage.SEVERITY_ERROR );
         listaMisCronicas=(ArrayList<Cronica>)universidadService.listarMisCronicas(usuario);
+        panelEdicion=false;
+        return null;
     }
-    
+    Usuario admin=null;
+    try{
+            
+            admin=usuarioService.buscarUsuario("admin");
+            
+        }catch(InstanceNotFoundException ex){
+            
+        }
+        
+        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario editado ", "el usuario "+usuario.getLogin()+" ha editado un comentario","no","no","no");
+        mensajeService.enviarMensaje(m);
     beanUtilidades.creaMensaje("Cronica actualizada, pendiente de moderación", FacesMessage.SEVERITY_INFO);
     return null;
     

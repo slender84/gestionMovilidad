@@ -7,7 +7,7 @@
     
     
     <h:head>
-        <title>Crónicas</title>
+        <title>Comentarios</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
     </h:head>
     <h:body onload="PF('cronicaTable').filter()" styleClass="blue">
@@ -24,7 +24,7 @@
             <p:growl id="msgs"/>
             
             <p:dataTable id="t1" var="cronica" value="#{cronicasController.listaCronicas}" paginator="true" rows="10"
-                         emptyMessage="no hay crónicas"
+                         emptyMessage="no hay comentarios"
                          widgetVar="cronicaTable"
                          rowKey="#{cronica.idcronica}"
                          selection="#{cronicasController.selectedCronicas}"
@@ -38,7 +38,7 @@
                 
                 <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="startsWith">
                 
-                    <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value=#{cronica.universidad.nombre}/></h:outputLink>
+                    <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value="#{cronica.universidad.nombre}"/></h:outputLink>
                     <h:outputText value="#{cronica.universidad.nombre}" rendered="#{empty cronica.universidad.web}"/>
                 </p:column>
                     <p:column headerText="fecha" sortBy="#{cronica.fecha}">
@@ -53,14 +53,15 @@
                     </p:column>
                 
                
-                    <p:column headerText="#{cronica.estado}" sortBy="#{cronica.estado}">
+                <p:column headerText="estado" sortBy="#{cronica.estado}" filterBy="#{cronica.estado}" filterMatchMode="exact">
                         <f:facet name="filter">
                            
                             <p:selectOneMenu onchange="PF('cronicaTable').filter()">
+                                 <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
                                 <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>  
-                                <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
-                            
+                               
+                            </p:selectOneMenu>
                         </f:facet>
                         <h:outputText value="#{cronica.estado}"/>
                     </p:column>
@@ -82,7 +83,7 @@
                     
                     <f:facet name="footer">
                         
-                        <p:commandButton value="eliminar" 
+                        <p:commandButton value="eliminar" action="#{cronicasController.eliminarCronicas}" update=":formCronica :panelEdicion" oncomplete="PF('cronicaTable').filter();" />
                         
                         
                     </f:facet>    
@@ -98,23 +99,26 @@
         <p:outputPanel id="panelEdicion">
             
             <h:form id="formEdicion" rendered="#{cronicasController.panelTexto}">
-                <h:panelGrid cellpadding="1" columns="2">
+                <h:panelGrid cellpadding="2" columns="3">
                 <p:outputLabel value="Autor:"/>
-                <p:inputText value="#{cronicasController.selectedCronica.alias}"/>
-                <p:outputLabel value="texto:"
-                               <p:inputTextarea value="#{cronicasController.selectedCronica.texto}" readonly="true"/>
+                <p:inputText value="#{cronicasController.selectedCronica.alias}" readonly="true"/>
+                <p:outputLabel/>
+                <p:outputLabel value="texto:"/>
+                <p:inputTextarea value="#{cronicasController.selectedCronica.texto}" readonly="true" cols="60" rows="10"/>
+                <p:outputLabel/>
                 
-                <p:commandButton value="cerrar" action="#{cronicasController.cerrarEdicion}" update="panelEdicion" process="@this"/>
-                <p:outputLabel value="cambiar estado de la crónica"/>
+                <p:outputLabel value="Estado:"/>
                 <p:selectOneMenu value="#{cronicasController.nuevoEstado}" required="true" requiredMessage="Hay que elegir un estado">
                     <f:selectItem itemLabel="elegir un estado" noSelectionOption="true" itemValue="#{null}" />
                     <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
                     <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>
                     
                 </p:selectOneMenu>
-                
-                <p:commandButton value="modificar" action="#{cronicasController.modificarEstado}" update=":formCronica" />
-                
+                <p:commandButton value="cerrar" action="#{cronicasController.cerrarEdicion}" update=":panelEdicion" process="@this"/>
+                <p:outputLabel/>
+                <p:commandButton value="modificar" action="#{cronicasController.modificarEstado}" update=":formCronica :panelEdicion" oncomplete="PF('cronicaTable').filter();" />
+                <p:outputLabel/>
+                <p:outputLabel/>
                 </h:panelGrid>
                
             </h:form>
@@ -125,7 +129,7 @@
         
         <br/>
         
-        <h:outputLink value="verMovilidades.xhtml">Ver mis movilidades</h:outputLink>
+        <h:outputLink value="verMovilidades.xhtml">Ver movilidades</h:outputLink>
             
             <br/><br/>
             

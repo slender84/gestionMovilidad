@@ -501,7 +501,7 @@ public class MisEquivalenciasController implements Serializable{
         ArrayList<Equivalencia>listaCopia=null;
          try{
         listaCopia=equivalenciaService.editarContrato(listaAuxEquivalencias, c);
-        }catch(RuntimeException ex){
+        }catch(InstanceNotFoundException|RuntimeException ex){
          
              try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");
@@ -549,7 +549,7 @@ public class MisEquivalenciasController implements Serializable{
         
          try{
          equivalenciaService.crearContratoDesdeAceptado(listaAuxEquivalencias, c, cNuevo);
-        }catch(RuntimeException ex){
+        }catch(InstanceNotFoundException|RuntimeException ex){
          
              try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");

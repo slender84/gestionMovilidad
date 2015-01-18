@@ -404,23 +404,31 @@ public class EquivalenciasController implements Serializable{
     
     public String cambiarEstadoContrato(){
         
-        try{
-        selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
-        }catch(InstanceNotFoundException ex){
-            try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
-            }catch(IOException ex2){
+        //try{
+        //selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
+        //}catch(InstanceNotFoundException ex){
+          //  try{
+            //FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
+            //}catch(IOException ex2){
                     
-                    }
-        }
+              //      }
+        //}
         if(apruebaOrechaza.equals(selectedContrato.getEstado()))
             return null;
         
         selectedContrato.setEstado(apruebaOrechaza);
         
-            
+            try{
             equivalenciaService.modificarContrato(selectedContrato);
-            
+            }catch(InstanceNotFoundException|RuntimeException ex){
+                
+                try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
+            }catch(IOException ex2){
+                    
+                    }
+                
+            }
         beanUtilidades.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
         Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, "no", "no", "no");
         mensajeService.enviarMensaje(m);
