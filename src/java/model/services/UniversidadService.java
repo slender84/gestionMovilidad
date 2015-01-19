@@ -31,7 +31,7 @@ public interface UniversidadService {
     public List<Cursoacademico> listarCursosAcademicos();
     public Universidad buscarUniversidad(String universidad) throws InstanceNotFoundException;
     public Cursoacademico buscarCursoAcademico(Date fechaInicio,Date fechaFin);
-    public List<Cronica>listarCronicasPorUniversidad(Universidad universidad);
+    public List<Cronica>listarCronicasPorUniversidad(String universidad)throws InstanceNotFoundException;
     public void enviarCronica(Cronica c);
     public List<Cronica> listarMisCronicas(Usuario u);
     public void editarCronica(Cronica c) throws InstanceNotFoundException;

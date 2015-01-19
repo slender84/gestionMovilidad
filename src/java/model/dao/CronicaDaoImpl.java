@@ -16,9 +16,9 @@ import org.springframework.stereotype.Repository;
 public class CronicaDaoImpl extends GenericDaoHibernate<Cronica, Integer> implements CronicaDao{
     
     @Override
-    public List<Cronica> listarCronicasPorUniversidad(Universidad universidad){
+    public List<Cronica> listarCronicasPorUniversidad(String universidad){
         
-        return getSession().createQuery("select c from Cronica c where c.universidad=:universidad order by c.fecha desc").setParameter("universidad", universidad).list();
+        return getSession().createQuery("select c from Cronica c where c.universidad.nombre=:universidad order by c.fecha desc").setParameter("universidad", universidad).list();
         
         
     }
@@ -30,6 +30,8 @@ public class CronicaDaoImpl extends GenericDaoHibernate<Cronica, Integer> implem
     
         
     }
+    
+   
     
     
 }

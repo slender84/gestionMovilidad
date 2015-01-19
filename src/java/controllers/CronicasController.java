@@ -2,6 +2,7 @@
 package controllers;
 
 import entities.Cronica;
+import entities.Universidad;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import model.services.UniversidadService;
 import model.utils.beanUtilidades;
@@ -51,7 +54,12 @@ public class CronicasController implements Serializable{
     @PostConstruct
     public void init(){
         
-        listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
+        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        if(request.getRequestURI().equals(request.getContextPath()+"/admin/verCronicas.xhtml")){
+            
+           listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas(); 
+        }
+        
         
         
     }
@@ -67,6 +75,10 @@ public class CronicasController implements Serializable{
     
     private String pais;
     private String universidad;
+    private ArrayList<Universidad>listaUniversidad;
+    
+    private boolean checkUni;
+    private boolean checkPais;
 
     public Cronica getSelectedCronica() {
         return selectedCronica;
@@ -106,6 +118,30 @@ public class CronicasController implements Serializable{
 
     public void setNuevoEstado(String nuevoEstado) {
         this.nuevoEstado = nuevoEstado;
+    }
+
+    public ArrayList<Universidad> getListaUniversidad() {
+        return listaUniversidad;
+    }
+
+    public void setListaUniversidad(ArrayList<Universidad> listaUniversidad) {
+        this.listaUniversidad = listaUniversidad;
+    }
+
+    public boolean isCheckUni() {
+        return checkUni;
+    }
+
+    public void setCheckUni(boolean checkUni) {
+        this.checkUni = checkUni;
+    }
+
+    public boolean isCheckPais() {
+        return checkPais;
+    }
+
+    public void setCheckPais(boolean checkPais) {
+        this.checkPais = checkPais;
     }
     
     
@@ -198,6 +234,33 @@ public class CronicasController implements Serializable{
             
         
         beanUtilidades.creaMensaje("Comentarios eliminados", FacesMessage.SEVERITY_INFO);
+        return null;
+    }
+    
+    public void onChangePais(){
+        
+        checkPais=true;
+        checkUni=false;
+        universidad="";
+        listaUniversidad=(ArrayList < Universidad >)universidadService.listarPorPais(pais);
+        
+    }
+    
+    public void onChangeUni(){
+        
+        checkUni=true;
+        
+    }
+    
+    public String buscar(){
+        try{
+        listaCronicas=(ArrayList<Cronica>)universidadService.listarCronicasPorUniversidad(universidad);
+        }catch(InstanceNotFoundException ex){
+            beanUtilidades.creaMensaje("No existe esa universidad", FacesMessage.SEVERITY_ERROR);
+            universidad="";
+            return null;
+        }
+        
         return null;
     }
     

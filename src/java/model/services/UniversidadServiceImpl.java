@@ -225,9 +225,11 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
    
    
    @Override
-   public List<Cronica> listarCronicasPorUniversidad(Universidad universidad){
+   public List<Cronica> listarCronicasPorUniversidad(String universidad)throws InstanceNotFoundException{
        
-      
+      if(universidadDao.existe(universidad)==false){
+          throw new InstanceNotFoundException();
+      }
        
        return cronicaDao.listarCronicasPorUniversidad(universidad);
        
