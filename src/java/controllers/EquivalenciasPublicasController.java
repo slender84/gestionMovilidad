@@ -193,6 +193,7 @@ public class EquivalenciasPublicasController implements Serializable{
         listaUniversidad=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
         checkUni=false;
         mostrarInfo=false;
+        universidadStr="";
     }
     
     public void onChangeUni(){

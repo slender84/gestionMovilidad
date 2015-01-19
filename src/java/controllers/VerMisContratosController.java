@@ -149,6 +149,7 @@ public class VerMisContratosController implements Serializable{
     
     
     public String eliminarContrato(){
+        
         try{
         selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
         }catch(InstanceNotFoundException ex){

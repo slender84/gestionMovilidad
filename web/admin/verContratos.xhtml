@@ -82,7 +82,7 @@
                 <f:facet name="footer">
                     
                     <p:commandButton value="editar/comparar" action="#{verContratosController.compararContratos}"  update=":panelContratos"/>
-                    <p:commandButton rendered="#{movilidadesController.usuario.tipoUsuario eq 0}" value="eliminar" action="#{verContratosController.eliminarContratos}" update=":panelContratos :headerContratos" 
+                    <p:commandButton rendered="#{movilidadesController.usuario.tipoUsuario eq 0}" value="eliminar" action="#{verContratosController.eliminarContratos}" update=":panelContratos :headerContratos :formContratos" 
                                      onclick="if (! confirm('¿seguro que quieres borrar?')) return false" oncomplete="PF('tablaContratos').filter();"
                                      >
                     

@@ -102,7 +102,7 @@
                     
                     </p:commandButton>
                     
-                    <p:commandButton value="escribir comentario" action="#{misMovilidadesController.escribirCronica}" rendered="#{movilidad.estado eq 'terminada' or movilidad.estado eq 'aceptada' }" update=":formMovilidad">
+                    <p:commandButton value="comentario" action="#{misMovilidadesController.escribirCronica}" rendered="#{movilidad.estado eq 'terminada' or movilidad.estado eq 'aceptada' }" update=":formMovilidad">
                     
                         <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
                         
