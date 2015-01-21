@@ -7,8 +7,14 @@
     <h:head>
         <title>Mis mensajes</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
+        
+        
     </h:head>
-    <h:body styleClass="blue">
+    <h:body styleClass="blue"  >
+        
+        
+        
+        
         
          <h:form id="recibidos">
            <p:growl id="msgsRecibidos" />
@@ -33,7 +39,7 @@
                     
                       <p:column headerText="fecha" sortBy="#{mensaje.fecha}">
                           <h:outputText value="#{mensaje.fecha}">
-                             <f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+                              <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                           </h:outputText>
                       </p:column>
                
@@ -98,7 +104,7 @@
                          
                          <p:column  headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaEnviados">
                                    <h:outputText value="#{mensaje.fecha}">
-                                   <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                                   <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}"/>
                                    </h:outputText>
                               </p:column>
                         
@@ -138,7 +144,7 @@
                 
            <br/>
            
-           <h:outputLink value="escribeMensaje.xhtml">escribe mensaje al coordinador</h:outputLink>
+           <h:outputLink value="escribeMensaje.xhtml">escribe mensaje a coordinación</h:outputLink>
            
            <br/>
            <br/>

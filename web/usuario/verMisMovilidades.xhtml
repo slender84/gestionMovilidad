@@ -66,7 +66,7 @@
                 <p:column headerText="fecha fin" sortBy="#{movilidad.fechaFin}" styleClass="centrar">
                     
                     <h:outputText value="#{movilidad.fechaFin}">
-                                  <f:convertDateTime pattern="dd-MM-yyyy" />
+                                  <f:convertDateTime pattern="dd-MM-yyyy"  />
                     </h:outputText>
                 </p:column>
                 
@@ -130,7 +130,7 @@
                          emptyMessage="no hay contratos">
                 <p:column headerText="fecha" sortBy="#{contrato.fecha}">
                     <h:outputText value="#{contrato.fecha}">
-                                  <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                                  <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}"/>
                     </h:outputText>
                 </p:column>
                 <p:column headerText="estado" sortBy="#{contrato.estado}" styleClass="centrar">

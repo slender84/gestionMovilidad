@@ -131,6 +131,10 @@ public class MensajesRecibidosUserController implements Serializable{
         this.filteredMensajesRecibidos = filteredMensajesRecibidos;
     }
 
+   
+
+    
+
     
     
     
@@ -188,6 +192,8 @@ public class MensajesRecibidosUserController implements Serializable{
         activaRecibido=false;
         
     }   
+        
+        
               
    
     

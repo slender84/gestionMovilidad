@@ -2,16 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
       
       
     <h:head>
         <title>pagina principal usuario</title>
         <h:outputStylesheet library="css" name="menu.css"/>
+        <h:outputScript library="js" name="jstz-1.0.4.min.js"/>
+        <script type="text/javascript">
+        $(document).ready(function()  {
+           var timezone = jstz.determine();
+           
+           $("#timezone_place").val(timezone.name());
+           $("#timezone_place").change();
+    });
+         </script>
     </h:head>
     <h:body styleClass="blue">
        
-        
+        <h:form id="formHora" prependId="false">
+            <h:inputText id="timezone_place" value="#{sessionController.zonaHoraria}" rendered="#{sessionController.mostrar}"> 
+                <f:ajax event="change" listener="#{sessionController.timezoneChange}" render=":formHora :form1" ></f:ajax>
+           </h:inputText>
+        </h:form>
         
         <h:form id="form1">
             
