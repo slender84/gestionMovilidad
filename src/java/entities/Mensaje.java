@@ -142,7 +142,7 @@ public class Mensaje  implements java.io.Serializable {
     }
 
     
-    @Column(name="eliminadoDestino", nullable=false, length=2)
+    @Column(name="eliminadoDestino", nullable=false)
     public boolean getEliminadoDestino() {
         return this.eliminadoDestino;
     }

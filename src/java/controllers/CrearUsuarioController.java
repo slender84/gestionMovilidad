@@ -217,7 +217,7 @@ public class CrearUsuarioController implements Serializable{
         m.setEliminadoDestino(false);
         m.setEliminadoOrigen(true);
         m.setFecha(Calendar.getInstance().getTime());
-        m.setLeidoDestino(true);
+        m.setLeidoDestino(false);
         m.setUsuarioByOrigen(new Usuario(login, password, s, titulacion, nombre, apellido1));
         m.setTema("usuario creado");
         m.setTexto("el usuario "+login+" se ha dado de alta en el sistema");

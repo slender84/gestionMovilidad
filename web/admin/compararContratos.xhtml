@@ -115,8 +115,10 @@
                    
                 <p:column styleClass="visible" headerText="Vi" sortBy="#{equivalencia.equivalencia.visible}">
                     
-                    <h:outputText value="#{equivalencia.equivalencia.visible}"/>
                     
+                    
+                    <h:outputText value="si" rendered="#{equivalencia.equivalencia.visible eq 'true'}"/>
+                    <h:outputText value="no" rendered="#{equivalencia.equivalencia.visible eq 'false'}"/>
                 </p:column>
                    
                 <p:column selectionMode="multiple" styleClass="nuevoMultipleAdmin"/>
@@ -215,8 +217,8 @@
                    
                 <p:column headerText="Vi" styleClass="visible" sortBy="#{equivalenciaB.equivalencia.visible}">
                     
-                    <h:outputText value="#{equivalenciaB.equivalencia.visible}"/>
-                    
+                    <h:outputText value="si" rendered="#{equivalenciaB.equivalencia.visible eq 'true'}"/>
+                    <h:outputText value="no" rendered="#{equivalenciaB.equivalencia.visible eq 'false'}"/>
                 </p:column>
                 
                  <p:columnGroup type="footer">

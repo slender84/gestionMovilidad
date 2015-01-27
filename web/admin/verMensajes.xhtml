@@ -57,7 +57,8 @@
                             
                     </f:facet>
                   
-                   <h:outputText value="#{mensaje.leidoDestino}"/>
+                  <h:outputText value="si" rendered="#{mensaje.leidoDestino eq 'true'}"/>
+                   <h:outputText value="no" rendered="#{mensaje.leidoDestino eq 'false'}"/>
                    
                </p:column>
                <p:column headerText="leer" styleClass="leerEnviados">

@@ -52,7 +52,8 @@
                         </p:selectOneMenu>
                             
                     </f:facet>
-                   <h:outputText value="#{mensaje.leidoDestino}" />
+                   <h:outputText value="si" rendered="#{mensaje.leidoDestino eq 'true'}"/>
+                   <h:outputText value="no" rendered="#{mensaje.leidoDestino eq 'false'}"/>
                </p:column>
                <p:column styleClass="leerEnviados" headerText="Leer">
                         <p:commandButton value="leer" update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.leerMensajeRecibido}">
