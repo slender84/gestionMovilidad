@@ -26,8 +26,8 @@
         <property name="apellido2" type="string">
             <column name="apellido2" length="45" />
         </property>
-        <property name="borrado" type="string">
-            <column name="borrado" length="2" />
+        <property name="borrado" type="boolean">
+            <column name="borrado" />
         </property>
         <set name="mensajesForDestino" table="mensaje" inverse="true" lazy="true" fetch="select">
             <key>

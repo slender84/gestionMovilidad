@@ -36,7 +36,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
     public List<Mensaje> mensajesEnviados(String origen,String destino){
         
         Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByOrigen.login=:origen  " +
-                "and m.usuarioByDestino.login=:destino and m.eliminadoOrigen='no' order by m.fecha desc" );
+                "and m.usuarioByDestino.login=:destino and m.eliminadoOrigen=0 order by m.fecha desc" );
              
         q.setParameter("origen", origen);
         q.setParameter("destino", destino);
@@ -50,7 +50,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
     public List<Mensaje> mensajesRecibidos(String origen,String destino){
         
         Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByOrigen.login=:origen  " +
-                "and m.usuarioByDestino.login=:destino and m.eliminadoDestino='no' order by m.fecha desc" );
+                "and m.usuarioByDestino.login=:destino and m.eliminadoDestino=0 order by m.fecha desc" );
                 
         q.setParameter("origen", origen);
         q.setParameter("destino", destino);
@@ -60,7 +60,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
     }
             @Override         
        public List<Mensaje> mensajesRecibidosTotal(String destino){
-           Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByDestino.login=:destino and m.eliminadoDestino='no' order by m.fecha desc");
+           Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByDestino.login=:destino and m.eliminadoDestino=0 order by m.fecha desc");
           q.setParameter("destino", destino);
           return q.list();
        }     
@@ -69,7 +69,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
       @Override          
       public List<Mensaje> mensajesEnviadosTotal(String origen){
           
-          Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByOrigen.login=:origen and m.eliminadoOrigen='no' order by m.fecha desc");
+          Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByOrigen.login=:origen and m.eliminadoOrigen=0 order by m.fecha desc");
           q.setParameter("origen", origen);
           return q.list();
       }

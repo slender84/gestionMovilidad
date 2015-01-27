@@ -107,7 +107,7 @@ public class EscribeMensajeAdminController implements Serializable{
             
         }
         
-        Mensaje m=new Mensaje(destino, user, Calendar.getInstance().getTime(), tema, texto, "no","no","no");
+        Mensaje m=new Mensaje(destino, user, Calendar.getInstance().getTime(), tema, texto, false,false,false);
        
         mensajeService.enviarMensaje(m);
         

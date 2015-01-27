@@ -142,7 +142,7 @@ public class EscribeMensajeController implements Serializable{
              
          }
     for(Usuario u:selectedUsuarios){
-        Mensaje mensaje=new Mensaje(u, aux, Calendar.getInstance().getTime(), tema, texto, "no", "no", "no");
+        Mensaje mensaje=new Mensaje(u, aux, Calendar.getInstance().getTime(), tema, texto,false,false,false);
         try{
         mensajeService.enviarMensaje(mensaje);
         }catch(Exception ex){

@@ -87,7 +87,7 @@ public class EliminarUsuarioController implements Serializable{
         }
         
         for(Usuario u:selectedUsuarios){
-            u.setBorrado("si");
+            u.setBorrado(true);
             try{
         usuarioService.editarUsuario(u);
             }catch(InstanceNotFoundException ex){

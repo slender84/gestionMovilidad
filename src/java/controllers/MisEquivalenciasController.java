@@ -15,7 +15,6 @@ import entities.MiembroGrupoAsignaturaA;
 import entities.MiembroGrupoAsignaturaB;
 import entities.Movilidad;
 import entities.Usuario;
-import exceptions.ContratoNotFoundException;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -52,19 +51,19 @@ public class MisEquivalenciasController implements Serializable{
     private beanUtilidades beanUtilidades;
     
     @ManagedProperty(value="#{usuarioService}")
-    private transient UsuarioService usuarioService;
+    private  UsuarioService usuarioService;
     
      @ManagedProperty(value="#{movilidadService}")
-    private transient MovilidadService movilidadService;
+    private MovilidadService movilidadService;
     
     @ManagedProperty(value="#{asignaturaService}")
-    private transient AsignaturaService asignaturaService;
+    private  AsignaturaService asignaturaService;
     
     @ManagedProperty(value="#{equivalenciaService}")
-    private transient EquivalenciaService equivalenciaService;
+    private  EquivalenciaService equivalenciaService;
     
     @ManagedProperty(value="#{mensajeService}")
-    private transient MensajeService mensajeService;
+    private  MensajeService mensajeService;
     
    
     private ExternalContext context;
@@ -439,7 +438,7 @@ public class MisEquivalenciasController implements Serializable{
                    creditosB=creditosB+a.getCreditos();
             
         }
-        equivalencia.setVisible("no");
+        equivalencia.setVisible(false);
         equivalencia.setIdequivalencia(j);
         
             listaAuxEquivalencias.add(equivalencia);
@@ -481,7 +480,7 @@ public class MisEquivalenciasController implements Serializable{
         
         beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
         try{
-        Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
+        Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,false,false);
         mensajeService.enviarMensaje(m);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
@@ -521,7 +520,7 @@ public class MisEquivalenciasController implements Serializable{
         
         beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato","no","no","no");
+     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato",false,false,false);
      mensajeService.enviarMensaje(m);
      }catch(Exception ex){
          
@@ -563,7 +562,7 @@ public class MisEquivalenciasController implements Serializable{
         
      beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato","no","no","no");
+     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,false,false);
      mensajeService.enviarMensaje(m);
      }catch(InstanceNotFoundException ex){
          

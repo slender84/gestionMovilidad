@@ -172,7 +172,7 @@ public class MisMovilidadesController implements Serializable{
          
             if(selectedMovilidad.getEstado().equalsIgnoreCase("aceptada")){
                 
-                Mensaje mensaje=new Mensaje( admin,usuario, Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" quiere cancelar una movilidad en curso en: "+selectedMovilidad.getUniversidad().getNombre()+" con fecha de inicio:"+ sdf.format(selectedMovilidad.getFechaInicio())+" y fecha fin:"+sdf.format(selectedMovilidad.getFechaFin()), "no","no","no");
+                Mensaje mensaje=new Mensaje( admin,usuario, Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" quiere cancelar una movilidad en curso en: "+selectedMovilidad.getUniversidad().getNombre()+" con fecha de inicio:"+ sdf.format(selectedMovilidad.getFechaInicio())+" y fecha fin:"+sdf.format(selectedMovilidad.getFechaFin()), false,false,false);
                 mensajeService.enviarMensaje(mensaje);
                 beanUtilidades.creaMensaje("se ha enviado un mensaje al coordinador para su cancelación", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;

@@ -298,7 +298,7 @@ public class EquivalenciasController implements Serializable{
         }
         
         for(EquivalenciaRevisada e:selectedEquivalencias){
-            e.getEquivalencia().setVisible("si");
+            e.getEquivalencia().setVisible(true);
            
                 try{
                 equivalenciaService.actualizarEquivalencia(e.getEquivalencia());
@@ -329,7 +329,7 @@ public class EquivalenciasController implements Serializable{
         
         
         for(Equivalencia e:selectedEquivalenciasSimples){
-            e.setVisible("si");
+            e.setVisible(true);
            
                  try{
                 equivalenciaService.actualizarEquivalencia(e);
@@ -356,7 +356,7 @@ public class EquivalenciasController implements Serializable{
         }
         
         for(EquivalenciaRevisada e:selectedEquivalencias){
-            e.getEquivalencia().setVisible("no");
+            e.getEquivalencia().setVisible(false);
             
                  try{
                 equivalenciaService.actualizarEquivalencia(e.getEquivalencia());
@@ -382,7 +382,7 @@ public class EquivalenciasController implements Serializable{
         }
         
         for(Equivalencia e:selectedEquivalenciasSimples){
-            e.setVisible("no");
+            e.setVisible(false);
             
             try{
                 equivalenciaService.actualizarEquivalencia(e);
@@ -430,7 +430,7 @@ public class EquivalenciasController implements Serializable{
                 
             }
         beanUtilidades.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
-        Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, "no", "no", "no");
+        Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, false,false,false);
         mensajeService.enviarMensaje(m);
         context.getSessionMap().remove("contrato");
         

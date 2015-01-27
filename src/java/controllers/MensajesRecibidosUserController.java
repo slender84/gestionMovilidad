@@ -143,7 +143,7 @@ public class MensajesRecibidosUserController implements Serializable{
         activaRecibido=true;
         temaRecibido=selectedMensajeRecibido.getTema();
         textAreaRecibido=selectedMensajeRecibido.getTexto();
-         selectedMensajeRecibido.setLeidoDestino("si");
+         selectedMensajeRecibido.setLeidoDestino(true);
          try{
         mensajeService.leerMensajeRecibido(selectedMensajeRecibido);
          }catch(InstanceNotFoundException ex){

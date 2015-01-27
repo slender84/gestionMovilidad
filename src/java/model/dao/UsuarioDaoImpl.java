@@ -17,7 +17,7 @@ public class UsuarioDaoImpl extends GenericDaoHibernate<Usuario, String> impleme
     @Override
         public List<Usuario> listar(){
             
-            return getSession().createQuery("select u from Usuario u where u.borrado='no'").list();
+            return getSession().createQuery("select u from Usuario u where u.borrado=0").list();
             
         }
         

@@ -31,15 +31,15 @@ public class Mensaje  implements java.io.Serializable {
      private Date fecha;
      private String tema;
      private String texto;
-     private String leidoDestino;
-     private String eliminadoOrigen;
-     private String eliminadoDestino;
+     private boolean leidoDestino;
+     private boolean eliminadoOrigen;
+     private boolean eliminadoDestino;
 
     public Mensaje() {
     }
 
 	
-    public Mensaje(Usuario usuarioByDestino, Usuario usuarioByOrigen, Date fecha, String texto, String leidoDestino, String eliminadoOrigen, String eliminadoDestino) {
+    public Mensaje(Usuario usuarioByDestino, Usuario usuarioByOrigen, Date fecha, String texto, boolean leidoDestino, boolean eliminadoOrigen, boolean eliminadoDestino) {
         this.usuarioByDestino = usuarioByDestino;
         this.usuarioByOrigen = usuarioByOrigen;
         this.fecha = fecha;
@@ -48,7 +48,7 @@ public class Mensaje  implements java.io.Serializable {
         this.eliminadoOrigen = eliminadoOrigen;
         this.eliminadoDestino = eliminadoDestino;
     }
-    public Mensaje(Usuario usuarioByDestino, Usuario usuarioByOrigen, Date fecha, String tema, String texto, String leidoDestino, String eliminadoOrigen, String eliminadoDestino) {
+    public Mensaje(Usuario usuarioByDestino, Usuario usuarioByOrigen, Date fecha, String tema, String texto, boolean leidoDestino, boolean eliminadoOrigen, boolean eliminadoDestino) {
        this.usuarioByDestino = usuarioByDestino;
        this.usuarioByOrigen = usuarioByOrigen;
        this.fecha = fecha;
@@ -122,32 +122,32 @@ public class Mensaje  implements java.io.Serializable {
     }
 
     
-    @Column(name="leidoDestino", nullable=false, length=2)
-    public String getLeidoDestino() {
+    @Column(name="leidoDestino", nullable=false)
+    public boolean getLeidoDestino() {
         return this.leidoDestino;
     }
     
-    public void setLeidoDestino(String leidoDestino) {
+    public void setLeidoDestino(boolean leidoDestino) {
         this.leidoDestino = leidoDestino;
     }
 
     
-    @Column(name="eliminadoOrigen", nullable=false, length=2)
-    public String getEliminadoOrigen() {
+    @Column(name="eliminadoOrigen", nullable=false)
+    public boolean getEliminadoOrigen() {
         return this.eliminadoOrigen;
     }
     
-    public void setEliminadoOrigen(String eliminadoOrigen) {
+    public void setEliminadoOrigen(boolean eliminadoOrigen) {
         this.eliminadoOrigen = eliminadoOrigen;
     }
 
     
     @Column(name="eliminadoDestino", nullable=false, length=2)
-    public String getEliminadoDestino() {
+    public boolean getEliminadoDestino() {
         return this.eliminadoDestino;
     }
     
-    public void setEliminadoDestino(String eliminadoDestino) {
+    public void setEliminadoDestino(boolean eliminadoDestino) {
         this.eliminadoDestino = eliminadoDestino;
     }
 

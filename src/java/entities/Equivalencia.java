@@ -26,7 +26,7 @@ public class Equivalencia  implements java.io.Serializable {
 
 
      private Integer idequivalencia;
-     private String visible;
+     private boolean visible;
      private Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs = new HashSet<MiembroGrupoAsignaturaB>(0);
      private Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs = new HashSet<MiembroGrupoAsignaturaA>(0);
      private Set<Contrato> contratos = new HashSet<Contrato>(0);
@@ -34,7 +34,7 @@ public class Equivalencia  implements java.io.Serializable {
     public Equivalencia() {
     }
 
-    public Equivalencia(String visible, Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs, Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs, Set<Contrato> contratos) {
+    public Equivalencia(boolean visible, Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs, Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs, Set<Contrato> contratos) {
        this.visible = visible;
        this.miembroGrupoAsignaturaBs = miembroGrupoAsignaturaBs;
        this.miembroGrupoAsignaturaAs = miembroGrupoAsignaturaAs;
@@ -55,11 +55,11 @@ public class Equivalencia  implements java.io.Serializable {
 
     
     @Column(name="visible", length=2)
-    public String getVisible() {
+    public boolean getVisible() {
         return this.visible;
     }
     
-    public void setVisible(String visible) {
+    public void setVisible(boolean visible) {
         this.visible = visible;
     }
 

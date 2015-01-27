@@ -33,7 +33,7 @@ public class EquivalenciaDaoImpl extends GenericDaoHibernate<Equivalencia, Integ
        
       
        
-       return getSession().createQuery("select e from Equivalencia e where e.visible='si' and e.idequivalencia in" +
+       return getSession().createQuery("select e from Equivalencia e where e.visible=1 and e.idequivalencia in" +
                "(select m.equivalencia from MiembroGrupoAsignaturaB m where m.asignatura.id.nombreUniversidad=:universidad))").setParameter("universidad", universidad).list();
    }
    

@@ -8,8 +8,8 @@
             <column name="idequivalencia" />
             <generator class="identity" />
         </id>
-        <property name="visible" type="string">
-            <column name="visible" length="2" />
+        <property name="visible" type="boolean">
+            <column name="visible" />
         </property>
         <set name="miembroGrupoAsignaturaBs" table="miembro_grupo_asignatura_b" inverse="true" lazy="true" fetch="select" cascade="save-update">
             <key>

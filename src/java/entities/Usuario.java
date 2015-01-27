@@ -29,7 +29,7 @@ public class Usuario  implements java.io.Serializable {
      private String nombre;
      private String apellido1;
      private String apellido2;
-     private String borrado;
+     private boolean borrado;
      private Set<Mensaje> mensajesForDestino = new HashSet<Mensaje>(0);
      private Set<Movilidad> movilidads = new HashSet<Movilidad>(0);
      private InfoCuenta infoCuenta;
@@ -48,7 +48,7 @@ public class Usuario  implements java.io.Serializable {
         this.nombre = nombre;
         this.apellido1 = apellido1;
     }
-    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, InfoCuenta infoCuenta, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen,String borrado) {
+    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, InfoCuenta infoCuenta, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen,boolean borrado) {
        this.login = login;
        this.password = password;
        this.tipoUsuario = tipoUsuario;
@@ -136,12 +136,12 @@ public class Usuario  implements java.io.Serializable {
         this.apellido2 = apellido2;
     }
     
-     @Column(name="borrado", length=2)
-    public String getBorrado() {
+     @Column(name="borrado")
+    public boolean getBorrado() {
         return this.borrado;
     }
     
-    public void setBorrado(String borrado) {
+    public void setBorrado(boolean borrado) {
         this.borrado = borrado;
     }
 

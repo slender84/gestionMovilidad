@@ -76,10 +76,10 @@ public class MensajeServiceImpl implements MensajeService{
                 
                 
                 if(accion.equals("recibido")){
-            aux.setEliminadoDestino("si");
+            aux.setEliminadoDestino(true);
                 
              
-                if(aux.getEliminadoOrigen().equals("si")){
+                if(aux.getEliminadoOrigen()==(true)){
                     
                     mensajeDao.eliminar(aux);
                 }else{
@@ -88,10 +88,10 @@ public class MensajeServiceImpl implements MensajeService{
                 }
               }else{
                     if(accion.equals("enviado")){
-            aux.setEliminadoOrigen("si");
+            aux.setEliminadoOrigen(true);
                 
              
-                if(aux.getEliminadoDestino().equals("si")){
+                if(aux.getEliminadoDestino()==true){
                     
                     mensajeDao.eliminar(aux);
                 }else{
@@ -121,7 +121,7 @@ public class MensajeServiceImpl implements MensajeService{
             
             
             if(aux!=null){
-            aux.setLeidoDestino("si");
+            aux.setLeidoDestino(true);
                 enviarMensaje(aux);
             
         

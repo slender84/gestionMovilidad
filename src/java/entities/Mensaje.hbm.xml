@@ -23,14 +23,14 @@
         <property name="texto" type="string">
             <column name="texto" not-null="true" />
         </property>
-        <property name="leidoDestino" type="string">
-            <column name="leidoDestino" length="2" not-null="true" />
+        <property name="leidoDestino" type="boolean">
+            <column name="leidoDestino"  not-null="true" />
         </property>
-        <property name="eliminadoOrigen" type="string">
-            <column name="eliminadoOrigen" length="2" not-null="true" />
+        <property name="eliminadoOrigen" type="boolean">
+            <column name="eliminadoOrigen"  not-null="true" />
         </property>
-        <property name="eliminadoDestino" type="string">
-            <column name="eliminadoDestino" length="2" not-null="true" />
+        <property name="eliminadoDestino" type="boolean">
+            <column name="eliminadoDestino"  not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
