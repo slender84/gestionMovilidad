@@ -16,7 +16,7 @@
     <mapping resource="entities/Contrato.hbm.xml"/>
     <mapping resource="entities/MiembroGrupoAsignaturaB.hbm.xml"/>
     <mapping resource="entities/Asignatura.hbm.xml"/>
-    <mapping resource="entities/Intentos.hbm.xml"/>
+    <mapping resource="entities/InfoCuenta.hbm.xml"/>
     <mapping resource="entities/Mensaje.hbm.xml"/>
     <mapping resource="entities/Cursoacademico.hbm.xml"/>
     <mapping resource="entities/Estado.hbm.xml"/>

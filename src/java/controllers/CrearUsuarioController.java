@@ -1,7 +1,7 @@
 package controllers;
 
 import entities.CorreoConf;
-import entities.Intentos;
+import entities.InfoCuenta;
 import entities.Mensaje;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
@@ -173,7 +173,8 @@ public class CrearUsuarioController implements Serializable{
         u.setApellido1(apellido1);
         u.setApellido2(apellido2);
         u.setTitulacion(titulacion);
-        u.setIntentos(new Intentos(u, 0));
+        u.setBorrado("no");
+        u.setInfoCuenta(new InfoCuenta(u, 0));
         
         
          

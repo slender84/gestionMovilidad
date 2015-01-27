@@ -1,13 +1,13 @@
 
 package model.dao;
 
-import entities.Intentos;
+import entities.InfoCuenta;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("intentosDao")
-public class IntentosDaoImpl implements IntentosDao{
+@Repository("infoCuentaDao")
+public class InfoCuentaDaoImpl implements InfoCuentaDao{
     
     
       @Autowired
@@ -24,18 +24,19 @@ public class IntentosDaoImpl implements IntentosDao{
       
       
     @Override
-    public Intentos recuperarIntentos(String login){
+    public InfoCuenta recuperarIntentos(String login){
         
-      return (Intentos) getSessionFactory().getCurrentSession().get(Intentos.class, login);
+      return (InfoCuenta) getSessionFactory().getCurrentSession().get(InfoCuenta.class, login);
         
         
     }
     
     @Override
-    public void actualizarIntentos(Intentos intentos){
+    public void actualizarIntentos(InfoCuenta intentos){
         
         getSessionFactory().getCurrentSession().saveOrUpdate(intentos);
     }
     
     
 }
+

@@ -1,6 +1,6 @@
 package controllers;
 
-import entities.Intentos;
+import entities.InfoCuenta;
 import entities.Usuario;
 import java.io.Serializable;
 
@@ -97,7 +97,7 @@ public class CrearAdminController implements Serializable{
         Short s=2;
        
         Usuario u=new Usuario(login,Seguridad.md5Password(password),s,"tutor","tutor","tutor");
-        u.setIntentos(new Intentos(u,0));
+        u.setInfoCuenta(new InfoCuenta(u,0));
         try{
         usuarioService.insertarUsuario(u);
     }catch(org.springframework.dao.DataIntegrityViolationException ex){

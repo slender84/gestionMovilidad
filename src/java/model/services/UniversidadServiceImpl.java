@@ -248,6 +248,7 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
    }
    
    @Override
+   @Transactional(readOnly = true)
    public List<Cronica> listarMisCronicas(Usuario u){
        
        
@@ -278,6 +279,7 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
    }
    
    @Override
+   @Transactional(readOnly = true)
        public List<Cronica> listaCronicas(){
            
            return cronicaDao.listar();

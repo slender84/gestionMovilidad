@@ -23,10 +23,12 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     public AsignaturaDao getAsignaturaDao() {
         return asignaturaDao;
     }
-
     public void setAsignaturaDao(AsignaturaDao asignaturaDao) {
         this.asignaturaDao = asignaturaDao;
     }
+    
+    
+    
     
     @Override
     public void crearAsignatura(Asignatura a){
@@ -65,12 +67,7 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
         asignaturaDao.editar(a);
     }
     
-    @Override
-    @Transactional(readOnly = true)
-    public List<Asignatura> listarPorCriterio(){
-        
-        return asignaturaDao.listarPorCriterio();
-    }
+   
     
     
 }

@@ -1,6 +1,6 @@
 package controllers;
 
-import entities.Intentos;
+import entities.InfoCuenta;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
@@ -146,19 +146,19 @@ public class AutenticarUsuarioController implements Serializable{
               return null; 
              }
              
-            Intentos i=u.getIntentos();
+            InfoCuenta i=u.getInfoCuenta();
             try{ 
             usuarioService.autenticarUsuario(password,u);
             }catch(PasswordIncorrectoException ex){
                beanUtilidades.creaMensaje("password incorrecto", FacesMessage.SEVERITY_ERROR);
                
                
-               i.setNumero(i.getNumero()+1);
-               usuarioService.actualizarIntentos(u.getIntentos());
+               i.setNumeroIntentos(i.getNumeroIntentos()+1);
+               usuarioService.actualizarIntentos(u.getInfoCuenta());
                
               
                
-               if(i.getNumero()>=3){
+               if(i.getNumeroIntentos()>=3){
                    
                    changeCaptcha(true);
                    //return "tresIntentos.xhtml?faces-redirect=true";
@@ -166,10 +166,10 @@ public class AutenticarUsuarioController implements Serializable{
                
                return null;
             }
-                if(u.getIntentos().getNumero()>0){
-                u.getIntentos().setNumero(0);
+                if(u.getInfoCuenta().getNumeroIntentos()>0){
+                u.getInfoCuenta().setNumeroIntentos(0);
                 changeCaptcha(false);
-                usuarioService.actualizarIntentos(u.getIntentos());
+                usuarioService.actualizarIntentos(u.getInfoCuenta());
                 }
                 
                 

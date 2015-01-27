@@ -5,7 +5,6 @@ import entities.CorreoConf;
 import entities.Cursoacademico;
 import entities.Estado;
 import entities.EstadoMovilidad;
-import entities.Intentos;
 import java.util.List;
 
 

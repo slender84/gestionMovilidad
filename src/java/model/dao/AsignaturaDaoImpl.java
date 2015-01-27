@@ -32,10 +32,6 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         
     }
     
-    @Override
-    public List<Asignatura> listarPorCriterio(){
-        
-        return(getSession().createQuery("select a from Asignatura a where a."+"periodo=:nombre").setParameter("nombre", "anual").list());
-    }
+    
     
 }

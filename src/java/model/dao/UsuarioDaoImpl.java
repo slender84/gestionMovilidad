@@ -7,18 +7,22 @@
 package model.dao;
 
 import entities.Usuario;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository("usuarioDao")
 public class UsuarioDaoImpl extends GenericDaoHibernate<Usuario, String> implements UsuarioDao{
-   /* @Autowired
-    private SessionFactory sessionFactory;
+   
     
-    
+    @Override
+        public List<Usuario> listar(){
+            
+            return getSession().createQuery("select u from Usuario u where u.borrado='no'").list();
+            
+        }
         
         
-        
-        
+   /*     
     
 
     public SessionFactory getSessionFactory() {

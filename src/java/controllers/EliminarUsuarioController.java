@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -86,7 +87,13 @@ public class EliminarUsuarioController implements Serializable{
         }
         
         for(Usuario u:selectedUsuarios){
-        usuarioService.eliminarUsuario(u);
+            u.setBorrado("si");
+            try{
+        usuarioService.editarUsuario(u);
+            }catch(InstanceNotFoundException ex){
+                
+                
+            }
         listaUsuarios.remove(u);
         }
         

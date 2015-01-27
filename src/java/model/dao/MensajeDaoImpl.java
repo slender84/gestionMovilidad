@@ -8,11 +8,10 @@ package model.dao;
 
 
 import entities.Mensaje;
-import java.util.Date;
+
 import java.util.List;
 import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Repository;
 
 @Repository("mensajeDao")
@@ -66,27 +65,6 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
           return q.list();
        }     
             
-            
-   @Override
-    public List<Mensaje> mensajesEnviadosPorFecha(String origen,String destino,Date d,Date d2){
-        
-        Query q=getSession().createQuery("select m from Mensaje m where m.usuarioByOrigen.login=:origen " +
-                "and m.usuarioByDestino.login=:destino and m.fecha>=:d and m.fecha=<:d2 order by m.fecha desc");
-        q.setParameter("origen", origen);
-        q.setParameter("destino", destino);
-        q.setParameter("d", d);
-        q.setParameter("d2", d2);
-        
-               
-        
-        
-        return q.list();
-    }
-   
-    
-    
-    
-    
     
       @Override          
       public List<Mensaje> mensajesEnviadosTotal(String origen){

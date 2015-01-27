@@ -12,7 +12,7 @@
   <table-filter match-name="movilidad"/>
   <table-filter match-name="pais"/>
   <table-filter match-name="equivalencia"/>
-  <table-filter match-name="intentos"/>
+  <table-filter match-name="info_cuenta"/>
   <table-filter match-name="usuario"/>
   <table-filter match-name="miembro_grupo_asignatura_b"/>
   <table-filter match-name="asignatura"/>

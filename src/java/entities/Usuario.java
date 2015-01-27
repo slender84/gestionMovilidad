@@ -29,9 +29,10 @@ public class Usuario  implements java.io.Serializable {
      private String nombre;
      private String apellido1;
      private String apellido2;
+     private String borrado;
      private Set<Mensaje> mensajesForDestino = new HashSet<Mensaje>(0);
      private Set<Movilidad> movilidads = new HashSet<Movilidad>(0);
-     private Intentos intentos;
+     private InfoCuenta infoCuenta;
      private Set<Cronica> cronicas = new HashSet<Cronica>(0);
      private Set<Mensaje> mensajesForOrigen = new HashSet<Mensaje>(0);
 
@@ -47,7 +48,7 @@ public class Usuario  implements java.io.Serializable {
         this.nombre = nombre;
         this.apellido1 = apellido1;
     }
-    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, Intentos intentos, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen) {
+    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, InfoCuenta infoCuenta, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen,String borrado) {
        this.login = login;
        this.password = password;
        this.tipoUsuario = tipoUsuario;
@@ -55,9 +56,10 @@ public class Usuario  implements java.io.Serializable {
        this.nombre = nombre;
        this.apellido1 = apellido1;
        this.apellido2 = apellido2;
+       this.borrado=borrado;
        this.mensajesForDestino = mensajesForDestino;
        this.movilidads = movilidads;
-       this.intentos = intentos;
+       this.infoCuenta = infoCuenta;
        this.cronicas = cronicas;
        this.mensajesForOrigen = mensajesForOrigen;
     }
@@ -133,6 +135,15 @@ public class Usuario  implements java.io.Serializable {
     public void setApellido2(String apellido2) {
         this.apellido2 = apellido2;
     }
+    
+     @Column(name="borrado", length=2)
+    public String getBorrado() {
+        return this.borrado;
+    }
+    
+    public void setBorrado(String borrado) {
+        this.borrado = borrado;
+    }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuarioByDestino")
     public Set<Mensaje> getMensajesForDestino() {
@@ -153,12 +164,12 @@ public class Usuario  implements java.io.Serializable {
     }
 
 @OneToOne(fetch=FetchType.LAZY, mappedBy="usuario")
-    public Intentos getIntentos() {
-        return this.intentos;
+    public InfoCuenta getInfoCuenta() {
+        return this.infoCuenta;
     }
     
-    public void setIntentos(Intentos intentos) {
-        this.intentos = intentos;
+    public void setInfoCuenta(InfoCuenta infoCuenta) {
+        this.infoCuenta = infoCuenta;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")

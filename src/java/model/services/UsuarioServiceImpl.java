@@ -4,13 +4,14 @@ package model.services;
 
 
 import entities.CorreoConf;
-import entities.Intentos;
+import entities.InfoCuenta;
+import entities.InfoCuenta;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.util.ArrayList;
 import java.util.List;
-import model.dao.IntentosDao;
+import model.dao.InfoCuentaDao;
 import model.dao.UsuarioDao;
 import model.utils.Seguridad;
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -38,13 +39,13 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
     
     @Autowired
-    private IntentosDao intentosDao;
+    private InfoCuentaDao intentosDao;
 
-    public IntentosDao getIntentosDao() {
+    public InfoCuentaDao getIntentosDao() {
         return intentosDao;
     }
 
-    public void setIntentosDao(IntentosDao intentosDao) {
+    public void setIntentosDao(InfoCuentaDao intentosDao) {
         this.intentosDao = intentosDao;
     }
     
@@ -61,8 +62,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public void eliminarUsuario(Usuario u){
         if(usuarioDao.existe(u.getLogin()))
-        usuarioDao.eliminar(u);
-       
+        //usuarioDao.eliminar(u);
+       usuarioDao.editar(u);
     }
     
     @Override
@@ -84,7 +85,18 @@ public class UsuarioServiceImpl implements UsuarioService{
         
     }
     
-    
+    @Override
+    public void editarUsuario(Usuario u) throws InstanceNotFoundException{
+        
+        if(usuarioDao.existe(u.getLogin())==false){
+            
+            throw new InstanceNotFoundException();
+        }else {
+            
+            usuarioDao.editar(u);
+        }
+        
+    }
     
     
     @Override
@@ -176,14 +188,14 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
     
     @Override
-    public Intentos recuperarIntentos(String login){
+    public InfoCuenta recuperarIntentos(String login){
         
         return intentosDao.recuperarIntentos(login);
         
     }
     
     @Override
-    public void actualizarIntentos(Intentos intentos){
+    public void actualizarIntentos(InfoCuenta intentos){
         
         intentosDao.actualizarIntentos(intentos);
         

@@ -26,6 +26,9 @@
         <property name="apellido2" type="string">
             <column name="apellido2" length="45" />
         </property>
+        <property name="borrado" type="string">
+            <column name="borrado" length="2" />
+        </property>
         <set name="mensajesForDestino" table="mensaje" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="destino" length="20" not-null="true" />
@@ -38,7 +41,7 @@
             </key>
             <one-to-many class="entities.Movilidad" />
         </set>
-        <one-to-one cascade="save-update" name="intentos" class="entities.Intentos"></one-to-one>
+        <one-to-one cascade="save-update" name="infoCuenta" class="entities.InfoCuenta"></one-to-one>
         <set name="cronicas" table="cronica" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="login" length="20" />

@@ -16,5 +16,5 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     
     
     public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
-    public List<Asignatura> listarPorCriterio();
+   
 }
