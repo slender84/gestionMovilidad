@@ -62,8 +62,8 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Override
     public void eliminarUsuario(Usuario u){
         if(usuarioDao.existe(u.getLogin()))
-        //usuarioDao.eliminar(u);
-       usuarioDao.editar(u);
+        usuarioDao.eliminar(u);
+       //usuarioDao.editar(u);
     }
     
     @Override

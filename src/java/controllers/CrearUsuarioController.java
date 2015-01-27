@@ -188,11 +188,13 @@ public class CrearUsuarioController implements Serializable{
             return null;
             
                 }
+        CorreoConf correoConf;
+        
        try{
-            CorreoConf correoConf=beanUtilidades.getCorreoConf();
+            correoConf=beanUtilidades.getCorreoConf();
             usuarioService.enviarEmail(login,password,correoConf);
             
-        }catch(EmailException ex){
+        }catch(Exception ex){
             
             usuarioService.eliminarUsuario(u);
             beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
@@ -200,7 +202,7 @@ public class CrearUsuarioController implements Serializable{
         }
         
         
-        beanUtilidades.creaMensaje("usuario creado. Se ha enviado un correo a la cuenta "+login+"@udc.es con la contraseña", FacesMessage.SEVERITY_INFO);
+        beanUtilidades.creaMensaje("usuario creado. Se ha enviado un correo a la cuenta "+login+"@"+correoConf.getAddTo() +" con la contraseña", FacesMessage.SEVERITY_INFO);
         
         
         Usuario destino;
