@@ -12,7 +12,16 @@
     </h:head>
     <h:body styleClass="blue">
          <h2 style="text-align: center">Editar contrato</h2>
-        <p:panel id="headerContratos">
+         
+         <h:form>
+         <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+           <p:printer target=":formTablaEquivalencias" />
+       </p:commandButton>
+         </h:form>
+        
+         <p:outputPanel id="outpan">
+        
+             <p:panel id="headerContratos">
         
             <h:outputLabel value="Contrato de: "/>
             <h:outputText value="#{equivalenciasController.selectedMovilidad.usuario.nombre }"/>
@@ -37,10 +46,11 @@
             </h:outputText>
             
         </p:panel>
-        <br/>
-        
-        
+             
+             
         <h:form id="formTablaEquivalencias" styleClass="tablaEquivalenciasPublicas">
+               
+        <br/>
             <p:growl id="msgs" />
                <p:dataTable id="tablaEquivalenciasAdmin"
                          emptyMessage="no hay equivalencias"
@@ -141,6 +151,7 @@
             </p:dataTable>
             
         </h:form>
+      </p:outputPanel>
         <br/>
         <p:outputPanel rendered="#{equivalenciasController.user.tipoUsuario eq 0}">
             <p:outputLabel value="Cambiar estado del contrato"/>
@@ -186,4 +197,18 @@
         
     </h:body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -13,11 +13,52 @@
     <h:body styleClass="blue">
          
        
+        
+        
+        
+        
+        
          <h2 style="text-align: center">Ver contrato</h2>
             
-       
+       <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
+           <p:printer target=":formTablaEquivalencias" />
+       </p:commandButton>
+ 
+
+         
+         
+         
         
         <h:form id="formTablaEquivalencias">
+            
+            <p:panel id="headerContratos">
+        
+            <h:outputLabel value="Contrato de: "/>
+            <h:outputText value="#{misEquivalenciasController.selectedMovilidad.usuario.nombre }"/>
+            
+            <h:outputText value=" #{misEquivalenciasController.selectedMovilidad.usuario.apellido1}"/>
+            <br/>
+            <h:outputLabel value="país: "/>
+            <h:outputText value="#{misEquivalenciasController.selectedMovilidad.universidad.pais.nombre}"/><br/>
+            <h:outputLabel value="Universidad: "/>
+            <h:outputText value=" #{misEquivalenciasController.selectedMovilidad.universidad.nombre} "/>
+            <br/>
+            <p:outputLabel value="inicio: "/>
+            <h:outputText value="#{misEquivalenciasController.selectedMovilidad.fechaInicio}">
+            
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:outputText><br/>
+             
+            <p:outputLabel value="fin: "/>               
+            <h:outputText value="#{misEquivalenciasController.selectedMovilidad.fechaFin}">
+                
+                <f:convertDateTime pattern="dd-MM-yyyy"/>
+            </h:outputText>
+            
+        </p:panel>
+            
+            
+        <br/>
             
             <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias"
@@ -104,27 +145,32 @@
             </p:dataTable>
             
            <br/>
-           <p:commandLink value="crear contrato nuevo a partir de este" action="#{misEquivalenciasController.nuevoAceptado}" rendered="#{misEquivalenciasController.ultimo}" ajax="false"/>
             
         </h:form>
 
-    <br/>
+
+
+
+
+
+         <h:form>
+                                <p:commandLink value="crear contrato nuevo a partir de este" action="#{misEquivalenciasController.nuevoAceptado}" rendered="#{misEquivalenciasController.ultimo}" ajax="false"/>
+
+             
+         </h:form>
+
+
+            <br/>
     
             <h:outputLink value="verMisMovilidades.xhtml" ><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
-<br/>
-        <h:form>
+            <br/>
+            <h:form>
             
              <p:commandButton value="cerrar sesión"  action="#{beanUtilidades.salir}" ajax="false"/>
             
             </h:form>
             
             <br />
-        
-        
-      
-       
-         
-        
         
         
         

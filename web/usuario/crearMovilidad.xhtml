@@ -50,7 +50,7 @@
             <h:panelGrid id="info" columns="2" cellpadding="6">
                 
                 <p:outputLabel value="web: "  rendered="#{not empty crearMovilidadController.universidad.web}" />
-                <h:outputLink value="#{crearMovilidadController.universidad.web}" rendered="#{not empty crearMovilidadController.universidad.web}">link</h:outputLink>
+                <h:outputLink value="#{crearMovilidadController.universidad.web}" target="_blank" rendered="#{not empty crearMovilidadController.universidad.web}">link</h:outputLink>
                 <p:outputLabel value="información:"  rendered="#{not empty crearMovilidadController.universidad.info}"/>
                 <p:inputTextarea value="#{crearMovilidadController.universidad.info}"
                                  readonly="true" rows="8" cols="50" rendered="#{not empty crearMovilidadController.universidad.info}"/>

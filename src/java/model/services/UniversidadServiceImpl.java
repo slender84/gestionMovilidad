@@ -286,6 +286,17 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
            
        }
 
+       @Override
+       @Transactional(readOnly = true)
+       public List<Cronica> listarCronicasPublicas(String universidad) throws InstanceNotFoundException{
+           
+           if(universidadDao.existe(universidad)==false){
+          throw new InstanceNotFoundException();
+      }
+       
+           return cronicaDao.listarCronicasPublicas(universidad);
+           
+       }
        
   
     

@@ -86,7 +86,7 @@ public class Universidad  implements java.io.Serializable {
     }
 
     
-    @Column(name="web", length=50)
+    @Column(name="web", length=100)
     public String getWeb() {
         return this.web;
     }

@@ -37,5 +37,6 @@ public interface UniversidadService {
     public void editarCronica(Cronica c) throws InstanceNotFoundException;
     public void eliminarCronica(Cronica c) throws InstanceNotFoundException;
     public List<Cronica> listaCronicas();
+    public List<Cronica> listarCronicasPublicas(String Universidad)throws InstanceNotFoundException;
     
 }

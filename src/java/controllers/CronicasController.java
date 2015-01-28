@@ -62,6 +62,8 @@ public class CronicasController implements Serializable{
         
         
         
+        
+        
     }
     
     private Cronica selectedCronica;
@@ -254,7 +256,7 @@ public class CronicasController implements Serializable{
     
     public String buscar(){
         try{
-        listaCronicas=(ArrayList<Cronica>)universidadService.listarCronicasPorUniversidad(universidad);
+        listaCronicas=(ArrayList<Cronica>)universidadService.listarCronicasPublicas(universidad);
         }catch(InstanceNotFoundException ex){
             beanUtilidades.creaMensaje("No existe esa universidad", FacesMessage.SEVERITY_ERROR);
             universidad="";

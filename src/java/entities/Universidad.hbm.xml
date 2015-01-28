@@ -15,7 +15,7 @@
             <column name="info" />
         </property>
         <property name="web" type="string">
-            <column name="web" length="50" />
+            <column name="web" length="100" />
         </property>
         <property name="codUniversidad" type="string">
             <column name="codUniversidad" length="15" not-null="true" unique="true" />

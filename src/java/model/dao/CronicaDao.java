@@ -11,6 +11,6 @@ public interface CronicaDao extends GenericDao<Cronica,Integer> {
     
     public List<Cronica> listarCronicasPorUniversidad(String universidad);
     public List<Cronica> listarMisCronicas(Usuario u);
-    
+    public List<Cronica> listarCronicasPublicas(String universidad);
     
 }
