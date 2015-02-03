@@ -10,7 +10,6 @@ import entities.MiembroGrupoAsignaturaA;
 import entities.MiembroGrupoAsignaturaB;
 import entities.Movilidad;
 import exceptions.InstanceNotFoundException;
-import exceptions.MovilidadNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -428,11 +427,11 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
 }
      
      @Override
-     public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException,MovilidadNotFoundException{
+     public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException{
         c=buscarContrato(c.getIdContrato());
         Hibernate.initialize(c.getMovilidad());
         if(c.getMovilidad()==null)
-            throw new MovilidadNotFoundException();
+            throw new InstanceNotFoundException();
         Hibernate.initialize(c.getMovilidad().getUniversidad());
         return c.getMovilidad();
      }

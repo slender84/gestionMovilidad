@@ -17,7 +17,16 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:component-scan base-package="model"/>
     
-   
+   <bean id="jdbcExceptionTranslator" 
+    class= "org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator"> 
+
+   <property name="dataSource">
+
+      <ref bean="dataSource"/>
+
+   </property>
+
+    </bean>
     
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>

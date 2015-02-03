@@ -145,7 +145,12 @@ public class AutenticarUsuarioController implements Serializable{
              password="";
               return null; 
              }
-             
+             if(u.getBorrado()==true){
+                 beanUtilidades.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
+                 login="";
+                 password="";
+                 return null;
+             }
             InfoCuenta i=u.getInfoCuenta();
             try{ 
             usuarioService.autenticarUsuario(password,u);
@@ -188,3 +193,9 @@ public class AutenticarUsuarioController implements Serializable{
     
     
 }
+
+
+
+
+
+

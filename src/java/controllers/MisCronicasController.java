@@ -72,7 +72,7 @@ public class MisCronicasController implements Serializable{
                selectedMovilidad=movilidadService.buscarMovilidad(selectedMovilidad.getCodMovilidad());
            }catch(InstanceNotFoundException ex){
                try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/verMovilidades.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/verMisMovilidades.xhtml");
             }catch(IOException ex2){
                     
                     }

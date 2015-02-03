@@ -8,9 +8,7 @@ import entities.Equivalencia;
 import entities.Movilidad;
 import entities.Pais;
 import entities.Universidad;
-import exceptions.ContratoNotFoundException;
 import exceptions.InstanceNotFoundException;
-import exceptions.MovilidadNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
@@ -226,7 +224,7 @@ public class EquivalenciasPublicasController implements Serializable{
         try{
         c=equivalenciaService.verContratoPorEquivalencia(selectedEquivalencia);
          m=equivalenciaService.buscarMovilidadPorContrato(c);
-        }catch(InstanceNotFoundException|MovilidadNotFoundException|RuntimeException ex){
+        }catch(InstanceNotFoundException|RuntimeException ex){
            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            
             return null;
