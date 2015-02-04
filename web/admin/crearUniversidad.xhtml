@@ -42,8 +42,8 @@
                 <p:inputText value="#{crearUniversidadController.nombre}"
                              required="true"
                              requiredMessage="el campo nombre está vacío"
-                             validatorMessage="El nombre debe tener entre 1 y 45 caracteres">
-                    <f:validateLength minimum="1" maximum="50"/>
+                             validatorMessage="El nombre debe tener entre 1 y 200 caracteres">
+                    <f:validateLength minimum="1" maximum="200"/>
                     
                 </p:inputText>
                 
@@ -63,8 +63,8 @@
                
                 <p:outputLabel value="pagina web"/>
                 <p:inputText id="text1" value="#{crearUniversidadController.web}"
-                             validatorMessage="Como maxímo la web debe tener 50 caracteres">
-                    <f:validateLength maximum="50"/>
+                             validatorMessage="Como maxímo la web debe tener 100 caracteres">
+                    <f:validateLength maximum="100"/>
                 </p:inputText>
                 <p:watermark for="text1" value="http://"/>
                 <h:outputLabel/>
@@ -150,8 +150,8 @@
                  
                 <p:outputLabel value="web" />
                 <p:inputText id="text2" value="#{crearUniversidadController.selectedUniversidad.web}"
-                             validatorMessage="Máximo 50 caracteres">
-                    <f:validateLength maximum="50"/>
+                             validatorMessage="Máximo 100 caracteres">
+                    <f:validateLength maximum="100"/>
                 </p:inputText>
                 <p:watermark for="text2" value="http://"/>
                 <h:outputLabel/>
