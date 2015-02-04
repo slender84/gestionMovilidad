@@ -26,7 +26,7 @@ public interface EquivalenciaService {
     public void eliminarContrato(Contrato c);
     public Contrato buscarContrato(Integer id) throws InstanceNotFoundException;
    public List<Equivalencia> equivalenciasPublicas(String universidad);
-   public int[] totalCreditos(ArrayList<Equivalencia> lista);
+   public Float[] totalCreditos(ArrayList<Equivalencia> lista);
    public void confirmarContrato(ArrayList<Equivalencia> lista,Contrato c);
    public ArrayList<Equivalencia> editarContrato(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c)throws InstanceNotFoundException;
    public void crearContratoDesdeAceptado(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c, Contrato cNuevo)throws InstanceNotFoundException;

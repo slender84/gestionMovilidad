@@ -190,10 +190,10 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     
     
     @Override
-    public int[] totalCreditos(ArrayList<Equivalencia> lista){
+    public Float[] totalCreditos(ArrayList<Equivalencia> lista){
         
-         int a=0;
-         int b=0;
+         Float a=new Float(0);
+         Float b=new Float(0);
          
         for(Equivalencia e:lista){
             Iterator i=e.getMiembroGrupoAsignaturaAs().iterator();
@@ -211,7 +211,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
             }
         }
         
-        return new int[]{a,b};
+        return new Float[]{a,b};
     }
     
     @Override

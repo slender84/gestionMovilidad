@@ -95,11 +95,11 @@ public class MisEquivalenciasController implements Serializable{
     private ArrayList<Equivalencia>selectedEquivalencias;
     
     private int j=0;
-    private int creditosA;
-    private int creditosB;
+    private Float creditosA=new Float(0);
+    private Float creditosB=new Float(0);
     
-    private int creditosComparadoA;
-    private int creditosComparadoB;
+    private Float creditosComparadoA;
+    private Float creditosComparadoB;
     
     
     private boolean verInfo;
@@ -332,35 +332,35 @@ public class MisEquivalenciasController implements Serializable{
         this.selectedContrato = selectedContrato;
     }
 
-    public int getCreditosA() {
+    public Float getCreditosA() {
         return creditosA;
     }
 
-    public void setCreditosA(int creditosA) {
+    public void setCreditosA(Float creditosA) {
         this.creditosA = creditosA;
     }
 
-    public int getCreditosB() {
+    public Float getCreditosB() {
         return creditosB;
     }
 
-    public void setCreditosB(int creditosB) {
+    public void setCreditosB(Float creditosB) {
         this.creditosB = creditosB;
     }
 
-    public int getCreditosComparadoA() {
+    public Float getCreditosComparadoA() {
         return creditosComparadoA;
     }
 
-    public void setCreditosComparadoA(int creditosComparadoA) {
+    public void setCreditosComparadoA(Float creditosComparadoA) {
         this.creditosComparadoA = creditosComparadoA;
     }
 
-    public int getCreditosComparadoB() {
+    public Float getCreditosComparadoB() {
         return creditosComparadoB;
     }
 
-    public void setCreditosComparadoB(int creditosComparadoB) {
+    public void setCreditosComparadoB(Float creditosComparadoB) {
         this.creditosComparadoB = creditosComparadoB;
     }
 

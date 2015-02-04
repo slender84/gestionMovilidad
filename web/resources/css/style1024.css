@@ -50,8 +50,8 @@
 
 .nuevoAsignatura{
     
-    width: 74%;
-    font-size: 15px;
+    width: 68%;
+    font-size: 14px;
 }
 
 .creditos{
@@ -78,9 +78,9 @@
 
 .nuevoCreditos{
     
-    width: 9%;
-    font-size: 15px;
-    text-align: center;
+    width: 15%;
+    font-size: 14px;
+    text-align: left;
 }
 
 
@@ -157,16 +157,16 @@ body.blue{
 
 .nuevoAsignaturaAdmin{
     
-    width: 55%;
+    width: 53%;
     font-size: 14px;
 }
 
 
 .nuevoCreditosAdmin{
     
-    width: 9%;
+    width: 14%;
     font-size: 14px;
-    text-align: left;
+    text-align: center;
         
 }
 

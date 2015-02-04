@@ -2,6 +2,7 @@ package entities;
 // Generated 16-dic-2014 9:35:09 by Hibernate Tools 4.3.1
 
 
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.AttributeOverride;
@@ -28,7 +29,7 @@ public class Asignatura  implements java.io.Serializable {
      private AsignaturaId id;
      private Universidad universidad;
      private String nombreAsignatura;
-     private Short creditos;
+     private Float creditos;
      private String periodo;
      private String infoAsigantura;
      private String webAsignatura;
@@ -45,7 +46,7 @@ public class Asignatura  implements java.io.Serializable {
         this.id = id;
         this.universidad = universidad;
     }
-    public Asignatura(AsignaturaId id, Universidad universidad, String nombreAsignatura, Short creditos, String periodo, String infoAsigantura, String webAsignatura, String facultad, String titulacion, Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs, Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs) {
+    public Asignatura(AsignaturaId id, Universidad universidad, String nombreAsignatura, Float creditos, String periodo, String infoAsigantura, String webAsignatura, String facultad, String titulacion, Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs, Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs) {
        this.id = id;
        this.universidad = universidad;
        this.nombreAsignatura = nombreAsignatura;
@@ -95,11 +96,11 @@ public class Asignatura  implements java.io.Serializable {
 
     
     @Column(name="creditos")
-    public Short getCreditos() {
+    public Float getCreditos() {
         return this.creditos;
     }
     
-    public void setCreditos(Short creditos) {
+    public void setCreditos(Float creditos) {
         this.creditos = creditos;
     }
 

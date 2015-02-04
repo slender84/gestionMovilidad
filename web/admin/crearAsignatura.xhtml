@@ -60,7 +60,7 @@
                              requiredMessage="el campo código está vacío"
                              validatorMessage=" Código debe ser un número válido">
                 
-                    <f:validateLongRange minimum="1" maximum="2000000"/>
+                    <f:validateLength minimum="1" maximum="50"/>
                 
                 </p:inputText>
                              
@@ -69,7 +69,7 @@
                 <p:outputLabel value="nombre " />
                 <p:inputText value="#{crearAsignaturaController.nombreAsignatura}"  required="true"
                              requiredMessage="el campo nombre está vacío"
-                             validatorMessage="El nombre debe tener menos de 50 caracteres">
+                             validatorMessage="El nombre debe tener menos de 100 caracteres">
                     <f:validateLength maximum="50"/>
                 </p:inputText>
                 
@@ -78,7 +78,7 @@
                              requiredMessage="el campo créditos está vacío"
                              validatorMessage=" créditos debe ser un número entre 1 y 100">
                              
-                    <f:validateLongRange minimum="1" maximum="100"/>
+                    <f:validateDoubleRange minimum="1" maximum="100"/>
                     
                 </p:inputText>
                

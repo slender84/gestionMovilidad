@@ -58,10 +58,10 @@ public class AsignaturaServiceTest {
    @Test(expected = InstanceNotFoundException.class)
     public void testCrearAsignaturaConUniversidad()throws InstanceNotFoundException{
         
-        Short s=1;
+        
         
         Universidad u=universidadService.buscarUniversidad(NON_EXISTENT_UNI);
-        Asignatura a=new Asignatura(new AsignaturaId(s, NON_EXISTENT_PAIS), u);
+        Asignatura a=new Asignatura(new AsignaturaId("uno", NON_EXISTENT_PAIS), u);
         //assertEquals(pais2, pais);
         
     }

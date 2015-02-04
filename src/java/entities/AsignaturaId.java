@@ -12,13 +12,13 @@ import javax.persistence.Embeddable;
 public class AsignaturaId  implements java.io.Serializable {
 
 
-     private int codAsignatura;
+     private String codAsignatura;
      private String nombreUniversidad;
 
     public AsignaturaId() {
     }
 
-    public AsignaturaId(int codAsignatura, String nombreUniversidad) {
+    public AsignaturaId(String codAsignatura, String nombreUniversidad) {
        this.codAsignatura = codAsignatura;
        this.nombreUniversidad = nombreUniversidad;
     }
@@ -26,16 +26,16 @@ public class AsignaturaId  implements java.io.Serializable {
 
 
     @Column(name="codAsignatura", nullable=false)
-    public int getCodAsignatura() {
+    public String getCodAsignatura() {
         return this.codAsignatura;
     }
     
-    public void setCodAsignatura(int codAsignatura) {
+    public void setCodAsignatura(String codAsignatura) {
         this.codAsignatura = codAsignatura;
     }
 
 
-    @Column(name="nombreUniversidad", nullable=false, length=45)
+    @Column(name="nombreUniversidad", nullable=false, length=200)
     public String getNombreUniversidad() {
         return this.nombreUniversidad;
     }
@@ -58,7 +58,7 @@ public class AsignaturaId  implements java.io.Serializable {
    public int hashCode() {
          int result = 17;
          
-         result = 37 * result + this.getCodAsignatura();
+         result = 37 * result + ( getCodAsignatura() == null ? 0 : this.getCodAsignatura().hashCode() );
          result = 37 * result + ( getNombreUniversidad() == null ? 0 : this.getNombreUniversidad().hashCode() );
          return result;
    }   

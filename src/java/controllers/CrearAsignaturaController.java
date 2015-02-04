@@ -46,9 +46,9 @@ public class CrearAsignaturaController implements Serializable{
     
     //asignatura
     
-    private Integer codAsignatura;
+    private String codAsignatura;
     private String nombreAsignatura;
-    private Integer creditosAsignatura;
+    private Float creditosAsignatura;
     private String periodoAsignatura;
     private String infoAsignatura;
     private String webAsignatura;
@@ -188,11 +188,11 @@ public class CrearAsignaturaController implements Serializable{
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////
-    public Integer getCodAsignatura() {
+    public String getCodAsignatura() {
         return codAsignatura;
     }
 
-    public void setCodAsignatura(Integer codAsignatura) {
+    public void setCodAsignatura(String codAsignatura) {
         this.codAsignatura = codAsignatura;
     }
 
@@ -204,11 +204,11 @@ public class CrearAsignaturaController implements Serializable{
         this.nombreAsignatura = nombreAsignatura;
     }
 
-    public Integer getCreditosAsignatura() {
+    public Float getCreditosAsignatura() {
         return creditosAsignatura;
     }
 
-    public void setCreditosAsignatura(Integer creditosAsignatura) {
+    public void setCreditosAsignatura(Float creditosAsignatura) {
         this.creditosAsignatura = creditosAsignatura;
     }
 
@@ -327,7 +327,7 @@ public class CrearAsignaturaController implements Serializable{
             
         AsignaturaId id=new AsignaturaId(codAsignatura,universidadStr);
         
-        Asignatura a=new Asignatura(id,uni, nombreAsignatura, creditosAsignatura.shortValue(),periodoAsignatura,infoAsignatura,webAsignatura,facultadAsignatura,titulacionAsignatura,null,null);
+        Asignatura a=new Asignatura(id,uni, nombreAsignatura, creditosAsignatura,periodoAsignatura,infoAsignatura,webAsignatura,facultadAsignatura,titulacionAsignatura,null,null);
         
         try{
            // org.springframework.dao.DuplicateKeyException ex

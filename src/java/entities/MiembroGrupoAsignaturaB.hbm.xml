@@ -10,7 +10,7 @@
         </id>
         <many-to-one name="asignatura" class="entities.Asignatura" fetch="select">
             <column name="codAsignatura" />
-            <column name="nombreUniversidad" length="45" />
+            <column name="nombreUniversidad" length="200" />
         </many-to-one>
         <many-to-one name="equivalencia" class="entities.Equivalencia" fetch="select">
             <column name="idEquivalencia" />
