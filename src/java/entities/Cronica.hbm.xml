@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="universidad" lazy="false" class="entities.Universidad" fetch="select">
-            <column name="universidad" length="45" not-null="true" />
+            <column name="universidad" length="200" not-null="true" />
         </many-to-one>
         <many-to-one name="usuario" class="entities.Usuario" fetch="select">
             <column name="login" length="20" />

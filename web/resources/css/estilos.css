@@ -41,41 +41,41 @@ body.red{
 
 .asignatura{
     
-    font-size: 15px;
+    font-size: 13px;
     height: 20%;
     width: 12%;
   
 }
 
 .creditos{
-    font-size: 15px;
+    font-size: 13px;
     height: 15%;
     width: 3%;
 }
 
 .periodo{
-    font-size: 15px;
+    font-size: 13px;
     height: 15%;
     width: 6%;
 }
 
 .asignatura{
     
-    font-size: 15px;
+    font-size: 13px;
     height: 20%;
     width: 12%;
   
 }
 
 .creditos{
-    font-size: 15px;
+    font-size: 13px;
     height: 15%;
     width: 3%;
     text-align: center;
 }
 
 .periodo{
-    font-size: 15px;
+    font-size: 13px;
     height: 15%;
     width: 6%;
     text-align: center;
@@ -83,14 +83,14 @@ body.red{
 
 .web{
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     width: 3%;
     height: 3%;
 }
 
 .info{
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     width: 3%;
     height: 3%;
     
@@ -127,7 +127,7 @@ and (max-width : 1199px) {
     .tablaFic{
     height: 45%;
     width: 45%;
-    font-size: 15px;
+    font-size: 13px;
     position: absolute;
     top: 58px;
     //left:50px;
@@ -136,7 +136,7 @@ and (max-width : 1199px) {
 .tablaUniversidad{
     width: 45%;
     height: 45%;
-    font-size: 15px;
+    font-size: 13px;
     position:absolute;
     top: 58px;
     left: 650px; 
@@ -156,7 +156,7 @@ and (min-width : 1200px) {
     .tablaFic{
     height: 45%;
     width: 45%;
-    font-size: 15px;
+    font-size: 13px;
     position: absolute;
     top: 58px;
     //left:50px;
@@ -165,7 +165,7 @@ and (min-width : 1200px) {
 .tablaUniversidad{
     width: 45%;
     height: 45%;
-    font-size: 15px;
+    font-size: 13px;
     position:absolute;
     top: 58px;
     left: 1950px; 
@@ -186,7 +186,7 @@ and (min-width : 1200px) {
 .tablaFic{
     height: 45%;
     width: 45%;
-    font-size: 15px;
+    font-size: 13px;
     position: absolute;
     top: 58px;
     //left:50px;
@@ -195,7 +195,7 @@ and (min-width : 1200px) {
 .tablaUniversidad{
     width: 45%;
     height: 45%;
-    font-size: 15px;
+    font-size: 13px;
     position:absolute;
     top: 58px;
     left: 650px; 
@@ -210,7 +210,7 @@ and (min-width : 1200px) {
     top: 700px;
     left:140px;
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
    
 }
 
@@ -221,7 +221,7 @@ and (min-width : 1200px) {
     
     //left:140px;
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
    
 }
 
@@ -233,7 +233,7 @@ and (min-width : 1200px) {
     
     //left:120px;
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
    
 }
 
@@ -244,7 +244,7 @@ and (min-width : 1200px) {
     width: 51%;
     position:relative;
     //text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     
 }
 .tablaEquivalenciasAdminUnico{
@@ -252,7 +252,7 @@ and (min-width : 1200px) {
     
     position:relative;
     //text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     
 }
 
@@ -265,7 +265,7 @@ and (min-width : 1200px) {
     width: 45%;
     position:absolute;
     //text-align: center;
-    font-size: 15px;
+    font-size: 12px;
     
 }
 
@@ -279,7 +279,7 @@ and (min-width : 1200px) {
     width: 45%;
     position:absolute;
     text-align: left;
-    font-size: 15px;
+    font-size: 12px;
   
 }
 
@@ -290,7 +290,7 @@ and (min-width : 1200px) {
     width: 50%;
     position:absolute;
     text-align: left;
-    font-size: 15px;
+    font-size: 12px;
   
 }
 
@@ -307,28 +307,28 @@ and (min-width : 1200px) {
 .codAsignatura{
     
     width: 5%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
    
 }
 
 .nombreAsignatura{
     width: 8%;
-    font-size: 15px;
+    font-size: 13px;
    text-align: center;
 }
 
 .periodoAsignatura{
     
     width: 6%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
 .creditosAsignatura{
     
     width: 6%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
     
 }
@@ -336,14 +336,14 @@ and (min-width : 1200px) {
 .detallesAsignatura{
     
     width: 8%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
 .webAsignatura{
     
     width: 6%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
@@ -354,20 +354,20 @@ and (min-width : 1200px) {
 .campoUsuario{
    
     width: 8%;
-    font-size: 15px;
+    font-size: 13px;
     
 }
 
 .asignaturaPublica{
     width: 55%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: left;
 }
 
 .creditosPublica{
     
     width: 10%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
     
 }
@@ -375,7 +375,7 @@ and (min-width : 1200px) {
 .periodoPublica{
     
     width: 17%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
     
 }
@@ -396,14 +396,14 @@ and (min-width : 1200px) {
 .nuevoCreditos{
     
     width: 9%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
 .nuevoAsignatura{
     
     width: 74%;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 
@@ -411,14 +411,14 @@ and (min-width : 1200px) {
 .nuevoMultiple{
     
     width: 9%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
     
 .nuevoCreditosAdmin{
     
     width: 8%;
-    font-size: 14px;
+    font-size: 13px;
     text-align: left;
         
 }
@@ -426,26 +426,26 @@ and (min-width : 1200px) {
 .nuevoAsignaturaAdmin{
     
     width: 59%;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .nuevoPeriodoAdmin{
     width: 7%;
-    font-size: 14px;
+    font-size: 13px;
     
 }
 
 .nuevoMultipleAdmin{
     
     width: 8%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
 .visible{
     
     
-    font-size: 15px;
+    font-size: 13px;
     height: 15%;
     width: 8%;
     
@@ -454,14 +454,14 @@ and (min-width : 1200px) {
 .verAsignatura{
     text-align: left;
     width: 60%;
-    font-size: 16px;
+    font-size: 13px;
     
 }
 
 .verCreditos{
     text-align: center;
     width: 15%;
-    font-size: 16px;
+    font-size: 13px;
     
     
 }
@@ -469,7 +469,7 @@ and (min-width : 1200px) {
 .verPeriodo{
     text-align: center;
      width: 25%;
-    font-size: 16px;
+    font-size: 13px;
     
 }
 
@@ -485,14 +485,14 @@ and (min-width : 1200px) {
 
 .asignaturaPublicaAdmin{
     width: 55%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: left;
 }
 
 .creditosPublicaAdmin{
     
     width: 10%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
     
 }
@@ -500,7 +500,7 @@ and (min-width : 1200px) {
 .periodoPublicaAdmin{
     
     width: 12%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
     
 }
@@ -518,14 +518,14 @@ and (min-width : 1200px) {
 .nuevoCreditos{
     
     width: 9%;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
 }
 
 .nuevoAsignatura{
     
     width: 74%;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 

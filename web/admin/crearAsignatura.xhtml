@@ -150,7 +150,7 @@
                         
                     </f:facet>
                 
-                    <p:column headerText="código" sortBy="#{asignatura.id.codAsignatura}" styleClass="codAsignatura">
+                    <p:column headerText="código" sortBy="#{asignatura.id.codAsignatura}" styleClass="codAsignatura" filterBy="#{asignatura.id.codAsignatura}" filterMatchMode="startsWith">
                         
                         <h:outputText value="#{asignatura.id.codAsignatura}"/>
                         

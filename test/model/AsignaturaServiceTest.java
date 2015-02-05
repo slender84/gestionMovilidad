@@ -10,6 +10,7 @@ import static junit.framework.Assert.assertEquals;
 import static model.UniversidadServiceTest.SPRING_CONFIG_FILE;
 import model.services.AsignaturaService;
 import model.services.UniversidadService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +62,13 @@ public class AsignaturaServiceTest {
         
         
         Universidad u=universidadService.buscarUniversidad(NON_EXISTENT_UNI);
-        Asignatura a=new Asignatura(new AsignaturaId("uno", NON_EXISTENT_PAIS), u);
-        //assertEquals(pais2, pais);
+        Asignatura a=new Asignatura(new AsignaturaId("cod1","uni1"),u);
+        universidadService.insertarUniversidad(u);
+        asignaturaService.crearAsignatura(a);
+        asignaturaService.eliminarAsignatura(a);
+        Asignatura b=u.getAsignaturas().iterator().next();
+        assertEquals(b, a);
+        
         
     }
     
@@ -111,11 +117,35 @@ public class AsignaturaServiceTest {
             
             
             
-        } 
+        }
+    }
+        
+        
+        @Test
+        public void crearYEditarAsignaturaTest() throws InstanceNotFoundException{
+           
+        Universidad uni1=new Universidad("abc", "cba"); 
+        AsignaturaId asId=new AsignaturaId("asf","abc");
+        Asignatura a=new Asignatura(asId,uni1);
+        uni1.getAsignaturas().add(a);
+        universidadService.insertarUniversidad(uni1);
+
+        asignaturaService.crearAsignatura(a);
+        a.setCreditos(new Float(12));
+        asignaturaService.actualizarAsignatura(a);
+        Universidad uni2=universidadService.buscarUniversidad("abc");
+        //Assert.assertTrue(uni2.getAsignaturas().size()==1);
+
+            Asignatura a2=uni2.getAsignaturas().iterator().next();
+        Assert.assertTrue(a2.getCreditos().equals(a.getCreditos()));
+        
+        
+    }
+        
         
        
        
     }
     
     
-}
+

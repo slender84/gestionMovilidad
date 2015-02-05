@@ -12,7 +12,7 @@
             <column name="cursoAcademico" length="10" />
         </many-to-one>
         <many-to-one name="universidad" class="entities.Universidad" lazy="false" fetch="select">
-            <column name="nombreUniversidad" length="45" not-null="true" />
+            <column name="nombreUniversidad" length="200" not-null="true" />
         </many-to-one>
         <many-to-one name="usuario" class="entities.Usuario" fetch="select" lazy="false">
             <column name="loginUsuario" length="20" not-null="true" />

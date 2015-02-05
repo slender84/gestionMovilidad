@@ -10,7 +10,7 @@
         </id>
         <set name="universidads" table="universidad" cascade="delete" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="pais" length="45" />
+                <column name="pais" length="200" />
             </key>
             <one-to-many class="entities.Universidad" />
         </set>
