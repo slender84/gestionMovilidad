@@ -35,7 +35,7 @@
                    
                         <p:outputLabel value="Universidad" rendered="#{crearAsignaturaController.checkPaisStr}"/>
                        <p:selectOneMenu  value="#{crearAsignaturaController.universidadStr}" rendered="#{crearAsignaturaController.checkPaisStr}" required="true" requiredMessage="hay que introducir una universidad"
-                                         filter="true" filterMatchMode="startsWith">
+                                         filter="true" filterMatchMode="contains">
                 
                         <p:ajax listener="#{crearAsignaturaController.onChangeUniversidad}" update=":formTabla :formAsignatura :formUniversidad" oncomplete="PF('asignaturaBtn').filter();"/>
                        <f:selectItem itemLabel="selecciona universidad" noSelectionOption="true" id="uni3" />
@@ -138,8 +138,11 @@
                              rowKey="#{asignatura.id}"
                              rendered="#{crearAsignaturaController.checkTabla}"
                              filteredValue="#{crearAsignaturaController.filteredAsignaturas}"
-                             
                              styleClass="borderless"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                              
+                              
                             >
                               
                     
@@ -156,7 +159,7 @@
                         
                     </p:column>
                 
-                    <p:column headerText="nombre" sortBy="#{asignatura.nombreAsignatura}" filterBy="#{asignatura.nombreAsignatura}" filterMatchMode="startsWith" styleClass="nombreAsignatura">
+                    <p:column headerText="nombre" sortBy="#{asignatura.nombreAsignatura}" filterBy="#{asignatura.nombreAsignatura}" filterMatchMode="contains" styleClass="nombreAsignatura">
                         
                         <h:outputText value="#{asignatura.nombreAsignatura}"/>
                         
@@ -170,7 +173,9 @@
                     
                     <p:column headerText="creditos" sortBy="#{asignatura.creditos}" styleClass="creditosAsignatura">
                         
-                        <h:outputText value="#{asignatura.creditos}"/>
+                        <h:outputText value="#{asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        </h:outputText>
                         
                     </p:column>
                     

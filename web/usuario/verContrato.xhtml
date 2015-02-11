@@ -89,7 +89,9 @@
                 
                 <p:column headerText="Cr" styleClass="verCreditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
-                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" maxFractionDigits="1" minFractionDigits="0"/>   
+                        </h:outputText>   
                         <br/>
                     </ui:repeat>
                 </p:column>
@@ -112,7 +114,9 @@
                 
                 <p:column headerText="Cr" styleClass="verCreditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
-                        <h:outputText value="#{asignatura.asignatura.creditos} "/>
+                       <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" maxFractionDigits="1" minFractionDigits="0"/>   
+                        </h:outputText>   
                         
                         <br/>
                     </ui:repeat>
@@ -133,10 +137,22 @@
          <p:columnGroup type="footer">
             <p:row>
                 <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
-                <p:column footerText="#{misEquivalenciasController.creditosA}" styleClass="creditos"/>
+                <p:column >
+                            <f:facet name="footer">
+                                <h:outputText value="#{misEquivalenciasController.creditosA}">
+                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column> 
                 <p:column/>
                 <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
-                <p:column footerText="#{misEquivalenciasController.creditosB}" styleClass="creditos"/>
+               <p:column >
+                            <f:facet name="footer">
+                                <h:outputText value="#{misEquivalenciasController.creditosB}">
+                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column> 
                 <p:column />
             </p:row>
             

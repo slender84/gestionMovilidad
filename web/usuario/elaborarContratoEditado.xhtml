@@ -42,7 +42,7 @@
                
                
                 <f:facet name="header">ORIGEN: UDC</f:facet>
-                <p:column headerText="asignatura"  sortBy="#{asigFic.nombreAsignatura}" styleClass="asignatura" filterBy="#{asigFic.nombreAsignatura}">
+                <p:column headerText="asignatura"  sortBy="#{asigFic.nombreAsignatura}" styleClass="asignatura" filterBy="#{asigFic.nombreAsignatura}" filterMatchMode="contains">
                     
                     <h:outputLink target="_blank" value="#{asigFic.webAsignatura}" rendered="#{not empty asigFic.webAsignatura}">#{asigFic.nombreAsignatura}</h:outputLink>
                     <h:outputText value="#{asigFic.nombreAsignatura}" rendered="#{empty asigFic.webAsignatura}" />
@@ -51,7 +51,9 @@
             
                 <p:column id="creditos" headerText="Cred" sortBy="#{asigFic.creditos}" styleClass="creditos" >
                 
-                    <h:outputText value="#{asigFic.creditos}"/>
+                    <h:outputText value="#{asigFic.creditos}">
+                        <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                    </h:outputText>
                 
                 </p:column>
                 
@@ -105,7 +107,7 @@
                 
                 <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.universidad.nombre}</f:facet>
                 
-                <p:column headerText="asignatura" sortBy="#{asigUni.nombreAsignatura}"  filterBy="#{asigUni.nombreAsignatura}" styleClass="asignatura">
+                <p:column headerText="asignatura" sortBy="#{asigUni.nombreAsignatura}"  filterBy="#{asigUni.nombreAsignatura}" styleClass="asignatura" filterMatchMode="contains">
                     <h:outputLink target="_blank" value="#{asigUni.webAsignatura}" rendered="#{not empty asigUni.webAsignatura}">#{asigUni.nombreAsignatura}</h:outputLink>
                     <h:outputText value="#{asigUni.nombreAsignatura}" rendered="#{empty asigUni.webAsignatura}" />
                 
@@ -113,7 +115,9 @@
             
                 <p:column headerText="Cred" sortBy="#{asigUni.creditos}" styleClass="creditos">
                 
-                    <h:outputText value="#{asigUni.creditos}"/>
+                    <h:outputText value="#{asigUni.creditos}">
+                        <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                    </h:outputText>
                 
                 </p:column>
                 
@@ -179,7 +183,9 @@
                 
                 <p:column headerText="Cr" styleClass="creditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
-                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" maxFractionDigits="1" minFractionDigits="0"/>
+                        </h:outputText>
                         <br/>
                     </ui:repeat>
                 </p:column>
@@ -193,7 +199,10 @@
                 </p:column>
                 <p:column headerText="Cr" styleClass="creditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
-                        <h:outputText value="#{asignatura.asignatura.creditos} "/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        </h:outputText>
+                                      
                         
                         <br/>
                     </ui:repeat>
@@ -201,11 +210,23 @@
                 <p:columnGroup type="footer">
             <p:row>
                 <p:column footerText="total créditos: " />
-                <p:column footerText="#{misEquivalenciasController.creditosA}"/>    
+                <p:column >
+                            <f:facet name="footer">
+                                <h:outputText value="#{misEquivalenciasController.creditosA}">
+                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>   
                    
                 
-                <p:column  footerText="total créditos:  " />
-                <p:column footerText="#{misEquivalenciasController.creditosB}"/>
+                <p:column  footerText="total créditos: " />
+                <p:column >
+                            <f:facet name="footer">
+                                <h:outputText value="#{misEquivalenciasController.creditosB}">
+                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
                 
             </p:row>
             
@@ -244,7 +265,9 @@
                 
                 <p:column headerText="Cr" styleClass="nuevoCreditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
-                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        </h:outputText>
                         <br/>
                     </ui:repeat>
                 </p:column>
@@ -259,7 +282,9 @@
                 
                 <p:column headerText="Cr" styleClass="nuevoCreditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
-                        <h:outputText value="#{asignatura.asignatura.creditos} "/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        </h:outputText>
                         
                         <br/>
                     </ui:repeat>
@@ -270,11 +295,23 @@
                 <p:columnGroup type="footer">
             <p:row>
                 <p:column footerText="total créditos: " />
-                <p:column footerText="#{misEquivalenciasController.creditosA}" />    
+                <p:column >
+                            <f:facet name="footer">
+                                <h:outputText value="#{misEquivalenciasController.creditosA}">
+                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>    
                    
                 
                 <p:column  footerText="total créditos: "  />
-                <p:column footerText="#{misEquivalenciasController.creditosB}" />
+                <p:column >
+                            <f:facet name="footer">
+                                <h:outputText value="#{misEquivalenciasController.creditosB}">
+                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                </h:outputText>
+                            </f:facet>
+                        </p:column>
                 <p:column/>
             </p:row>
             

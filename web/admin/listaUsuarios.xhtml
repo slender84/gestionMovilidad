@@ -29,18 +29,18 @@
                          rowKey="#{usuario.login}"
                          styleClass="borderless">
                 
-                <p:column headerText="login" sortBy="#{usuario.nombre}" filterBy="#{usuario.login}"  styleClass="campoUsuario">
+                <p:column headerText="login" sortBy="#{usuario.nombre}" filterBy="#{usuario.login}"  styleClass="campoUsuario" filterMatchMode="contains">
                     
                     <h:outputText value="#{usuario.login}"/>
                 </p:column>
             
-                <p:column headerText="nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}" styleClass="campoUsuario">
+                <p:column headerText="nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}" styleClass="campoUsuario" filterMatchMode="contains">
                 
                           <h:outputText value="#{usuario.nombre}"/>
                           
                 </p:column>
                 
-                <p:column headerText="apellido" sortBy="#{usuario.apellido1}" filterBy="#{usuario.apellido1}"  styleClass="campoUsuario">
+                <p:column headerText="apellido" sortBy="#{usuario.apellido1}" filterBy="#{usuario.apellido1}"  styleClass="campoUsuario" filterMatchMode="contains">
                 
                     <h:outputText value="#{usuario.apellido1}"/>
                 
