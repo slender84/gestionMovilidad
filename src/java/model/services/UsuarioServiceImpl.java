@@ -4,7 +4,7 @@ package model.services;
 
 
 import entities.CorreoConf;
-import entities.InfoCuenta;
+
 import entities.InfoCuenta;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;

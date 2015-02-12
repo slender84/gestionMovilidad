@@ -185,7 +185,7 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
                     
                     if(cal1.get(1)==cal2.get(1)){
                         if(cal1.get(2)>=8){
-                        System.out.println(cal1.get(1)+"/"+cal1.get(2));
+                        
                         ca.setCursoAcademico(cal1.get(1)+"/"+(cal1.get(1)+1));
                      
                     }else{
