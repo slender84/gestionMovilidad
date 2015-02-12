@@ -4,6 +4,7 @@ package entities;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -97,6 +98,28 @@ public class Contrato  implements java.io.Serializable {
     
     public void setEquivalencias(Set<Equivalencia> equivalencias) {
         this.equivalencias = equivalencias;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.idContrato);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Contrato other = (Contrato) obj;
+        if (!Objects.equals(this.idContrato, other.idContrato)) {
+            return false;
+        }
+        return true;
     }
 
 
