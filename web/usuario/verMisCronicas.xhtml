@@ -27,7 +27,10 @@
                          emptyMessage="no hay comentarios"
                          widgetVar="cronicaTable"
                          rowKey="#{cronica.idcronica}"
-                         styleClass="borderless">
+                         styleClass="borderless"
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}">
                 
                 <p:column headerText="autor" sortBy="#{cronica.alias}">
                     

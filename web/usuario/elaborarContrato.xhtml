@@ -28,6 +28,9 @@
                          paginator="true"
                          styleClass="tablaFic"
                          filteredValue="#{misEquivalenciasController.filteredAsignaturasFic}"
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
                          >
                
                 <f:facet name="header">ORIGEN: UDC</f:facet>
@@ -93,6 +96,9 @@
                          paginator="true"
                          rows="10"
                          styleClass="tablaUniversidad"
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
                          >
                 
                 <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.universidad.nombre}</f:facet>

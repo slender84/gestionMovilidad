@@ -170,7 +170,7 @@ public class VerContratosController implements Serializable{
         ArrayList<Equivalencia> listaCopia;
         
         for(Contrato c:selectedContratos){
-        
+         listaContratos.remove(c);
             try{
             c=equivalenciaService.buscarContrato(c.getIdContrato());
             }catch(InstanceNotFoundException ex){
@@ -192,6 +192,8 @@ public class VerContratosController implements Serializable{
             }
         }
           
+            
+
            }
         
         

@@ -30,6 +30,9 @@
                          paginator="true"
                          styleClass="tablaFic"
                          filteredValue="#{misEquivalenciasController.filteredAsignaturasFic}"
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
                          >
                <!-- <p:ajax event="rowSelectCheckbox" listener="{misEquivalenciasController.seleccionaFila}" update=":formEquivalenciaFic"/>
                 <p:ajax event="rowUnselectCheckbox" listener="{misEquivalenciasController.deseleccionarFila}" update=":formEquivalenciaFic"/>    
@@ -98,6 +101,9 @@
                          paginator="true"
                          rows="10"
                          styleClass="tablaUniversidad" 
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
                          >
                 
                 <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.universidad.nombre}</f:facet>

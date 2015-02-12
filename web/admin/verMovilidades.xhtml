@@ -25,6 +25,9 @@
                          rowKey="#{movilidad.codMovilidad}"
                          styleClass="borderless"
                          paginator="true" rows="10"
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
+                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="{currentPage} de {totalPages}"
                          
                          >
                 <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable').unselectAllRows();PF('movTable').filter();" update=":formMovilidades:t1 :formMovilidades:msgs"/>
