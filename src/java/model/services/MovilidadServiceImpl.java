@@ -51,7 +51,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
         
        List<Movilidad> aux=movilidadDao.listar();
         for(Movilidad m:aux){
-            Hibernate.initialize(m.getUniversidad());
+            //Hibernate.initialize(m.getUniversidad());
             if(m.getFechaFin().compareTo(new Date())==-1){
                 m.setEstado("terminada");
                 editarMovilidad(m);
@@ -121,7 +121,7 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
     public Movilidad buscarMovilidad(Integer id)throws InstanceNotFoundException{
         
         Movilidad m=movilidadDao.buscar(id);
-        Hibernate.initialize(m.getUniversidad());
+        //Hibernate.initialize(m.getUniversidad());
         return m;
     }
     
