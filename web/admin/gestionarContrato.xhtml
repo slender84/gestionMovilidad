@@ -5,6 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      
     <h:head>
         <title>Gestión de contrato</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
@@ -15,8 +16,9 @@
          
          <h:form>
          <p:commandButton value="Imprimir" type="button" icon="ui-icon-print" style="display:block;margin-bottom: 20px">
-           <p:printer target=":formTablaEquivalencias" />
+           <p:printer target=":outpan" />
        </p:commandButton>
+            
          </h:form>
         
          <p:outputPanel id="outpan">
@@ -49,7 +51,7 @@
              
              
         <h:form id="formTablaEquivalencias" styleClass="tablaEquivalenciasPublicas">
-               
+             
         <br/>
             <p:growl id="msgs" />
                <p:dataTable id="tablaEquivalenciasAdmin"
@@ -77,7 +79,7 @@
                     </ui:repeat>
                 </p:column>
                    
-                <p:column headerText="Créditos" styleClass="creditosPublica">
+                <p:column headerText="Cred" styleClass="creditosPublica">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}">
                             <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
@@ -103,7 +105,7 @@
                     </ui:repeat>
                 </p:column>
                    
-                    <p:column headerText="Creditos" styleClass="creditosPublica">
+                    <p:column headerText="Cred" styleClass="creditosPublica">
                         <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}">
                             <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>

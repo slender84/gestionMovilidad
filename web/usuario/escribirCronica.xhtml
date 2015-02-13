@@ -21,8 +21,9 @@
             <p:tooltip id="mostrar" for="focus" showEvent="focus" hideEvent="blur" />
             
             </h:panelGrid>
-            <p:editor id="editor" widgetVar="editorWidget" value="#{misCronicasController.texto}" width="600" required="true" requiredMessage="El texto está vacío"
-                      />
+            <p:inputTextarea id="editor" widgetVar="editorWidget" value="#{misCronicasController.texto}" cols="60" rows="10" 
+                             required="true" requiredMessage="El texto está vacío"/>
+                      
  
     <h:panelGrid columns="2" style="margin-top: 10px">
         <p:commandButton widgetVar="enviar" value="Enviar" action="#{misCronicasController.enviarCronica}" icon="ui-icon-disk" update="formTexto"

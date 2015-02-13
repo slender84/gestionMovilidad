@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
    
     <h:head>
@@ -48,77 +49,36 @@
         
         <h:form id="formCronica">
             
-            <p:growl id="msgs"/>
+            <h:outputText value="no hay comentarios" rendered="#{cronicasController.listaCronicas.size() eq 0}"/>
             
-            <p:dataTable id="t1" var="cronica" value="#{cronicasController.listaCronicas}" paginator="true" rows="10"
-                         emptyMessage="no hay comentarios"
-                         widgetVar="cronicaTable"
-                         rowKey="#{cronica.idcronica}"
-                         styleClass="borderless">
-                
-                
-                <p:column headerText="Autor" sortBy="#{cronica.alias}" filterBy="#{cronica.alias}" filterMatchMode="startsWith">
-                    <h:outputText value="#{cronica.alias}"/>
-                </p:column>
-                
-                <p:column styleClass="centrar" headerText="fecha" sortBy="#{cronica.fecha}">
-                        
-                        <h:outputText value="#{cronica.fecha}">
-                        
-                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                        
-                        </h:outputText>
-                        
-                        
-                    </p:column>
-                    <p:column headerText="Leer" styleClass="centrar">
-                    
-                    <p:commandButton  value="Leer" action="#{cronicasController.verCronica}" update=":panelEdicion"
-                                      icon="edit_icon"   > 
-                        <f:setPropertyActionListener value="#{cronica}" target="#{cronicasController.selectedCronica}"/>
-                    
-                    </p:commandButton>
-                    
-                    
-                    </p:column>
-               
-            </p:dataTable> 
+            <ui:repeat value="#{cronicasController.listaCronicas}" var="comentario">
+            
+                <h:outputText value="#{comentario.alias} "/>
+                <h:outputText value="#{comentario.fecha}">
+                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                </h:outputText>
+                <br/><br/>
+                <h:outputText value="#{comentario.texto}" styleClass="preformat" />
+                <br/><br/><br/><br/>
+            
+            
+            
+            
+            </ui:repeat>
+            
+             
             
             
         </h:form>
         <br/>
         <br/>
         
-        <p:outputPanel id="panelEdicion">
-            
-            <h:form id="formEdicion" rendered="#{cronicasController.panelTexto}">
-                <h:panelGrid cellpadding="2" columns="3">
-                <p:outputLabel value="Autor:"/>
-                <p:inputText value="#{cronicasController.selectedCronica.alias}" readonly="true"/>
-                <p:outputLabel/>
-                <p:outputLabel value="texto:"/>
-                <p:inputTextarea value="#{cronicasController.selectedCronica.texto}" readonly="true" cols="60" rows="10"/>
-                <p:outputLabel/>
-                
-                <p:outputLabel/> 
-                <p:outputLabel/>
-                <p:commandButton value="cerrar" action="#{cronicasController.cerrarEdicion}" update=":panelEdicion" process="@this"/>
-                </h:panelGrid>
-               
-            </h:form>
-            
-            
-        </p:outputPanel>
-        
-        
-        <br/>
-        
-        
+       
             
             <br/><br/>
             
             
-             <h:outputLink value="principal.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+             <h:outputLink value="principal.xhtml"><h:graphicImage  value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
             
         
         
@@ -131,6 +91,7 @@
         
     </h:body>
 </html>
+
 
 
 

@@ -550,5 +550,9 @@ and (min-width : 1200px) {
     }
     
     
-    
+    .preformat{
+        
+        white-space: pre-wrap;
+            
+    }    
 
