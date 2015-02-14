@@ -124,18 +124,24 @@ public class MisEquivalenciasController implements Serializable{
         user=(Usuario)session.getAttribute("user");
         
         
-        
+         System.out.println("a");
         if(context.getSessionMap().containsKey("movilidad")){
+            System.out.println("b");
         selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
         context.getSessionMap().remove("movilidad");
+        
+        
+        
         listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("UDC");
         if(listaAsignaturasFic.isEmpty())
             listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("Universidade da Coruña");
         listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(selectedMovilidad.getUniversidad().getNombre());
         
-            
+        
+           
         
          if(context.getSessionMap().containsKey("contrato")){
+              System.out.println("c");
         selectedContrato=(Contrato)context.getSessionMap().get("contrato");
         context.getSessionMap().remove("contrato");
         try{
@@ -167,6 +173,7 @@ public class MisEquivalenciasController implements Serializable{
         
         else{
              try{
+                  System.out.println("c");
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/verMisMovilidades.xhtml");
             }catch(IOException ex){
                     
