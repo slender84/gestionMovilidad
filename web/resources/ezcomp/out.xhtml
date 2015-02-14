@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      
+    <!-- INTERFACE -->
+    <cc:interface>
+        
+    </cc:interface>
+
+    
+    <cc:implementation>
+        
+        <h:form>
+            <p:menubar>
+           
+            <p:menuitem value="Home" url="/admin/index.xhtml" />
+            <p:menuitem value="Usuarios" url="/admin/listaUsuarios.xhtml"/>
+            <p:menuitem value="Países" url="/admin/crearPais.xhtml"/>
+            <p:menuitem value="Universidades" url="/admin/crearUniversidad.xhtml"/>       
+            <p:menuitem value="Asignaturas" url="/admin/crearAsignatura.xhtml"/>
+            <p:menuitem value="Movilidades" url="/admin/verMovilidades.xhtml"/>
+            <p:menuitem value="Mensajes" url="/admin/verMensajes.xhtml"/>
+            <p:menuitem value="Comentarios" url="/admin/verCronicas.xhtml"/>
+            <p:menuitem value="Equivalencias públicas" url="/admin/equivalenciasPublicasAdmin.xhtml"/>
+            <p:menuitem value="Cambiar password" url="/admin/cambiarPasswordAdmin.xhtml"/>
+            <p:submenu label="administración" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">
+            <p:menuitem value="crear tutor" url="/adminGeneral/crearAdmin.xhtml"/>
+            <p:menuitem value="Configurar correo" url="/adminGeneral/configuracionCorreo.xhtml"/>
+            </p:submenu>
+            <p:menuitem value="salir" action="#{beanUtilidades.salir}" icon="ui-icon-close" />
+            
+        </p:menubar>
+        </h:form>
+        
+    </cc:implementation>
+</html>

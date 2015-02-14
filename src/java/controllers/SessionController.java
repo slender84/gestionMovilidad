@@ -1,11 +1,14 @@
 
 package controllers;
 
+import entities.Usuario;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
+import javax.annotation.PostConstruct;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 
 
@@ -16,6 +19,7 @@ public class SessionController implements Serializable{
    
     private String zonaHoraria;
     private boolean mostrar=true;
+    private Usuario user;
     
     
     public SessionController() {
@@ -37,7 +41,14 @@ public class SessionController implements Serializable{
         this.mostrar = mostrar;
     }
     
-    
+    @PostConstruct
+    public void init(){
+        
+        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        user=(Usuario)session.getAttribute("user");
+        
+        
+    }
     
     
     
@@ -46,6 +57,14 @@ public class SessionController implements Serializable{
         mostrar=false;
         
            
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
     
     

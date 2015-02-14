@@ -3,7 +3,7 @@
     width: 45%;
     font-size: 14px;
     position: absolute;
-    top: 58px;
+    top: 112px;
     //left:50px;
 }
 
@@ -12,14 +12,14 @@
     height: 45%;
     font-size: 14px;
     position:absolute;
-    top: 58px;
+    top: 112px;
     left: 870px; 
 }
 
 .areaTexto{
     
     position: absolute;
-    top: 535px;
+    top: 589px;
 }
 
 .cerrarAreaTexto{
@@ -86,13 +86,13 @@
 .añadir{
     
     position: absolute;
-    top: 535px;
+    top: 589px;
     left: 820px;
     text-align:center; 
 }
 
 .tablaEquivalenciasAceptado{
-    top: 700px;
+    top: 754px;
     //left: 50px;
     height: 45%;
     width: 45%;
@@ -103,7 +103,7 @@
 }
 
 .tablaEquivalenciasAceptadoNuevo{
-    top: 700px;
+    top: 754px;
     left: 870px;
     height: 45%;
     width: 50%;
@@ -188,7 +188,7 @@ body.blue{
 }
 
 .tablaEquivalenciasComparadoAdmin{
-    top:198px;
+    top:252px;
     left: 880px;
     height: 50%;
     width: 45%;
@@ -202,7 +202,7 @@ body.blue{
     height: 65%;
     width: 80%;
     position:absolute;
-    top: 700px;
+    top: 754px;
     left:140px;
     text-align: center;
     font-size: 14px;
