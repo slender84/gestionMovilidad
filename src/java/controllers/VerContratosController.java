@@ -62,13 +62,16 @@ public class VerContratosController implements Serializable{
     @PostConstruct
     public void init(){
         
-       
+        
        session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
        user=(Usuario)session.getAttribute("admin");
        context=FacesContext.getCurrentInstance().getExternalContext();
        if(context.getSessionMap().containsKey("movilidad")==true){
+           
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
-           context.getSessionMap().remove("Movilidad");
+           //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("movilidad");
+           context.getSessionMap().remove("movilidad");
+           
            try{
                selectedMovilidad=movilidadService.buscarMovilidad(selectedMovilidad.getCodMovilidad());
            }catch(InstanceNotFoundException ex){

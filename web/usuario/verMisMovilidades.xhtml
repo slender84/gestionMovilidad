@@ -98,7 +98,7 @@
                 <p:column headerText="Acciones" styleClass="centrar">
                     
                     <p:commandButton  value="eliminar" action="#{misMovilidadesController.eliminarMovilidad}" update=":formMovilidad" onclick= "if (! confirm('¿seguro que quieres borrar?'))return false"
-                                      icon="fa-edit"  oncomplete="PF('movTable').filter()" rendered="#{movilidad.estado ne 'cancelada' and movilidad.estado ne 'terminada' and movilidad.estado ne 'pendiente'}"> 
+                                        oncomplete="PF('movTable').filter()" rendered="#{movilidad.estado ne 'cancelada' and movilidad.estado ne 'terminada' and movilidad.estado ne 'pendiente'}"> 
                         <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
                     
                     </p:commandButton>
@@ -140,7 +140,7 @@
                 
                 <p:column headerText="ver contrato/editar" styleClass="centrar">
                      
-                     <p:commandButton value="ver contrato/editar" action="#{verMisContratosController.editarContrato}" ajax="false" rendered="#{contrato.estado eq 'pendiente'||contrato.estado eq 'rechazado'}">
+                     <p:commandButton value="ver/editar" action="#{verMisContratosController.editarContrato}" ajax="false" rendered="#{contrato.estado eq 'pendiente'||contrato.estado eq 'rechazado'}">
                         <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
                     </p:commandButton>
                      <p:commandButton value="Ver contrato" action="#{verMisContratosController.revisarContrato}" ajax="false" rendered="#{contrato.estado eq 'aceptado' and verMisContratosController.verAceptado==true}">
@@ -179,9 +179,7 @@
         
         <br/>
         
-        <h:outputLink value="crearMovilidad.xhtml">Crear movilidad</h:outputLink>
-            
-            <br/><br/>
+        
             
             
              <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
@@ -190,11 +188,7 @@
         
             
                 
-        <h:form>
-             
-            <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
-            
-        </h:form>
+        
               
         
         

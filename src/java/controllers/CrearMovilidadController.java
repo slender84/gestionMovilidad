@@ -212,7 +212,7 @@ public class CrearMovilidadController implements Serializable{
        
        checkPais=true;
        listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(selectedPais);
-     
+       universidad=null;
    }
     
     public void onDropboxchangeUni(){

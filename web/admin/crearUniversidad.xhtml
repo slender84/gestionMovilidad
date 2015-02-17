@@ -158,7 +158,7 @@
                 <p:watermark for="text2" value="http://"/>
                 <h:outputLabel/>
                 <p:outputLabel value="info" />
-                <p:inputTextarea value="#{crearUniversidadController.selectedUniversidad.info}" />
+                <p:inputTextarea value="#{crearUniversidadController.selectedUniversidad.info}" rows="8" cols="50"  />
                 
                
                 
@@ -172,18 +172,12 @@
             </h:panelGrid>
           </h:form>   
                <br/>
-        <h:outputLink value="crearAsignatura.xhtml">Asignaturas</h:outputLink>
+        
         <br/><br/><br/>
-        <h:form>
+       
             
              <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
         
-                    <br/><br/>
-                    <p:commandButton value="Cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
-        </h:form>  
-           
-        
-        <br/>
     
     </h:body>
     

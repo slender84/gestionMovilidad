@@ -4,6 +4,7 @@ package entities;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -172,7 +173,36 @@ public class Asignatura  implements java.io.Serializable {
         this.miembroGrupoAsignaturaAs = miembroGrupoAsignaturaAs;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+       
+        Asignatura otra=(Asignatura)obj;
+        //if(this.id.equals(otra.getId())){
+            
+        //return true;
+        
+        return Objects.equals(this.getId(),otra.getId() );
+        
+        }
+         //return false;*/
+
+    
+    
+    }
 
 
 
-}
+

@@ -45,16 +45,18 @@ public class AsignaturaId  implements java.io.Serializable {
     }
 
 
+    @Override
    public boolean equals(Object other) {
          if ( (this == other ) ) return true;
 		 if ( (other == null ) ) return false;
 		 if ( !(other instanceof AsignaturaId) ) return false;
 		 AsignaturaId castOther = ( AsignaturaId ) other; 
          
-		 return (this.getCodAsignatura()==castOther.getCodAsignatura())
- && ( (this.getNombreUniversidad()==castOther.getNombreUniversidad()) || ( this.getNombreUniversidad()!=null && castOther.getNombreUniversidad()!=null && this.getNombreUniversidad().equals(castOther.getNombreUniversidad()) ) );
+		 return (this.getCodAsignatura().equals(castOther.getCodAsignatura()))
+ && ( (this.getNombreUniversidad().equals(castOther.getNombreUniversidad())) || ( this.getNombreUniversidad()!=null && castOther.getNombreUniversidad()!=null && this.getNombreUniversidad().equals(castOther.getNombreUniversidad()) ) );
    }
    
+   @Override
    public int hashCode() {
          int result = 17;
          

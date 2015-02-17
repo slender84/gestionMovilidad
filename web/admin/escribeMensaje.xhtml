@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
     <h:head>
         <title>Escribir mensaje a usuario</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
@@ -11,6 +12,7 @@
         <h:outputScript library="js" name="functions.js"/>
     </h:head>
     <h:body styleClass="blue">
+        <ezcomp:out/>
  <h2 style="text-align: center">Escribir mensaje</h2>
         <h:form id="usuario">
             
@@ -84,9 +86,7 @@
             <br/>
         
         
-             <h:form>
-                 <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
-            </h:form>
+            
         
         
     

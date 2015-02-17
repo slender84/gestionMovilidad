@@ -307,7 +307,62 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
      
     
     
-    @Override 
+   /* @Override 
+    public ArrayList<EquivalenciaRevisada> compararEquivalencias(ArrayList<Equivalencia> listaAuxEquivalencias,ArrayList<Equivalencia> listaAuxEquivalenciasComparado){
+        
+        ArrayList<EquivalenciaRevisada> listaRevisada=new ArrayList<EquivalenciaRevisada>();
+        
+        loop:
+        for(Equivalencia e:listaAuxEquivalencias){
+            EquivalenciaRevisada er=new EquivalenciaRevisada(e);
+            er.setIgual(true);
+            
+                  loopB: 
+                  for(Equivalencia eComp:listaAuxEquivalenciasComparado){
+                      
+                       if(e.getMiembroGrupoAsignaturaAs().size()==eComp.getMiembroGrupoAsignaturaAs().size()){
+                           System.out.println("a");
+                           if(e.getMiembroGrupoAsignaturaBs().size()==eComp.getMiembroGrupoAsignaturaBs().size()){
+                               System.out.println("b");
+                               
+                               Iterator i=e.getMiembroGrupoAsignaturaAs().iterator();
+                               MiembroGrupoAsignaturaA mA=(MiembroGrupoAsignaturaA)i.next();
+                               Asignatura a=mA.getAsignatura();
+                               
+                               Iterator j=eComp.getMiembroGrupoAsignaturaAs().iterator();
+                               MiembroGrupoAsignaturaA mA2=(MiembroGrupoAsignaturaA)j.next();
+                               Asignatura b=mA2.getAsignatura();
+                               
+                               System.out.println("id"+a.getId().equals(b.getId()));
+                               
+                               System.out.println("asignatura"+a.equals(b));
+                               System.out.println("miembros"+mA.equals(mA2));
+                               
+                               
+                               if(e.getMiembroGrupoAsignaturaAs().containsAll(eComp.getMiembroGrupoAsignaturaAs())){
+                                     System.out.println("c");
+                                       if(e.getMiembroGrupoAsignaturaBs().containsAll(eComp.getMiembroGrupoAsignaturaBs())){
+                                           System.out.println("d");
+                                           er.setIgual(false);
+                                           listaRevisada.add(er);
+                                           continue loop;
+                                          }
+                                      }
+                               
+                               
+                           }
+                           
+                  }
+                         
+               }
+                listaRevisada.add(er);
+            }
+            return listaRevisada;
+        }
+     
+     */
+     
+      @Override 
     public ArrayList<EquivalenciaRevisada> compararEquivalencias(ArrayList<Equivalencia> listaAuxEquivalencias,ArrayList<Equivalencia> listaAuxEquivalenciasComparado){
         
         ArrayList<EquivalenciaRevisada> listaRevisada=new ArrayList<EquivalenciaRevisada>();
@@ -319,6 +374,8 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
             ArrayList<Asignatura> listaAsignaturas=new ArrayList<Asignatura>();
             ArrayList<Asignatura> listaAsignaturasB=new ArrayList<Asignatura>();
             
+            ArrayList<Asignatura> listaAsignaturasComp=new ArrayList<Asignatura>();
+            ArrayList<Asignatura> listaAsignaturasCompB=new ArrayList<Asignatura>();
             
             Iterator i=e.getMiembroGrupoAsignaturaAs().iterator();
             while(i.hasNext()){
@@ -337,28 +394,32 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
             loopB: 
                   for(Equivalencia eComp:listaAuxEquivalenciasComparado){
                       
-                       ArrayList<Asignatura> listaAsignaturasComp=new ArrayList<Asignatura>();
-                       i=eComp.getMiembroGrupoAsignaturaAs().iterator();
-                            while(i.hasNext()){
-                            MiembroGrupoAsignaturaA m=(MiembroGrupoAsignaturaA)i.next();
-                            listaAsignaturasComp.add(m.getAsignatura());
-                
-                        }
+                       
                              
-                           if(listaAsignaturas.size()==listaAsignaturasComp.size()){
-                                 if(contiene(listaAsignaturas, listaAsignaturasComp)){
-                              
+                           if(eComp.getMiembroGrupoAsignaturaAs().size()==e.getMiembroGrupoAsignaturaAs().size()){
+                               
+                               if(eComp.getMiembroGrupoAsignaturaBs().size()==e.getMiembroGrupoAsignaturaBs().size()){
                                    
-                                   ArrayList<Asignatura> listaAsignaturasCompB=new ArrayList<Asignatura>();
-                                      j=eComp.getMiembroGrupoAsignaturaBs().iterator();
-                                      
+                                      i=eComp.getMiembroGrupoAsignaturaAs().iterator();
+                                      while(i.hasNext()){
+                                      MiembroGrupoAsignaturaA m=(MiembroGrupoAsignaturaA)i.next();
+                                      listaAsignaturasComp.add(m.getAsignatura());
+                
+                        }    
+                               
+                                       j=eComp.getMiembroGrupoAsignaturaBs().iterator();
                                        while(j.hasNext()){
                                        MiembroGrupoAsignaturaB mb=(MiembroGrupoAsignaturaB)j.next();
                                        listaAsignaturasCompB.add(mb.getAsignatura());
-                           }     
-                                      
-                                      if(listaAsignaturasB.size()==listaAsignaturasCompB.size()){
+                                          }     
+                               
+                            
+                               
+                                       if(contiene(listaAsignaturas, listaAsignaturasComp)){
+                                         
+                                        
                                           if(contiene(listaAsignaturasB, listaAsignaturasCompB)){
+                                              
                                                 er.setIgual(false);
                                                 listaRevisada.add(er);
                                                 continue loop;
@@ -396,6 +457,107 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
          
          return true;
      }
+     
+     /*@Override
+     public boolean equivalenciaRepetida(Equivalencia e, ArrayList<Equivalencia>listaEquivalencias){
+         
+         
+         
+         for(Equivalencia aux:listaEquivalencias){
+             
+             if(e.getMiembroGrupoAsignaturaAs().size()==aux.getMiembroGrupoAsignaturaAs().size()){
+                
+                          if(e.getMiembroGrupoAsignaturaBs().size()==aux.getMiembroGrupoAsignaturaBs().size()){
+                
+                                   
+                                 if(e.getMiembroGrupoAsignaturaAs().containsAll(aux.getMiembroGrupoAsignaturaAs())){
+                 
+                                            
+                                         if(e.getMiembroGrupoAsignaturaBs().containsAll(aux.getMiembroGrupoAsignaturaBs())){
+                                                   
+                                             return true;
+                                             
+                                             
+                 }
+                 
+               }
+            }
+             
+         }
+             
+         }
+         
+         return false;
+         
+         
+     }
+     
+     
+     */
+     
+     @Override
+     public boolean equivalenciaRepetida(Equivalencia e,ArrayList<Equivalencia>listaEquivalencias){
+         
+          ArrayList<Asignatura> listaAsignaturasA=new ArrayList<Asignatura>();
+          ArrayList<Asignatura> listaAsignaturasB=new ArrayList<Asignatura>();
+         
+          ArrayList<Asignatura> listaAsignaturasCompA=new ArrayList<Asignatura>();
+          ArrayList<Asignatura> listaAsignaturasCompB=new ArrayList<Asignatura>();
+          
+         Iterator j=e.getMiembroGrupoAsignaturaAs().iterator();
+         while(j.hasNext()){
+             MiembroGrupoAsignaturaA mA=(MiembroGrupoAsignaturaA)j.next();
+             listaAsignaturasA.add(mA.getAsignatura());
+         }
+         
+         Iterator i=e.getMiembroGrupoAsignaturaBs().iterator();
+         while(i.hasNext()){
+             
+             MiembroGrupoAsignaturaB mB=(MiembroGrupoAsignaturaB)i.next();
+             listaAsignaturasB.add(mB.getAsignatura());
+         }
+         
+         
+         for(Equivalencia aux:listaEquivalencias){
+            
+             
+             if(aux.getMiembroGrupoAsignaturaAs().size()==e.getMiembroGrupoAsignaturaAs().size()){
+                 
+                 if(aux.getMiembroGrupoAsignaturaBs().size()==e.getMiembroGrupoAsignaturaBs().size()){
+                     
+                     i=aux.getMiembroGrupoAsignaturaAs().iterator();
+                 while(i.hasNext()){
+                 MiembroGrupoAsignaturaA mA=(MiembroGrupoAsignaturaA)i.next();
+                 listaAsignaturasCompA.add(mA.getAsignatura());
+             }
+                     
+                     
+                     
+                     if(contiene(listaAsignaturasA, listaAsignaturasCompA)){
+                         
+                         j=aux.getMiembroGrupoAsignaturaBs().iterator();
+                         while(j.hasNext()){
+                          MiembroGrupoAsignaturaB mB=(MiembroGrupoAsignaturaB)j.next();
+                          listaAsignaturasCompB.add(mB.getAsignatura());
+                          
+                         }
+                         
+                         if(contiene(listaAsignaturasB, listaAsignaturasCompB)){
+                             return true;
+                         }
+                     }
+                     
+                 }
+                 
+                 
+             }
+             
+            
+             
+         }
+              return false;   
+     }
+     
      
      @Override
      public Contrato verContratoPorEquivalencia(Equivalencia e) throws InstanceNotFoundException{

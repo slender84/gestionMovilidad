@@ -230,27 +230,17 @@
                 </p:inputText>    
                 <p:watermark for="texto2" value="http://"/>
                 <h:outputLabel/>
-                <p:outputLabel value="info" />
-                <p:inputTextarea value="#{crearAsignaturaController.selectedAsignatura.infoAsigantura}" cols="22" />
                 
-                <p:outputLabel value="titulacion" />
-                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.titulacion}" 
-                             validatorMessage="Máximo 45 caracteres">
-                    <f:validateLength maximum="45"/>
-                </p:inputText>
                 
-                <p:outputLabel value="Facultad" />
-                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.facultad}"
-                             validatorMessage="Máximo 45 caracteres">
-                    <f:validateLength maximum="45"/>
-                </p:inputText>
+               
                 <p:outputLabel value="periodo" />
                 <p:selectOneMenu value="#{crearAsignaturaController.selectedAsignatura.periodo}" >
                     <f:selectItem itemLabel="anual" itemValue="anual"/>
                     <f:selectItem itemLabel="invierno" itemValue="invierno"/>
                     <f:selectItem itemLabel="primavera" itemValue="primavera"/>
                 </p:selectOneMenu>
-                
+                <p:outputLabel value="info" />
+                <p:inputTextarea value="#{crearAsignaturaController.selectedAsignatura.infoAsigantura}" cols="50" rows="8"  />
                 <p:commandButton process=":formDetalles:" id="actualizaBtn" value="editar" action="#{crearAsignaturaController.editar()}" update=":formDetalles: :formTabla: :formUniversidad :formAsignatura"
                                   />
                 <p:commandButton id="cancelBtn" value="cerrar" action="#{crearAsignaturaController.cerrar}" update=":formDetalles" process="cancelBtn"
@@ -265,17 +255,13 @@
         
             
        
-        <h:outputLink value="crearUniversidad.xhtml">Universidades</h:outputLink>
-        <br/><br/>
+       
         
         
          <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
           <br/>  
         
         
-             <h:form>
-                <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
-            </h:form>
         
         
     

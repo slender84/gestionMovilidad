@@ -2,6 +2,7 @@ package entities;
 // Generated 15-ene-2015 23:57:01 by Hibernate Tools 4.3.1
 
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -67,6 +68,28 @@ public class MiembroGrupoAsignaturaB  implements java.io.Serializable {
     
     public void setEquivalencia(Equivalencia equivalencia) {
         this.equivalencia = equivalencia;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.asignatura);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MiembroGrupoAsignaturaB other = (MiembroGrupoAsignaturaB) obj;
+        if (!Objects.equals(this.asignatura, other.asignatura)) {
+            return false;
+        }
+        return true;
     }
 
 

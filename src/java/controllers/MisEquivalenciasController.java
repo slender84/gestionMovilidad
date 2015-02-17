@@ -39,6 +39,7 @@ import model.services.UsuarioService;
 import model.utils.beanUtilidades;
 
 
+
 /**
  *
  * @author abc
@@ -118,7 +119,7 @@ public class MisEquivalenciasController implements Serializable{
         context=FacesContext.getCurrentInstance().getExternalContext();
         session=(HttpSession)context.getSession(false);
         
-        
+       
        
       
         user=(Usuario)session.getAttribute("user");
@@ -129,6 +130,7 @@ public class MisEquivalenciasController implements Serializable{
            
         selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
         context.getSessionMap().remove("movilidad");
+            
         
         
         
@@ -144,6 +146,7 @@ public class MisEquivalenciasController implements Serializable{
               
         selectedContrato=(Contrato)context.getSessionMap().get("contrato");
         context.getSessionMap().remove("contrato");
+            
         try{
         c=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
         }catch(InstanceNotFoundException ex){
@@ -427,14 +430,15 @@ public class MisEquivalenciasController implements Serializable{
             return null;
         }
        
-        
+        Float creditosAaux=new Float(0);
+        Float creditosBaux=new Float(0);
         
         for(Asignatura a:selectedAsignaturasFic){
        
         ma=new MiembroGrupoAsignaturaA(a, equivalencia);
         equivalencia.getMiembroGrupoAsignaturaAs().add(ma);
         
-                  creditosA=creditosA+a.getCreditos();                              // con cascade save-update no hace falta salvar el miembro_grupo_asignaturas
+                  creditosAaux=creditosAaux+a.getCreditos();                             // con cascade save-update no hace falta salvar el miembro_grupo_asignaturas
         
         }
         
@@ -442,11 +446,26 @@ public class MisEquivalenciasController implements Serializable{
             
         mb=new MiembroGrupoAsignaturaB(a, equivalencia);
         equivalencia.getMiembroGrupoAsignaturaBs().add(mb);
-                   creditosB=creditosB+a.getCreditos();
-            
+                   //creditosB=creditosB+a.getCreditos();
+                     creditosBaux=creditosBaux+a.getCreditos();
         }
+         //System.out.println("tamaño lista "+ listaAuxEquivalencias.size()); 
+        
+        
+        
+        
+         if(equivalenciaService.equivalenciaRepetida(equivalencia, listaAuxEquivalencias)==true){
+            beanUtilidades.creaMensaje("Equivalencia repetida: descartada", FacesMessage.SEVERITY_ERROR);
+        return null;
+        }
+         creditosA=creditosAaux+creditosA;
+         creditosB=creditosBaux+creditosB;
+        
         equivalencia.setVisible(false);
         equivalencia.setIdequivalencia(j);
+        
+       
+        
         
             listaAuxEquivalencias.add(equivalencia);
             j++;
@@ -610,17 +629,30 @@ public class MisEquivalenciasController implements Serializable{
     
     public void detallesAsign(){
          
-        verInfo=true;
+        //verInfo=true;
+        
+        
+        
         
     }
     
     public void cerrarDetallesAsign(){
         
-        verInfo=false;
+        //verInfo=false;
     }
    
-    
-    
+  /* @PreDestroy 
+   public void destroy(){
+       if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("ultimo")){
+          FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("ultimo"); 
+       }
+   FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("movilidad");
+   FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("contrato");
+       System.out.println("destruyendo");     
+        
+        
+    }
+    */
     
     public String nuevoAceptado(){
         

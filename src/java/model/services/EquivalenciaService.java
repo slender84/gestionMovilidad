@@ -33,6 +33,7 @@ public interface EquivalenciaService {
    public ArrayList<EquivalenciaRevisada> compararEquivalencias(ArrayList<Equivalencia> listaAuxEquivalencias,ArrayList<Equivalencia> listaAuxEquivalenciasComparado);
     public Contrato verContratoPorEquivalencia(Equivalencia e)throws InstanceNotFoundException;
     public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException;
+    public boolean equivalenciaRepetida(Equivalencia e, ArrayList<Equivalencia> listaEquivalencias);
 }
 
 

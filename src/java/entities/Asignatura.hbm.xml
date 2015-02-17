@@ -39,7 +39,7 @@
         <set name="miembroGrupoAsignaturaBs" table="miembro_grupo_asignatura_b" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="codAsignatura" />
-                <column name="nombreUniversidad" length="45" />
+                <column name="nombreUniversidad" length="200" />
             </key>
             <one-to-many class="entities.MiembroGrupoAsignaturaB" />
         </set>

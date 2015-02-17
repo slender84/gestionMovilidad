@@ -66,7 +66,8 @@
                 
                 <p:column styleClass="info" headerText="+info">
                         
-                        <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" rendered="#{not empty asigFic.infoAsigantura}">
+                        <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic"
+                                       oncomplete="PF('dialog1').show();" rendered="#{not empty asigFic.infoAsigantura}">
                         
                             <f:setPropertyActionListener value="#{asigFic}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             
@@ -80,13 +81,21 @@
             </p:dataTable>
        
             
-            <p:inputTextarea id="info" readonly="true" cols="58" rows="4"  styleClass="areaTexto" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}"
-                             rendered="#{misEquivalenciasController.verInfo}"/>
-            <p:commandButton styleClass="cerrarAreaTexto" value="cerrar" action="#{misEquivalenciasController.cerrarDetallesAsign}" update=":formEquivalenciaFic"
-                             rendered="#{misEquivalenciasController.verInfo}"/> 
+            
        
+            <p:dialog header="información" widgetVar="dialog1"  >
+                
+                <h:inputTextarea readonly="true" value="#{misEquivalenciasController.selectedAsignatura.infoAsigantura}" rows="8" cols="50" />
+                
+                
+            </p:dialog>
+            
        </p:outputPanel>
            
+                
+                
+                
+                
 
         
                 <p:outputPanel>
@@ -132,7 +141,8 @@
                 
                 <p:column headerText="+info" styleClass="info">
                         
-                     <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" rendered="#{not empty asigUni.infoAsigantura}">
+                     <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" 
+                                    oncomplete="PF('dialog1').show();" rendered="#{not empty asigUni.infoAsigantura}">
                         
                             <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             
@@ -298,7 +308,7 @@
                 <p:columnGroup type="footer">
             <p:row>
                 <p:column footerText="total créditos: " />
-                <p:column >
+                <p:column>
                             <f:facet name="footer">
                                 <h:outputText value="#{misEquivalenciasController.creditosA}">
                                     <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
@@ -340,11 +350,7 @@
     
        
       
-        <h:form style="position: absolute;top: 600px;left: 1100px">
-            
-           <p:commandButton value="cerrar sesión" action="#{beanUtilidades.salir}" ajax="false"/>
-            
-        </h:form>
+       
         
         
         <br />

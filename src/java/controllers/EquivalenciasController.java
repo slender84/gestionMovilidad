@@ -96,6 +96,7 @@ public class EquivalenciasController implements Serializable{
            selectedContrato=(Contrato)context.getSessionMap().get("contrato");
            context.getSessionMap().remove("contrato");
            context.getSessionMap().remove("movilidad");
+               
            try{
            selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
            }catch(InstanceNotFoundException ex){

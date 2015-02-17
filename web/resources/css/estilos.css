@@ -557,15 +557,12 @@ and (min-width : 1200px) {
     }    
 
     
-    .ui-breadcrumb ul li.first a{
-   background-image: none;
-   text-indent: 0;
-   display: block;
-    float: left;
-    height: 21px;
-    line-height: 21px;
-    width: 30px;
-    margin-top: 0;
-    overflow: hidden;
-    position: relative;
-}
+    .ui-button{
+        
+        width: 160px;
+        height: 35px;
+        font-size: 15px;
+        
+    }
+
+
