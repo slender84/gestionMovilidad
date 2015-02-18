@@ -246,7 +246,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
         for(Equivalencia e:c.getEquivalencias()){
             
             if(listaAuxEquivalencias.contains(e)==false){
-              
+                
                    listaCopia.add(e);
           
         }

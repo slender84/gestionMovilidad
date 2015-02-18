@@ -109,6 +109,7 @@ public class Equivalencia  implements java.io.Serializable {
         if (!Objects.equals(this.idequivalencia, other.idequivalencia)) {
             return false;
         }
+        
         return true;
     }
 
