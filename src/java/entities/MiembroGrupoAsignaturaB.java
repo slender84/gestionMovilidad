@@ -77,24 +77,20 @@ public class MiembroGrupoAsignaturaB  implements java.io.Serializable {
         return hash;
     }
 
-    @Override
+     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof MiembroGrupoAsignaturaB)) {
             return false;
         }
-        final MiembroGrupoAsignaturaB other = (MiembroGrupoAsignaturaB) obj;
-        if (!Objects.equals(this.asignatura, other.asignatura)) {
-            return false;
-        }
-        return true;
-    }
+        MiembroGrupoAsignaturaB other = (MiembroGrupoAsignaturaB) obj;
+      return(Objects.equals(this.getAsignatura(), other.getAsignatura()));
 
 
 
 
 }
 
-
+}

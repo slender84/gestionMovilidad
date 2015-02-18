@@ -82,14 +82,11 @@ public class MiembroGrupoAsignaturaA  implements java.io.Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof MiembroGrupoAsignaturaA)) {
             return false;
         }
-        final MiembroGrupoAsignaturaA other = (MiembroGrupoAsignaturaA) obj;
-        if (!Objects.equals(this.asignatura, other.asignatura)) {
-            return false;
-        }
-        return true;
+        MiembroGrupoAsignaturaA other = (MiembroGrupoAsignaturaA) obj;
+      return(Objects.equals(this.getAsignatura(), other.getAsignatura()));
     }
 
 

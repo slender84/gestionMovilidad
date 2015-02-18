@@ -182,27 +182,25 @@ public class Asignatura  implements java.io.Serializable {
 
     @Override
     public boolean equals(Object obj) {
+       
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        
+        if (!(obj instanceof Asignatura)) {
             return false;
         }
-       
+        
         Asignatura otra=(Asignatura)obj;
-        //if(this.id.equals(otra.getId())){
-            
-        //return true;
         
-        return Objects.equals(this.getId(),otra.getId() );
+       
+   return (Objects.equals(this.getId(),otra.getId() ));
         
-        }
-         //return false;*/
-
+       
     
     
     }
 
 
-
+}
 
