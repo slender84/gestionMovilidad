@@ -102,7 +102,11 @@ public class Equivalencia  implements java.io.Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        /*if (getClass() != obj.getClass()) {
+            return false;
+        }*/
+        
+        if (!(obj instanceof Equivalencia)) {
             return false;
         }
         final Equivalencia other = (Equivalencia) obj;
