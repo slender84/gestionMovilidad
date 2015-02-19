@@ -191,6 +191,11 @@ public class Asignatura  implements java.io.Serializable {
             return false;
         }
         
+        /*System.out.println(getClass().equals(obj.getClass()));
+        if ( getClass().equals(obj.getClass())==false) {
+            return false;
+        }*/
+        
         Asignatura otra=(Asignatura)obj;
         
        

@@ -454,6 +454,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
                 
                           if(e.getMiembroGrupoAsignaturaBs().size()==aux.getMiembroGrupoAsignaturaBs().size()){
                               
+                              
                               if(e.getMiembroGrupoAsignaturaAs().containsAll(aux.getMiembroGrupoAsignaturaAs())){
                                      
                                             
