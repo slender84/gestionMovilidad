@@ -65,8 +65,10 @@
                     <p:column selectionMode="multiple" styleClass="multiple"/>
                
                          <f:facet name="footer">
-                             <p:commandButton onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formTabla:" icon="ui-icon-search" value="Eliminar" action="#{eliminarUsuarioController.eliminaUsuariosLista}" 
-                                              oncomplete="PF('usTable').filter()" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}" />
+                             <p:commandLink onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formTabla:" action="#{eliminarUsuarioController.eliminaUsuariosLista}" 
+                                              oncomplete="PF('usTable').filter()" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">
+                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                             </p:commandLink>
                          </f:facet>
                 
             </p:dataTable>

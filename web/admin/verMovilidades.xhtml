@@ -117,18 +117,23 @@
                 
                
                          <f:facet name="footer">
-                             <p:commandButton widgetVar="eliminar"  onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades:" icon="ui-icon-search" value="Eliminar" action="#{movilidadesController.eliminaMovilidadLista}" 
-                                 oncomplete="PF('movTable').filter()" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}"/>
-                             <p:commandButton value="enviar mensaje" action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades:msgs"/>  
+                             <p:commandLink  onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades:"  action="#{movilidadesController.eliminaMovilidadLista}" 
+                                 oncomplete="PF('movTable').filter()" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
+                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                             </p:commandLink>
+                             <p:commandLink action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades:msgs">
+                                 <h:graphicImage value="/resources/img/edit48.png" title="Escrribir mensaje"/>
+                             </p:commandLink>
                          </f:facet>
                 
                 <p:column headerText="contratos" styleClass="contratos">
                     
-                    <p:commandButton value="contratos" action="#{movilidadesController.verContratos}" ajax="false" rendered="#{movilidad.estado eq 'aceptada'||movilidad.estado eq 'cancelada'||movilidad.estado eq 'terminada'}">
+                    <p:commandLink action="#{movilidadesController.verContratos}" ajax="false" rendered="#{movilidad.estado eq 'aceptada'||movilidad.estado eq 'cancelada'||movilidad.estado eq 'terminada'}">
                     
                         <f:setPropertyActionListener value="#{movilidad}" target="#{movilidadesController.selectedMovilidad}"/>
+                        <h:graphicImage value="/resources/img/doc48.png" title="ver contratos"/>
                         
-                    </p:commandButton>
+                    </p:commandLink>
                     
                 </p:column>
                 

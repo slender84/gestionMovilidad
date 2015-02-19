@@ -34,19 +34,19 @@
                              {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              currentPageReportTemplate="{currentPage} de {totalPages}">
                 
-                <p:column headerText="autor" sortBy="#{cronica.alias}">
+                <p:column headerText="autor" filterBy="#{cronica.alias}" filterMatchMode="contains" sortBy="#{cronica.alias}" styleClass="nombreCronica">
                     
                     <h:outputText value="#{cronica.alias}"/>
                     
                 </p:column>
                 
-                <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="startsWith">
+                <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="startsWith" styleClass="uniCronica">
                 
                     <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value="#{cronica.universidad.nombre}"/></h:outputLink>
                     <h:outputText value="#{cronica.universidad.nombre}" rendered="#{empty cronica.universidad.web}"/>
                 </p:column>
                     
-                    <p:column headerText="fecha" sortBy="#{cronica.fecha}">
+                <p:column headerText="fecha" sortBy="#{cronica.fecha}" styleClass="fechaCronica">
                         
                         <h:outputText value="#{cronica.fecha}">
                         
@@ -58,7 +58,7 @@
                     </p:column>
                 
                
-                <p:column headerText="estado" sortBy="#{cronica.estado}" filterBy="#{cronica.estado}" filterMatchMode="exact">
+                <p:column headerText="estado" sortBy="#{cronica.estado}" filterBy="#{cronica.estado}" filterMatchMode="exact" styleClass="estadoCronica">
                         <f:facet name="filter">
                            
                             <p:selectOneMenu onchange="PF('cronicaTable').filter()">
@@ -73,13 +73,14 @@
                 
                 
                 
-                <p:column headerText="editar" styleClass="centrar">
+                <p:column headerText="editar" styleClass="editarCronica">
                     
-                    <p:commandButton  value="Ver/editar" action="#{misCronicasController.verCronica}" update=":panelEdicion"
-                                      icon="edit_icon"  > 
+                    <p:commandLink   action="#{misCronicasController.verCronica}" update=":panelEdicion">
+                                      
+                        
                         <f:setPropertyActionListener value="#{cronica}" target="#{misCronicasController.selectedCronica}"/>
-                    
-                    </p:commandButton>
+                        <h:graphicImage value="/resources/img/edit48.png" title="editar"/>
+                    </p:commandLink>
                     
                     
                 </p:column>

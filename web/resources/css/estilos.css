@@ -481,6 +481,7 @@ and (min-width : 1200px) {
 .fechaEnviados,.asuntoEnviados,.multipleEnviados,.leerEnviados,.centrar{
     
     text-align: center;
+    font-size: 14px;
 }
 
 .asignaturaPublicaAdmin{
@@ -557,12 +558,145 @@ and (min-width : 1200px) {
     }    
 
     
-    .ui-button{
+   
+
+
+    .ui-icon.prueba{
         
-        width: 160px;
-        height: 35px;
-        font-size: 15px;
+        background-image: url("#{resource['img:trash-icon.png']}");
+       
+    }
+    
+    
+    .uniMovilidad{
+        text-align: center;
+        font-size: 14px;
+        width: 40%
         
     }
-
-
+    
+    .cursoMovilidad{
+        font-size: 14px;
+        text-align: center;
+        width:10%; 
+            
+    }
+    
+    .fechaIniMovilidad{
+        font-size: 14px;
+        text-align: center;
+        width: 10%;
+    }
+    
+    .fechaFinMovilidad{
+        font-size: 14px;
+        text-align: center;
+        width: 10%;
+    }
+    
+    .estadoMovilidad{
+        font-size: 14px;
+        text-align: center;
+        width: 10%;
+    }
+    
+    .contratosMovilidad{
+        font-size: 14px;
+        text-align: center;
+        width: 10%;
+        
+    }
+    
+    .accionesMovilidad{
+        text-align: center;
+        font-size: 14px;
+        width: 10%;
+    }
+   
+    .nombreCronica{
+       text-align: center;
+       font-size: 14px;
+       width: 20%;
+        
+    }
+    .uniCronica{
+        
+       text-align: center;
+       font-size: 14px;
+       width: 50%; 
+         
+    }
+    
+    .fechaCronica{
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    }
+    
+    .estadoCronica{
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    }
+    
+    .editarCronica{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    }
+    
+    
+    .mandadoPor{
+       text-align: center;
+       font-size: 14px;
+       width: 25%; 
+        
+        
+    }
+    
+    .asuntoMensaje{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 25%; 
+        
+    }
+    
+    .fechaMensaje{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 20%; 
+        
+    }
+    
+    .leidoMensaje{
+        
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+    }
+    
+    .leerMensaje{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+    }
+    
+    .multipleMensaje{
+        
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    }
+    
+    
+    

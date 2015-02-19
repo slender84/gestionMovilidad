@@ -188,11 +188,11 @@
                     
                     <p:column headerText="detalles/edición" styleClass="detallesAsignatura">
                         
-                        <p:commandButton id="detailBtn" value="ver detalles/editar" process=":formTabla:" action="#{crearAsignaturaController.verDetalles}" update=":formDetalles:" ajax="true">
+                        <p:commandLink id="detailBtn" process=":formTabla:" action="#{crearAsignaturaController.verDetalles}" update=":formDetalles:" ajax="true">
                         
                             <f:setPropertyActionListener value="#{asignatura}" target="#{crearAsignaturaController.selectedAsignatura}"/>
-                        
-                        </p:commandButton>
+                            <h:graphicImage value="/resources/img/edit48.png" title="detalles/editar"/>
+                        </p:commandLink>
                         
                     </p:column>
                     
@@ -200,8 +200,10 @@
                
                     
                          <f:facet name="footer">
-                             <p:commandButton id="deleteBtn"  onclick="if (! confirm('¿seguro que quieres eliminar?')) return false" process=":formTabla:" update=":formTabla: :formDetalles: :formAsignatura :formUniversidad" icon="ui-icon-search" value="Eliminar" action="#{crearAsignaturaController.eliminaAsignaturasLista}"  
-                               oncomplete="PF('asignaturaBtn').filter()" />
+                             <p:commandLink id="deleteBtn"  onclick="if (! confirm('¿seguro que quieres eliminar?')) return false" process=":formTabla:" update=":formTabla: :formDetalles: :formAsignatura :formUniversidad" action="#{crearAsignaturaController.eliminaAsignaturasLista}"  
+                               oncomplete="PF('asignaturaBtn').filter()">
+                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                             </p:commandLink>
                          </f:facet>
                     
                 

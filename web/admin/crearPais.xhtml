@@ -44,12 +44,12 @@
                     </p:column>
                     <p:column headerText="eliminar" styleClass="centrar">
                         
-                        <p:commandButton id="button1" value="eliminar" action="#{paisController.eliminaPais}" update=":formPais"
+                        <p:commandLink id="button1" action="#{paisController.eliminaPais}" update=":formPais"
                                          process="button1"  
                                          onclick= "if (! confirm('¿seguro que quieres borrar?'))return false">
                             <f:setPropertyActionListener target="#{paisController.pais}" value="#{pais}"/>
-                        
-                        </p:commandButton>
+                            <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                        </p:commandLink>
                         
                     </p:column>
                     

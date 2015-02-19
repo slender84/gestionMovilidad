@@ -74,11 +74,11 @@
                 
                 <p:column headerText="Ver/editar" styleClass="centrar">
                     
-                    <p:commandButton  value="Ver/editar" action="#{cronicasController.verCronica}" update=":panelEdicion"
-                                      icon="edit_icon"   > 
+                    <p:commandLink  action="#{cronicasController.verCronica}" update=":panelEdicion"
+                                        > 
                         <f:setPropertyActionListener value="#{cronica}" target="#{cronicasController.selectedCronica}"/>
-                    
-                    </p:commandButton>
+                        <h:graphicImage value="/resources/img/edit48.img" title="editar"/>
+                    </p:commandLink>
                     
                     
                 </p:column>
@@ -87,7 +87,9 @@
                     
                     <f:facet name="footer">
                         
-                        <p:commandButton value="eliminar" action="#{cronicasController.eliminarCronicas}" update=":formCronica :panelEdicion" oncomplete="PF('cronicaTable').filter();" />
+                        <p:commandLink action="#{cronicasController.eliminarCronicas}" update=":formCronica :panelEdicion" oncomplete="PF('cronicaTable').filter();">
+                            <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                        </p:commandLink>
                         
                         
                     </f:facet>    

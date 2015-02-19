@@ -30,21 +30,21 @@
                          >
                <f:facet name="header">Mensajes recibidos</f:facet>
                 
-                      <p:column headerText="De:">
+               <p:column headerText="De:" styleClass="mandadoPor">
                           <h:outputText value="#{mensaje.usuarioByOrigen.login}"/>
                       </p:column>
                     
-                      <p:column headerText="asunto">
+               <p:column headerText="asunto" styleClass="asuntoMensaje">
                          <h:outputText value="#{mensaje.tema}"/>
                       </p:column>
                     
-                      <p:column headerText="fecha" sortBy="#{mensaje.fecha}">
+               <p:column headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaMensaje">
                           <h:outputText value="#{mensaje.fecha}">
                               <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                           </h:outputText>
                       </p:column>
                
-               <p:column filterBy="#{mensaje.leidoDestino}" headerText="leido" filterMatchMode="exact" styleClass="leerEnviados">
+               <p:column filterBy="#{mensaje.leidoDestino}" headerText="leido" filterMatchMode="exact" styleClass="leidoMensaje">
                    <f:facet name="filter">
                       <p:selectOneMenu onchange="PF('mensTabla').filter()">
                             <f:selectItem itemLabel="no" itemValue="no" />
@@ -56,17 +56,20 @@
                    <h:outputText value="si" rendered="#{mensaje.leidoDestino eq 'true'}"/>
                    <h:outputText value="no" rendered="#{mensaje.leidoDestino eq 'false'}"/>
                </p:column>
-               <p:column styleClass="leerEnviados" headerText="Leer">
-                        <p:commandButton value="leer" update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.leerMensajeRecibido}">
+               <p:column styleClass="leerMensaje" headerText="Leer">
+                        <p:commandLink  update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.leerMensajeRecibido}">
                             <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesRecibidosUserController.selectedMensajeRecibido}"/>
-                           </p:commandButton>
+                            <h:graphicImage value="/resources/img/lupa48.png" title="leer"/>
+                           </p:commandLink>
                       </p:column>
                
-               <p:column selectionMode="multiple" styleClass="multipleEnviados"/>
+               <p:column selectionMode="multiple" styleClass="multipleMensaje"/>
                
                          <f:facet name="footer">
-                             <p:commandButton update=":recibidos :panelRecibidos" icon="ui-icon-search" value="Borrar" action="#{mensajesRecibidosUserController.eliminarMensajesRecibidos}"
-                                              oncomplete="PF('mensTabla').clearFilters()"/>
+                             <p:commandLink update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.eliminarMensajesRecibidos}"
+                                              oncomplete="PF('mensTabla').clearFilters()">
+                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                             </p:commandLink>
                          </f:facet>
                
                 </p:dataTable> 
@@ -100,26 +103,29 @@
                  
                          <f:facet name="header">Mensajes enviados</f:facet>
                              
-                         <p:column headerText="asunto">
+                         <p:column headerText="asunto" styleClass="mandadoPor">
                                  <h:outputText value="#{mensaje.tema}"/>
                               </p:column>
                          
-                         <p:column  headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaEnviados">
+                         <p:column  headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaMensaje">
                                    <h:outputText value="#{mensaje.fecha}">
                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}"/>
                                    </h:outputText>
                               </p:column>
                         
-                         <p:column headerText="leer" styleClass="leerEnviados">
-                             <p:commandButton value="leer" update=":enviados :panelEnviados" action="#{mensajesEnviadosUserController.leerMensajeEnviado}" styleClass="leerEnviados">
+                         <p:column headerText="leer" styleClass="leerMensaje">
+                             <p:commandLink update=":enviados :panelEnviados" action="#{mensajesEnviadosUserController.leerMensajeEnviado}" styleClass="leerEnviados">
                                       <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosUserController.selectedMensajeEnviado}"/>
-                                  </p:commandButton>
+                                      <h:graphicImage value="/resources/img/lupa48.png" title="leer"/>
+                                  </p:commandLink>
                               </p:column>
                          
-                         <p:column selectionMode="multiple" style="multiple" styleClass="multipleEnviados"/>
+                         <p:column selectionMode="multiple" style="multiple" styleClass="multipleMensaje"/>
                              
                          <f:facet name="footer">
-                             <p:commandButton update=":enviados :panelEnviados" icon="ui-icon-search" value="Borrar" action="#{mensajesEnviadosUserController.eliminarMensajesEnviados}" />
+                             <p:commandLink update=":enviados :panelEnviados" action="#{mensajesEnviadosUserController.eliminarMensajesEnviados}" >
+                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                             </p:commandLink>
                          </f:facet>
                          
                         </p:dataTable>   

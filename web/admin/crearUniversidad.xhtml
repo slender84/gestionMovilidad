@@ -118,20 +118,24 @@
                                            
                                <p:column headerText="ver detalles/editar" style="font-size:12px;">
                                    
-                                   <p:commandButton value="ver detalles/editar" action="#{crearUniversidadController.verDetalles}" update=":formDetalles">
+                                   <p:commandLink action="#{crearUniversidadController.verDetalles}" update=":formDetalles">
                                    
                                        <f:setPropertyActionListener value="#{universidad}" target="#{crearUniversidadController.selectedUniversidad}"/>
+                                       <h:graphicImage value="/resources/img/edit48.png" title="editar"/>
                                        
-                                   </p:commandButton>
+                                       
+                                   </p:commandLink>
                                    
                                </p:column>   
                          
                          <p:column selectionMode="multiple" styleClass="multiple" style="font-size:12px;"/>
                                
                                <f:facet name="footer">
-                                   <p:commandButton  id="b1" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"
-                                                 value="eliminar" action="#{crearUniversidadController.eliminaUniversidadLista}" process=":formTabla"  icon="edit_icon" update=":formTabla :formUniversidad :formDetalles"
-                                                 oncomplete="PF('universidadTabla').filter();" />
+                                   <p:commandLink  id="b1" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"
+                                                 value="eliminar" action="#{crearUniversidadController.eliminaUniversidadLista}" process=":formTabla" update=":formTabla :formUniversidad :formDetalles"
+                                                 oncomplete="PF('universidadTabla').filter();">
+                                       <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                                   </p:commandLink>
                                                  
                                
                                </f:facet>
