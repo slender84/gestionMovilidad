@@ -59,7 +59,7 @@
                <p:column headerText="leer" styleClass="leerMensaje" >
                    <p:commandLink update=":recibidos :panelRecibidos" action="#{mensajesRecibidosAdminController.leerMensajeRecibido}">
                        <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesRecibidosAdminController.selectedMensajeRecibido}"/>
-                       <h:graphicImage value="/resources/img/lupa48.png" title="leer"/>
+                       <h:graphicImage value="/resources/img/lupa24.png" title="leer"/>
                            </p:commandLink>
                       </p:column>
                
@@ -127,7 +127,7 @@
                          <p:column styleClass="leerEnviados" headerText="LeerMensaje">
                                   <p:commandLink  update=":enviados :panelEnviados" action="#{mensajesEnviadosAdminController.leerMensajeEnviado}" >
                                       <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosAdminController.selectedMensajeEnviado}"/>
-                                      <h:graphicImage value="/resources/img/lupa48.png" title="leer"/>
+                                      <h:graphicImage value="/resources/img/lupa24.png" title="leer"/>
                                   </p:commandLink>
                               </p:column>
                          

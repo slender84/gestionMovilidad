@@ -79,7 +79,7 @@
                     <p:commandLink action="#{verMisContratosController.verContratos}" update=":panelContratos" rendered="#{movilidad.estado eq 'aceptada'}">
                          
                              <f:setPropertyActionListener value="#{movilidad}" target="#{verMisContratosController.selectedMovilidad}"/>
-                             <h:graphicImage value="/resources/img/doc48.png" title="contratos"/>
+                             <h:graphicImage value="/resources/img/doc24.png" title="contratos"/>
                              
                          </p:commandLink>
                          
@@ -140,11 +140,11 @@
                      
                      <p:commandLink  action="#{verMisContratosController.editarContrato}" ajax="false" rendered="#{contrato.estado eq 'pendiente'||contrato.estado eq 'rechazado'}">
                         <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
-                        <h:graphicImage value="/resources/img/edit48.png" title="ver/editar contrato"/>
+                        <h:graphicImage value="/resources/img/edit26.png" title="ver/editar contrato"/>
                     </p:commandLink>
                      <p:commandLink  action="#{verMisContratosController.revisarContrato}" ajax="false" rendered="#{contrato.estado eq 'aceptado' and verMisContratosController.verAceptado==true}">
                         <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
-                        <h:graphicImage value="/resources/img/lupa48.png" title="ver contrato"/>
+                        <h:graphicImage value="/resources/img/lupa24.png" title="ver contrato"/>
                     </p:commandLink>
                 </p:column>
                 
@@ -155,7 +155,7 @@
                                      onclick="if (! confirm('¿seguro que quieres borrar?')) return false" oncomplete="PF('tablaContratos').filter();" ajax="false">
                     
                         <f:setPropertyActionListener target="#{verMisContratosController.selectedContrato}" value="#{contrato}"/>
-                        <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                        <h:graphicImage value="/resources/img/trash26.png" title="eliminar"/>
                     </p:commandLink>  
                     
                 </p:column>

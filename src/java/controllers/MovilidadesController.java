@@ -70,7 +70,7 @@ public class MovilidadesController implements Serializable{
       
        usuario=(Usuario)session.getAttribute("admin");
        listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
-       Collections.reverse(listaMovilidades);
+       //Collections.reverse(listaMovilidades);
       
        }
 
