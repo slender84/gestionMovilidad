@@ -7,7 +7,7 @@
       xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
     <h:head>
         <title>Ver movilidades</title>
-        <h:outputStylesheet library="css" name="movilidadAdmin.css"/>
+        <h:outputStylesheet library="css" name="estilos.css"/>
         
     </h:head>
     <h:body onload="PF('movTable').filter()" styleClass="blue">
@@ -35,35 +35,24 @@
                 <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable').unselectAllRows();PF('movTable').filter();" update=":formMovilidades:t1 :formMovilidades:msgs"/>
                 <p:ajax event="rowEditCancel" listener="#{movilidadesController.onRowCancel}" />
                    
-                <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="login" filterBy="#{movilidad.usuario.login}">
+                <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="loginMovilidadAdmin" filterBy="#{movilidad.usuario.login}">
                     
                     <h:outputText value="#{movilidad.usuario.login}"/>
                 </p:column>
                 
-                          
-                <p:column headerText="nombre" sortBy="#{movilidad.usuario.nombre}" styleClass="nombre">
-                    
-                    <h:outputText value="#{movilidad.usuario.nombre}"/>
-                </p:column>
-                
-                <p:column headerText="apellido" sortBy="#{movilidad.usuario.apellido1}" filterBy="#{movilidad.usuario.apellido1}" filterMatchMode="contains" styleClass="apellido1">
-                    
-                    <h:outputText value="#{movilidad.usuario.apellido1}"/>
-                </p:column>
-                
-                <p:column headerText="Pais" filterBy="#{movilidad.universidad.pais.nombre}" sortBy="#{movilidad.universidad.pais.nombre}" styleClass="pais">
+                <p:column headerText="Pais" filterBy="#{movilidad.universidad.pais.nombre}" sortBy="#{movilidad.universidad.pais.nombre}" styleClass="paisMovilidadAdmin">
                 
                     <h:outputText value="#{movilidad.universidad.pais.nombre}"/>
                 
                 </p:column>
                 
-                <p:column headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidad" filterBy="#{movilidad.universidad.nombre}">
+                <p:column headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidadMovilidadAdmin" filterBy="#{movilidad.universidad.nombre}">
                     
                     <h:outputText value="#{movilidad.universidad.nombre}"/>
                     
                 </p:column>
               
-                <p:column filterBy="#{movilidad.estado}" filterMatchMode="exact" headerText="estado" styleClass="estado" >
+                <p:column filterBy="#{movilidad.estado}" filterMatchMode="exact" headerText="estado" styleClass="estadoMovilidadAdmin" >
                 
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('movTable').filter()" style="width: 100%">
@@ -84,18 +73,18 @@
                     </p:cellEditor>
                 </p:column>
                 
-                 <p:column headerText="cambiar" styleClass="cambiar" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
+                 <p:column headerText="cambiar" styleClass="cambiarMovilidadAdmin" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
                         <p:rowEditor/>
                 </p:column>
                 
                 
-                <p:column headerText="curso académico" sortBy="#{movilidad.cursoacademico.cursoAcademico}" styleClass="cursoAcademico">
+                <p:column headerText="curso" sortBy="#{movilidad.cursoacademico.cursoAcademico}" styleClass="cursoMovilidadAdmin">
                 
                     <h:outputText value="#{movilidad.cursoacademico.cursoAcademico}"/>
                     
                 </p:column>
                 
-                <p:column headerText="Inicio" sortBy="#{movilidad.fechaInicio}" styleClass="fecha">
+                <p:column headerText="Inicio" sortBy="#{movilidad.fechaInicio}" styleClass="fechaMovilidadAdmin">
                 
                     <h:outputText value="#{movilidad.fechaInicio}">
                     
@@ -105,7 +94,7 @@
                 </p:column>
                 
                 
-                <p:column headerText="Fin" sortBy="#{movilidad.fechaFin}" styleClass="fecha">
+                <p:column headerText="Fin" sortBy="#{movilidad.fechaFin}" styleClass="fechaMovilidadAdmin">
                 
                     <h:outputText value="#{movilidad.fechaFin}">
                     
@@ -114,19 +103,7 @@
                 
                 </p:column>
                 
-                
-               
-                         <f:facet name="footer">
-                             <p:commandLink  onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades:"  action="#{movilidadesController.eliminaMovilidadLista}" 
-                                 oncomplete="PF('movTable').filter()" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
-                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
-                             </p:commandLink>
-                             <p:commandLink action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades:msgs">
-                                 <h:graphicImage value="/resources/img/edit48.png" title="Escrribir mensaje"/>
-                             </p:commandLink>
-                         </f:facet>
-                
-                <p:column headerText="contratos" styleClass="contratos">
+                <p:column headerText="contratos" styleClass="contratosMovilidadAdmin">
                     
                     <p:commandLink action="#{movilidadesController.verContratos}" ajax="false" rendered="#{movilidad.estado eq 'aceptada'||movilidad.estado eq 'cancelada'||movilidad.estado eq 'terminada'}">
                     
@@ -137,7 +114,45 @@
                     
                 </p:column>
                 
-                <p:column selectionMode="multiple" styleClass="multiple"/>
+                <p:column selectionMode="multiple" styleClass="multipleMovilidadAdmin"/>
+                
+                <p:columnGroup type="footer">
+                    
+                    <p:column colspan="4">
+                        
+                        <f:facet name="footer">
+                            
+                             <p:commandLink action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades:msgs">
+                                 <h:graphicImage value="/resources/img/message48.png" title="Escrribir mensaje"/>
+                             </p:commandLink>
+                
+                            
+                        </f:facet>
+                        
+                        
+                    </p:column>
+                    
+                    
+                    
+                    <p:column colspan="6">
+                        <f:facet name="footer">
+                             <p:commandLink   onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades:"  action="#{movilidadesController.eliminaMovilidadLista}" 
+                                 oncomplete="PF('movTable').filter()" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
+                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                             </p:commandLink>
+                        </f:facet>
+                    </p:column>
+                    
+                    
+                    
+                </p:columnGroup>
+                
+                
+                
+                
+                             
+                            
+                
             </p:dataTable>
             
         </h:form>

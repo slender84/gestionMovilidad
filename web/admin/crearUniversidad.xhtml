@@ -94,13 +94,13 @@
                              >
                                         
                          <f:facet name="header">Lista de Universidades de #{crearUniversidadController.paisStr}</f:facet>
-                         <p:column headerText="código" style="font-size:12px;" sortBy="#{universidad.codUniversidad}" filterBy="#{universidad.codUniversidad}" filterMatchMode="startsWith">
+                         <p:column headerText="código" styleClass="codigoUniversidad" sortBy="#{universidad.codUniversidad}" filterBy="#{universidad.codUniversidad}" filterMatchMode="startsWith">
                         
                               <h:outputText value="#{universidad.codUniversidad}"/>
                             
                            </p:column>
                          
-                         <p:column headerText="nombre" style="font-size:12px;" sortBy="#{universidad.nombre}" filterBy="#{universidad.nombre}" filterMatchMode="contains">
+                         <p:column headerText="nombre" styleClass="nombreUniversidad" sortBy="#{universidad.nombre}" filterBy="#{universidad.nombre}" filterMatchMode="contains">
                         
                             
                               <h:outputText value="#{universidad.nombre}"/>
@@ -108,7 +108,7 @@
                         
                            </p:column>
                     
-                         <p:column sortBy="#{universidad.web}" headerText="web" style="font-size:12px;">
+                         <p:column sortBy="#{universidad.web}" headerText="web" styleClass="webUniversidad">
                     
                              <h:outputLink value="#{universidad.web}" target="_blank" rendered="#{not empty universidad.web}"><h:outputText value="link"/></h:outputLink>
                              
@@ -116,7 +116,7 @@
                     
                            
                                            
-                               <p:column headerText="ver detalles/editar" style="font-size:12px;">
+                         <p:column headerText="ver detalles/editar" styleClass="detallesUniversidad">
                                    
                                    <p:commandLink action="#{crearUniversidadController.verDetalles}" update=":formDetalles">
                                    
@@ -128,11 +128,11 @@
                                    
                                </p:column>   
                          
-                         <p:column selectionMode="multiple" styleClass="multiple" style="font-size:12px;"/>
+                         <p:column selectionMode="multiple" styleClass="multipleUniversidad"/>
                                
                                <f:facet name="footer">
                                    <p:commandLink  id="b1" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"
-                                                 value="eliminar" action="#{crearUniversidadController.eliminaUniversidadLista}" process=":formTabla" update=":formTabla :formUniversidad :formDetalles"
+                                                  action="#{crearUniversidadController.eliminaUniversidadLista}" process=":formTabla" update=":formTabla :formUniversidad :formDetalles"
                                                  oncomplete="PF('universidadTabla').filter();">
                                        <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
                                    </p:commandLink>

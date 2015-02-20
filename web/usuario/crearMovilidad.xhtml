@@ -36,7 +36,7 @@
                 
                 <p:outputPanel id="universidad" >
                     <p:selectOneMenu  value="#{crearMovilidadController.selectedUniversidad}" rendered="#{crearMovilidadController.checkPais}" required="true" requiredMessage="hay que introducir una universidad"
-                                      filter="true" filterMatchMode="startsWith">
+                                      filter="true" filterMatchMode="contains">
                 
                 <p:ajax listener="#{crearMovilidadController.onDropboxchangeUni()}" update=":formMovilidad:info "/>
                 <f:selectItem itemLabel="selecciona universidad" noSelectionOption="true" />

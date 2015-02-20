@@ -304,48 +304,6 @@ and (min-width : 1200px) {
 
 
 
-.codAsignatura{
-    
-    width: 5%;
-    font-size: 13px;
-    text-align: center;
-   
-}
-
-.nombreAsignatura{
-    width: 8%;
-    font-size: 13px;
-   text-align: center;
-}
-
-.periodoAsignatura{
-    
-    width: 6%;
-    font-size: 13px;
-    text-align: center;
-}
-
-.creditosAsignatura{
-    
-    width: 6%;
-    font-size: 13px;
-    text-align: center;
-    
-}
-
-.detallesAsignatura{
-    
-    width: 8%;
-    font-size: 13px;
-    text-align: center;
-}
-
-.webAsignatura{
-    
-    width: 6%;
-    font-size: 13px;
-    text-align: center;
-}
 
 
 
@@ -634,6 +592,7 @@ and (min-width : 1200px) {
         
     }
     
+  
     .estadoCronica{
         text-align: center;
        font-size: 14px;
@@ -647,6 +606,15 @@ and (min-width : 1200px) {
        font-size: 14px;
        width: 10%; 
         
+    }
+    
+    .multipleCronica{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    
     }
     
     
@@ -699,4 +667,223 @@ and (min-width : 1200px) {
     }
     
     
+    .codigoUniversidad{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 20%; 
+        
+    }
     
+    .nombreUniversidad{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 50%; 
+        
+    }
+    
+    .webUniversidad{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    }
+    
+    .detallesUniversidad{
+        
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+    }
+    
+    .multipleUniversidad{
+        
+        text-align: center;
+       font-size: 14px;
+       width: 10%; 
+        
+        
+    }
+    
+    .codAsignatura{
+    
+    width: 15%;
+    font-size: 14px;
+    text-align: center;
+   
+}
+
+.nombreAsignatura{
+    width: 30%;
+    font-size: 14px;
+   text-align: center;
+}
+
+.periodoAsignatura{
+    
+    width: 15%;
+    font-size: 14px;
+    text-align: center;
+}
+
+.creditosAsignatura{
+    
+    width: 10%;
+    font-size: 13px;
+    text-align: center;
+    
+}
+
+.detallesAsignatura{
+    
+    width: 10%;
+    font-size: 13px;
+    text-align: center;
+}
+
+.webAsignatura{
+    
+    width: 10%;
+    font-size: 13px;
+    text-align: center;
+}
+
+
+.loginMovilidadAdmin{
+    
+    
+    width: 14%;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+
+.paisMovilidadAdmin{
+    
+    width: 15%;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+
+.universidadMovilidadAdmin{
+    
+    width: 26%;
+    font-size: 14px;
+    text-align: center;
+    
+    
+}
+
+
+.estadoMovilidadAdmin{
+    
+    width: 9%;
+    font-size: 14px;
+    text-align: center;
+    
+    
+}
+
+
+ 
+
+
+.cursoMovilidadAdmin{
+    
+    width: 8%;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+.fechaMovilidadAdmin{
+    
+     width: 8%;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+ .multipleMovilidadAdmin{
+    
+    width: 5%;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+
+
+.cambiarMovilidadAdmin{
+    
+     width: 6%;
+    font-size: 14px;
+    text-align: center;
+}
+
+.contratosMovilidadAdmin{
+    
+    width: 7%;
+    font-size: 14px;
+    text-align: center;
+    
+}
+
+
+nombreCronicaAdmin{
+    
+text-align: center;
+font-size: 14px;
+width: 20%; 
+    
+}
+
+
+.uniCronicaAdmin{
+    
+text-align: center;
+font-size: 14px;
+width: 30%; 
+    
+}
+
+.fechaCronicaAdmin{
+text-align: center;
+font-size: 14px;
+width: 20%; 
+        
+    }
+    
+    .estadoCronicaAdmin{
+        
+       text-align: center;
+       font-size: 14px;
+       width: 10%;  
+        
+    }
+    
+    .editarCronicaAdmin{
+        
+       text-align: center;
+       font-size: 14px;
+       width: 10%;  
+        
+    }
+    
+    .multipleCronicaAdmin{
+        
+        
+       text-align: center;
+       font-size: 14px;
+       width: 10%;  
+        
+        
+    }
+

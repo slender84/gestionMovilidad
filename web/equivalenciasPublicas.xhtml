@@ -69,7 +69,9 @@
                    <p:column headerText="Cr" styleClass="creditosPublica">
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         
-                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        </h:outputText>
                         <br/>
                     </ui:repeat>
                 </p:column>
@@ -94,7 +96,9 @@
                        <p:column headerText="Cr" styleClass="creditosPublica">
                            <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         
-                        <h:outputText value="#{asignatura.asignatura.creditos}"/>
+                        <h:outputText value="#{asignatura.asignatura.creditos}">
+                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        </h:outputText>
                         <br/>
                     </ui:repeat>
                 </p:column>
