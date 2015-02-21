@@ -70,7 +70,7 @@ public class VerContratosController implements Serializable{
            
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("movilidad");
-           context.getSessionMap().remove("movilidad");
+           //context.getSessionMap().remove("movilidad"); usar la version larga si falla
            
            try{
                selectedMovilidad=movilidadService.buscarMovilidad(selectedMovilidad.getCodMovilidad());

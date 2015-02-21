@@ -7,6 +7,7 @@ import entities.Equivalencia;
 import entities.Movilidad;
 import exceptions.InstanceNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import model.utils.EquivalenciaRevisada;
 
@@ -33,7 +34,7 @@ public interface EquivalenciaService {
    public ArrayList<EquivalenciaRevisada> compararEquivalencias(ArrayList<Equivalencia> listaAuxEquivalencias,ArrayList<Equivalencia> listaAuxEquivalenciasComparado);
     public Contrato verContratoPorEquivalencia(Equivalencia e)throws InstanceNotFoundException;
     public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException;
-    public boolean equivalenciaRepetida(Equivalencia e, ArrayList<Equivalencia> listaEquivalencias);
+    public boolean equivalenciaRepetida(Equivalencia e, Collection<Equivalencia> listaEquivalencias);
 }
 
 

@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -261,12 +263,20 @@ public class MovilidadesController implements Serializable{
     if(selectedMovilidades.isEmpty()){
         return null;
     }
+    
+     Set<Usuario> s=new HashSet<Usuario>();
     for(Movilidad m:selectedMovilidades){
-        Mensaje mensaje=new Mensaje(m.getUsuario(),usuario,  Calendar.getInstance().getTime(), tema, texto, false,false,false);
+        s.add(m.getUsuario());
+    }
+    
+        
+    
+    for(Usuario u:s){
+        Mensaje mensaje=new Mensaje(u,usuario,  Calendar.getInstance().getTime(), tema, texto, false,false,false);
         mensajeService.enviarMensaje(mensaje);
         
-        
-    }
+    } 
+    
         beanUtilidades.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
         activaTexto=false;
         tema="";

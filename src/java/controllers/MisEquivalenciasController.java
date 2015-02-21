@@ -573,7 +573,9 @@ public class MisEquivalenciasController implements Serializable{
         cNuevo.setEstado("pendiente");
         
          try{
+             
          equivalenciaService.crearContratoDesdeAceptado(listaAuxEquivalencias, c, cNuevo);
+             
         }catch(InstanceNotFoundException|RuntimeException ex){
          
              try{

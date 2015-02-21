@@ -12,6 +12,7 @@ import entities.Movilidad;
 import exceptions.InstanceNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import model.dao.ContratoDao;
@@ -245,7 +246,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
         
         for(Equivalencia e:c.getEquivalencias()){
             
-            if(listaAuxEquivalencias.contains(e)==false){
+            if(equivalenciaRepetida(e, listaAuxEquivalencias)==false){
                 
                    listaCopia.add(e);
           
@@ -256,7 +257,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
            
             c.getEquivalencias().remove(e);
            
-            modificarContrato(c);
+            //modificarContrato(c);
             
             
         
@@ -265,7 +266,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
         
         for(Equivalencia e2:listaAuxEquivalencias){
             
-         if(c.getEquivalencias().contains(e2)==false){   
+         if(equivalenciaRepetida(e2, c.getEquivalencias())==false){   
            
             c.getEquivalencias().add(e2);
             crearEquivalencia(e2);
@@ -285,21 +286,28 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
     
  
     @Override
-     public void crearContratoDesdeAceptado(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c,Contrato cNuevo){
-       
-        for(Equivalencia e:listaAuxEquivalencias){
+     public void crearContratoDesdeAceptado(ArrayList<Equivalencia>listaAuxEquivalencias,Contrato c,Contrato cNuevo) throws InstanceNotFoundException{
+      
+        for(Equivalencia e:c.getEquivalencias()){
             
-         if(c.getEquivalencias().contains(e)==true){   
-            
+         if(equivalenciaRepetida(e, listaAuxEquivalencias)==true){   
+             
+             
             cNuevo.getEquivalencias().add(e);
            
-        }else{
-             
-            crearEquivalencia(e);
-             cNuevo.getEquivalencias().add(e);
-         }
-       
     }
+        }
+        
+        for(Equivalencia e:listaAuxEquivalencias){
+            
+            if(equivalenciaRepetida(e, c.getEquivalencias())==false){
+                
+                crearEquivalencia(e);
+                cNuevo.getEquivalencias().add(e);
+            }
+            
+        }
+        
         
         crearContrato(cNuevo);
         
@@ -315,31 +323,11 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
         loop:
         for(Equivalencia e:listaAuxEquivalencias){
             EquivalenciaRevisada er=new EquivalenciaRevisada(e);
-            er.setIgual(true);
             
-                  loopB: 
-                  for(Equivalencia eComp:listaAuxEquivalenciasComparado){
-                      
-                       if(e.getMiembroGrupoAsignaturaAs().size()==eComp.getMiembroGrupoAsignaturaAs().size()){
                            
-                           if(e.getMiembroGrupoAsignaturaBs().size()==eComp.getMiembroGrupoAsignaturaBs().size()){
-                            
-                               if(e.getMiembroGrupoAsignaturaAs().containsAll(eComp.getMiembroGrupoAsignaturaAs())){
-                                    
-                                       if(e.getMiembroGrupoAsignaturaBs().containsAll(eComp.getMiembroGrupoAsignaturaBs())){
-                                           
-                                           er.setIgual(false);
-                                           listaRevisada.add(er);
-                                           continue loop;
-                                          }
-                                      }
-                               
-                               
-                           }
-                           
-                  }
+                  er.setIgual(equivalenciaRepetida(e, listaAuxEquivalencias));
                          
-               }
+               
                 listaRevisada.add(er);
             }
             return listaRevisada;
@@ -444,7 +432,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
      }
      
      @Override
-     public boolean equivalenciaRepetida(Equivalencia e, ArrayList<Equivalencia>listaEquivalencias){
+     public boolean equivalenciaRepetida(Equivalencia e, Collection<Equivalencia>listaEquivalencias){
          
          
          
