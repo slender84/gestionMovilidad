@@ -91,7 +91,8 @@
                     <h:panelGrid columns="2" >
                       
                    
-                      <p:commandLink  action="#{misMovilidadesController.escribirCronica}" rendered="#{movilidad.estado eq 'terminada' or movilidad.estado eq 'aceptada' }" update=":formMovilidad">
+                      <p:commandLink  action="#{misMovilidadesController.escribirCronica}" rendered="#{movilidad.estado eq 'terminada' or movilidad.estado eq 'aceptada' }" 
+                                      ajax="false">
                     
                           
                           <h:graphicImage value="/resources/img/comment24.png" title="comentario"/>

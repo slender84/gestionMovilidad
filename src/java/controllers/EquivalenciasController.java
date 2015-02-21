@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import model.services.EquivalenciaService;
 import model.services.MensajeService;
@@ -44,6 +45,12 @@ public class EquivalenciasController implements Serializable{
     
     @ManagedProperty(value="#{mensajeService}")
     private  MensajeService mensajeService;
+    
+    
+
+    
+    
+    
     
    
     private ExternalContext context;
@@ -87,16 +94,22 @@ public class EquivalenciasController implements Serializable{
     
     @PostConstruct
     public void init(){
+        
+        
+        
         context=FacesContext.getCurrentInstance().getExternalContext();
         session=(HttpSession)context.getSession(false);
-        
+        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+           
+          
            if(context.getSessionMap().containsKey("movilidad")&&context.getSessionMap().containsKey("contrato")){
            user=(Usuario)session.getAttribute("admin");
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-           context.getSessionMap().remove("contrato");
-           context.getSessionMap().remove("movilidad");
-               
+           //context.getSessionMap().remove("contrato");
+           //context.getSessionMap().remove("movilidad");
+              request.getSession().removeAttribute("movilidad");
+              request.getSession().removeAttribute("contrato");
            try{
            selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
            }catch(InstanceNotFoundException ex){

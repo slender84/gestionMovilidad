@@ -325,7 +325,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
             EquivalenciaRevisada er=new EquivalenciaRevisada(e);
             
                            
-                  er.setIgual(equivalenciaRepetida(e, listaAuxEquivalencias));
+                  er.setIgual(!equivalenciaRepetida(e, listaAuxEquivalenciasComparado));
                          
                
                 listaRevisada.add(er);
