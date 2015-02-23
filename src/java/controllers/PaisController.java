@@ -7,13 +7,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import model.services.UniversidadService;
 import model.utils.beanUtilidades;
 
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class PaisController implements Serializable{
     
     @ManagedProperty(value="#{universidadService}")
@@ -89,6 +89,7 @@ public class PaisController implements Serializable{
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
           
           beanUtilidades.creaMensaje("Ya existe ese país", FacesMessage.SEVERITY_ERROR);
+          paisStr="";
           return null;
       }
           

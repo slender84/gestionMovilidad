@@ -35,6 +35,7 @@
                 <p:dataTable id="tabla1" value="#{paisController.listaPaises}" var="pais"
                              emptyMessage="no hay países" paginator="true" rows="10"
                              styleClass="borderless"
+                             rowKey="#{pais.nombre}"
                              >
                     
                     <p:column headerText="pais" sortBy="#{pais.nombre}" styleClass="centrar">

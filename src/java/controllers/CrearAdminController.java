@@ -102,6 +102,7 @@ public class CrearAdminController implements Serializable{
         usuarioService.insertarUsuario(u);
     }catch(org.springframework.dao.DataIntegrityViolationException ex){
         beanUtilidades.creaMensaje("Ese usuario ya existe", FacesMessage.SEVERITY_ERROR);
+        login="";
         return null;
     }
         
@@ -109,6 +110,7 @@ public class CrearAdminController implements Serializable{
         password="";
         passwordAux="";
         nuevoPassword="";
+        login="";
         return null;
                 
     
