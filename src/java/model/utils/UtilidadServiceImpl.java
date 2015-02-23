@@ -64,22 +64,7 @@ public class UtilidadServiceImpl implements UtilidadService,Serializable{
         sessionFactory.getCurrentSession().delete(e);
     }
     
-    @Override
-    public void crearCursoAcademico(Cursoacademico c){
-        
-      sessionFactory.getCurrentSession().save(c);
-        
-    }
     
-    @Override
-    public List<Cursoacademico> listaCursoAcademico(){
-        return sessionFactory.getCurrentSession().createQuery("select c from Cursoacademico c").list();
-                
-    }
-    @Override
-    public void eliminaCursoAcademico(Cursoacademico c){
-        sessionFactory.getCurrentSession().delete(c);
-    }
     
     @Override
     public CorreoConf getCorreoConf(){

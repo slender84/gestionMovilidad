@@ -74,7 +74,7 @@
                 <f:facet name="header">Estado del contrato:
                     <h:outputText value=" #{misEquivalenciasController.selectedContrato.estado}"/><br/>última modificación
                     <h:outputText value="#{misEquivalenciasController.selectedContrato.fecha}">
-                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}"/>
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{autenticarUsuarioController.zonaHoraria}"/>
                     </h:outputText>
                            
                 </f:facet>

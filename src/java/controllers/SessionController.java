@@ -45,6 +45,7 @@ public class SessionController implements Serializable{
     public void init(){
         
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if(session.getAttribute("user")!=null)
         user=(Usuario)session.getAttribute("user");
         
         

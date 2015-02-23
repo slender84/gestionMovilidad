@@ -124,7 +124,7 @@
                               </p:column>
                         
                          
-                         <p:column styleClass="leerEnviados" headerText="LeerMensaje">
+                         <p:column styleClass="leerEnviados" headerText="Leer mensaje">
                                   <p:commandLink  update=":enviados :panelEnviados" action="#{mensajesEnviadosAdminController.leerMensajeEnviado}" >
                                       <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosAdminController.selectedMensajeEnviado}"/>
                                       <h:graphicImage value="/resources/img/lupa24.png" title="leer"/>

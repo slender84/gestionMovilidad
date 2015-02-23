@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +20,7 @@ import model.utils.beanUtilidades;
 
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class AutenticarUsuarioController implements Serializable{
 
      @ManagedProperty(value="#{beanUtilidades}")
@@ -37,6 +37,11 @@ public class AutenticarUsuarioController implements Serializable{
     
     private boolean checkCaptcha;
     private String volverAPantallaInicial;
+    
+    private String zonaHoraria;
+    private boolean mostrar=true;
+    
+    
     
     
     public AutenticarUsuarioController() {
@@ -61,10 +66,12 @@ public class AutenticarUsuarioController implements Serializable{
 
     @PostConstruct
     public void init(){
-         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        if(session.getAttribute("admin")!=null){
-            user=(Usuario)session.getAttribute("admin");
-        }
+         
+        
+         //HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        //if(session.getAttribute("user")!=null)
+        //user=(Usuario)session.getAttribute("user");
+        
         
     }
 
@@ -109,6 +116,30 @@ public class AutenticarUsuarioController implements Serializable{
 
     public void setVolverAPantallaInicial(String volverAPantallaInicial) {
         this.volverAPantallaInicial = volverAPantallaInicial;
+    }
+
+    public String getZonaHoraria() {
+        return zonaHoraria;
+    }
+
+    public void setZonaHoraria(String zonaHoraria) {
+        this.zonaHoraria = zonaHoraria;
+    }
+
+    public boolean isMostrar() {
+        return mostrar;
+    }
+
+    public void setMostrar(boolean mostrar) {
+        this.mostrar = mostrar;
+    }
+    
+    
+    public void timezoneChange(){
+     
+        mostrar=false;
+        
+           
     }
     
     public String comprobarAccesoHumano(){
@@ -182,11 +213,13 @@ public class AutenticarUsuarioController implements Serializable{
             
                 HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                 session.setAttribute("user", u);
+               user=u;
                 return "usuario/index.xhtml?faces-redirect=true";
                 }
                 else{
                     HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                     session.setAttribute("admin", u);
+                    user=u;
                     return "admin/index.xhtml?faces-redirect=true";
                 }
         }

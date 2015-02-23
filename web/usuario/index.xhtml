@@ -22,8 +22,8 @@
     <h:body styleClass="blue">
        
         <h:form id="formHora" prependId="false">
-            <h:inputText id="timezone_place" value="#{sessionController.zonaHoraria}" rendered="#{sessionController.mostrar}"> 
-                <f:ajax event="change" listener="#{sessionController.timezoneChange}" render=":formHora :form1" ></f:ajax>
+            <h:inputText id="timezone_place" value="#{autenticarUsuarioController.zonaHoraria}" rendered="#{autenticarUsuarioController.mostrar}"> 
+                <f:ajax event="change" listener="#{autenticarUsuarioController.timezoneChange}" render=":formHora :form1" ></f:ajax>
            </h:inputText>
         </h:form>
         

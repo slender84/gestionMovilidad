@@ -7,13 +7,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import model.services.UniversidadService;
 import model.utils.beanUtilidades;
 
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class PaisController implements Serializable{
     
     @ManagedProperty(value="#{universidadService}")
@@ -87,7 +87,7 @@ public class PaisController implements Serializable{
       universidadService.insertarPais(p);
       listaPaises.add(p);
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
-          ex. printStackTrace();
+          
           beanUtilidades.creaMensaje("Ya existe ese país", FacesMessage.SEVERITY_ERROR);
           return null;
       }
@@ -108,7 +108,7 @@ public class PaisController implements Serializable{
           listaPaises.remove(pais);
           
       }catch(RuntimeException ex){
-           listaPaises=(ArrayList<Pais>)universidadService.listarPaises();
+           //listaPaises=(ArrayList<Pais>)universidadService.listarPaises();
           beanUtilidades.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;
       }

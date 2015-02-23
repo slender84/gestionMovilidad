@@ -12,8 +12,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import org.apache.commons.mail.EmailException;
+import javax.faces.bean.RequestScoped;
+//import org.apache.commons.mail.EmailException;
 import model.services.MensajeService;
 import model.services.UsuarioService;
 import model.utils.Seguridad;
@@ -21,7 +21,7 @@ import model.utils.beanUtilidades;
 
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class CrearUsuarioController implements Serializable{
     
     @ManagedProperty(value="#{mensajeService}")
