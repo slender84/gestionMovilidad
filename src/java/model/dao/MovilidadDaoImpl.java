@@ -7,9 +7,11 @@
 package model.dao;
 
 
+import com.sun.faces.flow.FlowCDIContext;
 import entities.Movilidad;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 
@@ -31,6 +33,11 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
     
     @Override
     public List<Movilidad> listar(){
+        
+       //getSession().enableFilter("universidad").setParameter("universidadParam", "Universidade da Coruña");
+       //getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", "2015/2016");
+       
+        
         
         return getSession().createQuery("select m from Movilidad m order by m.fechaInicio desc").list();
     }

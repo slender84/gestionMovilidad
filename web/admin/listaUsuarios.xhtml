@@ -27,7 +27,8 @@
                          widgetVar="usTable"
                          emptyMessage="no se han encontrado usuarios"
                          rowKey="#{usuario.login}"
-                         styleClass="borderless">
+                         styleClass="borderless"
+                         paginatorPosition="bottom">
                 
                 <p:column headerText="login" sortBy="#{usuario.nombre}" filterBy="#{usuario.login}"  styleClass="campoUsuario" filterMatchMode="contains">
                     
@@ -66,7 +67,7 @@
                
                          <f:facet name="footer">
                              <p:commandLink onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formTabla:" action="#{eliminarUsuarioController.eliminaUsuariosLista}" 
-                                            oncomplete="PF('usTable').filter()" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">
+                                            oncomplete="PF('usTable').filter()" rendered="#{sessionController.user.tipoUsuario eq 0}">
                                  <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
                              </p:commandLink>
                          </f:facet>

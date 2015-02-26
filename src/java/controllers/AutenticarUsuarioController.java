@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +20,7 @@ import model.utils.beanUtilidades;
 
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class AutenticarUsuarioController implements Serializable{
 
      @ManagedProperty(value="#{beanUtilidades}")
@@ -29,7 +29,16 @@ public class AutenticarUsuarioController implements Serializable{
     @ManagedProperty(value="#{usuarioService}")  
     private UsuarioService usuarioService;
     
-   
+   @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
+    
+    public SessionController getSessionController() {
+        return sessionController;
+    }
+
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
+    }
     
     private String login;
     private String password; 
@@ -38,8 +47,8 @@ public class AutenticarUsuarioController implements Serializable{
     private boolean checkCaptcha;
     private String volverAPantallaInicial;
     
-    private String zonaHoraria;
-    private boolean mostrar=true;
+    //private String zonaHoraria;
+    //private boolean mostrar=true;
     
     
     
@@ -118,29 +127,29 @@ public class AutenticarUsuarioController implements Serializable{
         this.volverAPantallaInicial = volverAPantallaInicial;
     }
 
-    public String getZonaHoraria() {
-        return zonaHoraria;
-    }
+   // public String getZonaHoraria() {
+   //     return zonaHoraria;
+    //}
 
-    public void setZonaHoraria(String zonaHoraria) {
-        this.zonaHoraria = zonaHoraria;
-    }
+    //public void setZonaHoraria(String zonaHoraria) {
+      //  this.zonaHoraria = zonaHoraria;
+    //}
 
-    public boolean isMostrar() {
-        return mostrar;
-    }
+   // public boolean isMostrar() {
+     //   return mostrar;
+    //}
 
-    public void setMostrar(boolean mostrar) {
-        this.mostrar = mostrar;
-    }
+    //public void setMostrar(boolean mostrar) {
+      //  this.mostrar = mostrar;
+    //}
     
     
-    public void timezoneChange(){
+   // public void timezoneChange(){
      
-        mostrar=false;
+     //   mostrar=false;
         
            
-    }
+    //}
     
     public String comprobarAccesoHumano(){
         
@@ -165,7 +174,11 @@ public class AutenticarUsuarioController implements Serializable{
     
     
     public String autenticarUsuario(){
-             
+          
+        //String version = FacesContext.class.getPackage().getImplementationVersion();
+        //System.out.println(version);
+        
+        
         Usuario u;
         
              try{
@@ -199,8 +212,9 @@ public class AutenticarUsuarioController implements Serializable{
                    changeCaptcha(true);
                    //return "tresIntentos.xhtml?faces-redirect=true";
                }
-               
+               login="";
                return null;
+               
             }
                 if(u.getInfoCuenta().getNumeroIntentos()>0){
                 u.getInfoCuenta().setNumeroIntentos(0);
@@ -208,6 +222,9 @@ public class AutenticarUsuarioController implements Serializable{
                 usuarioService.actualizarIntentos(u.getInfoCuenta());
                 }
                 
+                login="";
+                
+                sessionController.setUser(u);
                 
                 if(u.getTipoUsuario()==1){          
             
@@ -223,6 +240,9 @@ public class AutenticarUsuarioController implements Serializable{
                     return "admin/index.xhtml?faces-redirect=true";
                 }
         }
+    
+    
+    
     
     
 }

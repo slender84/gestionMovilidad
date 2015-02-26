@@ -18,9 +18,9 @@
           
             
             
-             <h:outputLink value="#{request.contextPath}/adminGeneral/configuracionCorreo.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Configuración de correo</h:outputLink>
+                <h:outputLink value="#{request.contextPath}/adminGeneral/configuracionCorreo.xhtml" rendered="#{sessionController.user.tipoUsuario eq 0}">Configuración de correo</h:outputLink>
 
-             <h:outputLink value="#{request.contextPath}/adminGeneral/crearAdmin.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Crear tutor</h:outputLink>
+             <h:outputLink value="#{request.contextPath}/adminGeneral/crearAdmin.xhtml" rendered="#{sessionController.user.tipoUsuario eq 0}">Crear tutor</h:outputLink>
                 
              <h:outputLink value="listaUsuarios.xhtml">Lista de usuarios</h:outputLink>
             
@@ -36,7 +36,7 @@
             
             <h:outputLink value="verCronicas.xhtml">Comentarios</h:outputLink>
             
-            <h:outputLink value="crearCursoAcademico.xhtml" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">Cursos academicos</h:outputLink>
+            <h:outputLink value="crearCursoAcademico.xhtml" rendered="#{sessionController.user.tipoUsuario eq 0}">Cursos academicos</h:outputLink>
             
           <!--  <h:outputLink value="estados.xhtml" rendered="{autenticarUsuarioController.user.tipoUsuario  eq 0}">Estados</h:outputLink>-->
             

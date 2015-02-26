@@ -11,6 +11,7 @@
     </h:head>
     <h:body styleClass="blue">
         <ezcomp:out/>
+        <br/>
         <h:form id="recibidos">
            <p:growl id="msgsRecibidos" />
             
@@ -21,6 +22,7 @@
                          selection="#{mensajesRecibidosAdminController.selectedMensajesRecibidos}"
                          rowKey="#{mensaje.idmensaje}"
                          paginator="true"
+                         paginatorPosition="bottom"
                          >
                          
                <f:facet name="header">Mensajes recibidos</f:facet>
@@ -104,6 +106,7 @@
                          selection="#{mensajesEnviadosAdminController.selectedMensajesEnviados}"
                          rowKey="#{mensaje.idmensaje}"
                          paginator="true"
+                         paginatorPosition="bottom"
                          >
                         
                          <f:facet name="header">Mensajes enviados</f:facet>

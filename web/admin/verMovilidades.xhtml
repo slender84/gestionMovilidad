@@ -16,6 +16,59 @@
         <h2 style="text-align: center">Lista de movilidades</h2>
         <br/>
         
+        <h:form id="formFiltro">
+            <p:panel header="Filtros:">
+            <h:panelGrid columns="8" >
+                
+                
+                <p:outputLabel value="curso académico: "/>
+                <p:selectOneMenu value="#{movilidadesController.filtroCursoAcademico}">
+                
+                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                    <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
+                                   itemValue="#{cursoAcademico.cursoAcademico}"/>
+                
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Estado: "/>
+                 <p:selectOneMenu value="#{movilidadesController.filtroEstado}">
+                
+                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                    <f:selectItems value="#{beanUtilidades.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
+                
+                </p:selectOneMenu>
+                
+                
+                <p:outputLabel value="Pais: "/>
+                <p:selectOneMenu value="#{movilidadesController.filtroPais}">
+                                 <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro"/>
+                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                    <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
+                
+                
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Universidad: "/>
+                <p:selectOneMenu value="#{movilidadesController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}">
+                    <f:selectItem itemLabel="Todas" itemValue="#{null}"/>
+                    <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
+                                   itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
+                
+                </p:selectOneMenu>
+                
+                
+               
+                
+                
+            
+            </h:panelGrid>
+            
+            <p:commandButton value="buscar" action="#{movilidadesController.buscarMovilidades}" update=":formMovilidades" oncomplete="PF('movTable').filter();"/>
+            </p:panel>
+        </h:form>
+        
+        <br/>
+        
         <h:form id="formMovilidades" onkeypress="return event.keyCode != 13">
             
             <p:growl id="msgs"/>
@@ -26,15 +79,17 @@
                          widgetVar="movTable"
                          rowKey="#{movilidad.codMovilidad}"
                          styleClass="borderless"
-                         paginator="true" rows="10"
-                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
-                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                         paginator="true" rows="10" paginatorPosition="bottom"
+                          
                          
                          >
                 <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable').unselectAllRows();PF('movTable').filter();" update=":formMovilidades:t1 :formMovilidades:msgs"/>
                 <p:ajax event="rowEditCancel" listener="#{movilidadesController.onRowCancel}" />
                    
+                <f:facet name="header">
+                    <h:outputText value="Movilidades"/>
+                </f:facet> 
+                
                 <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="loginMovilidadAdmin" filterBy="#{movilidad.usuario.login}">
                     
                     <h:outputText value="#{movilidad.usuario.login}"/>
@@ -73,7 +128,7 @@
                     </p:cellEditor>
                 </p:column>
                 
-                 <p:column headerText="cambiar" styleClass="cambiarMovilidadAdmin" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
+                <p:column headerText="cambiar" styleClass="cambiarMovilidadAdmin" rendered="#{sessionController.user.tipoUsuario eq 0}">
                         <p:rowEditor/>
                 </p:column>
                 
@@ -137,7 +192,7 @@
                     <p:column colspan="6">
                         <f:facet name="footer">
                              <p:commandLink   onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades:"  action="#{movilidadesController.eliminaMovilidadLista}" 
-                                 oncomplete="PF('movTable').filter()" rendered="#{movilidadesController.usuario.tipoUsuario eq 0}">
+                                              oncomplete="PF('movTable').filter()" rendered="#{sessionController.user.tipoUsuario eq 0}">
                                  <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
                              </p:commandLink>
                         </f:facet>

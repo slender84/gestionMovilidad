@@ -159,9 +159,9 @@
                 
                 <f:facet name="footer" >
                     <p:commandButton  id="publicaBtn"  update=":formTablaEquivalencias:" icon="ui-icon-search" value="publicar" action="#{equivalenciasController.publicarEquivalencia}"
-                                      oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{equivalenciasController.user.tipoUsuario eq 0}"/>
+                                      oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{sessionController.user.tipoUsuario eq 0}"/>
                     <p:commandButton   process=":formTablaEquivalencias:" update=":formTablaEquivalencias" icon="ui-icon-search" value="invisible" action="#{equivalenciasController.noPublicar}"
-                                   oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{equivalenciasController.user.tipoUsuario eq 0}"/>
+                                   oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{sessionController.user.tipoUsuario eq 0}"/>
                     
                 </f:facet>
            
@@ -278,9 +278,9 @@
         
         
         
-        <p:outputPanel rendered="#{equivalenciasController.user.tipoUsuario eq 0}">
+        <p:outputPanel rendered="#{sessionController.user.tipoUsuario eq 0}">
             <p:outputLabel value="Cambiar estado del contrato"/>
-        <h:form id="aprobarContrato" rendered="#{equivalenciasController.user.tipoUsuario eq 0}">
+        <h:form id="aprobarContrato" rendered="#{sessionController.user.tipoUsuario eq 0}">
             
             
             <p:selectOneMenu value="#{equivalenciasController.apruebaOrechaza}" required="true"

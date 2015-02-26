@@ -19,14 +19,14 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         
         if(nombre.equalsIgnoreCase("Universidade da Coruña")){
             
-            Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre like '%coruña%' order by a.universidad.nombre desc" );
+            Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre like '%coruña%' order by a.nombreAsignatura asc" );
         //q.setParameter("nombre", nombre);
         return q.list();
             
         }
         
         
-        Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre=:nombre order by a.universidad.nombre desc" );
+        Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre=:nombre order by a.nombreAsignatura asc" );
         q.setParameter("nombre", nombre);
         return q.list();
         

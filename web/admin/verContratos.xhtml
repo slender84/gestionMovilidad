@@ -92,7 +92,7 @@
                     </p:column>
                     <p:column colspan="2">
                         <f:facet name="footer">
-                        <p:commandLink rendered="#{movilidadesController.usuario.tipoUsuario eq 0}" action="#{verContratosController.eliminarContratos}" update=":panelContratos :headerContratos :formContratos" 
+                            <p:commandLink rendered="#{sessionController.user.tipoUsuario eq 0}" action="#{verContratosController.eliminarContratos}" update=":panelContratos :headerContratos :formContratos" 
                                      onclick="if (! confirm('¿seguro que quieres borrar?')) return false" oncomplete="PF('tablaContratos').filter();"
                                      >
                         <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>

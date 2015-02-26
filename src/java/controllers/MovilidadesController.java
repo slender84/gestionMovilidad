@@ -2,14 +2,15 @@ package controllers;
 
 
 
+import entities.Cursoacademico;
 import entities.Mensaje;
 import entities.Movilidad;
+import entities.Universidad;
 import entities.Usuario;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -22,7 +23,9 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.event.RowEditEvent;
 import model.services.MensajeService;
 import model.services.MovilidadService;
+import model.services.UniversidadService;
 import model.utils.beanUtilidades;
+
 
 
 
@@ -31,7 +34,8 @@ import model.utils.beanUtilidades;
 @ViewScoped
 public class MovilidadesController implements Serializable{
 
-   
+   @ManagedProperty(value="#{universidadService}")
+    private UniversidadService universidadService;
     
    @ManagedProperty(value="#{beanUtilidades}")
     private beanUtilidades beanUtilidades;
@@ -49,6 +53,13 @@ public class MovilidadesController implements Serializable{
         
     }
     
+    private String filtroEstado;
+    private String filtroCursoAcademico;
+    private String filtroPais;
+    private String filtroUniversidad;
+    
+   private boolean checkPais;
+    
   private Usuario usuario;
     
     private String texto;
@@ -61,7 +72,9 @@ public class MovilidadesController implements Serializable{
     private ArrayList<Movilidad>listaMovilidades;
     private ArrayList<Movilidad> filteredMovilidades;
     private ArrayList<Movilidad> selectedMovilidades;
-   
+    private ArrayList<Cursoacademico> listaCursoAcademico;
+    private ArrayList<Universidad> listaUniversidades;
+    
     SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
     
   
@@ -71,9 +84,11 @@ public class MovilidadesController implements Serializable{
        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
       
        usuario=(Usuario)session.getAttribute("admin");
-       listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
-       //Collections.reverse(listaMovilidades);
-      
+       //listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+       listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
+       
+       
+       
        }
 
     
@@ -126,6 +141,67 @@ public class MovilidadesController implements Serializable{
         this.activaTexto = activaTexto;
     }
 
+    public UniversidadService getUniversidadService() {
+        return universidadService;
+    }
+
+    public void setUniversidadService(UniversidadService universidadService) {
+        this.universidadService = universidadService;
+    }
+
+    public String getFiltroEstado() {
+        return filtroEstado;
+    }
+
+    public void setFiltroEstado(String filtroEstado) {
+        this.filtroEstado = filtroEstado;
+    }
+
+    public String getFiltroCursoAcademico() {
+        return filtroCursoAcademico;
+    }
+
+    public void setFiltroCursoAcademico(String filtroCursoAcademico) {
+        this.filtroCursoAcademico = filtroCursoAcademico;
+    }
+
+    public String getFiltroPais() {
+        return filtroPais;
+    }
+
+    public void setFiltroPais(String filtroPais) {
+        this.filtroPais = filtroPais;
+    }
+
+    public String getFiltroUniversidad() {
+        return filtroUniversidad;
+    }
+
+    public void setFiltroUniversidad(String filtroUniversidad) {
+        this.filtroUniversidad = filtroUniversidad;
+    }
+
+    public ArrayList<Cursoacademico> getListaCursoAcademico() {
+        return listaCursoAcademico;
+    }
+
+    public void setListaCursoAcademico(ArrayList<Cursoacademico> listaCursoAcademico) {
+        this.listaCursoAcademico = listaCursoAcademico;
+    }
+
+    public ArrayList<Universidad> getListaUniversidades() {
+        return listaUniversidades;
+    }
+
+    public void setListaUniversidades(ArrayList<Universidad> listaUniversidades) {
+        this.listaUniversidades = listaUniversidades;
+    }
+
+    
+
+    
+    
+    
 
     public ArrayList<Movilidad> getSelectedMovilidades() {
         return selectedMovilidades;
@@ -156,7 +232,7 @@ public class MovilidadesController implements Serializable{
     }
     
     public ArrayList<Movilidad> getListaMovilidades() {
-        Collections.reverse(listaMovilidades);
+        
         return listaMovilidades;
     }
 
@@ -180,6 +256,47 @@ public class MovilidadesController implements Serializable{
         this.changeEstado = changeEstado;
     }
 
+    public boolean isCheckPais() {
+        return checkPais;
+    }
+
+    public void setCheckPais(boolean checkPais) {
+        this.checkPais = checkPais;
+    }
+
+    
+    
+    
+    
+    public void onChangePais(){
+        
+        System.out.println(filtroPais);
+        
+        if(filtroPais==null){
+            
+            checkPais=false;
+        }
+        else{
+            if(checkPais==false)
+            checkPais=true;
+            
+          listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(filtroPais);  
+        }
+        
+        
+    }
+    
+    
+    public void buscarMovilidades(){
+        
+        
+        
+        listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+        
+    }
+    
+    
+    
     
        
     public String verContratos(){
@@ -246,7 +363,7 @@ public class MovilidadesController implements Serializable{
      public void actualizarTodasMovilidades(){
         
         listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
-        Collections.reverse(listaMovilidades);
+        
     }
     
     public void activaTexto(){

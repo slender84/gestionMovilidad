@@ -32,5 +32,20 @@
             </key>
             <one-to-many class="entities.Contrato" />
         </set>
+        <filter name="cursoAcademico" condition="cursoAcademico=:cursoAcademicoParam"/>
+        <filter name="universidad" condition="nombreUniversidad=:universidadParam"/>
+        <filter name="estado" condition="estado=:estadoParam"/>
+        
     </class>
+    <filter-def name="cursoAcademico">
+        <filter-param name="cursoAcademicoParam" type="string"/>
+    </filter-def>
+    <filter-def name="universidad">
+        <filter-param name="universidadParam" type="string"/>
+    </filter-def>
+    <filter-def name="estado">
+        <filter-param name="estadoParam" type="string"/>
+    </filter-def>
+    
+    
 </hibernate-mapping>

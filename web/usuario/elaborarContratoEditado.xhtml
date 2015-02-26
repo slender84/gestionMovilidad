@@ -36,9 +36,7 @@
                          paginator="true"
                          styleClass="tablaFic"
                          filteredValue="#{misEquivalenciasController.filteredAsignaturasFic}"
-                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
-                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                          paginatorPosition="bottom"
                          >
                <!-- <p:ajax event="rowSelectCheckbox" listener="{misEquivalenciasController.seleccionaFila}" update=":formEquivalenciaFic"/>
                 <p:ajax event="rowUnselectCheckbox" listener="{misEquivalenciasController.deseleccionarFila}" update=":formEquivalenciaFic"/>    
@@ -112,9 +110,7 @@
                          paginator="true"
                          rows="10"
                          styleClass="tablaUniversidad" 
-                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
-                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             currentPageReportTemplate="{currentPage} de {totalPages}"
+                          paginatorPosition="bottom"
                          >
                 
                 <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.universidad.nombre}</f:facet>
@@ -181,7 +177,7 @@
                 <f:facet name="header">Estado del contrato:
                     <h:outputText value=" #{misEquivalenciasController.selectedContrato.estado}"/><br/>última modificación
                     <h:outputText value="#{misEquivalenciasController.selectedContrato.fecha}">
-                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{autenticarUsuarioController.zonaHoraria}" />
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                     </h:outputText>
                            
                 </f:facet>

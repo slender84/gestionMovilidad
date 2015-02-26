@@ -15,7 +15,7 @@
         <ezcomp:out1/>
         
         
-        
+        <br/>
         
          <h:form id="recibidos">
            <p:growl id="msgsRecibidos" />
@@ -27,6 +27,7 @@
                          selection="#{mensajesRecibidosUserController.selectedMensajesRecibidos}"
                          rowKey="#{mensaje.idmensaje}"
                          paginator="true"
+                         paginatorPosition="bottom"
                          >
                <f:facet name="header">Mensajes recibidos</f:facet>
                 
@@ -40,7 +41,7 @@
                     
                <p:column headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaMensaje">
                           <h:outputText value="#{mensaje.fecha}">
-                              <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{autenticarUsuarioController.zonaHoraria}" />
+                              <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                           </h:outputText>
                       </p:column>
                
@@ -99,6 +100,7 @@
                          style="margin-bottom:0"
                          selection="#{mensajesEnviadosUserController.selectedMensajesEnviados}"
                          paginator="true"
+                         paginatorPosition="bottom"
                          >
                  
                          <f:facet name="header">Mensajes enviados</f:facet>
@@ -109,7 +111,7 @@
                          
                          <p:column  headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaMensaje">
                                    <h:outputText value="#{mensaje.fecha}">
-                                   <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{autenticarUsuarioController.zonaHoraria}" />
+                                   <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                                    </h:outputText>
                               </p:column>
                         

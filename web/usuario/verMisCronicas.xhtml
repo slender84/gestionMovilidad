@@ -30,9 +30,7 @@
                          rowKey="#{cronica.idcronica}"
                          styleClass="borderless"
                          paginator="true" rows="10"
-                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} 
-                             {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             currentPageReportTemplate="{currentPage} de {totalPages}">
+                          paginatorPosition="bottom">
                 
                 <p:column headerText="autor" filterBy="#{cronica.alias}" filterMatchMode="contains" sortBy="#{cronica.alias}" styleClass="nombreCronica">
                     
@@ -50,7 +48,7 @@
                         
                         <h:outputText value="#{cronica.fecha}">
                         
-                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{autenticarUsuarioController.zonaHoraria}" />
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                         
                         </h:outputText>
                         

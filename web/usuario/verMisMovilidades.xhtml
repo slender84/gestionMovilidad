@@ -130,7 +130,7 @@
                          emptyMessage="no hay contratos">
                 <p:column headerText="fecha" sortBy="#{contrato.fecha}" styleClass="centrar">
                     <h:outputText value="#{contrato.fecha}">
-                                  <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{autenticarUsuarioController.zonaHoraria}" />
+                                  <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                     </h:outputText>
                 </p:column>
                 <p:column headerText="estado" sortBy="#{contrato.estado}" styleClass="centrar">

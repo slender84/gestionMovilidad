@@ -77,5 +77,11 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
             getSession().delete(entity);
         }
 
+        
+        
+        
+        
+        
+        
     
 }
