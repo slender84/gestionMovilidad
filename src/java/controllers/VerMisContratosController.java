@@ -15,17 +15,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.EquivalenciaService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class VerMisContratosController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{equivalenciaService}")
     private EquivalenciaService equivalenciaService;
@@ -34,7 +33,7 @@ public class VerMisContratosController implements Serializable{
     
    private Usuario user;
     
-    private HttpSession session;
+    
     
     
     private boolean nuevo;
@@ -57,19 +56,19 @@ public class VerMisContratosController implements Serializable{
     public void init(){
         
        
-       session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        user=(Usuario)session.getAttribute("user");
+       user=sessionController.getUser();
          
         }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
-       
+
+    
      
     public EquivalenciaService getEquivalenciaService() {
         return equivalenciaService;
@@ -153,7 +152,7 @@ public class VerMisContratosController implements Serializable{
         try{
         selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
             verContratos();
             return null;
             
@@ -174,7 +173,7 @@ public class VerMisContratosController implements Serializable{
             }
             
           
-        beanUtilidades.creaMensaje("contrato eliminado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("contrato eliminado correctamente", FacesMessage.SEVERITY_INFO);
         verContratos();
         
         selectedContrato=null;

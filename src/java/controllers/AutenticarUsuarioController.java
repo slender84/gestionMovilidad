@@ -16,21 +16,20 @@ import javax.servlet.http.HttpSession;
 
 
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class AutenticarUsuarioController implements Serializable{
 
-     @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+     @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{usuarioService}")  
     private UsuarioService usuarioService;
     
-   @ManagedProperty(value="#{sessionController}")
-    private SessionController sessionController;
+   
     
     public SessionController getSessionController() {
         return sessionController;
@@ -57,13 +56,7 @@ public class AutenticarUsuarioController implements Serializable{
     }
     
     
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
-    }
-
-   public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
-    }
+   
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
@@ -175,8 +168,7 @@ public class AutenticarUsuarioController implements Serializable{
     
     public String autenticarUsuario(){
           
-        //String version = FacesContext.class.getPackage().getImplementationVersion();
-        //System.out.println(version);
+        //sessionController.version();
         
         
         Usuario u;
@@ -184,13 +176,13 @@ public class AutenticarUsuarioController implements Serializable{
              try{
              u=usuarioService.buscarUsuario(getLogin());
              }catch(InstanceNotFoundException ex){
-             beanUtilidades.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
+             sessionController.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
              login="";
              password="";
               return null; 
              }
              if(u.getBorrado()==true){
-                 beanUtilidades.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
+                 sessionController.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
                  login="";
                  password="";
                  return null;
@@ -199,7 +191,7 @@ public class AutenticarUsuarioController implements Serializable{
             try{ 
             usuarioService.autenticarUsuario(password,u);
             }catch(PasswordIncorrectoException ex){
-               beanUtilidades.creaMensaje("password incorrecto", FacesMessage.SEVERITY_ERROR);
+              sessionController.creaMensaje("password incorrecto", FacesMessage.SEVERITY_ERROR);
                
                
                i.setNumeroIntentos(i.getNumeroIntentos()+1);

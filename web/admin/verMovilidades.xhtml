@@ -13,57 +13,62 @@
     <h:body onload="PF('movTable').filter()" styleClass="blue">
         <ezcomp:out/>
         
-        <h2 style="text-align: center">Lista de movilidades</h2>
+       
         <br/>
         
         <h:form id="formFiltro">
-            <p:panel header="Filtros:">
-            <h:panelGrid columns="8" >
+            <p:panel header="Filtros" style="background-color: khaki;font-size: 12px">
+                <h:panelGrid columns="9" cellpadding="20" >
                 
-                
+                    <p:outputPanel id="panelCurso" style="font-size: 12px;">
                 <p:outputLabel value="curso académico: "/>
-                <p:selectOneMenu value="#{movilidadesController.filtroCursoAcademico}">
+                <p:selectOneMenu value="#{sessionController.filtroCursoAcademico}">
                 
                     <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
                     <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
                                    itemValue="#{cursoAcademico.cursoAcademico}"/>
                 
                 </p:selectOneMenu>
+                </p:outputPanel>
                 
+                <p:outputPanel id="panelEstado" style="font-size: 12px;">
                 <p:outputLabel value="Estado: "/>
-                 <p:selectOneMenu value="#{movilidadesController.filtroEstado}">
+                <p:selectOneMenu value="#{sessionController.filtroEstado}">
                 
                     <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
-                    <f:selectItems value="#{beanUtilidades.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
+                    <f:selectItems value="#{sessionController.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
                 
                 </p:selectOneMenu>
-                
-                
+                </p:outputPanel>
+               <p:outputPanel id="panelPais" style="font-size: 12px;">
+                    
                 <p:outputLabel value="Pais: "/>
-                <p:selectOneMenu value="#{movilidadesController.filtroPais}">
-                                 <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro"/>
+                <p:selectOneMenu value="#{sessionController.filtroPais}" filterMatchMode="contains">
+                                 <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro:panelPais :formFiltro:panelUniversidad"/>
                     <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
                     <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
                 
                 
                 </p:selectOneMenu>
+                </p:outputPanel>
                 
+                <p:outputPanel id="panelUniversidad" style="font-size: 12px;">
                 <p:outputLabel value="Universidad: "/>
-                <p:selectOneMenu value="#{movilidadesController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}">
+                <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains">
                     <f:selectItem itemLabel="Todas" itemValue="#{null}"/>
                     <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
                                    itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
                 
                 </p:selectOneMenu>
-                
+                </p:outputPanel>
                 
                
-                
+                    <p:commandButton style="font-size: 12px" value="buscar" action="#{movilidadesController.buscarMovilidades}" update=":formMovilidades" oncomplete="PF('movTable').filter();"/>
+                    <p:commandButton  style="font-size: 12px" value="limpiar" action="#{movilidadesController.limpiarFiltros}" update=":formFiltro"/>
                 
             
             </h:panelGrid>
             
-            <p:commandButton value="buscar" action="#{movilidadesController.buscarMovilidades}" update=":formMovilidades" oncomplete="PF('movTable').filter();"/>
             </p:panel>
         </h:form>
         
@@ -112,7 +117,7 @@
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('movTable').filter()" style="width: 100%">
                             <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
-                            <f:selectItems var="estados" value="#{beanUtilidades.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
+                            <f:selectItems var="estados" value="#{sessionController.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
                         </p:selectOneMenu>
                     </f:facet>
                     <p:cellEditor>
@@ -122,7 +127,7 @@
                         <p:selectOneMenu value="#{movilidadesController.changeEstado}" style="width: 100%"
                                          required="true" requiredMessage="hay que elegir un estado">
                             <f:selectItem itemLabel="seleccionar" itemValue="#{null}" noSelectionOption="true"/>
-                            <f:selectItems var="estados2" value="#{beanUtilidades.listaEstadosMovilidad}" itemLabel="#{estados2.estadoMovilidad}" itemValue="#{estados2.estadoMovilidad}"/>             
+                            <f:selectItems var="estados2" value="#{sessionController.listaEstadosMovilidad}" itemLabel="#{estados2.estadoMovilidad}" itemValue="#{estados2.estadoMovilidad}"/>             
                         </p:selectOneMenu>
                     </f:facet>
                     </p:cellEditor>
@@ -178,7 +183,7 @@
                         <f:facet name="footer">
                             
                              <p:commandLink action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades:msgs">
-                                 <h:graphicImage value="/resources/img/message48.png" title="Escrribir mensaje"/>
+                                 <h:graphicImage value="/resources/img/message32.png" title="Escribir mensaje. Los usuarios repetidos se cuentan como uno"/>
                              </p:commandLink>
                 
                             
@@ -193,7 +198,7 @@
                         <f:facet name="footer">
                              <p:commandLink   onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades:"  action="#{movilidadesController.eliminaMovilidadLista}" 
                                               oncomplete="PF('movTable').filter()" rendered="#{sessionController.user.tipoUsuario eq 0}">
-                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                                 <h:graphicImage value="/resources/img/trash26.png" title="eliminar"/>
                              </p:commandLink>
                         </f:facet>
                     </p:column>

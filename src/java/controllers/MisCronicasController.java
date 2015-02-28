@@ -17,12 +17,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -42,8 +41,8 @@ public class MisCronicasController implements Serializable{
     @ManagedProperty(value = "#{usuarioService}")
     private UsuarioService usuarioService;
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value = "#{movilidadService}")
     private MovilidadService movilidadService;
@@ -52,8 +51,8 @@ public class MisCronicasController implements Serializable{
     @PostConstruct
     public void init(){
         
-        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        usuario=(Usuario)session.getAttribute("user");
+        
+        usuario=sessionController.getUser();
         
         HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         if(request.getRequestURI().equals(request.getContextPath()+"/usuario/verMisCronicas.xhtml")){
@@ -112,13 +111,15 @@ public class MisCronicasController implements Serializable{
         this.usuarioService = usuarioService;
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public MovilidadService getMovilidadService() {
         return movilidadService;
@@ -259,7 +260,7 @@ public class MisCronicasController implements Serializable{
         
         Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario creado ", "el usuario "+usuario.getLogin()+" ha escrito una crónica",false,false,false);
         mensajeService.enviarMensaje(m);
-        beanUtilidades.creaMensaje("crónica enviada correctamente, a la espera de moderación", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("crónica enviada correctamente, a la espera de moderación", FacesMessage.SEVERITY_INFO);
         btnActivados=false;
         texto="";
         alias="";
@@ -284,7 +285,7 @@ public class MisCronicasController implements Serializable{
         
     }catch(InstanceNotFoundException ex){
         
-        beanUtilidades.creaMensaje("No existe ese comentario",FacesMessage.SEVERITY_ERROR );
+        sessionController.creaMensaje("No existe ese comentario",FacesMessage.SEVERITY_ERROR );
         listaMisCronicas=(ArrayList<Cronica>)universidadService.listarMisCronicas(usuario);
         panelEdicion=false;
         return null;
@@ -300,7 +301,7 @@ public class MisCronicasController implements Serializable{
         
         Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario editado ", "el usuario "+usuario.getLogin()+" ha editado un comentario",false,false,false);
         mensajeService.enviarMensaje(m);
-    beanUtilidades.creaMensaje("Cronica actualizada, pendiente de moderación", FacesMessage.SEVERITY_INFO);
+    sessionController.creaMensaje("Cronica actualizada, pendiente de moderación", FacesMessage.SEVERITY_INFO);
     return null;
     
 }

@@ -9,10 +9,10 @@
     <h:head>
         <title>Gestión de contrato</title>
         
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 100px)" href="/gestionMovilidad/javax.faces.resource/style1024.css.xhtml?ln=css"/>
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1279px)" href="/gestionMovilidad/javax.faces.resource/style1366.css.xhtml?ln=css"/>
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1599px)" href="/gestionMovilidad/javax.faces.resource/styleBig.css.xhtml?ln=css"/>
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1900px)" href="/gestionMovilidad/javax.faces.resource/styleBig1900.css.xhtml?ln=css"/>
+       <link type="text/css" rel="stylesheet" media="screen and (min-width: 100px)" href="/gestionMovilidad/resources/css/style1024.css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1365px)" href="/gestionMovilidad/resources/css/style1366.css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1600px)" href="/gestionMovilidad/resources/css/styleBig.css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1900px)" href="/gestionMovilidad/resources/css/styleBig1900.css"/>
     </h:head>
     <h:body styleClass="blue">
         <ezcomp:out/>
@@ -74,7 +74,7 @@
                 <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
                     <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" maxFractionDigits="1" minFractionDigits="0"/>
+                            <f:convertNumber locale="en-US" maxFractionDigits="1" minFractionDigits="0"/>
                         </h:outputText>       
                             
                         <br/>
@@ -103,7 +103,7 @@
                     <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
                         <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>
@@ -136,7 +136,7 @@
                         <p:column >
                             <f:facet name="footer">
                                 <h:outputText value="#{equivalenciasController.creditosA}">
-                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                    <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
@@ -145,7 +145,7 @@
                         <p:column >
                             <f:facet name="footer">
                                 <h:outputText value="#{equivalenciasController.creditosB}">
-                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                    <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
@@ -194,7 +194,7 @@
                 <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
                     <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>
@@ -248,7 +248,7 @@
                         <p:column >
                             <f:facet name="footer">
                                 <h:outputText value="#{equivalenciasController.creditosComparadoA}">
-                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                    <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
@@ -257,7 +257,7 @@
                        <p:column >
                             <f:facet name="footer">
                                 <h:outputText value="#{equivalenciasController.creditosComparadoB}">
-                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                    <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
@@ -287,7 +287,7 @@
                              requiredMessage="hay que seleccionar un estado">
             
                 <f:selectItem noSelectionOption="true" itemValue="#{null}" itemLabel="selecciona una opción"/>
-                <f:selectItems value="#{beanUtilidades.listaEstados}" var="estado" itemLabel="#{estado.estado}" itemValue="#{estado.estado}"/>
+                <f:selectItems value="#{sessionController.listaEstados}" var="estado" itemLabel="#{estado.estado}" itemValue="#{estado.estado}"/>
             
             
             </p:selectOneMenu>

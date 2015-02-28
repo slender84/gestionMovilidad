@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -20,8 +20,8 @@ public class PaisController implements Serializable{
     private UniversidadService universidadService;
 
      
-   @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+   @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     public UniversidadService getUniversidadService() {
         return universidadService;
@@ -31,13 +31,15 @@ public class PaisController implements Serializable{
         this.universidadService = universidadService;
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
      
     private String paisStr;
     private Pais pais;
@@ -88,12 +90,12 @@ public class PaisController implements Serializable{
       listaPaises.add(p);
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
           
-          beanUtilidades.creaMensaje("Ya existe ese país", FacesMessage.SEVERITY_ERROR);
+          sessionController.creaMensaje("Ya existe ese país", FacesMessage.SEVERITY_ERROR);
           paisStr="";
           return null;
       }
           
-          beanUtilidades.creaMensaje("se ha creado el país correctamente", FacesMessage.SEVERITY_INFO);
+          sessionController.creaMensaje("se ha creado el país correctamente", FacesMessage.SEVERITY_INFO);
           paisStr="";
           
       return null;
@@ -110,11 +112,11 @@ public class PaisController implements Serializable{
           
       }catch(RuntimeException ex){
            //listaPaises=(ArrayList<Pais>)universidadService.listarPaises();
-          beanUtilidades.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
+          sessionController.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;
       }
       
-      beanUtilidades.creaMensaje("se ha eliminado correctamente el pais", FacesMessage.SEVERITY_INFO);
+      sessionController.creaMensaje("se ha eliminado correctamente el pais", FacesMessage.SEVERITY_INFO);
      
       return null;
   }

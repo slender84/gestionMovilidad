@@ -9,18 +9,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class MensajesEnviadosAdminController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{mensajeService}")
     private MensajeService mensajeService;
@@ -37,6 +35,14 @@ public class MensajesEnviadosAdminController implements Serializable{
     private ArrayList<Mensaje> listaMensajesEnviados;
     private ArrayList<Mensaje> selectedMensajesEnviados;
     private ArrayList<Mensaje> filteredMensajesEnviados;
+
+    public SessionController getSessionController() {
+        return sessionController;
+    }
+
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
+    }
     
     
     
@@ -46,18 +52,12 @@ public class MensajesEnviadosAdminController implements Serializable{
     
     @PostConstruct
     public void init(){
-        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        user=(Usuario)session.getAttribute("admin");
+        
+        user=sessionController.getUser();
         setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
-    }
-
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
-    }
+   
 
     public MensajeService getMensajeService() {
         return mensajeService;
@@ -180,7 +180,7 @@ public class MensajesEnviadosAdminController implements Serializable{
             }
         }
      
-        //beanUtilidades.creaMensaje("mensajes eliminados correctamente", FacesMessage.SEVERITY_INFO);
+        //sessionController.creaMensaje("mensajes eliminados correctamente", FacesMessage.SEVERITY_INFO);
         actualizarEnviados();
         return null;
         

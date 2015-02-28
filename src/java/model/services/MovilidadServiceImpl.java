@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import model.dao.MovilidadDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -204,5 +205,18 @@ public class MovilidadServiceImpl implements MovilidadService,Serializable{
         movilidadDao.editar(m);
         
     }
+    
+    
+    @Override
+    public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros){
+        
+        
+        return movilidadDao.listarMovilidadPorFiltro(listaFiltros);
+        
+    
+        
+        
+    }
+    
     
 }

@@ -11,19 +11,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class EscribeMensajeController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{mensajeService}")
     private MensajeService mensajeService;
@@ -47,17 +45,19 @@ public class EscribeMensajeController implements Serializable{
     
     @PostConstruct
     public void init(){
-        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        user=(Usuario)session.getAttribute("admin");
+        
+        user=sessionController.getUser();
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+   
 
     public MensajeService getMensajeService() {
         return mensajeService;
@@ -124,7 +124,7 @@ public class EscribeMensajeController implements Serializable{
         if(selectedUsuarios.isEmpty()==false){
         activaTexto=true;
     }else{
-            beanUtilidades.creaMensaje("hay que seleccionar al menos un usuario", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("hay que seleccionar al menos un usuario", FacesMessage.SEVERITY_ERROR);
         }
     }
     
@@ -147,13 +147,14 @@ public class EscribeMensajeController implements Serializable{
         mensajeService.enviarMensaje(mensaje);
         }catch(Exception ex){
             
-            beanUtilidades.creaMensaje("error al enviar mensajes", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("error al enviar mensajes", FacesMessage.SEVERITY_ERROR);
             return null;
         }
     }
-        beanUtilidades.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
+         
+        sessionController.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
         activaTexto=false;
-        selectedUsuarios=null;
+        //selectedUsuarios=null;
         tema="";
         texto="";
     return null;

@@ -96,7 +96,7 @@
 }
 
 .tablaEquivalenciasAceptado{
-    top: 700px;
+    top: 660px;
     //left: 50px;
     height: 45%;
     width: 45%;
@@ -107,7 +107,7 @@
 }
 
 .tablaEquivalenciasAceptadoNuevo{
-    top: 700px;
+    top: 660px;
     left: 650px;
     height: 45%;
     width: 50%;
@@ -139,7 +139,8 @@ body.red{
 
 body.blue{
     
-    background-color: #F2FAFA;
+    //background-color: #F2FAFA;
+    background-color: khaki;
 }
 
 
@@ -209,7 +210,7 @@ body.blue{
     height: 65%;
     width: 80%;
     position:absolute;
-    top: 700px;
+    top: 660px;
     left:140px;
     text-align: center;
     font-size: 14px;

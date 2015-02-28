@@ -10,19 +10,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @RequestScoped
 public class EscribeMensajeAdminController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{mensajeService}")
     private MensajeService mensajeService;
@@ -48,18 +46,20 @@ public class EscribeMensajeAdminController implements Serializable{
     
     @PostConstruct
     public void init(){
-       HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-       user=(Usuario)session.getAttribute("user");
+       
+       user=sessionController.getUser();
         
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public MensajeService getMensajeService() {
         return mensajeService;
@@ -111,7 +111,7 @@ public class EscribeMensajeAdminController implements Serializable{
        
         mensajeService.enviarMensaje(m);
         
-        beanUtilidades.creaMensaje("mensaje enviado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("mensaje enviado correctamente", FacesMessage.SEVERITY_INFO);
         texto="";
         tema="";
         

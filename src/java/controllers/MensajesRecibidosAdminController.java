@@ -9,18 +9,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class MensajesRecibidosAdminController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{mensajeService}")
     private MensajeService mensajeService;
@@ -52,19 +50,21 @@ public class MensajesRecibidosAdminController implements Serializable{
         aux.add("no");
         setEstados(aux);
         
-        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        user=(Usuario)session.getAttribute("admin");
+        
+        user=sessionController.getUser();
         setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
         
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public MensajeService getMensajeService() {
         return mensajeService;

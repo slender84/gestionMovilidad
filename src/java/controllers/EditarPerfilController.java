@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.services.UsuarioService;
 import model.utils.Seguridad;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -23,8 +23,8 @@ public class EditarPerfilController implements Serializable{
     
     @ManagedProperty(value="#{usuarioService}")
     private UsuarioService usuarioService;
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
      
    private Usuario user;
    private String password;
@@ -49,15 +49,17 @@ public class EditarPerfilController implements Serializable{
     public void setUsuarioService(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
     }
+
+    public SessionController getSessionController() {
+        return sessionController;
+    }
+
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
+    }
     
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
-    }
-
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
-    }
-
+    
+    
     public Usuario getUser() {
         return user;
     }
@@ -94,19 +96,19 @@ public class EditarPerfilController implements Serializable{
         
         if(user.getPassword().equals(Seguridad.md5Password(password))==false){
             
-            beanUtilidades.creaMensaje("el password es incorrecto", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el password es incorrecto", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         if(nuevoPassword.equals(repitePassword)==false){
             
-            beanUtilidades.creaMensaje("el nuevo password no coincide con la confirmación", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el nuevo password no coincide con la confirmación", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
         user.setPassword(Seguridad.md5Password(nuevoPassword));
         usuarioService.actualizarUsuario(user);
         
-        beanUtilidades.creaMensaje("password modificado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("password modificado correctamente", FacesMessage.SEVERITY_INFO);
         return null;
     }
     

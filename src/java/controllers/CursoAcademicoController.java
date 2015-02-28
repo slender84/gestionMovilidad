@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -22,16 +22,18 @@ public class CursoAcademicoController implements Serializable{
     @ManagedProperty(value = "#{universidadService}")
     private UniversidadService universidadService;
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+   
 
     
     
@@ -82,7 +84,7 @@ public class CursoAcademicoController implements Serializable{
       
       if(cursoAcademico.substring(0, 4).compareTo(cursoAcademico.substring(5, 9))!=-1){
           
-          beanUtilidades.creaMensaje("el curso académico no puede empezar más tarde de lo que acaba",FacesMessage.SEVERITY_ERROR);
+          sessionController.creaMensaje("el curso académico no puede empezar más tarde de lo que acaba",FacesMessage.SEVERITY_ERROR);
           return null;
       }
       
@@ -93,10 +95,10 @@ public class CursoAcademicoController implements Serializable{
           listaCursoAcademico.add(c);
       }catch(org.springframework.dao.DataIntegrityViolationException ex){
           
-          beanUtilidades.creaMensaje("El año "+cursoAcademico+" ya existe", FacesMessage.SEVERITY_ERROR);
+          sessionController.creaMensaje("El año "+cursoAcademico+" ya existe", FacesMessage.SEVERITY_ERROR);
           return null;
       }
-        beanUtilidades.creaMensaje("curso creado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("curso creado correctamente", FacesMessage.SEVERITY_INFO);
         cursoAcademico="";
         //setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listaCursosAcademicos());
         
@@ -112,13 +114,13 @@ public class CursoAcademicoController implements Serializable{
         universidadService.eliminarCursoAcademico(c);
         listaCursoAcademico.remove(c);
     }catch(RuntimeException ex){
-            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;
             
     }
          cursoAcademico="";
          setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listarCursosAcademicos());
-        beanUtilidades.creaMensaje("curso académico eliminado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("curso académico eliminado correctamente", FacesMessage.SEVERITY_INFO);
         return null;
     }
     

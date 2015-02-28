@@ -69,7 +69,7 @@
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>
@@ -96,7 +96,7 @@
                            <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>
@@ -112,9 +112,10 @@
                    
                     
                    <p:column headerText="contrato" styleClass="verPublicaAdmin" >
-                       <p:commandButton value="ver contrato" action="#{equivalenciasPublicasController.verContrato}" ajax="true" update=":formPais:msgs">
+                       <p:commandLink  action="#{equivalenciasPublicasController.verContrato}" ajax="true" update=":formPais:msgs">
                            <f:setPropertyActionListener value="#{equivalencia}" target="#{equivalenciasPublicasController.selectedEquivalencia}"/>
-                       </p:commandButton>
+                           <h:graphicImage value="/resources/img/lupa24.png" title="Ver contrato"/>
+                       </p:commandLink>
                        
                    </p:column> 
            

@@ -16,6 +16,7 @@ import exceptions.InstanceNotFoundException;
 import exceptions.NumeroDeMovilidadesException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 
@@ -31,4 +32,5 @@ public interface MovilidadService {
     public Movilidad buscarMovilidad(Integer id) throws InstanceNotFoundException;
     public void crearMovilidad(Date fechaInicio,Date fechaFin,Usuario user,Universidad u,Cursoacademico ca) throws DuracionException,NumeroDeMovilidadesException;
     public void editarMovilidad(Movilidad m);
+    public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros);
 }

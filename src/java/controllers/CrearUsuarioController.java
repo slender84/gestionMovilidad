@@ -17,7 +17,7 @@ import javax.faces.bean.RequestScoped;
 import model.services.MensajeService;
 import model.services.UsuarioService;
 import model.utils.Seguridad;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -27,8 +27,8 @@ public class CrearUsuarioController implements Serializable{
     @ManagedProperty(value="#{mensajeService}")
     private MensajeService mensajeService;
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{usuarioService}")  
     private UsuarioService usuarioService;
@@ -55,16 +55,18 @@ public class CrearUsuarioController implements Serializable{
         aux.add("MUEI");
         setListaTitulaciones(aux);
     }
+
+    public SessionController getSessionController() {
+        return sessionController;
+    }
+
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
+    }
     
     
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
-    }
-
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
-    }
+    
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
@@ -184,25 +186,25 @@ public class CrearUsuarioController implements Serializable{
         usuarioService.insertarUsuario(u);
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
             
-            beanUtilidades.creaMensaje("ya existe ese login", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("ya existe ese login", FacesMessage.SEVERITY_ERROR);
             return null;
             
                 }
         CorreoConf correoConf;
         
        try{
-            correoConf=beanUtilidades.getCorreoConf();
+            correoConf=sessionController.getCorreoConf();
             usuarioService.enviarEmail(login,password,correoConf);
             
         }catch(Exception ex){
             
             usuarioService.eliminarUsuario(u);
-            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
         
-        beanUtilidades.creaMensaje("usuario creado. Se ha enviado un correo a la cuenta "+login+"@"+correoConf.getAddTo() +" con la contraseña", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("usuario creado. Se ha enviado un correo a la cuenta "+login+"@"+correoConf.getAddTo() +" con la contraseña", FacesMessage.SEVERITY_INFO);
         
         
         Usuario destino;
@@ -226,7 +228,7 @@ public class CrearUsuarioController implements Serializable{
         mensajeService.enviarMensaje(m);
         }catch(InstanceNotFoundException|RuntimeException ex){
             
-            beanUtilidades.creaMensaje("se ha producido un error. Inténtalo más tarde", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("se ha producido un error. Inténtalo más tarde", FacesMessage.SEVERITY_ERROR);
                 return null;
         }
         

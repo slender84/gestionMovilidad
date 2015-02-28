@@ -20,7 +20,7 @@ import javax.faces.bean.ViewScoped;
 
 import model.services.AsignaturaService;
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -33,8 +33,8 @@ public class CrearAsignaturaController implements Serializable{
     @ManagedProperty (value="#{asignaturaService}")
     private AsignaturaService asignaturaService;
     
-    @ManagedProperty (value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty (value="#{sessionController}")
+    private SessionController sessionController;
     
     
     
@@ -90,13 +90,15 @@ public class CrearAsignaturaController implements Serializable{
         this.asignaturaService = asignaturaService;
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
     
     
     
@@ -320,7 +322,7 @@ public class CrearAsignaturaController implements Serializable{
         try{
         uni=universidadService.buscarUniversidad(universidadStr);
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("no existe la universidad", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("no existe la universidad", FacesMessage.SEVERITY_ERROR);
             universidadStr="";
             listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
             return null;
@@ -336,11 +338,11 @@ public class CrearAsignaturaController implements Serializable{
             asignaturaService.crearAsignatura(a);
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
             
-            beanUtilidades.creaMensaje("ya existe esa universidad", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("ya existe esa universidad", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         listaAsignaturas.add(a);
-        beanUtilidades.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
         nombreAsignatura="";
         codAsignatura=null;
         creditosAsignatura=null;
@@ -370,7 +372,7 @@ public class CrearAsignaturaController implements Serializable{
             //listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
         }catch(InstanceNotFoundException|RuntimeException ex){
             
-            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            checkDetalles=false;
         checkUniversidadStr=false;
         checkTabla=false;
@@ -386,7 +388,7 @@ public class CrearAsignaturaController implements Serializable{
             facultadAsignatura="";
             infoAsignatura="";
             nombreAsignatura="";
-            beanUtilidades.creaMensaje("Edición correcta", FacesMessage.SEVERITY_INFO);
+            sessionController.creaMensaje("Edición correcta", FacesMessage.SEVERITY_INFO);
            return null;
         
     }
@@ -413,7 +415,7 @@ public class CrearAsignaturaController implements Serializable{
             }catch(InstanceNotFoundException|RuntimeException ex){
               
            
-            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            checkDetalles=false;
         checkTabla=false;
         checkUniversidadStr=false;
@@ -430,7 +432,7 @@ public class CrearAsignaturaController implements Serializable{
             listaAsignaturas.remove(a);
         }
         
-        beanUtilidades.creaMensaje("se han eliminado correctamente las asignaturas",FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("se han eliminado correctamente las asignaturas",FacesMessage.SEVERITY_INFO);
         //listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
         //checkUniversidadStr=false;
         checkDetalles=false;

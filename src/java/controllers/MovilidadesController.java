@@ -11,7 +11,9 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -19,12 +21,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import org.primefaces.event.RowEditEvent;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -37,8 +38,8 @@ public class MovilidadesController implements Serializable{
    @ManagedProperty(value="#{universidadService}")
     private UniversidadService universidadService;
     
-   @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+   @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
      @ManagedProperty(value="#{movilidadService}")
     private MovilidadService movilidadService;
@@ -53,10 +54,7 @@ public class MovilidadesController implements Serializable{
         
     }
     
-    private String filtroEstado;
-    private String filtroCursoAcademico;
-    private String filtroPais;
-    private String filtroUniversidad;
+   
     
    private boolean checkPais;
     
@@ -81,9 +79,9 @@ public class MovilidadesController implements Serializable{
     @PostConstruct
     public void init(){
     
-       HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+       
       
-       usuario=(Usuario)session.getAttribute("admin");
+       usuario=sessionController.getUser();
        //listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
        
@@ -91,14 +89,16 @@ public class MovilidadesController implements Serializable{
        
        }
 
-    
-     public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
+   
     
      public MensajeService getMensajeService() {
         return mensajeService;
@@ -149,37 +149,7 @@ public class MovilidadesController implements Serializable{
         this.universidadService = universidadService;
     }
 
-    public String getFiltroEstado() {
-        return filtroEstado;
-    }
-
-    public void setFiltroEstado(String filtroEstado) {
-        this.filtroEstado = filtroEstado;
-    }
-
-    public String getFiltroCursoAcademico() {
-        return filtroCursoAcademico;
-    }
-
-    public void setFiltroCursoAcademico(String filtroCursoAcademico) {
-        this.filtroCursoAcademico = filtroCursoAcademico;
-    }
-
-    public String getFiltroPais() {
-        return filtroPais;
-    }
-
-    public void setFiltroPais(String filtroPais) {
-        this.filtroPais = filtroPais;
-    }
-
-    public String getFiltroUniversidad() {
-        return filtroUniversidad;
-    }
-
-    public void setFiltroUniversidad(String filtroUniversidad) {
-        this.filtroUniversidad = filtroUniversidad;
-    }
+   
 
     public ArrayList<Cursoacademico> getListaCursoAcademico() {
         return listaCursoAcademico;
@@ -265,36 +235,83 @@ public class MovilidadesController implements Serializable{
     }
 
     
-    
+    public void limpiarFiltros(){
+        
+        
+        sessionController.limpiarFiltros();
+        checkPais=false;
+        
+        
+    }
     
     
     public void onChangePais(){
         
-        System.out.println(filtroPais);
         
-        if(filtroPais==null){
-            
+        
+        if(sessionController.getFiltroPais()==null){
             checkPais=false;
         }
         else{
             if(checkPais==false)
             checkPais=true;
             
-          listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(filtroPais);  
+          listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(sessionController.getFiltroPais());  
         }
         
         
     }
     
     
-    public void buscarMovilidades(){
+    public String buscarMovilidades(){
+        System.out.println(sessionController.getFiltroEstado());
+        boolean todosNulos=false;
+        Map<String,String> m=new HashMap<String,String>();
         
+        if(sessionController.getFiltroEstado()!=null){
+            
+          m.put("estado", sessionController.getFiltroEstado());
+        todosNulos=false;
+            
+        }
         
+        if(sessionController.getFiltroCursoAcademico()!=null){
+          m.put("curso", sessionController.getFiltroCursoAcademico());
+           
+        todosNulos=false;
+        }
         
-        listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+        if(sessionController.getFiltroPais()!=null){
+          m.put("pais", sessionController.getFiltroPais());
+          todosNulos=false;  
+             if(sessionController.getFiltroUniversidad()!=null)
+                 m.put("universidad", sessionController.getFiltroUniversidad());
+                  
+                }
+     
+        if(todosNulos==true){
+            listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+        return null;
+                }
+        
+        listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarMovilidadPorFiltro(m);
+        return null;
+        
         
     }
+                
+        
+        
     
+        
+        
+        
+        
+        
+        
+        
+        
+       
     
     
     
@@ -328,13 +345,13 @@ public class MovilidadesController implements Serializable{
         try{
         movilidadService.editarMovilidad(m);
         }catch(RuntimeException ex){
-            beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
             return null;
         }
         Mensaje mensaje=new Mensaje(m.getUsuario() ,usuario, Calendar.getInstance().getTime(),"cambio de estado de movilidad","destino:"+m.getUniversidad().getNombre()+" \n"+"fecha de inicio:"+sdf.format(m.getFechaInicio())+" \n"+"fecha fin:"+sdf.format(m.getFechaFin())+"\n\n"+ "el estado de la movilidad ahora es: "+m.getEstado(), false,false,false);
             mensajeService.enviarMensaje(mensaje);
-            beanUtilidades.creaMensaje("estado de una movilidad modificado, se ha enviado un mensaje", FacesMessage.SEVERITY_INFO);
+            sessionController.creaMensaje("estado de una movilidad modificado, se ha enviado un mensaje", FacesMessage.SEVERITY_INFO);
         }
                return null;
     }
@@ -349,13 +366,13 @@ public class MovilidadesController implements Serializable{
         listaMovilidades.remove(m);
             }catch(RuntimeException ex){
                 actualizarTodasMovilidades();
-                beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
+                sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                 return null;
             }
         }
         
         //actualizarTodasMovilidades();
-        beanUtilidades.creaMensaje("movilidad eliminada correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("movilidad eliminada correctamente", FacesMessage.SEVERITY_INFO);
         return null;
         
     }
@@ -371,7 +388,7 @@ public class MovilidadesController implements Serializable{
         if(selectedMovilidades.isEmpty()==false){
         activaTexto=true;
     }else{
-            beanUtilidades.creaMensaje("hay que seleccionar al menos un usuario", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("hay que seleccionar al menos un usuario", FacesMessage.SEVERITY_ERROR);
         }
     }
     
@@ -394,7 +411,7 @@ public class MovilidadesController implements Serializable{
         
     } 
     
-        beanUtilidades.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
         activaTexto=false;
         tema="";
         texto="";

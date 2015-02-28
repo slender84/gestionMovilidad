@@ -8,6 +8,7 @@ import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -16,18 +17,17 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.EquivalenciaService;
 import model.services.MovilidadService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class VerContratosController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{equivalenciaService}")
     private EquivalenciaService equivalenciaService;
@@ -38,7 +38,7 @@ public class VerContratosController implements Serializable{
    private Usuario user;
     
    
-    private HttpSession session;
+    
     private ExternalContext context;
             
     
@@ -62,9 +62,7 @@ public class VerContratosController implements Serializable{
     @PostConstruct
     public void init(){
         
-        
-       session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-       user=(Usuario)session.getAttribute("admin");
+       user=sessionController.getUser();
        context=FacesContext.getCurrentInstance().getExternalContext();
        if(context.getSessionMap().containsKey("movilidad")==true){
            
@@ -94,13 +92,15 @@ public class VerContratosController implements Serializable{
        }
         }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public MovilidadService getMovilidadService() {
         return movilidadService;
@@ -178,7 +178,7 @@ public class VerContratosController implements Serializable{
             c=equivalenciaService.buscarContrato(c.getIdContrato());
             }catch(InstanceNotFoundException ex){
              listaContratos=(ArrayList<Contrato>)equivalenciaService.listarContratos(selectedMovilidad);
-              beanUtilidades.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
+              sessionController.creaMensaje("contrato no encontrado", FacesMessage.SEVERITY_ERROR);
              return null;
             }
             listaCopia=new ArrayList<>(c.getEquivalencias());
@@ -203,7 +203,7 @@ public class VerContratosController implements Serializable{
         
         
         
-        beanUtilidades.creaMensaje("contrato eliminado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("contrato eliminado correctamente", FacesMessage.SEVERITY_INFO);
         //listaContratos=(ArrayList<Contrato>)equivalenciaService.listarContratos(selectedMovilidad);
         selectedContratos=null;
         
@@ -222,7 +222,7 @@ public class VerContratosController implements Serializable{
     public String compararContratos(){
         
         if(selectedContratos.isEmpty()!=selectedContratos.size()>2){
-            beanUtilidades.creaMensaje("hay que elegir uno o dos contratos", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("hay que elegir uno o dos contratos", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         if(selectedContratos.size()==1){

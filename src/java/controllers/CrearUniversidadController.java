@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -22,8 +22,8 @@ public class CrearUniversidadController implements Serializable{
     @ManagedProperty(value="#{universidadService}")
     private UniversidadService universidadService;
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     
     
@@ -77,15 +77,17 @@ public class CrearUniversidadController implements Serializable{
         this.universidadService = universidadService;
     }
 
+    public SessionController getSessionController() {
+        return sessionController;
+    }
+
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
+    }
+
    
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
-    }
-
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
-    }
+    
 
     
     
@@ -244,7 +246,7 @@ public class CrearUniversidadController implements Serializable{
        try{
         p=universidadService.buscarPais(paisStr);
        }catch(InstanceNotFoundException ex){
-          beanUtilidades.creaMensaje("se ha producido un error,no existe ese país", FacesMessage.SEVERITY_ERROR);
+          sessionController.creaMensaje("se ha producido un error,no existe ese país", FacesMessage.SEVERITY_ERROR);
            return "crearUniversidad.xhtml";
        }
         Universidad u=new Universidad();
@@ -258,15 +260,15 @@ public class CrearUniversidadController implements Serializable{
             universidadService.insertarUniversidad(u);
             
         }catch(org.springframework.dao.DataIntegrityViolationException ex){
-            beanUtilidades.creaMensaje("ya existe esa universidad", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("ya existe esa universidad", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         catch(RuntimeException ex){
-            beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_INFO);
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_INFO);
             return null;
         }
         
-        beanUtilidades.creaMensaje("universidad creada", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("universidad creada", FacesMessage.SEVERITY_INFO);
         listaUniversidades.add(u);
         nombre="";
         web="";
@@ -302,14 +304,14 @@ public class CrearUniversidadController implements Serializable{
                 }catch(InstanceNotFoundException|RuntimeException ex){
                     ex.printStackTrace();
                     listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
-                   beanUtilidades.creaMensaje("Error eliminando", FacesMessage.SEVERITY_ERROR); 
+                   sessionController.creaMensaje("Error eliminando", FacesMessage.SEVERITY_ERROR); 
                    
                     return null;
                 }  
                 
                 listaUniversidades.remove(u);
             }
-            beanUtilidades.creaMensaje("se han eliminado las universidades correctamente", FacesMessage.SEVERITY_INFO);
+            sessionController.creaMensaje("se han eliminado las universidades correctamente", FacesMessage.SEVERITY_INFO);
             //listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
             checkDetalles=false;
         }
@@ -326,12 +328,12 @@ public class CrearUniversidadController implements Serializable{
        // listaUniversidades=(ArrayList<Universidad>)universidadService.listarPorPais(paisStr);
         }catch(InstanceNotFoundException|RuntimeException ex){
            
-            beanUtilidades.creaMensaje("se ha producido un error ", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("se ha producido un error ", FacesMessage.SEVERITY_ERROR);
             checkDetalles=false;
             //listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(paisStr);
             return "crearUniversidad.xhtml?faces-redirect=true";
         }
-        beanUtilidades.creaMensaje("edición correcta", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("edición correcta", FacesMessage.SEVERITY_INFO);
         codUniversidad="";
         nombre="";
         web="";

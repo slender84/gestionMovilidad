@@ -65,12 +65,42 @@
                 
                     <p:column selectionMode="multiple" styleClass="multiple"/>
                
-                         <f:facet name="footer">
-                             <p:commandLink onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formTabla:" action="#{eliminarUsuarioController.eliminaUsuariosLista}" 
+                    <p:columnGroup type="footer">
+                        <p:row>
+                            <p:column/>
+                        <p:column>   
+                            <f:facet name="footer">
+                                
+                                <p:commandLink onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formTabla:" action="#{eliminarUsuarioController.eliminaUsuariosLista}" 
                                             oncomplete="PF('usTable').filter()" rendered="#{sessionController.user.tipoUsuario eq 0}">
-                                 <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                                 <h:graphicImage value="/resources/img/trash26.png" title="eliminar"/>
                              </p:commandLink>
-                         </f:facet>
+                            </f:facet>
+                            
+                        </p:column>
+                            <p:column/>
+                            
+                            
+                            <p:column>
+                                <f:facet name="footer">
+                                    
+                                    <p:commandLink onclick="if(!confirm('SE ELIMINARÁ EL USUARIO Y TODAS SUS ACCIONES'))return false" update=":formTabla" action="#{eliminarUsuarioController.borrarUsuario}"
+                                                   oncomplete="PF('usTable').filter()" rendered="#{sessionController.user.tipoUsuario eq 0}">
+                                    
+                                        <h:graphicImage value="/resources/img/erase24.png" title="eliminar definitivamente"/>
+                                    </p:commandLink> 
+                                    
+                                </f:facet>
+                                
+                            </p:column>
+                            
+                            
+                            <p:column/>
+                            <p:column/>
+                        </p:row>
+                        
+                             
+                    </p:columnGroup>     
                 
             </p:dataTable>
           

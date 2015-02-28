@@ -70,7 +70,7 @@
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>
@@ -97,7 +97,7 @@
                            <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         
                         <h:outputText value="#{asignatura.asignatura.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>

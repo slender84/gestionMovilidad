@@ -19,13 +19,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -35,8 +33,8 @@ import model.utils.beanUtilidades;
 @ViewScoped
 public class CrearMovilidadController implements Serializable{
 
-   @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+   @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
      @ManagedProperty(value="#{movilidadService}")
     private MovilidadService movilidadService;
@@ -57,8 +55,8 @@ public class CrearMovilidadController implements Serializable{
     
     @PostConstruct
     public void init(){
-        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        usuario=(Usuario)session.getAttribute("user");
+        
+        usuario=sessionController.getUser();
        fechaMin=movilidadService.fechaMin();
        fechaMax=movilidadService.fechaMax();
     } 
@@ -99,13 +97,15 @@ public class CrearMovilidadController implements Serializable{
         this.universidadService = universidadService;
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+   
     
     
 
@@ -220,7 +220,7 @@ public class CrearMovilidadController implements Serializable{
         try{
         universidad=universidadService.buscarUniversidad(selectedUniversidad);
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
             
         }
     }
@@ -235,7 +235,7 @@ public String crearMovilidad(){
         try{
        u=universidadService.buscarUniversidad(selectedUniversidad);
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("universidad inexistente", FacesMessage.SEVERITY_ERROR);
             selectedUniversidad="";
                 selectedPais="";
                 selectedUniversidad="";
@@ -258,16 +258,16 @@ public String crearMovilidad(){
              
               
               }catch(DuracionException ex){
-                  beanUtilidades.creaMensaje(ex.getMessage(),FacesMessage.SEVERITY_ERROR);
+                  sessionController.creaMensaje(ex.getMessage(),FacesMessage.SEVERITY_ERROR);
                   return null;
               }
               catch(NumeroDeMovilidadesException ex){
-                  beanUtilidades.creaMensaje(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
+                  sessionController.creaMensaje(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
                   return null;
               }
               
                catch(RuntimeException ex){
-                 beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+                 sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
                   return "crearMovilidad.xhtml";
               }
              
@@ -286,8 +286,8 @@ public String crearMovilidad(){
                     mensajeService.enviarMensaje(mensaje);
                 
                 
-                beanUtilidades.creaMensaje("movilidad creada", FacesMessage.SEVERITY_INFO);
-                beanUtilidades.creaMensaje(usuario.getLogin()+" a "+ selectedUniversidad+" "+selectedPais+" "+" " + " de "+sdf.format(fechaInicio)+" a "+ sdf.format(fechaFin), FacesMessage.SEVERITY_INFO);
+                sessionController.creaMensaje("movilidad creada", FacesMessage.SEVERITY_INFO);
+                sessionController.creaMensaje(usuario.getLogin()+" a "+ selectedUniversidad+" "+selectedPais+" "+" " + " de "+sdf.format(fechaInicio)+" a "+ sdf.format(fechaFin), FacesMessage.SEVERITY_INFO);
                 selectedUniversidad="";
                 selectedPais="";
                 selectedUniversidad="";

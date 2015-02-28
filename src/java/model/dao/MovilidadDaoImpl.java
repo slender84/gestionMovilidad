@@ -10,6 +10,7 @@ package model.dao;
 import com.sun.faces.flow.FlowCDIContext;
 import entities.Movilidad;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -42,6 +43,34 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
         return getSession().createQuery("select m from Movilidad m order by m.fechaInicio desc").list();
     }
    
+    
+    @Override
+    public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros){
+        
+        if(listaFiltros.containsKey("curso"))
+            getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", listaFiltros.get("curso"));
+        if(listaFiltros.containsKey("estado"))
+            getSession().enableFilter("estado").setParameter("estadoParam", listaFiltros.get("estado"));
+        if(listaFiltros.containsKey("pais")){
+           
+            if(listaFiltros.containsKey("universidad")==false){
+                
+                return getSession().createQuery("select m from Movilidad m where m.universidad.pais.nombre=:pais order by m.fechaInicio desc").setParameter("pais", listaFiltros.get("pais")).list();
+            }else{
+                
+                getSession().enableFilter("universidad").setParameter("universidadParam", listaFiltros.get("universidad"));
+                
+                
+            }
+                
+            
+        }
+        
+        return listar();
+        
+    }
+    
+    
    
     
 }

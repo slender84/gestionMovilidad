@@ -11,7 +11,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import model.services.UsuarioService;
 import model.utils.Seguridad;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -19,8 +19,8 @@ import model.utils.beanUtilidades;
 @RequestScoped
 public class ConfiguracionCorreoController implements Serializable{
 
-    @ManagedProperty (value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty (value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty (value = "#{usuarioService}")
     private UsuarioService usuarioService;
@@ -31,13 +31,15 @@ public class ConfiguracionCorreoController implements Serializable{
     public ConfiguracionCorreoController() {
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+   
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
@@ -62,7 +64,7 @@ public class ConfiguracionCorreoController implements Serializable{
     @PostConstruct
     public void init(){
         
-        correoConf=(CorreoConf)beanUtilidades.getCorreoConf();
+        correoConf=(CorreoConf)sessionController.getCorreoConf();
         
         
     }
@@ -73,13 +75,13 @@ public class ConfiguracionCorreoController implements Serializable{
         
     try{    
     correoConf.setPassword(Seguridad.encrypt(correoConf.getPassword()));
-    beanUtilidades.setCorreoConf(correoConf);
+    sessionController.setCorreoConf(correoConf);
     }catch(Exception ex){
         
-        beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+        sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
     }
     
-    beanUtilidades.creaMensaje("Configuración de correo guardada correctamente", FacesMessage.SEVERITY_INFO);
+    sessionController.creaMensaje("Configuración de correo guardada correctamente", FacesMessage.SEVERITY_INFO);
     return null;
 }
     

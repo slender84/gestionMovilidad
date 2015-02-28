@@ -9,18 +9,16 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class MensajesEnviadosUserController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{mensajeService}")
     private MensajeService mensajeService;
@@ -46,19 +44,21 @@ public class MensajesEnviadosUserController implements Serializable{
     
     @PostConstruct
     public void init(){
-        HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        user=(Usuario)session.getAttribute("user");
+        
+        user=sessionController.getUser();
         setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviados(user.getLogin(), "admin"));
         
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public MensajeService getMensajeService() {
         return mensajeService;
@@ -173,7 +173,7 @@ public class MensajesEnviadosUserController implements Serializable{
             }
         }
      
-        //beanUtilidades.creaMensaje("mensajes eliminados correctamente", FacesMessage.SEVERITY_INFO);
+        //sessionController.creaMensaje("mensajes eliminados correctamente", FacesMessage.SEVERITY_INFO);
         actualizarEnviados();
         return null;
         

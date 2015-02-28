@@ -56,6 +56,7 @@
                              required="true"
                              requiredMessage="el campo Coduniversidad está vacío"
                              validatorMessage="El código de la universidad debe tener como máximo 15 caracteres">
+                             
                    
                    <f:validateLength minimum="1" maximum="15"/>
                     
@@ -135,7 +136,7 @@
                                    <p:commandLink  id="b1" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"
                                                   action="#{crearUniversidadController.eliminaUniversidadLista}" process=":formTabla" update=":formTabla :formUniversidad :formDetalles"
                                                  oncomplete="PF('universidadTabla').filter();">
-                                       <h:graphicImage value="/resources/img/trash48.png" title="eliminar"/>
+                                       <h:graphicImage value="/resources/img/trash26.png" title="eliminar"/>
                                    </p:commandLink>
                                                  
                                

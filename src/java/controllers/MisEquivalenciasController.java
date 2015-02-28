@@ -36,7 +36,7 @@ import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -48,8 +48,8 @@ import model.utils.beanUtilidades;
 @ViewScoped
 public class MisEquivalenciasController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{usuarioService}")
     private  UsuarioService usuarioService;
@@ -117,12 +117,12 @@ public class MisEquivalenciasController implements Serializable{
     @PostConstruct
     public void init(){
         context=FacesContext.getCurrentInstance().getExternalContext();
-        session=(HttpSession)context.getSession(false);
+        
         
        
        
       
-        user=(Usuario)session.getAttribute("user");
+        user=sessionController.getUser();
         
         
          
@@ -185,15 +185,17 @@ public class MisEquivalenciasController implements Serializable{
          
        
     }
+
+    public SessionController getSessionController() {
+        return sessionController;
+    }
+
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
+    }
     
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
-    }
-
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
-    }
+    
     
 
     public MensajeService getMensajeService() {
@@ -421,12 +423,12 @@ public class MisEquivalenciasController implements Serializable{
         
         if(selectedAsignaturasFic.isEmpty()){
             
-            beanUtilidades.creaMensaje("No hay asignaturas de origen", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("No hay asignaturas de origen", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
         if(selectedAsignaturasUni.isEmpty()){
-            beanUtilidades.creaMensaje("No hay asignaturas de destino", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("No hay asignaturas de destino", FacesMessage.SEVERITY_ERROR);
             return null;
         }
        
@@ -455,7 +457,7 @@ public class MisEquivalenciasController implements Serializable{
         
         
          if(equivalenciaService.equivalenciaRepetida(equivalencia, listaAuxEquivalencias)==true){
-            beanUtilidades.creaMensaje("Equivalencia repetida: descartada", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("Equivalencia repetida: descartada", FacesMessage.SEVERITY_ERROR);
         return null;
         }
          creditosA=creditosAaux+creditosA;
@@ -481,7 +483,7 @@ public class MisEquivalenciasController implements Serializable{
     public String confirmarContrato(){
         if(listaAuxEquivalencias.isEmpty()){
             
-            beanUtilidades.creaMensaje("el contrato está vacío", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el contrato está vacío", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
@@ -504,12 +506,12 @@ public class MisEquivalenciasController implements Serializable{
         }
             
         
-        beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
         try{
         Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,false,false);
         mensajeService.enviarMensaje(m);
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
         }
         verConfirmar=false;
         
@@ -520,7 +522,7 @@ public class MisEquivalenciasController implements Serializable{
     public String editarContrato(){
         if(listaAuxEquivalencias.isEmpty()){
             
-            beanUtilidades.creaMensaje("el contrato está vacío", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el contrato está vacío", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         ArrayList<Equivalencia>listaCopia=null;
@@ -544,7 +546,7 @@ public class MisEquivalenciasController implements Serializable{
             }
         }
         
-        beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
      Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato",false,false,false);
      mensajeService.enviarMensaje(m);
@@ -563,7 +565,7 @@ public class MisEquivalenciasController implements Serializable{
      public String  crearContratoDesdeAceptado(){
        if(listaAuxEquivalencias.isEmpty()){
             
-            beanUtilidades.creaMensaje("el contrato está vacío", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el contrato está vacío", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
@@ -588,7 +590,7 @@ public class MisEquivalenciasController implements Serializable{
         
        
         
-     beanUtilidades.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
+     sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
      Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,false,false);
      mensajeService.enviarMensaje(m);

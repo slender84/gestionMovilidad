@@ -10,15 +10,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
 @ViewScoped
 public class EliminarUsuarioController implements Serializable{
 
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{usuarioService}")  
     private transient UsuarioService usuarioService;
@@ -38,13 +38,15 @@ public class EliminarUsuarioController implements Serializable{
         
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
@@ -87,6 +89,20 @@ public class EliminarUsuarioController implements Serializable{
         }
         
         for(Usuario u:selectedUsuarios){
+            
+            if(u.getTipoUsuario()==2){
+                try{
+                usuarioService.eliminarUsuario(u);
+                listaUsuarios.remove(u);
+                }catch(RuntimeException ex){
+                    return null;
+                }
+            }else{
+                
+                
+        
+            
+            
             u.setBorrado(true);
             try{
         usuarioService.editarUsuario(u);
@@ -97,13 +113,43 @@ public class EliminarUsuarioController implements Serializable{
         listaUsuarios.remove(u);
         }
         
-         beanUtilidades.creaMensaje("usuarios borrados ", FacesMessage.SEVERITY_INFO);
+        }
+         sessionController.creaMensaje("usuarios borrados ", FacesMessage.SEVERITY_INFO);
         //setListaUsuarios((ArrayList < Usuario >)usuarioService.listar());
         return null;
-      
-        
-        
           
+    }
+    
+    public String borrarUsuario(){
+        
+        
+        
+         if(selectedUsuarios.isEmpty()){
+            return null;
+        }
+         
+         for(Usuario u:selectedUsuarios){
+             
+             try{
+                 
+                 usuarioService.eliminarUsuario(u);
+                  
+             }catch(RuntimeException ex){
+                 
+                 sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+                 listaUsuarios=(ArrayList < Usuario >)usuarioService.listarUsuarios();
+                 return null;
+             }
+             
+             System.out.println(listaUsuarios.remove(u));
+             
+             
+         }
+         sessionController.creaMensaje("usuarios eliminados correctamente", FacesMessage.SEVERITY_INFO);
+                 
+         
+         return null;
+        
     }
     
     

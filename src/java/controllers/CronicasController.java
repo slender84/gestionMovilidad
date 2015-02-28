@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -26,8 +26,8 @@ public class CronicasController implements Serializable{
     @ManagedProperty(value="#{universidadService}")
     private UniversidadService universidadService;
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     public UniversidadService getUniversidadService() {
         return universidadService;
@@ -37,13 +37,15 @@ public class CronicasController implements Serializable{
         this.universidadService = universidadService;
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+   
     
     
     
@@ -200,13 +202,13 @@ public class CronicasController implements Serializable{
             universidadService.editarCronica(selectedCronica);
         }catch(InstanceNotFoundException ex){
             
-            beanUtilidades.creaMensaje("El comentario no existe", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("El comentario no existe", FacesMessage.SEVERITY_ERROR);
             panelTexto=false;
             listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
             return null;
         }
         
-        beanUtilidades.creaMensaje("Comentario modificado correctamente", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("Comentario modificado correctamente", FacesMessage.SEVERITY_INFO);
         return null;
         
     }
@@ -224,7 +226,7 @@ public class CronicasController implements Serializable{
                 universidadService.eliminarCronica(c);
             }catch(InstanceNotFoundException ex){
                 
-                beanUtilidades.creaMensaje("No existe ese comentario", FacesMessage.SEVERITY_ERROR);
+                sessionController.creaMensaje("No existe ese comentario", FacesMessage.SEVERITY_ERROR);
                 listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
                 panelTexto=false;
                 return null;
@@ -235,7 +237,7 @@ public class CronicasController implements Serializable{
         }
             
         
-        beanUtilidades.creaMensaje("Comentarios eliminados", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("Comentarios eliminados", FacesMessage.SEVERITY_INFO);
         return null;
     }
     
@@ -258,7 +260,7 @@ public class CronicasController implements Serializable{
         try{
         listaCronicas=(ArrayList<Cronica>)universidadService.listarCronicasPublicas(universidad);
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("No existe esa universidad", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("No existe esa universidad", FacesMessage.SEVERITY_ERROR);
             universidad="";
             return null;
         }

@@ -67,7 +67,7 @@
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('movTable').filter()">
                             <f:selectItem itemLabel="todas" itemValue="#{null}" noSelectionOption="true"/>
-                            <f:selectItems var="estados" value="#{beanUtilidades.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
+                            <f:selectItems var="estados" value="#{sessionController.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
                         </p:selectOneMenu>
                             
                     </f:facet>

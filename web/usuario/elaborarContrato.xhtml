@@ -8,9 +8,9 @@
       xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
     <h:head>
         <title>Elaborar contrato</title>
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 100px)" href="/gestionMovilidad/javax.faces.resource/style1024.css.xhtml?ln=css"/>
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1365px)" href="/gestionMovilidad/javax.faces.resource/style1366.css.xhtml?ln=css"/>
-        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1600px)" href="/gestionMovilidad/javax.faces.resource/styleBig.css.xhtml?ln=css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 100px)" href="/gestionMovilidad/resources/css/style1024.css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1365px)" href="/gestionMovilidad/resources/css/style1366.css"/>
+        <link type="text/css" rel="stylesheet" media="screen and (min-width: 1600px)" href="/gestionMovilidad/resources/css/styleBig.css"/>
     </h:head>
     <h:body styleClass="blue">
         <ezcomp:out1/>
@@ -45,7 +45,7 @@
                     
                         
                     <h:outputText value="#{asigFic.creditos}">
-                        <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                        <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                     </h:outputText>
                 
                 </p:column>
@@ -114,7 +114,7 @@
                 <p:column headerText="Cred" sortBy="#{asigUni.creditos}" styleClass="creditos">
                 
                     <h:outputText value="#{asigUni.creditos}">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1" />
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1" />
                         </h:outputText>
                 
                 </p:column>
@@ -178,7 +178,7 @@
                 <p:column headerText="Cr" styleClass="nuevoCreditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos} ">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/>
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/>
                         </h:outputText>
                         <br/>
                     </ui:repeat>
@@ -196,7 +196,7 @@
                 <p:column headerText="Cr" styleClass="nuevoCreditos">
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         <h:outputText value="#{asignatura.asignatura.creditos} ">
-                            <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1" />
+                            <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1" />
                         </h:outputText>
                         
                         <br/>
@@ -212,7 +212,7 @@
                <p:column >
                             <f:facet name="footer">
                                 <h:outputText value="#{misEquivalenciasController.creditosA}">
-                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                    <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
@@ -221,7 +221,7 @@
                 <p:column >
                             <f:facet name="footer">
                                 <h:outputText value="#{misEquivalenciasController.creditosB}">
-                                    <f:convertNumber locale="es_ES" minFractionDigits="0" maxFractionDigits="1"/> 
+                                    <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>

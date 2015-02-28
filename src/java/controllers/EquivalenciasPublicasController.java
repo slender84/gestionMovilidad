@@ -19,7 +19,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.services.EquivalenciaService;
 import model.services.UniversidadService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -28,8 +28,8 @@ import model.utils.beanUtilidades;
 public class EquivalenciasPublicasController implements Serializable{
 
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{equivalenciaService}")
     private EquivalenciaService equivalenciaService;
@@ -70,13 +70,15 @@ public class EquivalenciasPublicasController implements Serializable{
        
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
    
     public EquivalenciaService getEquivalenciaService() {
         return equivalenciaService;
@@ -208,7 +210,7 @@ public class EquivalenciasPublicasController implements Serializable{
         try{
         universidad=universidadService.buscarUniversidad(universidadStr);
         }catch(InstanceNotFoundException ex){
-            beanUtilidades.creaMensaje("no existe esa universidad", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("no existe esa universidad", FacesMessage.SEVERITY_ERROR);
             universidadStr="";
             return null;
         }
@@ -225,7 +227,7 @@ public class EquivalenciasPublicasController implements Serializable{
         c=equivalenciaService.verContratoPorEquivalencia(selectedEquivalencia);
          m=equivalenciaService.buscarMovilidadPorContrato(c);
         }catch(InstanceNotFoundException|RuntimeException ex){
-           beanUtilidades.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+           sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            
             return null;
         }

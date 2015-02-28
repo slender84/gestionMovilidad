@@ -25,7 +25,6 @@ import javax.servlet.http.HttpSession;
 import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.utils.EquivalenciaRevisada;
-import model.utils.beanUtilidades;
 
 
 /**
@@ -37,8 +36,8 @@ import model.utils.beanUtilidades;
 public class EquivalenciasController implements Serializable{
 
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
    
     @ManagedProperty(value="#{equivalenciaService}")
     private  EquivalenciaService equivalenciaService;
@@ -98,18 +97,17 @@ public class EquivalenciasController implements Serializable{
         
         
         context=FacesContext.getCurrentInstance().getExternalContext();
-        session=(HttpSession)context.getSession(false);
-        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        
+        
            
           
            if(context.getSessionMap().containsKey("movilidad")&&context.getSessionMap().containsKey("contrato")){
-           user=(Usuario)session.getAttribute("admin");
+           user=sessionController.getUser();
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-           //context.getSessionMap().remove("contrato");
+           context.getSessionMap().remove("contrato");
            //context.getSessionMap().remove("movilidad");
-              request.getSession().removeAttribute("movilidad");
-              request.getSession().removeAttribute("contrato");
+              
            try{
            selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
            }catch(InstanceNotFoundException ex){
@@ -155,13 +153,15 @@ public class EquivalenciasController implements Serializable{
     }
        } 
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
     
     public MensajeService getMensajeService() {
         return mensajeService;
@@ -325,7 +325,7 @@ public class EquivalenciasController implements Serializable{
             }
             
         }
-        beanUtilidades.creaMensaje("Las equivalencias han sido publicadas", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("Las equivalencias han sido publicadas", FacesMessage.SEVERITY_INFO);
         
         
         return null;
@@ -356,7 +356,7 @@ public class EquivalenciasController implements Serializable{
             }
             
         }
-        beanUtilidades.creaMensaje("Las equivalencias han sido publicadas", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("Las equivalencias han sido publicadas", FacesMessage.SEVERITY_INFO);
         
         
         return null;
@@ -383,7 +383,7 @@ public class EquivalenciasController implements Serializable{
             }
             
         }
-        beanUtilidades.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);
         return null;
         
         
@@ -409,7 +409,7 @@ public class EquivalenciasController implements Serializable{
             }
             
         }
-        beanUtilidades.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);
         return null;
         
         
@@ -443,7 +443,7 @@ public class EquivalenciasController implements Serializable{
                     }
                 
             }
-        beanUtilidades.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
         Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, false,false,false);
         mensajeService.enviarMensaje(m);
         context.getSessionMap().remove("contrato");

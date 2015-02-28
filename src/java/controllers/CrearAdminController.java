@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.services.UsuarioService;
 import model.utils.Seguridad;
-import model.utils.beanUtilidades;
+
 
 
 @ManagedBean
@@ -20,8 +20,8 @@ import model.utils.beanUtilidades;
 public class CrearAdminController implements Serializable{
     
     
-    @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+    @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
     @ManagedProperty(value="#{usuarioService}")  
     private transient UsuarioService usuarioService;
@@ -36,13 +36,15 @@ public class CrearAdminController implements Serializable{
         
     }
 
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+    
 
     public UsuarioService getUsuarioService() {
         return usuarioService;
@@ -89,7 +91,7 @@ public class CrearAdminController implements Serializable{
     public String crearAdmin(){
         
         if(password.equals(passwordAux)==false){
-            beanUtilidades.creaMensaje("el password no coincide con la confirmación", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el password no coincide con la confirmación", FacesMessage.SEVERITY_ERROR);
            return null;
         }
         
@@ -101,12 +103,12 @@ public class CrearAdminController implements Serializable{
         try{
         usuarioService.insertarUsuario(u);
     }catch(org.springframework.dao.DataIntegrityViolationException ex){
-        beanUtilidades.creaMensaje("Ese usuario ya existe", FacesMessage.SEVERITY_ERROR);
+        sessionController.creaMensaje("Ese usuario ya existe", FacesMessage.SEVERITY_ERROR);
         login="";
         return null;
     }
         
-        beanUtilidades.creaMensaje("usuario creado", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("usuario creado", FacesMessage.SEVERITY_INFO);
         password="";
         passwordAux="";
         nuevoPassword="";
@@ -121,18 +123,18 @@ public class CrearAdminController implements Serializable{
         HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         Usuario u=(Usuario)session.getAttribute("admin");
         if(Seguridad.md5Password(password).equals(u.getPassword())==false){
-            beanUtilidades.creaMensaje("password erróneo", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("password erróneo", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
         if(nuevoPassword.equals(passwordAux)==false){
-            beanUtilidades.creaMensaje("el password no coincide con la confirmación", FacesMessage.SEVERITY_ERROR);
+            sessionController.creaMensaje("el password no coincide con la confirmación", FacesMessage.SEVERITY_ERROR);
             return null;
         }
         
         u.setPassword(Seguridad.md5Password(nuevoPassword));
         usuarioService.actualizarUsuario(u);
-        beanUtilidades.creaMensaje("password modificado", FacesMessage.SEVERITY_INFO);
+        sessionController.creaMensaje("password modificado", FacesMessage.SEVERITY_INFO);
         password="";
         passwordAux="";
         nuevoPassword="";

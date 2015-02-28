@@ -17,11 +17,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UsuarioService;
-import model.utils.beanUtilidades;
+
 
 
 
@@ -32,8 +31,8 @@ public class MisMovilidadesController implements Serializable{
 
    
     
-   @ManagedProperty(value="#{beanUtilidades}")
-    private beanUtilidades beanUtilidades;
+   @ManagedProperty(value="#{sessionController}")
+    private SessionController sessionController;
     
      @ManagedProperty(value="#{movilidadService}")
     private MovilidadService movilidadService;
@@ -64,14 +63,24 @@ public class MisMovilidadesController implements Serializable{
     @PostConstruct
     public void init(){
     
-       HttpSession session=(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-       usuario=(Usuario)session.getAttribute("user");
+      
+       usuario=sessionController.getUser();
        listaMisMovilidades=(ArrayList < Movilidad >)movilidadService.listarMisMovilidades(usuario.getLogin());
        
        
         
        }
 
+    public SimpleDateFormat getSdf() {
+        return sdf;
+    }
+
+    public void setSdf(SimpleDateFormat sdf) {
+        this.sdf = sdf;
+    }
+
+    
+    
    
      public MensajeService getMensajeService() {
         return mensajeService;
@@ -98,14 +107,16 @@ public class MisMovilidadesController implements Serializable{
         this.movilidadService = movilidadService;
     }
 
-   
-    public beanUtilidades getBeanUtilidades() {
-        return beanUtilidades;
+    public SessionController getSessionController() {
+        return sessionController;
     }
 
-    public void setBeanUtilidades(beanUtilidades beanUtilidades) {
-        this.beanUtilidades = beanUtilidades;
+    public void setSessionController(SessionController sessionController) {
+        this.sessionController = sessionController;
     }
+
+   
+    
 
     public Movilidad getSelectedMovilidad() {
         return selectedMovilidad;
@@ -157,13 +168,13 @@ public class MisMovilidadesController implements Serializable{
             movilidadService.eliminarMovilidad(selectedMovilidad);
             listaMisMovilidades.remove(selectedMovilidad);
             }catch(RuntimeException ex){
-                    beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
+                    sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                     actualizar();
                     return "verMisMovilidades.xhtml";
                     }
            // Mensaje mensaje=new Mensaje(admin,usuario,Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" ha eliminado una movilidad", "no","no","no");
              //   mensajeService.enviarMensaje(mensaje);
-                beanUtilidades.creaMensaje("movilidad eliminada correctamente ", FacesMessage.SEVERITY_INFO);
+                sessionController.creaMensaje("movilidad eliminada correctamente ", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;
                 actualizar();
                 return null;
@@ -174,7 +185,7 @@ public class MisMovilidadesController implements Serializable{
                 
                 Mensaje mensaje=new Mensaje( admin,usuario, Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" quiere cancelar una movilidad en curso en: "+selectedMovilidad.getUniversidad().getNombre()+" con fecha de inicio:"+ sdf.format(selectedMovilidad.getFechaInicio())+" y fecha fin:"+sdf.format(selectedMovilidad.getFechaFin()), false,false,false);
                 mensajeService.enviarMensaje(mensaje);
-                beanUtilidades.creaMensaje("se ha enviado un mensaje al coordinador para su cancelación", FacesMessage.SEVERITY_INFO);
+                sessionController.creaMensaje("se ha enviado un mensaje al coordinador para su cancelación", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;
                 return null;
                     
@@ -186,12 +197,12 @@ public class MisMovilidadesController implements Serializable{
                 listaMisMovilidades.remove(selectedMovilidad);
                     }catch(RuntimeException ex){
                         actualizar();
-                        beanUtilidades.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
+                        sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                         return "verMisMovilidades.xhtml";
                     }
                 //actualizar();  
                     
-                beanUtilidades.creaMensaje("movilidad eliminada correctamente", FacesMessage.SEVERITY_INFO);
+                sessionController.creaMensaje("movilidad eliminada correctamente", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;
                 return null;
            
