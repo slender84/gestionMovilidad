@@ -143,7 +143,7 @@
                         <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
                         <h:graphicImage value="/resources/img/edit26.png" title="ver/editar contrato"/>
                     </p:commandLink>
-                     <p:commandLink  action="#{verMisContratosController.revisarContrato}" ajax="false" rendered="#{contrato.estado eq 'aceptado' and verMisContratosController.verAceptado==true}">
+                    <p:commandLink  action="#{verMisContratosController.revisarContrato}" ajax="false" rendered="#{contrato.estado eq 'aceptado' or contrato.estado eq 'pendiente' and verMisContratosController.verAceptado==true}">
                         <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
                         <h:graphicImage value="/resources/img/lupa24.png" title="ver contrato"/>
                     </p:commandLink>

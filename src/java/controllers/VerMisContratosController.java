@@ -218,7 +218,7 @@ public class VerMisContratosController implements Serializable{
         
         for(Contrato c:listaContratos){
             
-            if(selectedContrato.getFecha().compareTo(c.getFecha())==-1){
+            if(selectedContrato.getFecha().compareTo(c.getFecha())==-1||selectedContrato.getEstado().equals("pendiente")){
                 
              return ("verContrato.xhtml?faces-redirect=true");
             }

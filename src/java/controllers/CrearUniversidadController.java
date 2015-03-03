@@ -271,7 +271,7 @@ public class CrearUniversidadController implements Serializable{
         sessionController.creaMensaje("universidad creada", FacesMessage.SEVERITY_INFO);
         listaUniversidades.add(u);
         nombre="";
-        web="";
+       web="";
         info="";
         //paisStr="";
         codUniversidad="";

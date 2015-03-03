@@ -61,6 +61,7 @@
                         <p:commandLink  update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.leerMensajeRecibido}">
                             <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesRecibidosUserController.selectedMensajeRecibido}"/>
                             <h:graphicImage value="/resources/img/lupa24.png" title="leer"/>
+                            
                            </p:commandLink>
                       </p:column>
                
@@ -69,7 +70,7 @@
                          <f:facet name="footer">
                              <p:commandLink update=":recibidos :panelRecibidos" action="#{mensajesRecibidosUserController.eliminarMensajesRecibidos}"
                                               oncomplete="PF('mensTabla').clearFilters()">
-                                 <h:graphicImage value="/resources/img/trash24.png" title="eliminar"/>
+                                 <h:graphicImage value="/resources/img/trash26.png" title="eliminar"/>
                              </p:commandLink>
                          </f:facet>
                

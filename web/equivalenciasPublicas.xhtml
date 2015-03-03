@@ -40,11 +40,20 @@
         
         <h:form id="formTablaEquivalencias">
             <h:panelGrid columns="2" cellpadding="5" rendered="#{equivalenciasPublicasController.checkUni}">
-                <p:outputLabel value="Web:" rendered="#{not empty equivalenciasPublicasController.universidad.web and equivalenciasPublicasController.mostrarInfo}"/>
-                <h:outputLink value="#{equivalenciasPublicasController.universidad.web}" rendered="#{not empty equivalenciasPublicasController.universidad.web and equivalenciasPublicasController.mostrarInfo}">link</h:outputLink>
-                <p:outputLabel value="Info:" rendered="#{not empty equivalenciasPublicasController.universidad.info and equivalenciasPublicasController.mostrarInfo}"/>
-            <p:inputTextarea value="#{equivalenciasPublicasController.universidad.info}" cols="60" rows="10" readonly="true" rendered="#{not empty equivalenciasPublicasController.universidad.info and equivalenciasPublicasController.mostrarInfo}"/>
+               
+                <h:outputLink value="#{equivalenciasPublicasController.universidad.web}" rendered="#{not empty equivalenciasPublicasController.universidad.web}">link</h:outputLink>
+                <p:commandLink style="font-size: 13px" value="Información"  rendered="#{not empty equivalenciasPublicasController.universidad.info}"
+                               action="#" oncomplete="PF('dialog1').show();"/>
+                <p:dialog header="información" widgetVar="dialog1" position="center,top">
+                    <p:inputTextarea value="#{equivalenciasPublicasController.universidad.info}"
+                                     readonly="true" rows="10" cols="50"/>
+                </p:dialog>
+            
             </h:panelGrid>
+            
+            
+            
+            
                <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias publicas"
                          value="#{equivalenciasPublicasController.listaEquivalencias}"

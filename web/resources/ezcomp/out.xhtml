@@ -26,7 +26,7 @@
             <p:menuitem value="Comentarios" url="/admin/verCronicas.xhtml"/>
             <p:menuitem value="Equivalencias públicas" url="/admin/equivalenciasPublicasAdmin.xhtml"/>
             <p:menuitem value="Cambiar password" url="/admin/cambiarPasswordAdmin.xhtml"/>
-            <p:submenu label="administración" rendered="#{autenticarUsuarioController.user.tipoUsuario eq 0}">
+            <p:submenu label="administración" rendered="#{sessionController.user.tipoUsuario eq 0}">
             <p:menuitem value="crear tutor" url="/adminGeneral/crearAdmin.xhtml"/>
             <p:menuitem value="Configurar correo" url="/adminGeneral/configuracionCorreo.xhtml"/>
             </p:submenu>

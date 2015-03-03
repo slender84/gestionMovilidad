@@ -51,9 +51,9 @@
             <h:panelGrid id="info" columns="2" cellpadding="6">
                 
                 
-                <h:outputLink value="#{crearMovilidadController.universidad.web}" target="_blank" rendered="#{not empty crearMovilidadController.universidad.web}">link</h:outputLink>
+                <h:outputLink value="#{crearMovilidadController.universidad.web}" target="_blank" rendered="#{not empty crearMovilidadController.universidad.web}">WEB</h:outputLink>
                 
-                <p:commandLink value="Información"  rendered="#{not empty crearMovilidadController.universidad.info}"
+                <p:commandLink style="font-size: 13px" value="Información"  rendered="#{not empty crearMovilidadController.universidad.info}"
                                action="#" oncomplete="PF('dialog1').show();"/>
                 <p:dialog header="información" widgetVar="dialog1" position="center,top">
                 <p:inputTextarea value="#{crearMovilidadController.universidad.info}"
