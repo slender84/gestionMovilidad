@@ -5,7 +5,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:pe="http://primefaces.org/ui/extensions">
     <h:head>
         <title>Ver contrato</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
@@ -22,7 +23,7 @@
         
          <h2 style="text-align: center">Ver contrato</h2>
             
-       <p:commandLink value="Imprimir" style="display:block;margin-bottom: 20px">
+       <p:commandLink style="display:block;margin-bottom: 20px">
            <p:printer target=":formTablaEquivalencias" />
            <h:graphicImage value="/resources/img/print48.png" title="Imprimir"/>
        </p:commandLink>
@@ -63,6 +64,9 @@
             
         <br/>
             
+        
+        
+        
             <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias"
                          selection="#{misEquivalenciasController.selectedEquivalencias}"
@@ -147,7 +151,16 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column> 
-                <p:column/>
+                <p:column>
+                    
+                    <f:facet name="footer">
+                        
+                        <p:commandButton value="print" ajax="false" immediate="true" action="#{misEquivalenciasController.imprimir()}"/>
+                        
+                    </f:facet>
+                    
+                    
+                </p:column>
                 <p:column footerText="total créditos: "  styleClass="verAsignatura"/>
                <p:column >
                             <f:facet name="footer">

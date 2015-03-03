@@ -24,10 +24,10 @@ import model.utils.UtilidadService;
 @SessionScoped
 public class SessionController implements Serializable {
 
-     private String filtroEstado;
-    private String filtroCursoAcademico;
-    private String filtroPais;
-    private String filtroUniversidad;
+     private String filtroEstado="todos";
+    private String filtroCursoAcademico="todos";
+    private String filtroPais="todos";
+    private String filtroUniversidad="todos";
     
     
     

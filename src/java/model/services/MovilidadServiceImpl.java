@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("movilidadService")
 @Transactional
-public class MovilidadServiceImpl implements MovilidadService,Serializable{
+public class MovilidadServiceImpl implements MovilidadService{
     
     
     @Autowired

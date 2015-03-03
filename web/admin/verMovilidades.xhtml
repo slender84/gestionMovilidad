@@ -24,7 +24,7 @@
                 <p:outputLabel value="curso académico: "/>
                 <p:selectOneMenu value="#{sessionController.filtroCursoAcademico}">
                 
-                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
                     <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
                                    itemValue="#{cursoAcademico.cursoAcademico}"/>
                 
@@ -35,7 +35,7 @@
                 <p:outputLabel value="Estado: "/>
                 <p:selectOneMenu value="#{sessionController.filtroEstado}">
                 
-                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
                     <f:selectItems value="#{sessionController.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
                 
                 </p:selectOneMenu>
@@ -45,7 +45,7 @@
                 <p:outputLabel value="Pais: "/>
                 <p:selectOneMenu value="#{sessionController.filtroPais}" filterMatchMode="contains">
                                  <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro:panelPais :formFiltro:panelUniversidad"/>
-                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
                     <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
                 
                 
@@ -55,7 +55,7 @@
                 <p:outputPanel id="panelUniversidad" style="font-size: 12px;">
                 <p:outputLabel value="Universidad: "/>
                 <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains">
-                    <f:selectItem itemLabel="Todas" itemValue="#{null}"/>
+                    <f:selectItem itemLabel="Todas" itemValue="todos"/>
                     <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
                                    itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
                 

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import java.util.Iterator;
 //import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -36,6 +37,7 @@ import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UsuarioService;
+
 
 
 
@@ -65,6 +67,8 @@ public class MisEquivalenciasController implements Serializable{
     
     @ManagedProperty(value="#{mensajeService}")
     private  MensajeService mensajeService;
+    
+    
     
    
     private ExternalContext context;
@@ -193,11 +197,8 @@ public class MisEquivalenciasController implements Serializable{
     public void setSessionController(SessionController sessionController) {
         this.sessionController = sessionController;
     }
-    
 
-    
-    
-
+   
     public MensajeService getMensajeService() {
         return mensajeService;
     }

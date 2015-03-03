@@ -7,23 +7,24 @@
 package model.dao;
 
 
-import com.sun.faces.flow.FlowCDIContext;
+
 import entities.Movilidad;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 
 @Repository("movilidadDao") 
-public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> implements MovilidadDao{
+public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> implements MovilidadDao,Serializable{
     
     
     
    
     @Override
     public List<Movilidad> listarMisMovilidades(String user){
+        
         
         Query q= getSession().createQuery("select m from Movilidad m where m.usuario.login=:user order by m.fechaInicio desc");
         q.setParameter("user", user);
@@ -39,7 +40,7 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
        //getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", "2015/2016");
        
         
-        
+       
         return getSession().createQuery("select m from Movilidad m order by m.fechaInicio desc").list();
     }
    
@@ -48,9 +49,12 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
     public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros){
         
         if(listaFiltros.containsKey("curso"))
+            
             getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", listaFiltros.get("curso"));
-        if(listaFiltros.containsKey("estado"))
+        if(listaFiltros.containsKey("estado")){
+            
             getSession().enableFilter("estado").setParameter("estadoParam", listaFiltros.get("estado"));
+        }
         if(listaFiltros.containsKey("pais")){
            
             if(listaFiltros.containsKey("universidad")==false){

@@ -85,8 +85,40 @@ public class MovilidadesController implements Serializable{
        //listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
        
+       boolean todosNulos=false;
+        Map<String,String> m=new HashMap<String,String>();
+         
+        if(sessionController.getFiltroEstado().equals("todos")==false){
+            
+          m.put("estado", sessionController.getFiltroEstado());
+        todosNulos=false;
+            
+        }
+        
+        if(sessionController.getFiltroCursoAcademico().equals("todos")==false){
+          m.put("curso", sessionController.getFiltroCursoAcademico());
+           
+        todosNulos=false;
+        }
+        
+        if(sessionController.getFiltroPais().equals("todos")==false){
+            
+          m.put("pais", sessionController.getFiltroPais());
+          todosNulos=false;  
+             if(sessionController.getFiltroUniversidad().equals("todos")==false){
+                 m.put("universidad", sessionController.getFiltroUniversidad());
+                 
+             }
+                }
+     
+        if(todosNulos==true){
+           
+            listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
        
-       
+       }else{
+            
+            listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarMovilidadPorFiltro(m);
+        }
        }
 
     public SessionController getSessionController() {
@@ -249,7 +281,7 @@ public class MovilidadesController implements Serializable{
         
         
         
-        if(sessionController.getFiltroPais()==null){
+        if(sessionController.getFiltroPais().equals("todos")){
             checkPais=false;
         }
         else{
@@ -264,32 +296,35 @@ public class MovilidadesController implements Serializable{
     
     
     public String buscarMovilidades(){
-        System.out.println(sessionController.getFiltroEstado());
+        
         boolean todosNulos=false;
         Map<String,String> m=new HashMap<String,String>();
-        
-        if(sessionController.getFiltroEstado()!=null){
+         
+        if(sessionController.getFiltroEstado().equals("todos")==false){
             
           m.put("estado", sessionController.getFiltroEstado());
         todosNulos=false;
             
         }
         
-        if(sessionController.getFiltroCursoAcademico()!=null){
+        if(sessionController.getFiltroCursoAcademico().equals("todos")==false){
           m.put("curso", sessionController.getFiltroCursoAcademico());
            
         todosNulos=false;
         }
         
-        if(sessionController.getFiltroPais()!=null){
+        if(sessionController.getFiltroPais().equals("todos")==false){
+            
           m.put("pais", sessionController.getFiltroPais());
           todosNulos=false;  
-             if(sessionController.getFiltroUniversidad()!=null)
+             if(sessionController.getFiltroUniversidad().equals("todos")==false){
                  m.put("universidad", sessionController.getFiltroUniversidad());
-                  
+                 
+             }
                 }
      
         if(todosNulos==true){
+           
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
         return null;
                 }
