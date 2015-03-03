@@ -139,7 +139,7 @@
                 
                 <p:column headerText="ver contrato/editar" styleClass="centrar">
                      
-                     <p:commandLink  action="#{verMisContratosController.editarContrato}" ajax="false" rendered="#{contrato.estado eq 'pendiente'||contrato.estado eq 'rechazado'}">
+                     <p:commandLink  action="#{verMisContratosController.editarContrato}" ajax="false" rendered="#{contrato.estado eq 'rechazado'}">
                         <f:setPropertyActionListener value="#{contrato}" target="#{verMisContratosController.selectedContrato}"/> 
                         <h:graphicImage value="/resources/img/edit26.png" title="ver/editar contrato"/>
                     </p:commandLink>
