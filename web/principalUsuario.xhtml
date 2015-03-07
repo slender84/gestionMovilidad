@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
       
       
     <h:head>
@@ -30,14 +31,24 @@
                         required="true"
                         requiredMessage="el campo password esta vacio"/>
             <h:outputLabel/>
-            <p:captcha required="true" requiredMessage="Es necesario cubrir el captcha" validatorMessage="El valor no es válido"
-                      
-                       rendered="false"/>
-                       <!--rendered="{autenticarUsuarioController.checkCaptcha}"-->
+            <h:panelGrid columns="2" rendered="#{autenticarUsuarioController.checkCaptcha}">
+                <h:outputLabel value="Escribe correctamente el entero resultante de la suma."/>
+                <h:outputLabel/>
+                <h:outputLabel value="sumando uno: "/>
+                 <h:outputText value="#{autenticarUsuarioController.letra}"/>
+                 <h:outputLabel value="sumando dos: "/>
+                <h:outputText value="#{autenticarUsuarioController.j}"/>
+                <h:outputLabel value="total: "/>
+                <p:inputText value="#{autenticarUsuarioController.total}" validatorMessage="El valor debe ser un número entero" required="true" requiredMessage="el captcha está vacío">
+                    <f:validateLongRange minimum="1"/>
+                   
+                
+                </p:inputText>              
+                              
                         
+            </h:panelGrid>
             
-            
-                       <p:commandButton value="autenticar" action="#{autenticarUsuarioController.autenticarUsuario}" ajax="false" />
+            <p:commandButton value="autenticar" action="#{autenticarUsuarioController.autenticarUsuario}" ajax="true" update="p1" />
                 </h:panelGrid>
             
         </h:form>

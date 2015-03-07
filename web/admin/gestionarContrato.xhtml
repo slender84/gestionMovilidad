@@ -93,6 +93,7 @@
                        
                    
                 <p:column headerText="Periodo" styleClass="periodoPublica">
+                    
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
                          <h:outputText value="#{asignatura.asignatura.periodo}"/>
                          <br/>

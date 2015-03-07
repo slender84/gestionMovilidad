@@ -5,6 +5,7 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 
 import model.services.UsuarioService;
+import model.utils.Captcha;
 
 
 
@@ -46,10 +48,12 @@ public class AutenticarUsuarioController implements Serializable{
     private boolean checkCaptcha;
     private String volverAPantallaInicial;
     
-    //private String zonaHoraria;
-    //private boolean mostrar=true;
+    Integer i;
+    Integer j;
+    String letra;
     
-    
+    Integer total;
+    ArrayList<Object> listaCaptcha=new ArrayList<Object>();
     
     
     public AutenticarUsuarioController() {
@@ -76,6 +80,36 @@ public class AutenticarUsuarioController implements Serializable{
         
         
     }
+
+    public Integer getJ() {
+        return j;
+    }
+
+    public void setJ(Integer j) {
+        this.j = j;
+    }
+
+    public String getLetra() {
+        return letra;
+    }
+
+    public void setLetra(String letra) {
+        this.letra = letra;
+    }
+
+   
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+    
+    
+    
+    
 
     public Usuario getUser() {
         return user;
@@ -144,16 +178,7 @@ public class AutenticarUsuarioController implements Serializable{
            
     //}
     
-    public String comprobarAccesoHumano(){
-        
-        if(volverAPantallaInicial.equals("volver"))
-            return "principalUsuario.xhtml?faces-redirect=true";
-       
-        volverAPantallaInicial="";
-        return null;
-        
-        
-    }
+    
     
     
     
@@ -163,6 +188,36 @@ public class AutenticarUsuarioController implements Serializable{
         
         checkCaptcha=cambio;
     }
+    
+    public void generarCaptcha(){
+        
+        listaCaptcha=Captcha.generarCaptchaString();
+        letra=listaCaptcha.get(2).toString();
+        i=(Integer)listaCaptcha.get(0);
+        j=(Integer)listaCaptcha.get(1);
+        if(checkCaptcha==false)
+          changeCaptcha(true);  
+        
+        
+    }
+    
+    public boolean comprobarCapcha(){
+        
+        if(total!=i+j)
+            return false;
+        
+        
+        return true;
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
     
     
@@ -179,32 +234,56 @@ public class AutenticarUsuarioController implements Serializable{
              sessionController.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
              login="";
              password="";
+             total=null;
               return null; 
              }
              if(u.getBorrado()==true){
                  sessionController.creaMensaje("login inexistente", FacesMessage.SEVERITY_ERROR);
                  login="";
                  password="";
+                 total=null;
                  return null;
              }
-            InfoCuenta i=u.getInfoCuenta();
+             
+             if(checkCaptcha==true){
+                 
+                 if(comprobarCapcha()==false){
+                     sessionController.creaMensaje("el captcha es incorrecto", FacesMessage.SEVERITY_ERROR);
+                     total=null;
+                     generarCaptcha();
+                     total=null;
+                     return null;
+                     
+                     
+                 }
+                 
+                 
+             }
+             
+             
+             
+            InfoCuenta info=u.getInfoCuenta();
+            
+            
             try{ 
             usuarioService.autenticarUsuario(password,u);
             }catch(PasswordIncorrectoException ex){
               sessionController.creaMensaje("password incorrecto", FacesMessage.SEVERITY_ERROR);
                
-               
-               i.setNumeroIntentos(i.getNumeroIntentos()+1);
+               total=null;
+               info.setNumeroIntentos(info.getNumeroIntentos()+1);
                usuarioService.actualizarIntentos(u.getInfoCuenta());
                
               
                
-               if(i.getNumeroIntentos()>=3){
+               if(info.getNumeroIntentos()>=3){
+                  
+                   generarCaptcha();
+                  
                    
-                   //changeCaptcha(true);
-                   return "tresIntentos.xhtml?faces-redirect=true";
+                   
                }
-               login="";
+               
                return null;
                
             }
