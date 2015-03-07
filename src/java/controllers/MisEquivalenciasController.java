@@ -18,10 +18,13 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import java.util.Iterator;
+import java.util.Map;
 //import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -30,6 +33,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import org.primefaces.component.datatable.DataTable;
 import model.services.AsignaturaService;
@@ -37,6 +41,8 @@ import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UsuarioService;
+import model.utils.ReportBean;
+import net.sf.jasperreports.engine.JRException;
 
 
 
@@ -68,7 +74,8 @@ public class MisEquivalenciasController implements Serializable{
     @ManagedProperty(value="#{mensajeService}")
     private  MensajeService mensajeService;
     
-    
+    @ManagedProperty(value="#{reportBean}")
+    private ReportBean reportBean;
     
    
     private ExternalContext context;
@@ -133,7 +140,7 @@ public class MisEquivalenciasController implements Serializable{
         if(context.getSessionMap().containsKey("movilidad")){
            
         selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
-        context.getSessionMap().remove("movilidad");
+       // context.getSessionMap().remove("movilidad");
             
         
         
@@ -149,7 +156,7 @@ public class MisEquivalenciasController implements Serializable{
          if(context.getSessionMap().containsKey("contrato")){
               
         selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-        context.getSessionMap().remove("contrato");
+        //context.getSessionMap().remove("contrato");
             
         try{
         c=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
@@ -189,6 +196,17 @@ public class MisEquivalenciasController implements Serializable{
          
        
     }
+
+    public ReportBean getReportBean() {
+        return reportBean;
+    }
+
+    public void setReportBean(ReportBean reportBean) {
+        this.reportBean = reportBean;
+    }
+    
+    
+    
 
     public SessionController getSessionController() {
         return sessionController;
@@ -671,7 +689,31 @@ public class MisEquivalenciasController implements Serializable{
      
         
     }
-     
+   
+    
+    public void PDF(ActionEvent event)throws JRException,IOException{
+        
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        
+        
+        Map parametros= new HashMap();
+        parametros.put("pais",selectedMovilidad.getUniversidad().getPais().getNombre());
+        parametros.put("universidad", selectedMovilidad.getUniversidad().getNombre());
+        
+        parametros.put("Inicio",sdf.format(selectedMovilidad.getFechaInicio()) );
+        parametros.put("Fin",sdf.format(selectedMovilidad.getFechaFin()));
+        parametros.put("Estado", selectedContrato.getEstado());
+        parametros.put("creditosA", creditosA.toString());
+        parametros.put("creditosB", creditosB.toString());
+        parametros.put("usuario", selectedMovilidad.getUsuario().getLogin());
+        
+        reportBean.PDF(event,reportBean.crearEquivalenciasJasper(listaAuxEquivalencias),parametros);
+        
+    }
+    
+   
+    
+    
      
     
 }

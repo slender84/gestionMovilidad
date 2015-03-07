@@ -22,13 +22,20 @@
         
         
          <h2 style="text-align: center">Ver contrato</h2>
-            
+     
+         
+         <h:form>   
+             <h:panelGrid columns="2">
        <p:commandLink style="display:block;margin-bottom: 20px">
            <p:printer target=":formTablaEquivalencias" />
            <h:graphicImage value="/resources/img/print48.png" title="Imprimir"/>
        </p:commandLink>
- 
-
+                 <p:commandLink actionListener="#{misEquivalenciasController.PDF}" ajax="false">
+                     <h:graphicImage value="/resources/img/pdf48.png" title="Exportar a PDF"/>
+                 </p:commandLink>          
+                 
+             </h:panelGrid>
+          </h:form>
          
          
          
@@ -165,7 +172,11 @@
                                 </h:outputText>
                             </f:facet>
                         </p:column> 
-                <p:column />
+                <p:column>
+                    
+                    
+                    
+                </p:column>
             </p:row>
             
                 </p:columnGroup>
@@ -177,7 +188,7 @@
         </h:form>
 
 
-
+       
 
 
 
