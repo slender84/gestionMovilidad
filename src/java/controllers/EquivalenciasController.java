@@ -11,8 +11,11 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -20,11 +23,13 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
 import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.utils.EquivalenciaRevisada;
+import model.utils.ReportBean;
+import net.sf.jasperreports.engine.JRException;
 
 
 /**
@@ -45,7 +50,8 @@ public class EquivalenciasController implements Serializable{
     @ManagedProperty(value="#{mensajeService}")
     private  MensajeService mensajeService;
     
-    
+    @ManagedProperty(value = "#{reportBean}")
+    private ReportBean reportBean;
 
     
     
@@ -178,6 +184,16 @@ public class EquivalenciasController implements Serializable{
     public void setEquivalenciaService(EquivalenciaService equivalenciaService) {
         this.equivalenciaService = equivalenciaService;
     }
+
+    public ReportBean getReportBean() {
+        return reportBean;
+    }
+
+    public void setReportBean(ReportBean reportBean) {
+        this.reportBean = reportBean;
+    }
+    
+    
     
     //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -451,6 +467,26 @@ public class EquivalenciasController implements Serializable{
         return null;
     }
     
+     public void PDF(ActionEvent event)throws JRException,IOException{
+        
+        SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf2=new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        
+        Map parametros= new HashMap();
+        parametros.put("pais",selectedMovilidad.getUniversidad().getPais().getNombre());
+        parametros.put("universidad", selectedMovilidad.getUniversidad().getNombre());
+        
+        parametros.put("Inicio",sdf.format(selectedMovilidad.getFechaInicio()) );
+        parametros.put("Fin",sdf.format(selectedMovilidad.getFechaFin()));
+        parametros.put("Estado", selectedContrato.getEstado());
+        parametros.put("creditosA", creditosA.toString());
+        parametros.put("creditosB", creditosB.toString());
+        parametros.put("usuario", selectedMovilidad.getUsuario().getLogin());
+        parametros.put("curso",selectedMovilidad.getCursoacademico().getCursoAcademico());
+        parametros.put("fecha",sdf2.format(selectedContrato.getFecha()));
+        reportBean.PDF(event,reportBean.crearEquivalenciasJasper(listaAuxEquivalencias),parametros);
+        
+    }
     
 }
      

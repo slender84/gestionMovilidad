@@ -17,9 +17,9 @@
          <h2 style="text-align: center">Editar contrato</h2>
          
          <h:form>
-             <p:commandLink  style="display:block;margin-bottom: 20px">
-           <p:printer target=":outpan" />
-           <h:graphicImage value="/resources/img/print48.png" title="Imprimir"/>
+             <p:commandLink  actionListener="#{equivalenciasController.PDF}" ajax="false">
+           
+           <h:graphicImage value="/resources/img/pdf48.png" title="Exportar a PDF"/>
              </p:commandLink>
              
          </h:form>

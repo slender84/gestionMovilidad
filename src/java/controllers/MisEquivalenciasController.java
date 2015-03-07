@@ -694,7 +694,7 @@ public class MisEquivalenciasController implements Serializable{
     public void PDF(ActionEvent event)throws JRException,IOException{
         
         SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-        
+        SimpleDateFormat sdf2=new SimpleDateFormat("dd-MM-yyyy HH:mm");
         
         Map parametros= new HashMap();
         parametros.put("pais",selectedMovilidad.getUniversidad().getPais().getNombre());
@@ -706,7 +706,9 @@ public class MisEquivalenciasController implements Serializable{
         parametros.put("creditosA", creditosA.toString());
         parametros.put("creditosB", creditosB.toString());
         parametros.put("usuario", selectedMovilidad.getUsuario().getLogin());
-        
+        parametros.put("curso",selectedMovilidad.getCursoacademico().getCursoAcademico());
+        parametros.put("fecha",sdf2.format(selectedContrato.getFecha()));
+       
         reportBean.PDF(event,reportBean.crearEquivalenciasJasper(listaAuxEquivalencias),parametros);
         
     }
