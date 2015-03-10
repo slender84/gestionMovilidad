@@ -1,8 +1,9 @@
 
 package controllers;
 
-import entities.CorreoConf;
 
+
+import entities.Configuracion;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -10,7 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import model.services.UsuarioService;
-import model.utils.Seguridad;
+
 
 
 
@@ -25,8 +26,8 @@ public class ConfiguracionCorreoController implements Serializable{
     @ManagedProperty (value = "#{usuarioService}")
     private UsuarioService usuarioService;
     
-    private CorreoConf correoConf;
-    
+    private Configuracion correoConf;
+    private String nuevoPassword;
     
     public ConfiguracionCorreoController() {
     }
@@ -37,6 +38,14 @@ public class ConfiguracionCorreoController implements Serializable{
 
     public void setSessionController(SessionController sessionController) {
         this.sessionController = sessionController;
+    }
+
+    public String getNuevoPassword() {
+        return nuevoPassword;
+    }
+
+    public void setNuevoPassword(String nuevoPassword) {
+        this.nuevoPassword = nuevoPassword;
     }
 
    
@@ -51,11 +60,11 @@ public class ConfiguracionCorreoController implements Serializable{
     
     
 
-    public CorreoConf getCorreoConf() {
+    public Configuracion getCorreoConf() {
         return correoConf;
     }
 
-    public void setCorreoConf(CorreoConf correoConf) {
+    public void setCorreoConf(Configuracion correoConf) {
         this.correoConf = correoConf;
     }
     
@@ -64,25 +73,28 @@ public class ConfiguracionCorreoController implements Serializable{
     @PostConstruct
     public void init(){
         
-        correoConf=(CorreoConf)sessionController.getCorreoConf();
+        correoConf=(Configuracion)sessionController.getCorreoConf();
         
         
     }
     
     public String editarConfiguracion(){
     
-        
+        if(nuevoPassword.equals("")==false)
+            correoConf.setPassword(nuevoPassword);
         
     try{    
-    correoConf.setPassword(Seguridad.encrypt(correoConf.getPassword()));
+    //correoConf.setPassword(Seguridad.encrypt(correoConf.getPassword()));
     sessionController.setCorreoConf(correoConf);
     }catch(Exception ex){
-        
+        ex.printStackTrace();
         sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
     }
     
     sessionController.creaMensaje("Configuración de correo guardada correctamente", FacesMessage.SEVERITY_INFO);
+    correoConf=sessionController.getCorreoConf();
     return null;
+    
 }
     
     

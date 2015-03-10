@@ -1,8 +1,9 @@
 
 package model.utils;
 
-import entities.CorreoConf;
-import entities.Cursoacademico;
+
+
+import entities.Configuracion;
 import entities.Estado;
 import entities.EstadoMovilidad;
 import java.io.Serializable;
@@ -67,17 +68,17 @@ public class UtilidadServiceImpl implements UtilidadService,Serializable{
     
     
     @Override
-    public CorreoConf getCorreoConf(){
+    public Configuracion getCorreoConf(){
         
         
-        List<CorreoConf> l= sessionFactory.getCurrentSession().createQuery("select c from CorreoConf c").list();
+        List<Configuracion> l= sessionFactory.getCurrentSession().createQuery("select c from Configuracion c").list();
         if(l.isEmpty())
-            return new CorreoConf();
+            return new Configuracion();
         return l.get(0);
     }
     
     @Override
-    public void setCorreoConf(CorreoConf correoConf){
+    public void setCorreoConf(Configuracion correoConf){
         
         sessionFactory.getCurrentSession().saveOrUpdate(correoConf);
     }

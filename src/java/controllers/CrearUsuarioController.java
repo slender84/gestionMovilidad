@@ -1,6 +1,7 @@
 package controllers;
 
-import entities.CorreoConf;
+
+import entities.Configuracion;
 import entities.InfoCuenta;
 import entities.Mensaje;
 import entities.Usuario;
@@ -190,7 +191,7 @@ public class CrearUsuarioController implements Serializable{
             return null;
             
                 }
-        CorreoConf correoConf;
+        Configuracion correoConf;
         
        try{
             correoConf=sessionController.getCorreoConf();

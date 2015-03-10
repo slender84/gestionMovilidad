@@ -2,7 +2,7 @@
 package controllers;
 
 
-import entities.CorreoConf;
+import entities.Configuracion;
 import entities.Estado;
 import entities.EstadoMovilidad;
 import entities.Usuario;
@@ -33,13 +33,12 @@ public class SessionController implements Serializable {
     private String filtroPais="todos";
     private String filtroUniversidad="todos";
     
+    Configuracion correoConf;
     
     
     
     public SessionController() {
-        
-        
-        
+       
     }
     
     
@@ -76,10 +75,9 @@ public class SessionController implements Serializable {
         
         
          setListaEstados((ArrayList < Estado >)utilidadService.listaEstados());
-        
-            
-            setListaEstadosMovilidad((ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad());
-        
+         setListaEstadosMovilidad((ArrayList < EstadoMovilidad >)utilidadService.listaEstadosMovilidad());
+         correoConf=utilidadService.getCorreoConf();
+         
     }
 
     public ArrayList<Estado> getListaEstados() {
@@ -171,16 +169,7 @@ public class SessionController implements Serializable {
     }
     
     
-    public CorreoConf getCorreoConf(){
-        
-        CorreoConf correoConf=utilidadService.getCorreoConf();
-        try{
-        correoConf.setPassword(Seguridad.decrypt(correoConf.getPassword()));
-        }catch(Exception ex){
-            
-        }
-        return correoConf;
-    }
+   
     
     public void limpiarFiltros(){
         
@@ -192,11 +181,30 @@ public class SessionController implements Serializable {
         
     }
     
-        
+         public Configuracion getCorreoConf(){
+        try{
+        correoConf.setPassword(Seguridad.decrypt(correoConf.getPassword()));
+        }catch(Exception ex){
+            
+        }
+        return correoConf;
+    }
     
-    public void setCorreoConf(CorreoConf correoConf) {
+    public void setCorreoConf(Configuracion correoConf){
+       
+            
+            try{
+            correoConf.setPassword(Seguridad.encrypt(correoConf.getPassword()));
+            utilidadService.setCorreoConf(correoConf);
+            }catch(Exception ex){
+                
+            } 
         
-        utilidadService.setCorreoConf(correoConf);
+            
+            
+            
+        
+        
         
     }
         

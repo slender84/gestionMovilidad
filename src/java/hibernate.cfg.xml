@@ -7,7 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gestordb?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">admin</property>
-    <mapping resource="entities/CorreoConf.hbm.xml"/>
+    <mapping resource="entities/Configuracion.hbm.xml"/>
     <mapping resource="entities/Movilidad.hbm.xml"/>
     <mapping resource="entities/Pais.hbm.xml"/>
     <mapping resource="entities/Cronica.hbm.xml"/>

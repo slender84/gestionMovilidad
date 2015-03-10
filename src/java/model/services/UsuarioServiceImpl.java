@@ -3,7 +3,7 @@
 package model.services;
 
 
-import entities.CorreoConf;
+import entities.Configuracion;
 
 import entities.InfoCuenta;
 import entities.Usuario;
@@ -160,7 +160,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     }*/
    
    @Override
-    public void enviarEmail(String login,String password,CorreoConf correoConf) throws EmailException{
+    public void enviarEmail(String login,String password,Configuracion correoConf) throws EmailException{
         
     
        

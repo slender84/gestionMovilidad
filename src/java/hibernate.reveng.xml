@@ -16,7 +16,7 @@
   <table-filter match-name="usuario"/>
   <table-filter match-name="miembro_grupo_asignatura_b"/>
   <table-filter match-name="asignatura"/>
-  <table-filter match-name="correo_conf"/>
+  <table-filter match-name="configuracion"/>
   <table-filter match-name="contrato"/>
   <table-filter match-name="cursoacademico"/>
 </hibernate-reverse-engineering>

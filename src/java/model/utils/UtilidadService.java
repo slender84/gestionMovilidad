@@ -1,6 +1,6 @@
 package model.utils;
 
-import entities.CorreoConf;
+import entities.Configuracion;
 import entities.Estado;
 import entities.EstadoMovilidad;
 import java.util.List;
@@ -17,8 +17,8 @@ public interface UtilidadService {
     public void eliminaEstadoMovilidad(EstadoMovilidad e);
     
     
-    public CorreoConf getCorreoConf();
-    public void setCorreoConf(CorreoConf correoConf);
+    public Configuracion getCorreoConf();
+    public void setCorreoConf(Configuracion correoConf);
     
             
 }

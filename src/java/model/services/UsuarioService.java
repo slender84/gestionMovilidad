@@ -6,7 +6,7 @@
 
 package model.services;
 
-import entities.CorreoConf;
+import entities.Configuracion;
 import entities.InfoCuenta;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
@@ -25,7 +25,7 @@ public interface UsuarioService {
     public void actualizarUsuario(Usuario u);
     public void autenticarUsuario(String password,Usuario u) throws PasswordIncorrectoException;
     public String generarPassword();
-     public void enviarEmail(String login,String password,CorreoConf correoConf) throws EmailException;
+     public void enviarEmail(String login,String password,Configuracion correoConf) throws EmailException;
      public InfoCuenta recuperarIntentos(String login);
      public void actualizarIntentos(InfoCuenta intentos);
      public void editarUsuario(Usuario u)throws InstanceNotFoundException;
