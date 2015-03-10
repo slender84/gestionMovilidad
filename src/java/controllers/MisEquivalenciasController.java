@@ -140,7 +140,7 @@ public class MisEquivalenciasController implements Serializable{
         if(context.getSessionMap().containsKey("movilidad")){
            
         selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
-       // context.getSessionMap().remove("movilidad");
+        context.getSessionMap().remove("movilidad");
             
         
         
@@ -156,7 +156,7 @@ public class MisEquivalenciasController implements Serializable{
          if(context.getSessionMap().containsKey("contrato")){
               
         selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-        //context.getSessionMap().remove("contrato");
+        context.getSessionMap().remove("contrato");
             
         try{
         c=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());

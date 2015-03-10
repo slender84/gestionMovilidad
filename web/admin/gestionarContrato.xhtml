@@ -101,7 +101,11 @@
                 </p:column>
                        
                 
-                   <p:column headerText="#{equivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="asignaturaPublica">
+                   <p:column styleClass="asignaturaPublica">
+                       <f:facet name="header">
+                           <h:outputLink style="text-decoration: underline" target="_blank" value="#{equivalenciasController.selectedMovilidad.universidad.web}" rendered="#{not empty equivalenciasController.selectedMovilidad.universidad.web}">#{equivalenciasController.selectedMovilidad.universidad.nombre}</h:outputLink>
+                           <h:outputText value="#{equivalenciasController.selectedMovilidad.universidad.nombre}" rendered="#{empty equivalenciasController.selectedMovilidad.universidad.web}"/>
+                       </f:facet>
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                          <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>

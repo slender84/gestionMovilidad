@@ -2,6 +2,7 @@
 package controllers;
 
 
+import entities.Curso;
 import entities.Cursoacademico;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import model.services.UniversidadService;
 
 
@@ -75,6 +78,10 @@ public class CursoAcademicoController implements Serializable{
     @PostConstruct
     public void init(){
         
+        HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        if(request.getRequestURI().equals(request.getContextPath()+"/admin/crearCurso.xhtml"))
+            setListaCursos((ArrayList<Curso>)universidadService.listarCursos());
+        
         setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listarCursosAcademicos());
         
     }
@@ -124,7 +131,63 @@ public class CursoAcademicoController implements Serializable{
         return null;
     }
     
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+    
+    private String curso;
+    private ArrayList<Curso> listaCursos;
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+   
+
+    public ArrayList<Curso> getListaCursos() {
+        return listaCursos;
+    }
+
+    public void setListaCursos(ArrayList<Curso> listaCursos) {
+        this.listaCursos = listaCursos;
+    }
+    
+    public String crearCurso(){
+        Curso c=new Curso(curso);
+        try{
+            
+            universidadService.crearCurso(c);
+            listaCursos.add(c);
+        }catch(org.springframework.dao.DataIntegrityViolationException ex){
+        
+        sessionController.creaMensaje("el curso ya existe", FacesMessage.SEVERITY_ERROR);
+        return null;
+        
+    }
+        sessionController.creaMensaje("curso creado", FacesMessage.SEVERITY_INFO);
+        curso="";
+        return null;
+        
+    }
+    
+    public String eliminarCurso(){
+        Curso c=new Curso(curso);
+        try{
+            
+            universidadService.eliminarCurso(c);
+            listaCursos.remove(c);
+        }catch(RuntimeException ex){
+            
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            
+        }
+        listaCursos=(ArrayList<Curso>)universidadService.listarCursos();
+        sessionController.creaMensaje("curso eliminado", FacesMessage.SEVERITY_INFO);
+        return null;
+    }
     
     
 }

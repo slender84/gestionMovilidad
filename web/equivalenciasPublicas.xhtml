@@ -41,7 +41,7 @@
         <h:form id="formTablaEquivalencias">
             <h:panelGrid columns="2" cellpadding="5" rendered="#{equivalenciasPublicasController.checkUni}">
                
-                <h:outputLink value="#{equivalenciasPublicasController.universidad.web}" rendered="#{not empty equivalenciasPublicasController.universidad.web}">link</h:outputLink>
+                <h:outputLink target="_blank;" value="#{equivalenciasPublicasController.universidad.web}" rendered="#{not empty equivalenciasPublicasController.universidad.web}">WEB</h:outputLink>
                 <p:commandLink style="font-size: 13px" value="Información"  rendered="#{not empty equivalenciasPublicasController.universidad.info}"
                                action="#" oncomplete="PF('dialog1').show();"/>
                 <p:dialog header="información" widgetVar="dialog1" position="center,top">

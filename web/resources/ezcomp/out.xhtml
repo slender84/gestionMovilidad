@@ -18,14 +18,23 @@
            
             <p:menuitem value="Home" url="/admin/index.xhtml" />
             <p:menuitem value="Usuarios" url="/admin/listaUsuarios.xhtml"/>
+            <p:submenu label="Centros">
+                
             <p:menuitem value="Países" url="/admin/crearPais.xhtml"/>
             <p:menuitem value="Universidades" url="/admin/crearUniversidad.xhtml"/>       
             <p:menuitem value="Asignaturas" url="/admin/crearAsignatura.xhtml"/>
+            </p:submenu>
+            
             <p:menuitem value="Movilidades" url="/admin/verMovilidades.xhtml"/>
             <p:menuitem value="Mensajes" url="/admin/verMensajes.xhtml"/>
             <p:menuitem value="Comentarios" url="/admin/verCronicas.xhtml"/>
             <p:menuitem value="Equivalencias públicas" url="/admin/equivalenciasPublicasAdmin.xhtml"/>
             <p:menuitem value="Cambiar password" url="/admin/cambiarPasswordAdmin.xhtml"/>
+            <p:submenu label="Cursos">
+                <p:menuitem value="Cursos académicos" url="/admin/crearCursoAcademico.xhtml"/>
+                <p:menuitem value="Cursos" url="/admin/crearCurso.xhtml"/>
+                
+            </p:submenu>
             <p:submenu label="administración" rendered="#{sessionController.user.tipoUsuario eq 0}">
             <p:menuitem value="crear tutor" url="/adminGeneral/crearAdmin.xhtml"/>
             <p:menuitem value="Configuración" url="/adminGeneral/configuracion.xhtml"/>

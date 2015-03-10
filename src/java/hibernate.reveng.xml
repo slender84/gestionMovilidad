@@ -19,4 +19,5 @@
   <table-filter match-name="configuracion"/>
   <table-filter match-name="contrato"/>
   <table-filter match-name="cursoacademico"/>
+  <table-filter match-name="curso"/>
 </hibernate-reverse-engineering>

@@ -117,7 +117,14 @@
                     </ui:repeat>
                 </p:column>
                 
-                <p:column headerText="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" styleClass="verAsignatura">
+                <p:column styleClass="verAsignatura">
+                    
+                     <f:facet name="header">
+                    <h:outputText value="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" rendered="#{empty misEquivalenciasController.selectedMovilidad.universidad.web}"/>
+                    <h:outputLink style="text-decoration: underline" target="_blank" value="#{misEquivalenciasController.selectedMovilidad.universidad.web}" rendered="#{not empty misEquivalenciasController.selectedMovilidad.universidad.web}">#{misEquivalenciasController.selectedMovilidad.universidad.nombre}</h:outputLink>
+                    
+                    </f:facet>
+                    
                     <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                          <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>

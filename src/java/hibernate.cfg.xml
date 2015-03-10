@@ -23,5 +23,6 @@
     <mapping resource="entities/Universidad.hbm.xml"/>
     <mapping resource="entities/Usuario.hbm.xml"/>
     <mapping resource="entities/MiembroGrupoAsignaturaA.hbm.xml"/>
+    <mapping resource="entities/Curso.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

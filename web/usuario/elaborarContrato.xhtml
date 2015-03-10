@@ -103,7 +103,11 @@
                           paginatorPosition="bottom"
                          >
                 
-                <f:facet name="header">DESTINO: #{misEquivalenciasController.selectedMovilidad.universidad.nombre}</f:facet>
+                 <f:facet name="header">
+                    DESTINO: <h:outputText value="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" rendered="#{empty misEquivalenciasController.selectedMovilidad.universidad.web}"/>
+                    <h:outputLink target="_blank" value="#{misEquivalenciasController.selectedMovilidad.universidad.web}" rendered="#{not empty misEquivalenciasController.selectedMovilidad.universidad.web}">#{misEquivalenciasController.selectedMovilidad.universidad.nombre}</h:outputLink>
+                    
+                </f:facet>
                 
                 <p:column headerText="asignatura" sortBy="#{asigUni.nombreAsignatura}" styleClass="asignatura" filterBy="#{asigUni.nombreAsignatura}" filterMatchMode="contains">
                    <h:outputLink target="_blank" value="#{asigUni.webAsignatura}" rendered="#{not empty asigUni.webAsignatura}">#{asigUni.nombreAsignatura}</h:outputLink>

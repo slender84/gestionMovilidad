@@ -2,6 +2,7 @@ package model.services;
 
 
 import entities.Cronica;
+import entities.Curso;
 import entities.Cursoacademico;
 import entities.Pais;
 import entities.Universidad;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import model.dao.CronicaDao;
 import model.dao.CursoAcademicoDao;
+import model.dao.CursoDao;
 import model.dao.PaisDao;
 import model.dao.UniversidadDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,21 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
     
     @Autowired
     private CronicaDao cronicaDao;
+    
+    @Autowired
+    private CursoDao cursoDao;
 
+    public CursoDao getCursoDao() {
+        return cursoDao;
+    }
+
+    public void setCursoDao(CursoDao cursoDao) {
+        this.cursoDao = cursoDao;
+    }
+
+    
+    
+    
     public CursoAcademicoDao getCursoacademicoDao() {
         return cursoacademicoDao;
     }
@@ -298,7 +314,32 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
            
        }
        
+       
+  @Override     
+  public void crearCurso(Curso c){
+      
+      cursoDao.insertar(c);
+      
+      
+  }
+  @Override
+  public void eliminarCurso(Curso c){
+      
+      
+      cursoDao.eliminar(c);
+      
+  }
   
-    
+  @Override
+  @Transactional(readOnly = true)
+  public List<Curso> listarCursos(){
+      
+      
+      return cursoDao.listar();
+      
+  }
+  
+  
+  
 }
 
