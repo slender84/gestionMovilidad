@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 23:14:00 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.ComentarioAsignatura" table="comentario_asignatura" catalog="gestordb" optimistic-lock="version">
+        <id name="idcomentario" type="java.lang.Integer">
+            <column name="idcomentario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="asignatura" class="entities.Asignatura" fetch="select">
+            <column name="codAsignatura" length="50" not-null="true" />
+            <column name="nombreUniversidad" length="200" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="entities.Usuario" fetch="select">
+            <column name="login" length="20" />
+        </many-to-one>
+        <property name="texto" type="string">
+            <column name="texto" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="12" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

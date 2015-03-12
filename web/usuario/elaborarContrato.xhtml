@@ -60,7 +60,7 @@
                 <p:column styleClass="info" headerText="+info">
                         
                         <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" 
-                                       oncomplete="PF('dialog1').show();" rendered="#{not empty asigFic.infoAsigantura}">
+                                       oncomplete="PF('dialog1').show();" >
                         
                             <f:setPropertyActionListener value="#{asigFic}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             
@@ -132,7 +132,7 @@
                 <p:column headerText="+info" styleClass="info">
                         
                      <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" 
-                                    oncomplete="PF('dialog1').show();" rendered="#{not empty asigUni.infoAsigantura}">
+                                    oncomplete="PF('dialog1').show();" >
                         
                             <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasController.selectedAsignatura}"/>
                             

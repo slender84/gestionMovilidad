@@ -48,6 +48,12 @@
             </key>
             <one-to-many class="entities.Cronica" />
         </set>
+        <set name="comentarioAsignaturas" table="comentario_asignatura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="login" length="20" />
+            </key>
+            <one-to-many class="entities.ComentarioAsignatura" />
+        </set>
         <set name="mensajesForOrigen" table="mensaje" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="origen" length="20" not-null="true" />

@@ -4,8 +4,11 @@
 package model.dao;
 
 
+import com.sun.faces.flow.FlowCDIContext;
 import entities.Asignatura;
 import entities.AsignaturaId;
+import entities.ComentarioAsignatura;
+import entities.MiembroGrupoAsignaturaB;
 import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
@@ -32,6 +35,17 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         
     }
     
+    @Override
+    public void insertarComentario(ComentarioAsignatura c){
+        
+        getSession().save(c);
+        
+    }
+    
+    public void crearMiembro(MiembroGrupoAsignaturaB m){
+        
+        getSession().save(m);
+    }
     
     
 }

@@ -7,9 +7,11 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gestordb?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">admin</property>
+    <property name="hibernate.show_sql">true</property>
     <mapping resource="entities/Configuracion.hbm.xml"/>
     <mapping resource="entities/Movilidad.hbm.xml"/>
     <mapping resource="entities/Pais.hbm.xml"/>
+    <mapping resource="entities/ComentarioAsignatura.hbm.xml"/>
     <mapping resource="entities/Cronica.hbm.xml"/>
     <mapping resource="entities/EstadoMovilidad.hbm.xml"/>
     <mapping resource="entities/Equivalencia.hbm.xml"/>
@@ -24,5 +26,6 @@
     <mapping resource="entities/Usuario.hbm.xml"/>
     <mapping resource="entities/MiembroGrupoAsignaturaA.hbm.xml"/>
     <mapping resource="entities/Curso.hbm.xml"/>
+    <mapping resource="entities/Idioma.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

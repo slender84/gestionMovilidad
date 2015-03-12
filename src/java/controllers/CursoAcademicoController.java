@@ -79,11 +79,30 @@ public class CursoAcademicoController implements Serializable{
     public void init(){
         
         HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        if(request.getRequestURI().equals(request.getContextPath()+"/admin/crearCurso.xhtml"))
+        if(request.getRequestURI().equals(request.getContextPath()+"/admin/crearCurso.xhtml")){
             setListaCursos((ArrayList<Curso>)universidadService.listarCursos());
         
+        
+        }
+        
+        else
+            
+            if(request.getRequestURI().equals(request.getContextPath()+"/admin/crearCursoAcademico.xhtml")){
         setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listarCursosAcademicos());
         
+        }
+        
+            else{
+                
+                setListaCursos((ArrayList<Curso>)universidadService.listarCursos());
+                setListaCursoAcademico((ArrayList < Cursoacademico >)universidadService.listarCursosAcademicos());
+                
+                }
+        
+        
+                
+                
+                
     }
     
     
@@ -184,6 +203,7 @@ public class CursoAcademicoController implements Serializable{
             sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             
         }
+        curso="";
         listaCursos=(ArrayList<Curso>)universidadService.listarCursos();
         sessionController.creaMensaje("curso eliminado", FacesMessage.SEVERITY_INFO);
         return null;

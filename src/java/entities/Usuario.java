@@ -33,6 +33,7 @@ public class Usuario  implements java.io.Serializable {
      private Set<Mensaje> mensajesForDestino = new HashSet<Mensaje>(0);
      private Set<Movilidad> movilidads = new HashSet<Movilidad>(0);
      private InfoCuenta infoCuenta;
+     private Set<ComentarioAsignatura> comentarioAsignaturas = new HashSet<ComentarioAsignatura>(0);
      private Set<Cronica> cronicas = new HashSet<Cronica>(0);
      private Set<Mensaje> mensajesForOrigen = new HashSet<Mensaje>(0);
 
@@ -48,7 +49,7 @@ public class Usuario  implements java.io.Serializable {
         this.nombre = nombre;
         this.apellido1 = apellido1;
     }
-    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, InfoCuenta infoCuenta, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen,boolean borrado) {
+    public Usuario(String login, String password, short tipoUsuario, String titulacion, String nombre, String apellido1, String apellido2, Set<Mensaje> mensajesForDestino, Set<Movilidad> movilidads, InfoCuenta infoCuenta, Set<Cronica> cronicas, Set<Mensaje> mensajesForOrigen,boolean borrado,Set<ComentarioAsignatura> comentarioAsignaturas) {
        this.login = login;
        this.password = password;
        this.tipoUsuario = tipoUsuario;
@@ -59,6 +60,7 @@ public class Usuario  implements java.io.Serializable {
        this.borrado=borrado;
        this.mensajesForDestino = mensajesForDestino;
        this.movilidads = movilidads;
+       this.comentarioAsignaturas = comentarioAsignaturas;
        this.infoCuenta = infoCuenta;
        this.cronicas = cronicas;
        this.mensajesForOrigen = mensajesForOrigen;
@@ -175,6 +177,15 @@ public class Usuario  implements java.io.Serializable {
 @OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
     public Set<Cronica> getCronicas() {
         return this.cronicas;
+    }
+    
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
+    public Set<ComentarioAsignatura> getComentarioAsignaturas() {
+        return this.comentarioAsignaturas;
+    }
+    
+    public void setComentarioAsignaturas(Set<ComentarioAsignatura> comentarioAsignaturas) {
+        this.comentarioAsignaturas = comentarioAsignaturas;
     }
     
     public void setCronicas(Set<Cronica> cronicas) {

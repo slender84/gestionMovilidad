@@ -30,9 +30,10 @@
             <p:menuitem value="Comentarios" url="/admin/verCronicas.xhtml"/>
             <p:menuitem value="Equivalencias públicas" url="/admin/equivalenciasPublicasAdmin.xhtml"/>
             <p:menuitem value="Cambiar password" url="/admin/cambiarPasswordAdmin.xhtml"/>
-            <p:submenu label="Cursos">
+            <p:submenu label="Base de datos">
                 <p:menuitem value="Cursos académicos" url="/admin/crearCursoAcademico.xhtml"/>
                 <p:menuitem value="Cursos" url="/admin/crearCurso.xhtml"/>
+                <p:menuitem value="Idiomas" url="/admin/crearIdioma.xhtml"/>
                 
             </p:submenu>
             <p:submenu label="administración" rendered="#{sessionController.user.tipoUsuario eq 0}">

@@ -2,6 +2,7 @@
 
 package model.services;
 
+import entities.Asignatura;
 import entities.Contrato;
 import entities.Equivalencia;
 import entities.Movilidad;
@@ -35,6 +36,10 @@ public interface EquivalenciaService {
     public Contrato verContratoPorEquivalencia(Equivalencia e)throws InstanceNotFoundException;
     public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException;
     public boolean equivalenciaRepetida(Equivalencia e, Collection<Equivalencia> listaEquivalencias);
+    public List<Object> listarAsignaturasMovilidad();
+    public List<Asignatura> lista2();
+    
+    
 }
 
 

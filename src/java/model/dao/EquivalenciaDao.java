@@ -8,6 +8,7 @@ package model.dao;
 
 
 
+import entities.Asignatura;
 import entities.Equivalencia;
 import java.util.List;
 
@@ -15,5 +16,6 @@ import java.util.List;
 public interface EquivalenciaDao extends GenericDao<Equivalencia, Integer> {
    public List<Equivalencia> listarEquivalenciasPorContrato(Integer id);
    public List<Equivalencia> equivalenciasPublicas(String universidad);
-   
+   public List<Object> listarAsignaturasMovilidad();
+   public List<Asignatura> lista2();
 }

@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -27,17 +28,20 @@ import javax.persistence.Table;
 public class Asignatura  implements java.io.Serializable {
 
 
-     private AsignaturaId id;
+    private AsignaturaId id;
      private Universidad universidad;
      private String nombreAsignatura;
      private Float creditos;
      private String periodo;
-     private String infoAsigantura;
      private String webAsignatura;
      private String facultad;
      private String titulacion;
-     private Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs = new HashSet<MiembroGrupoAsignaturaB>(0);
+     private String curso;
+     private String idioma;
+     private Boolean disponible;
      private Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs = new HashSet<MiembroGrupoAsignaturaA>(0);
+     private Set<ComentarioAsignatura> comentarioAsignaturas = new HashSet<ComentarioAsignatura>(0);
+     private Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs = new HashSet<MiembroGrupoAsignaturaB>(0);
 
     public Asignatura() {
     }
@@ -47,18 +51,21 @@ public class Asignatura  implements java.io.Serializable {
         this.id = id;
         this.universidad = universidad;
     }
-    public Asignatura(AsignaturaId id, Universidad universidad, String nombreAsignatura, Float creditos, String periodo, String infoAsigantura, String webAsignatura, String facultad, String titulacion, Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs, Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs) {
+    public Asignatura(AsignaturaId id, Universidad universidad, String nombreAsignatura, Float creditos, String periodo, String webAsignatura, String facultad, String titulacion, String curso, String idioma, Boolean disponible, Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs, Set<ComentarioAsignatura> comentarioAsignaturas, Set<MiembroGrupoAsignaturaB> miembroGrupoAsignaturaBs) {
        this.id = id;
        this.universidad = universidad;
        this.nombreAsignatura = nombreAsignatura;
        this.creditos = creditos;
        this.periodo = periodo;
-       this.infoAsigantura = infoAsigantura;
        this.webAsignatura = webAsignatura;
        this.facultad = facultad;
        this.titulacion = titulacion;
-       this.miembroGrupoAsignaturaBs = miembroGrupoAsignaturaBs;
+       this.curso = curso;
+       this.idioma = idioma;
+       this.disponible = disponible;
        this.miembroGrupoAsignaturaAs = miembroGrupoAsignaturaAs;
+       this.comentarioAsignaturas = comentarioAsignaturas;
+       this.miembroGrupoAsignaturaBs = miembroGrupoAsignaturaBs;
     }
    
      @EmbeddedId
@@ -66,7 +73,7 @@ public class Asignatura  implements java.io.Serializable {
     
     @AttributeOverrides( {
         @AttributeOverride(name="codAsignatura", column=@Column(name="codAsignatura", nullable=false) ), 
-        @AttributeOverride(name="nombreUniversidad", column=@Column(name="nombreUniversidad", nullable=false, length=45) ) } )
+        @AttributeOverride(name="nombreUniversidad", column=@Column(name="nombreUniversidad", nullable=false, length=200) ) } )
     public AsignaturaId getId() {
         return this.id;
     }
@@ -86,7 +93,7 @@ public class Asignatura  implements java.io.Serializable {
     }
 
     
-    @Column(name="nombreAsignatura", length=50)
+    @Column(name="nombreAsignatura", length=100)
     public String getNombreAsignatura() {
         return this.nombreAsignatura;
     }
@@ -115,17 +122,7 @@ public class Asignatura  implements java.io.Serializable {
         this.periodo = periodo;
     }
 
-    
-    @Column(name="infoAsigantura")
-    public String getInfoAsigantura() {
-        return this.infoAsigantura;
-    }
-    
-    public void setInfoAsigantura(String infoAsigantura) {
-        this.infoAsigantura = infoAsigantura;
-    }
-
-    
+   
     @Column(name="webAsignatura", length=200)
     public String getWebAsignatura() {
         return this.webAsignatura;
@@ -154,6 +151,36 @@ public class Asignatura  implements java.io.Serializable {
     public void setTitulacion(String titulacion) {
         this.titulacion = titulacion;
     }
+    
+    @Column(name="curso", length=15)
+    public String getCurso() {
+        return this.curso;
+    }
+    
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    
+    @Column(name="idioma", length=45)
+    public String getIdioma() {
+        return this.idioma;
+    }
+    
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    
+    @Column(name="disponible")
+    public Boolean getDisponible() {
+        return this.disponible;
+    }
+    
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+    
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="asignatura")
     public Set<MiembroGrupoAsignaturaB> getMiembroGrupoAsignaturaBs() {
@@ -172,6 +199,17 @@ public class Asignatura  implements java.io.Serializable {
     public void setMiembroGrupoAsignaturaAs(Set<MiembroGrupoAsignaturaA> miembroGrupoAsignaturaAs) {
         this.miembroGrupoAsignaturaAs = miembroGrupoAsignaturaAs;
     }
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="asignatura")
+    public Set<ComentarioAsignatura> getComentarioAsignaturas() {
+        return this.comentarioAsignaturas;
+    }
+    
+    public void setComentarioAsignaturas(Set<ComentarioAsignatura> comentarioAsignaturas) {
+        this.comentarioAsignaturas = comentarioAsignaturas;
+    }
+    
+    
 
     @Override
     public int hashCode() {

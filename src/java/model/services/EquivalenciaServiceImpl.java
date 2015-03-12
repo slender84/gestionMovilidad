@@ -576,6 +576,22 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
         return c.getMovilidad();
      }
      
+     @Override
+     public List<Object> listarAsignaturasMovilidad(){
+         
+         return equivalenciaDao.listarAsignaturasMovilidad();
+         
+         
+     }
+     
+     @Override
+     public List<Asignatura> lista2(){
+         
+         
+         return equivalenciaDao.lista2();
+     }
+     
+     
 }        
             
             

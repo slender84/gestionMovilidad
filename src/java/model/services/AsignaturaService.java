@@ -7,6 +7,10 @@
 package model.services;
 
 import entities.Asignatura;
+import entities.AsignaturaId;
+import entities.ComentarioAsignatura;
+import entities.Idioma;
+import entities.MiembroGrupoAsignaturaB;
 import exceptions.InstanceNotFoundException;
 import java.util.List;
 
@@ -21,5 +25,10 @@ public interface AsignaturaService {
     public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
     public void eliminarAsignatura(Asignatura a)throws InstanceNotFoundException;
     public void actualizarAsignatura(Asignatura a)throws InstanceNotFoundException;
-    
+    public void crearIdioma(Idioma i);
+    public void eliminarIdioma(Idioma i);
+    public List<Idioma>listarIdiomas();
+    public Asignatura buscarAsignatura(AsignaturaId id)throws InstanceNotFoundException;
+    public void insertarComentario(ComentarioAsignatura c);
+    public void crearMiembro(MiembroGrupoAsignaturaB m);
 }

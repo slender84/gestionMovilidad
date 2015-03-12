@@ -7,6 +7,7 @@
   <table-filter match-name="universidad"/>
   <table-filter match-name="contrato_equivalencia"/>
   <table-filter match-name="estado_movilidad"/>
+  <table-filter match-name="comentario_asignatura"/>
   <table-filter match-name="estado"/>
   <table-filter match-name="miembro_grupo_asignatura_a"/>
   <table-filter match-name="movilidad"/>
@@ -20,4 +21,5 @@
   <table-filter match-name="contrato"/>
   <table-filter match-name="cursoacademico"/>
   <table-filter match-name="curso"/>
+  <table-filter match-name="idioma"/>
 </hibernate-reverse-engineering>

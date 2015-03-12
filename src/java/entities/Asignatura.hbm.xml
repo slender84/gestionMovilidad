@@ -24,9 +24,6 @@
         <property name="periodo" type="string">
             <column name="periodo" length="10" />
         </property>
-        <property name="infoAsigantura" type="string">
-            <column name="infoAsigantura" />
-        </property>
         <property name="webAsignatura" type="string">
             <column name="webAsignatura" length="200" />
         </property>
@@ -36,7 +33,24 @@
         <property name="titulacion" type="string">
             <column name="titulacion" length="45" />
         </property>
-        <set name="miembroGrupoAsignaturaBs" table="miembro_grupo_asignatura_b" inverse="true" lazy="true" fetch="select">
+        <property name="curso" type="string">
+            <column name="curso" length="15" />
+        </property>
+        <property name="idioma" type="string">
+            <column name="idioma" length="45" />
+        </property>
+        <property name="disponible" type="java.lang.Boolean">
+            <column name="disponible" />
+        </property>
+        
+        <set name="comentarioAsignaturas" cascade="all" table="comentario_asignatura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codAsignatura" length="50" not-null="true" />
+                <column name="nombreUniversidad" length="200" not-null="true" />
+            </key>
+            <one-to-many class="entities.ComentarioAsignatura" />
+        </set>
+        <set name="miembroGrupoAsignaturaBs" table="miembro_grupo_asignatura_b" cascade="all" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="codAsignatura" />
                 <column name="nombreUniversidad" length="200" />

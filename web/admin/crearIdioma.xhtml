@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+    xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+    <h:head>
+        <title>Idiomas</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body styleClass="blue">
+        <ezcomp:out/>
+        <h:form id="f1">
+            <p:growl/>
+            <h:panelGrid columns="2" cellpadding="6">
+                
+                <p:outputLabel value="Curso: "/>
+                <p:inputText value="#{crearIdiomaController.idioma}" required="true" requiredMessage="El campo idioma está vacío"/>
+                
+                <p:outputLabel/>
+                <p:commandButton value="Crear" action="#{crearIdiomaController.insertarIdioma}" ajax="false"/>
+                
+            </h:panelGrid>
+            
+            
+            
+        </h:form>
+        
+        <br/>
+        <br/>
+        
+        <h:form id="f2">
+            
+            <h:panelGrid columns="3" cellpadding="6">
+                
+                
+                <p:outputLabel value="Idioma: "/>
+                <p:selectOneMenu filter="true" filterMatchMode="startsWith" value="#{crearIdiomaController.idioma}" required="true" requiredMessage="Hay que seleccionar un idioma">
+                    <f:selectItem value="#{null}" itemLabel="Lista de idiomas" noSelectionOption="true"/>
+                    <f:selectItems value="#{crearIdiomaController.listaIdiomas}" var="idioma" itemValue="#{idioma.idioma}" itemLabel="#{idioma.idioma}"/>
+                
+                </p:selectOneMenu>
+                
+                <p:commandButton value="eliminar" action="#{crearIdiomaController.eliminarIdioma}" ajax="false"/> 
+            </h:panelGrid>
+            
+           
+            
+        </h:form>
+        <br/>
+        <br/>
+        <br/><br/>
+      <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+        
+        
+        
+    </h:body>
+    
+</html>
