@@ -167,8 +167,17 @@
                     
                     
                     <f:facet name="header">
+                       
+                        <h:outputText value="#{crearAsignaturaController.universidadStr}"/>
+                        &nbsp;
+                        &nbsp;
+                        <p:selectOneMenu value="#{crearAsignaturaController.seleccionCurso}">
+                            <p:ajax event="change" listener="#{crearAsignaturaController.cambioCurso}" update=":formTabla" oncomplete="PF('asignaturaBtn').clearFilters();"/>
+                            <f:selectItems value="#{crearAsignaturaController.listaCursos}" var="curso" itemLabel="#{curso.curso}" itemValue="#{curso.curso}"/>
                         
-                        Lista de asignaturas de #{crearAsignaturaController.universidadStr}
+                        
+                        </p:selectOneMenu>
+                        
                         
                     </f:facet>
                 
@@ -235,12 +244,16 @@
             
                 
             </p:outputPanel>
-           
+            
             </h:form>
             
             <h:form id="formDetalles" style="font-size: 13px">
-            <h:panelGrid id="detallesAsignatura" columns="4" cellpadding="6" rendered="#{crearAsignaturaController.checkDetalles}">
                 
+            <h:panelGrid id="detallesAsignatura" columns="4" cellpadding="6" rendered="#{crearAsignaturaController.checkDetalles}">
+                <h3 style="text-align: center">Detalles</h3>
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <p:outputLabel/>
                 <p:outputLabel value="creditos" />
                 <p:inputText value="#{crearAsignaturaController.selectedAsignatura.creditos}" 
                              validatorMessage="Debe de ser un número entre 1 y 100">
@@ -275,7 +288,7 @@
                 </p:selectOneMenu>
                 
                 <p:outputLabel for="cur" value="Curso: "/>
-                <p:selectOneMenu id="cur" value="#{crearAsignaturaController.selectedAsignatura.curso}" required="true">
+                <p:selectOneMenu id="cur" value="#{crearAsignaturaController.cursoEdicion}" required="true">
                     <f:selectItems value="#{cursoAcademicoController.listaCursos}" var="curso" itemLabel="#{curso.curso}" itemValue="#{curso.curso}"/>
                     
                 </p:selectOneMenu>
@@ -297,37 +310,52 @@
                 <p:inputTextarea value="#{crearAsignaturaController.comentario}" cols="50" rows="8"/>
                 
                 
-                <p:commandButton process=":formDetalles:" id="actualizaBtn" value="editar" action="#{crearAsignaturaController.editar()}" update=":formDetalles: :formTabla: :formUniversidad :formAsignatura"
+                <p:commandButton process=":formDetalles:" id="actualizaBtn" value="editar" action="#{crearAsignaturaController.editar()}" update=":formDetalles: :formTabla: :formUniversidad :formAsignatura" oncomplete="PF('asignaturaBtn').filter()"
                                   />
                 <p:commandButton id="cancelBtn" value="cerrar" action="#{crearAsignaturaController.cerrar}" update=":formDetalles" process="cancelBtn"
-                                  onclick=""/>
+                                 />
            
             </h:panelGrid>
+                <br/>
               </h:form>   
                 <h:form id="formComentarios" style="font-size: 13px">
                 
                         
-            <p:dataTable rendered="#{crearAsignaturaController.checkComentarios}" style="font-size: 12px" value="#{crearAsignaturaController.listaComentarios}" id="tablaComentarios"
+            <p:dataTable rendered="#{crearAsignaturaController.checkComentarios}" value="#{crearAsignaturaController.listaComentarios}" id="tablaComentarios"
                              var="comentario" rowKey="#{comentario.idcomentario}"
                              paginator="true" rows="10"
                              selection="#{crearAsignaturaController.selectedComentarios}"
                              paginatorPosition="bottom"
-                             widgetVar="comentariosBtn">
+                             widgetVar="comentariosBtn"
+                             styleClass="borderless"
+                             emptyMessage="No hay comentarios">
                     
+                <f:facet name="header">
                     
+                    <h:outputText value="Comentarios"/>
                     
-                    <p:column headerText="fecha" sortBy="#{comentario.fecha}">
+                </f:facet>
+                    
+                <p:column style="text-align: center" headerText="Autor" filterBy="#{comentario.usuario.login}" sortBy="#{comentario.usuario.login}" filterMatchMode="contains">
+                
+                    <h:outputText value="#{comentario.usuario.login}"/>
+                
+                </p:column>
+                
+                
+                
+                
+                
+                <p:column style="text-align: center" headerText="fecha" sortBy="#{comentario.fecha}">
                         <h:outputText value="#{comentario.fecha}">
                             <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
                         </h:outputText>
                     </p:column>
                 
                 
-                <p:column headerText="Login" sortBy="#{comentario.usuario.login}" filterBy="#{comentario.usuario.login}" filterMatchMode="contains">
-                                <h:outputText value="#{comentario.usuario.login}"/>
-                </p:column>
+               
                             
-                    <p:column headerText="estado" filterBy="#{comentario.estado}" filterMatchMode="exact" sortBy="#{comentario.estado}">
+                <p:column style="text-align: center" headerText="estado" filterBy="#{comentario.estado}" filterMatchMode="exact" sortBy="#{comentario.estado}">
                         <f:facet name="filter">  
                             
                             <p:selectOneMenu onchange="PF('tablaComentarios').filter();">
@@ -342,7 +370,7 @@
                                 <h:outputText value="#{comentario.estado}"/>
                     
                     </p:column>
-                                <p:column headerText="ver/editar">
+                <p:column headerText="ver/editar" style="text-align: center">
                                     
                                     <p:commandLink action="#{crearAsignaturaController.verComentario}" update=":formLeerComentario">
                                         <f:setPropertyActionListener value="#{comentario}" target="#{crearAsignaturaController.selectedComentario}"/>
@@ -353,7 +381,7 @@
                             
                                 <p:column selectionMode="multiple" styleClass="multiple"/>
                 
-                                <p:columnGroup type="header">
+                                <p:columnGroup type="footer">
                                     <p:row>
                                         <p:column/>
                                         <p:column>
@@ -361,10 +389,10 @@
                                             <f:facet name="footer">
                                                 
                                                  
-                                                <p:commandLink oncomplete="PF('comentariosBtn').filter();" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"  action="#{crearAsignaturaController.eliminarComentarios}" update=":formLeerComentario">
+                                                <p:commandLink oncomplete="PF('comentariosBtn').filter();" onclick="if (! confirm('¿seguro que quieres eliminar?')) return false"  action="#{crearAsignaturaController.eliminarComentarios}" update=":formLeerComentario :formUniversidad">
                                 
-                                    <f:setPropertyActionListener value="#{comentario}" target="#{crearAsignaturaController.selectedComentario}"/>
-                                    <h:graphicImage value="/resources/img/trash26.png" title="eliminar comentario"/>
+                                    
+                                                     <h:graphicImage value="/resources/img/trash26.png" title="eliminar comentario"/>
                                 
                                               </p:commandLink> 
                                                 
@@ -381,17 +409,23 @@
                                                 <p:commandLink value="cerrar" action="#{crearAsignaturaController.cerrarComentarios}" update=":formComentarios :formLeerComentario"/>
                                                 
                                             </f:facet>
-                                                
-                                            
-                                            
+                                             
                                         </p:column>
-                                        
-                                        
-                                        
+                                        <p:column/>
                                         
                                     </p:row>
                                     
                                 </p:columnGroup>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                             
                             
                 </p:dataTable>
@@ -411,7 +445,7 @@
             <p:outputLabel value="Estado: "/>
             
             <p:selectBooleanCheckbox value="#{crearAsignaturaController.estadoComentario}"/>
-            <p:commandButton value="editar" action="#{crearAsignaturaController.aprobarOrechazar}" update=":formComentarios"/>
+            <p:commandButton value="editar" action="#{crearAsignaturaController.aprobarOrechazar}" update=":formComentarios :formUniversidad "/>
             <p:commandButton id="cerrarComentarioBtn" value="cerrar" action="#{crearAsignaturaController.cerrarComentario}" process="cerrarComentarioBtn" update=":formLeerComentario"/>
             
             </h:panelGrid>

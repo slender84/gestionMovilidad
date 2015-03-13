@@ -10,7 +10,7 @@ package model.dao;
 import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
-import entities.MiembroGrupoAsignaturaB;
+
 import java.util.List;
 
 
@@ -19,7 +19,7 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     
     public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
     public void insertarComentario(ComentarioAsignatura c);
-    public void crearMiembro(MiembroGrupoAsignaturaB m);
-    
+    public void eliminarComentario(ComentarioAsignatura c);
+    public List<Asignatura> listarAsignaturasPorUniversidadYCurso (String nombreUniversidad, String curso);
     
 }

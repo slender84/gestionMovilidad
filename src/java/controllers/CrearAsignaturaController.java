@@ -5,7 +5,8 @@ package controllers;
 import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
-import entities.MiembroGrupoAsignaturaB;
+import entities.Curso;
+
 import entities.Pais;
 import entities.Universidad;
 
@@ -23,7 +24,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import model.services.AsignaturaService;
-import model.services.EquivalenciaService;
+
 import model.services.UniversidadService;
 
 
@@ -55,7 +56,7 @@ public class CrearAsignaturaController implements Serializable{
    
     
     private String seleccionCurso;
-   
+   private ArrayList<Curso> listaCursos;
     
     //asignatura
     
@@ -71,6 +72,7 @@ public class CrearAsignaturaController implements Serializable{
     private String idioma;
     private boolean disponible;
     
+    private String cursoEdicion;
     
     private ArrayList<Pais> listaPaises;
     private ArrayList<Universidad> listaUniversidades;
@@ -101,6 +103,22 @@ public class CrearAsignaturaController implements Serializable{
 
     public void setSeleccionCurso(String seleccionCurso) {
         this.seleccionCurso = seleccionCurso;
+    }
+
+    public ArrayList<Curso> getListaCursos() {
+        return listaCursos;
+    }
+
+    public void setListaCursos(ArrayList<Curso> listaCursos) {
+        this.listaCursos = listaCursos;
+    }
+
+    public String getCursoEdicion() {
+        return cursoEdicion;
+    }
+
+    public void setCursoEdicion(String cursoEdicion) {
+        this.cursoEdicion = cursoEdicion;
     }
     
     
@@ -141,7 +159,7 @@ public class CrearAsignaturaController implements Serializable{
     public void init(){
         
         setListaPaises((ArrayList<Pais>)universidadService.listarPaises());
-        
+        setListaCursos((ArrayList<Curso>)universidadService.listarCursos());
     }
     
     
@@ -233,6 +251,12 @@ public class CrearAsignaturaController implements Serializable{
     }
 
     public boolean isEstadoComentario() {
+        
+        if(selectedComentario!=null){
+            if(selectedComentario.getEstado().equals("aceptado"))
+                estadoComentario=true;
+            
+        }
         return estadoComentario;
     }
 
@@ -414,7 +438,7 @@ public class CrearAsignaturaController implements Serializable{
         
         checkUniversidadStr=true;
         checkTabla=true;
-        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr,universidadService.listarCursos().get(0).getCurso());
        checkDetalles=false;
        codAsignatura=null;
       nombreAsignatura=null;
@@ -475,10 +499,11 @@ public class CrearAsignaturaController implements Serializable{
             nombreAsignatura="";
             return null;
         }
+        if(a.getCurso().equals(seleccionCurso))
         listaAsignaturas.add(a);
-        sessionController.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
-        nombreAsignatura="";
-        codAsignatura=null;
+         sessionController.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
+         nombreAsignatura="";
+         codAsignatura=null;
         //creditosAsignatura=null;
         //periodoAsignatura="";
         //titulacionAsignatura=null;
@@ -494,17 +519,47 @@ public class CrearAsignaturaController implements Serializable{
     
     public void verDetalles(){
         
-        webAsignatura=SelectedAsignatura.getWebAsignatura();
-        
-        facultadAsignatura=SelectedAsignatura.getFacultad();
-        titulacionAsignatura=SelectedAsignatura.getTitulacion();
+       
         checkDetalles=true;
         checkComentarios=false;
         //checkUniversidadStr=false;
         
     }
     public String editar(){
+        
+        
+        if(cursoEdicion.equals(SelectedAsignatura.getCurso())==false){
+            listaAsignaturas.remove(SelectedAsignatura);
+            SelectedAsignatura.setCurso(cursoEdicion);
+        }
+        
+        
         if(comentario.equals("")==false){
+            
+            
+            
+            
+            try{
+                
+                asignaturaService.actualizarAsignatura(SelectedAsignatura);
+                
+                
+            }catch(InstanceNotFoundException ex){
+                sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+           checkDetalles=false;
+        checkUniversidadStr=false;
+        checkTabla=false;
+        checkPaisStr=false;
+          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr,universidadService.listarCursos().get(0).getCurso());
+          disponible=true;
+          curso="";
+          idioma="";
+          comentario="";
+        return null;
+          
+            }
+            
+            
             
             ComentarioAsignatura cm=new ComentarioAsignatura();
             cm.setAsignatura(SelectedAsignatura);
@@ -522,30 +577,15 @@ public class CrearAsignaturaController implements Serializable{
                 
                 
             }catch(InstanceNotFoundException ex){
-                 sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
-           checkDetalles=false;
-        checkUniversidadStr=false;
-        checkTabla=false;
-        checkPaisStr=false;
-          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
-          disponible=true;
-          curso="";
-          idioma="";
-          comentario="";
-          
-        //paisStr="";
-        //universidadStr="";
-        return null;
-                
-                
-                
+              
             }
+          sessionController.creaMensaje("Se ha editado correctamente", FacesMessage.SEVERITY_INFO);
+          comentario=null;
+          return null;
+        }else{
             
             
-            
-            
-            
-        }
+        
             
         try{
             asignaturaService.actualizarAsignatura(SelectedAsignatura);
@@ -567,6 +607,9 @@ public class CrearAsignaturaController implements Serializable{
         //universidadStr="";
         return null;
         }
+        
+        
+        
             checkDetalles=false;
             codAsignatura=null;
             creditosAsignatura=null;
@@ -577,17 +620,19 @@ public class CrearAsignaturaController implements Serializable{
             idioma="";
             disponible=true;
             sessionController.creaMensaje("Edición correcta", FacesMessage.SEVERITY_INFO);
-           return null;
+           
         
+    
+       return null; 
+        }
     }
     
     public void cerrar(){
         
         checkDetalles=false;
-        webAsignatura="";
+        
         comentario="";
-        facultadAsignatura="";
-        titulacionAsignatura="";
+        
     }
     
     
@@ -662,46 +707,67 @@ public class CrearAsignaturaController implements Serializable{
         this.checkTabla = checkTabla;
     }
 
-    public void verComentarios(){
+    public String verComentarios(){
         
        
         
         checkComentarios=true;
         checkDetalles=false;
-        listaComentarios.addAll(SelectedAsignatura.getComentarioAsignaturas());
+        try{
+            
+            SelectedAsignatura=asignaturaService.buscarAsignatura(SelectedAsignatura.getId());
+        }catch(InstanceNotFoundException ex){
+            
+            sessionController.creaMensaje("No existe la asignatura", FacesMessage.SEVERITY_ERROR);
+            listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+            checkComentario=false;
+            return null;
+            
+        }
+        listaComentarios=new ArrayList<>(SelectedAsignatura.getComentarioAsignaturas());
         
+        return null;
         
     }
     
     public String eliminarComentarios(){
         
-        if(selectedAsignaturas.isEmpty())
+        //System.out.println("id "+ selectedComentario.getIdcomentario());
+        
+        
+        
+        if(selectedComentarios.isEmpty())
             return null;
         
         for(ComentarioAsignatura c:selectedComentarios){
             
             listaComentarios.remove(c);
+            //c.setAsignatura(null);
             
-            SelectedAsignatura.getComentarioAsignaturas().remove(c);
             try{
                 
-                asignaturaService.actualizarAsignatura(SelectedAsignatura);
+                //SelectedAsignatura.getComentarioAsignaturas().remove(c);
                 
-            }catch(InstanceNotFoundException ex){
+                asignaturaService.eliminarComentario(c);
                 
+            }catch(RuntimeException ex){
                 
+               
+               
                 checkComentario=false;
-                checkComentarios=false;
+                
+                //checkComentarios=false;
                 sessionController.creaMensaje("Se ha producido un error", FacesMessage.SEVERITY_ERROR);
                 return null;
             }
             
             
-            
+            if(selectedComentario!=null&&selectedComentario.getIdcomentario().equals(c.getIdcomentario()))
+                checkComentario=false;
             
             
         }
-        
+         
         sessionController.creaMensaje("Comentarios eliminados", FacesMessage.SEVERITY_INFO);
             return null;
         
@@ -732,31 +798,46 @@ public class CrearAsignaturaController implements Serializable{
     
     public String aprobarOrechazar(){
         
-        if(estadoComentario==false){
-            if(selectedComentario.getEstado().equals("aceptado"))
-            selectedComentario.setEstado("pendiente");
-        }else if(estadoComentario==true){
-            
-            if(selectedComentario.getEstado().equals("pendiente"))
-                selectedComentario.setEstado("aceptado");
-            
-            
+        String estadoAux;
+        if(estadoComentario==true){
+            estadoAux="aceptado";
+        }
+        else{
+            estadoAux="pendiente";
         }
         
-        try{
+        
+        
+            if(selectedComentario.getEstado().equals(estadoAux))
+                return null;
+            
+            selectedComentario.setEstado(estadoAux);
+            
+        
+            
+             try{
         asignaturaService.actualizarAsignatura(SelectedAsignatura);
         }catch(InstanceNotFoundException ex){
+            sessionController.creaMensaje("Se ha producido un error", FacesMessage.SEVERITY_ERROR);
            checkComentario=false;
            checkComentarios=false;
            return null;
             
         }
-        
+            
+        sessionController.creaMensaje("Comentario editado ", FacesMessage.SEVERITY_INFO);
         return null;
         
         
     }
     
+    
+    public void cambioCurso(){
+        
+        
+        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr, seleccionCurso);
+        System.out.println("tamaño "+listaAsignaturas.size());
+    }
     
     
 }

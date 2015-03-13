@@ -112,7 +112,7 @@ public class Contrato  implements java.io.Serializable {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Contrato)) {
             return false;
         }
         final Contrato other = (Contrato) obj;

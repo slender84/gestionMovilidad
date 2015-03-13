@@ -7,7 +7,7 @@ import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
 import entities.Idioma;
-import entities.MiembroGrupoAsignaturaB;
+
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.List;
@@ -120,11 +120,22 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
         asignaturaDao.insertarComentario(c);
         
     }
+    
     @Override
-    public void crearMiembro(MiembroGrupoAsignaturaB m){
+    public void eliminarComentario(ComentarioAsignatura c){
         
-        asignaturaDao.crearMiembro(m);
+        
+        asignaturaDao.eliminarComentario(c);
         
     }
+    
+    @Override
+    public List<Asignatura> listarAsignaturasPorUniversidadYCurso(String nombreUniversidad, String curso){
+        
+        return asignaturaDao.listarAsignaturasPorUniversidadYCurso (nombreUniversidad, curso);
+        
+        
+    }
+    
     
 }

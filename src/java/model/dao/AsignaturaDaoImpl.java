@@ -4,11 +4,11 @@
 package model.dao;
 
 
-import com.sun.faces.flow.FlowCDIContext;
+
 import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
-import entities.MiembroGrupoAsignaturaB;
+
 import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
@@ -42,10 +42,23 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         
     }
     
-    public void crearMiembro(MiembroGrupoAsignaturaB m){
+    @Override
+    public void eliminarComentario(ComentarioAsignatura c){
         
-        getSession().save(m);
+        
+        getSession().delete(c);
     }
     
-    
+  @Override  
+  public List<Asignatura> listarAsignaturasPorUniversidadYCurso ( String nombreUniversidad, String curso){
+      
+     
+      
+      
+      return getSession().createQuery("SELECT a from Asignatura a where a.universidad.nombre=:nombreUniversidad and a.curso=:curso")
+              .setParameter("nombreUniversidad", nombreUniversidad).setParameter("curso", curso).list();
+      
+      
+      
+  }
 }

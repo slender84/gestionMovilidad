@@ -3,6 +3,7 @@ package entities;
 
 
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -113,6 +114,28 @@ public class ComentarioAsignatura  implements java.io.Serializable {
     
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.idcomentario);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof ComentarioAsignatura)) {
+            return false;
+        }
+        final ComentarioAsignatura other = (ComentarioAsignatura) obj;
+        if (!Objects.equals(this.idcomentario, other.idcomentario)) {
+            return false;
+        }
+        return true;
     }
 
 
