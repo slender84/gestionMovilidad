@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+    
+    
+    <h:head>
+        <title>Mis comentarios de asignaturas</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body onload="PF('comentariosTable').filter()" styleClass="blue">
+        <ezcomp:out1/>
+         <h2 style="text-align: center">Comentarios</h2>
+        
+        
+       
+        
+        <br/>
+        
+        <h:form id="formComentarios" style="font-size: 13px">
+            
+            <p:growl id="msgs"/>
+            
+            <p:dataTable id="t1" var="comentario" value="#{misComentariosAsignaturaController.listaComentarios}"
+                         emptyMessage="no hay comentarios"
+                         widgetVar="comentarioTable"
+                         rowKey="#{comentario.idcomentario}"
+                         styleClass="borderless"
+                         paginator="true" rows="10"
+                          paginatorPosition="bottom">
+                 
+                <p:column headerText="fecha" sortBy="#{comentario.fecha}" styleClass="fechaCronica">
+                        
+                        <h:outputText value="#{comentario.fecha}">
+                        
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
+                        
+                        </h:outputText>
+                        
+                        
+                    </p:column>
+                
+                <p:column headerText="universidad" sortBy="#{comentario.asignatura.id.nombreUniversidad}" filterBy="#{comentario.asignatura.id.nombreUniversidad}">
+                
+                    <h:outputText value="#{comentario.asignatura.id.nombreUniversidad}"/>
+                
+                </p:column>
+                
+                <p:column headerText="asignatura" sortBy="#{comentario.asignatura.nombreAsignatura}" filterBy="#{comentario.asignatura.nombreAsignatura}">
+                
+                    <h:outputText value="#{comentario.asignatura.nombreAsignatura}"/>
+                
+                
+                </p:column>
+                
+               
+                <p:column headerText="estado" sortBy="#{comentario.estado}" filterBy="#{comentario.estado}" filterMatchMode="exact" styleClass="estadoCronica">
+                        <f:facet name="filter">
+                           
+                            <p:selectOneMenu onchange="PF('comentarioTable').filter()">
+                                <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
+                                <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>  
+                                
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{comentario.estado}"/>
+                    </p:column>
+                
+                
+                
+                <p:column headerText="editar" styleClass="editarCronica">
+                    
+                    <p:commandLink   action="#{misComentariosAsignaturaController.verComentario}" update=":panelEdicion">
+                                      
+                        
+                        <f:setPropertyActionListener value="#{comentario}" target="#{misComentariosAsignaturaController.selectedComentario}"/>
+                        <h:graphicImage value="/resources/img/edit26.png" title="editar"/>
+                    </p:commandLink>
+                    
+                    
+                </p:column>
+                
+               
+            </p:dataTable> 
+            
+            
+        </h:form>
+        <br/>
+        <br/>
+        
+        <p:outputPanel id="panelEdicion">
+            
+            <h:form id="formEdicion" rendered="#{misComentariosAsignaturaController.panelEdicion}">
+                <h:panelGrid cellpadding="3" columns="3">
+                
+                <p:outputLabel/>
+                <p:outputLabel value="texto:"/>
+                <p:inputTextarea value="#{misComentariosAsignaturaController.selectedComentario.texto}" readonly="#{misComentariosAsignaturaController.selectedComentario.estado ne 'pendiente'}" cols="60" rows="10"/>
+                <p:outputLabel/>
+                <p:outputLabel/>
+                <p:commandButton value="editar" action="#{misComentariosAsignaturaController.editarComentario}" rendered="#{misComentariosAsignaturaController.selectedComentario.estado eq 'pendiente'}" update=":formComentarios :panelEdicion"
+                                 oncomplete="PF('comentarioTable').filter();"/>
+                <p:commandButton value="cerrar" action="#{misComentariosAsignaturaController.cerrarPanelEdicion}" update=":panelEdicion" process="@this"/>
+                <p:outputLabel/>
+                
+                
+                </h:panelGrid>
+               
+            </h:form>
+            
+            
+        </p:outputPanel>
+        
+        
+        <br/>
+        
+        
+            
+            
+             <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+            
+        
+        
+            
+                
+        
+              
+        
+        
+        
+    </h:body>
+</html>
+

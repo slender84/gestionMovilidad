@@ -10,6 +10,7 @@ import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
 import entities.Idioma;
+import entities.Usuario;
 
 import exceptions.InstanceNotFoundException;
 import java.util.List;
@@ -32,5 +33,6 @@ public interface AsignaturaService {
     public Asignatura buscarAsignatura(AsignaturaId id)throws InstanceNotFoundException;
     public void insertarComentario(ComentarioAsignatura c);
     public void eliminarComentario(ComentarioAsignatura c);
-    
+    public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario);
+    public void editarComentario(ComentarioAsignatura c);
 }

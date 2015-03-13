@@ -8,7 +8,7 @@
             <column name="idcomentario" />
             <generator class="identity" />
         </id>
-        <many-to-one name="asignatura" class="entities.Asignatura" fetch="select">
+        <many-to-one name="asignatura" class="entities.Asignatura" lazy="false" fetch="select">
             <column name="codAsignatura" length="50" not-null="true" />
             <column name="nombreUniversidad" length="200" not-null="true" />
         </many-to-one>

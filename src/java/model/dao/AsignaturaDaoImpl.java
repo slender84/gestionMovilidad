@@ -8,6 +8,7 @@ package model.dao;
 import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
+import entities.Usuario;
 
 import java.util.List;
 import org.hibernate.Query;
@@ -51,14 +52,28 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
     
   @Override  
   public List<Asignatura> listarAsignaturasPorUniversidadYCurso ( String nombreUniversidad, String curso){
-      
-     
-      
-      
+    
       return getSession().createQuery("SELECT a from Asignatura a where a.universidad.nombre=:nombreUniversidad and a.curso=:curso")
               .setParameter("nombreUniversidad", nombreUniversidad).setParameter("curso", curso).list();
+      
+  }
+  
+  @Override
+  public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario){
+      
+      return getSession().createQuery("select c from ComentarioAsignatura c where c.usuario=:user").setParameter("user", usuario).list();
       
       
       
   }
+  
+  @Override
+  public void editarComentario(ComentarioAsignatura c){
+      
+      getSession().update(c);
+      
+      
+  }
+  
+  
 }
