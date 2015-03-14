@@ -10,8 +10,9 @@ package model.dao;
 import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
+import entities.Movilidad;
 import entities.Usuario;
-import exceptions.InstanceNotFoundException;
+
 
 import java.util.List;
 
@@ -25,4 +26,5 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     public void editarComentario(ComentarioAsignatura c);
     public List<Asignatura> listarAsignaturasPorUniversidadYCurso (String nombreUniversidad, String curso);
     public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario);
+    public List<Asignatura> asignaturasMovilidad(Movilidad m);
 }

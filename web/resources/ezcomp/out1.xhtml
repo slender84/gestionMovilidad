@@ -19,8 +19,11 @@
            <p:menuitem id="index" value="Home" url="/usuario/index.xhtml" />
                 <p:menuitem value="Crear movilidad" url="/usuario/crearMovilidad.xhtml"/>
             <p:menuitem value="Movilidades" url="/usuario/verMisMovilidades.xhtml"/>
-            <p:menuitem value="Mensajes" url="/usuario/verMisMensajes.xhtml"/>       
-            <p:menuitem value="Comentarios" url="/usuario/verMisCronicas.xhtml"/>
+            <p:menuitem value="Mensajes" url="/usuario/verMisMensajes.xhtml"/>
+            <p:submenu label="comentarios">
+               <p:menuitem value="Comentarios de movilidades" url="/usuario/verMisCronicas.xhtml"/>
+               <p:menuitem value="Comentarios de asignaturas" url="/usuario/verMisComentariosAsignatura.xhtml"/>
+            </p:submenu>
             <p:menuitem value="Cambiar password" url="/usuario/editarPerfil.xhtml"/>
             <p:menuitem value="salir" action="#{sessionController.salir}" icon="ui-icon-close" />
             

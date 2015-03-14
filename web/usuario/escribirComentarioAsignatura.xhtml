@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Escribir comentario de asignatura</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+    </h:head>
+    <h:body>
+        <ezcomp:out1/>
+        
+        <h2 style="text-align: center">Asignaturas disponibles</h2>
+        
+        <h:form id="formTabla">
+            <p:growl/>
+            <p:dataTable value="#{escribirComentarioAsignaturaController.listaAsignaturas}" var="asignatura"
+                         paginator="true" rows="10" rowKey="#{asignatura.id}" paginatorPosition="bottom"
+                         styleClass="borderless" >
+               
+                <f:facet name="header">
+                    <h:outputText value="#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.nombre}" rendered="#{empty escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}"/>
+                    <h:outputLink value="#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}" rendered="#{not empty escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}">#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.nombre}</h:outputLink>
+                </f:facet>
+            
+                <p:column headerText="nombre" sortBy="#{asignatura.nombreAsignatura}" filterBy="#{asignatura.nombreAsignatura}" filterMatchMode="contains" style="text-align: center">
+                
+                    <h:outputText value="#{asignatura.nombreAsignatura}" rendered="#{empty asignatura.webAsignatura}"/>
+                    <h:outputLink value="#{asignatura.webAsignatura}" rendered="#{not empty asignatura.webAsignatura}">#{asignatura.nombreAsignatura}</h:outputLink>
+                </p:column>
+            
+                
+                <p:column headerText="créditos" style="text-align: center">
+                    
+                    
+                    <h:outputText value="#{asignatura.creditos}">
+                        <f:convertNumber locale="en-US"  minFractionDigits="0" maxFractionDigits="1"/>
+                    </h:outputText>
+                    
+                </p:column>
+                
+                <p:column headerText="periodo" sortBy="#{asignatura.periodo}" style="text-align: center">
+                    <h:outputText value="#{asignatura.periodo}"/>
+                </p:column>
+            
+                
+                <p:column headerText="Escribir comentario" style="text-align: center">
+                    
+                    <p:commandLink action="#{escribirComentarioAsignaturaController.escribirComentario}" update=":formTexto">
+                        
+                        <f:setPropertyActionListener value="#{asignatura}" target="#{escribirComentarioAsignaturaController.selectedAsignatura}"/>
+                        <h:graphicImage value="/resources/img/edit26.png" title="Escribir comentario"/> 
+                        
+                    </p:commandLink>
+                    
+                </p:column>
+            
+            
+            </p:dataTable>
+            
+            
+            
+            
+            
+            
+        </h:form>
+        
+        
+        
+        <h:form id="formTexto">
+            
+            <h:panelGrid columns="2" cellpadding="3" rendered="#{escribirComentarioAsignaturaController.panelTexto}">
+            
+                <p:outputLabel value="Texto: "/>
+                <p:inputTextarea value="#{escribirComentarioAsignaturaController.texto}" cols="50" rows="8"/>
+                <p:commandButton value="enviar" action="#{escribirComentarioAsignaturaController.enviarComentario}" rendered="#{escribirComentarioAsignaturaController.btnActivado}" update=":formTexto :formTabla"/>
+                <p:commandButton value="cerrar" action="#{escribirComentarioAsignaturaController.cerrarPanelTexto()}"  process="@this" update=":formTexto"/>
+                                 
+            
+            
+            </h:panelGrid>
+            
+            
+            
+        </h:form>
+        
+        
+        
+        
+    </h:body>
+</html>
+

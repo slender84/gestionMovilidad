@@ -2,6 +2,9 @@
 package controllers;
 
 import entities.ComentarioAsignatura;
+import entities.Mensaje;
+import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.annotation.PostConstruct;
@@ -10,6 +13,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.AsignaturaService;
+import model.services.MensajeService;
+import model.services.UsuarioService;
 
 
 
@@ -22,6 +27,12 @@ public class MisComentariosAsignaturaController {
    
     @ManagedProperty (value="#{sessionController}")
     private SessionController sessionController;
+    
+    @ManagedProperty(value ="#{usuarioService}")
+    private UsuarioService usuarioService;
+    
+    @ManagedProperty(value ="#{mensajeService}")
+    private MensajeService mensajeService;
     
     private ArrayList<ComentarioAsignatura> listaComentarios;
     private ComentarioAsignatura selectedComentario;
@@ -46,6 +57,22 @@ public class MisComentariosAsignaturaController {
 
     public void setAsignaturaService(AsignaturaService asignaturaService) {
         this.asignaturaService = asignaturaService;
+    }
+
+    public UsuarioService getUsuarioService() {
+        return usuarioService;
+    }
+
+    public void setUsuarioService(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    public MensajeService getMensajeService() {
+        return mensajeService;
+    }
+
+    public void setMensajeService(MensajeService mensajeService) {
+        this.mensajeService = mensajeService;
     }
 
     
@@ -115,7 +142,19 @@ public class MisComentariosAsignaturaController {
             sessionController.creaMensaje("no existe el comentario", FacesMessage.SEVERITY_ERROR);
             listaComentarios=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignatura(sessionController.getUser());
         }
-        
+         Usuario admin=null;
+        try{
+                
+               admin=usuarioService.buscarUsuario("admin");
+                
+            }catch(InstanceNotFoundException ex){
+                
+            }
+            
+            String textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha escrito un comentario \n asignatura: "+selectedComentario.getAsignatura().getNombreAsignatura()+"\n Universidad: "+selectedComentario.getAsignatura().getUniversidad().getNombre();
+            
+            Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Comentario de asignatura editado",textoMensaje,false ,true, false);
+            mensajeService.enviarMensaje(m);
         sessionController.creaMensaje("comentario editado correctamente", FacesMessage.SEVERITY_INFO);
         return null;
     }

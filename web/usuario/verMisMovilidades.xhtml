@@ -109,9 +109,10 @@
                       </p:commandLink>
                         
                         
-                        <p:commandLink action="#">
+                        <p:commandLink action="#{misMovilidadesController.escribirComentario}" ajax="false" rendered="#{movilidad.estado eq 'aceptada' or movilidad.estado eq 'terminada'}" >
                             
-                            <h:graphicImage value="/resources/img/trash26.png" title="Solicitar cancelación"/>
+                            <h:graphicImage value="/resources/img/cblue.png" title="Escribir comentario de asignatura"/>
+                            <f:setPropertyActionListener value="#{movilidad}" target="#{misMovilidadesController.selectedMovilidad}"/>
                             
                         </p:commandLink> 
                     </h:panelGrid>

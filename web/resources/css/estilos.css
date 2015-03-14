@@ -589,7 +589,7 @@ and (min-width : 1200px) {
     .fechaCronica{
         text-align: center;
        font-size: 14px;
-       width: 10%; 
+       width: 12%; 
         
     }
     
@@ -605,7 +605,7 @@ and (min-width : 1200px) {
         
         text-align: center;
        font-size: 14px;
-       width: 10%; 
+       width: 8%; 
         
     }
     

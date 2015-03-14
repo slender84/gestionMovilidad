@@ -10,6 +10,7 @@ import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
 import entities.Idioma;
+import entities.Movilidad;
 import entities.Usuario;
 
 import exceptions.InstanceNotFoundException;
@@ -35,4 +36,5 @@ public interface AsignaturaService {
     public void eliminarComentario(ComentarioAsignatura c);
     public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario);
     public void editarComentario(ComentarioAsignatura c);
+    public List<Asignatura> asignaturasMovilidad(Movilidad m);
 }

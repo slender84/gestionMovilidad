@@ -32,16 +32,7 @@
                          paginator="true" rows="10"
                           paginatorPosition="bottom">
                  
-                <p:column headerText="fecha" sortBy="#{comentario.fecha}" styleClass="fechaCronica">
-                        
-                        <h:outputText value="#{comentario.fecha}">
-                        
-                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
-                        
-                        </h:outputText>
-                        
-                        
-                    </p:column>
+                
                 
                 <p:column headerText="universidad" sortBy="#{comentario.asignatura.id.nombreUniversidad}" filterBy="#{comentario.asignatura.id.nombreUniversidad}">
                 
@@ -70,7 +61,16 @@
                         <h:outputText value="#{comentario.estado}"/>
                     </p:column>
                 
-                
+                <p:column headerText="fecha" sortBy="#{comentario.fecha}" styleClass="fechaCronica">
+                        
+                        <h:outputText value="#{comentario.fecha}">
+                        
+                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
+                        
+                        </h:outputText>
+                        
+                        
+                    </p:column>
                 
                 <p:column headerText="editar" styleClass="editarCronica">
                     
@@ -78,7 +78,7 @@
                                       
                         
                         <f:setPropertyActionListener value="#{comentario}" target="#{misComentariosAsignaturaController.selectedComentario}"/>
-                        <h:graphicImage value="/resources/img/edit26.png" title="editar"/>
+                        <h:graphicImage value="/resources/img/edit26.png" title="Ver/editar"/>
                     </p:commandLink>
                     
                     
@@ -95,17 +95,17 @@
         <p:outputPanel id="panelEdicion">
             
             <h:form id="formEdicion" rendered="#{misComentariosAsignaturaController.panelEdicion}">
-                <h:panelGrid cellpadding="3" columns="3">
+                <h:panelGrid cellpadding="2" columns="2">
                 
-                <p:outputLabel/>
+                
                 <p:outputLabel value="texto:"/>
                 <p:inputTextarea value="#{misComentariosAsignaturaController.selectedComentario.texto}" readonly="#{misComentariosAsignaturaController.selectedComentario.estado ne 'pendiente'}" cols="60" rows="10"/>
-                <p:outputLabel/>
-                <p:outputLabel/>
+                
+                
                 <p:commandButton value="editar" action="#{misComentariosAsignaturaController.editarComentario}" rendered="#{misComentariosAsignaturaController.selectedComentario.estado eq 'pendiente'}" update=":formComentarios :panelEdicion"
                                  oncomplete="PF('comentarioTable').filter();"/>
                 <p:commandButton value="cerrar" action="#{misComentariosAsignaturaController.cerrarPanelEdicion}" update=":panelEdicion" process="@this"/>
-                <p:outputLabel/>
+                
                 
                 
                 </h:panelGrid>

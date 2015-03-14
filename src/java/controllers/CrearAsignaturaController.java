@@ -88,6 +88,7 @@ public class CrearAsignaturaController implements Serializable{
     private ComentarioAsignatura selectedComentario;
     private ArrayList<ComentarioAsignatura> listaComentarios;
     private ArrayList<ComentarioAsignatura> selectedComentarios;
+    private ArrayList<ComentarioAsignatura> filteredComentarios;
     
     private boolean estadoComentario;
     
@@ -226,6 +227,14 @@ public class CrearAsignaturaController implements Serializable{
 
     public void setSelectedComentarios(ArrayList<ComentarioAsignatura> selectedComentarios) {
         this.selectedComentarios = selectedComentarios;
+    }
+
+    public ArrayList<ComentarioAsignatura> getFilteredComentarios() {
+        return filteredComentarios;
+    }
+
+    public void setFilteredComentarios(ArrayList<ComentarioAsignatura> filteredComentarios) {
+        this.filteredComentarios = filteredComentarios;
     }
     
     
@@ -654,6 +663,10 @@ public class CrearAsignaturaController implements Serializable{
         checkUniversidadStr=false;
         checkPaisStr=false;
           listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+          checkComentario=false;
+          checkComentarios=false;
+          
+          
         //paisStr="";
         //universidadStr="";
         return null;
@@ -669,6 +682,8 @@ public class CrearAsignaturaController implements Serializable{
         //listaAsignaturas=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
         //checkUniversidadStr=false;
         checkDetalles=false;
+        checkComentarios=false;
+        checkComentario=false;
         return null;
     }
         
@@ -756,6 +771,7 @@ public class CrearAsignaturaController implements Serializable{
                
                 checkComentario=false;
                 
+                
                 //checkComentarios=false;
                 sessionController.creaMensaje("Se ha producido un error", FacesMessage.SEVERITY_ERROR);
                 return null;
@@ -836,7 +852,16 @@ public class CrearAsignaturaController implements Serializable{
         
         
         listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr, seleccionCurso);
-        System.out.println("tamaño "+listaAsignaturas.size());
+        checkComentario=false;
+        checkComentarios=false;
+        checkDetalles=false;
+        comentario="";
+        facultadAsignatura="";
+        titulacionAsignatura="";
+        curso="";
+        creditosAsignatura=null;
+        cursoEdicion=null;
+        periodoAsignatura="";
     }
     
     

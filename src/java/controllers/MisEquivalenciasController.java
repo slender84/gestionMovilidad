@@ -527,7 +527,7 @@ public class MisEquivalenciasController implements Serializable{
         
         sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
         try{
-        Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,false,false);
+        Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,true,false);
         mensajeService.enviarMensaje(m);
         }catch(InstanceNotFoundException ex){
             sessionController.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
@@ -567,7 +567,7 @@ public class MisEquivalenciasController implements Serializable{
         
         sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato",false,false,false);
+     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato",false,true,false);
      mensajeService.enviarMensaje(m);
      }catch(Exception ex){
          
@@ -611,7 +611,7 @@ public class MisEquivalenciasController implements Serializable{
         
      sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
      try{
-     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,false,false);
+     Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,true,false);
      mensajeService.enviarMensaje(m);
      }catch(InstanceNotFoundException ex){
          

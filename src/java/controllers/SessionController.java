@@ -33,6 +33,8 @@ public class SessionController implements Serializable {
     private String filtroPais="todos";
     private String filtroUniversidad="todos";
     
+    
+    
     Configuracion correoConf;
     
     

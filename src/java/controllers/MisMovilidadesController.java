@@ -220,6 +220,15 @@ public class MisMovilidadesController implements Serializable{
         return "escribirCronica.xhtml?faces-redirect=true";
     }
     
+    public String escribirComentario(){
+        
+        System.out.println("en mov");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movilidad", selectedMovilidad);
+        return "escribirComentarioAsignatura.xhtml?faces-redirect=true";
+        
+        
+    }
+    
    
     }
     

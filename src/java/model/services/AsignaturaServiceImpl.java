@@ -7,6 +7,7 @@ import entities.Asignatura;
 import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
 import entities.Idioma;
+import entities.Movilidad;
 import entities.Usuario;
 
 import exceptions.InstanceNotFoundException;
@@ -150,6 +151,14 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     public void editarComentario(ComentarioAsignatura c){
         
         asignaturaDao.editarComentario(c);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Asignatura> asignaturasMovilidad(Movilidad m){
+        
+        
+        return asignaturaDao.asignaturasMovilidad(m);
     }
     
 }

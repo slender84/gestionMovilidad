@@ -258,7 +258,7 @@ public class MisCronicasController implements Serializable{
             
         }
         
-        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario creado ", "el usuario "+usuario.getLogin()+" ha escrito una crónica",false,false,false);
+        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario creado ", "el usuario "+usuario.getLogin()+" ha escrito una crónica",false,true,false);
         mensajeService.enviarMensaje(m);
         sessionController.creaMensaje("crónica enviada correctamente, a la espera de moderación", FacesMessage.SEVERITY_INFO);
         btnActivados=false;
@@ -299,7 +299,7 @@ public class MisCronicasController implements Serializable{
             
         }
         
-        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario editado ", "el usuario "+usuario.getLogin()+" ha editado un comentario",false,false,false);
+        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario editado ", "el usuario "+usuario.getLogin()+" ha editado un comentario",false,true,false);
         mensajeService.enviarMensaje(m);
     sessionController.creaMensaje("Cronica actualizada, pendiente de moderación", FacesMessage.SEVERITY_INFO);
     return null;
