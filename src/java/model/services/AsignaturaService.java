@@ -25,7 +25,7 @@ public interface AsignaturaService {
     public void crearAsignatura(Asignatura a);
     public List<Asignatura> listarAsignaturas();
     public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
-    public List<Asignatura> listarAsignaturasPorUniversidadYCurso(String nombreUniversidad, String curso);
+    public List<Asignatura> listarAsignaturasPorUniversidadYCurso(boolean disponible,String nombreUniversidad, String curso);
     public void eliminarAsignatura(Asignatura a)throws InstanceNotFoundException;
     public void actualizarAsignatura(Asignatura a)throws InstanceNotFoundException;
     public void crearIdioma(Idioma i);
@@ -37,4 +37,5 @@ public interface AsignaturaService {
     public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario);
     public void editarComentario(ComentarioAsignatura c);
     public List<Asignatura> asignaturasMovilidad(Movilidad m);
+    public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id);
 }

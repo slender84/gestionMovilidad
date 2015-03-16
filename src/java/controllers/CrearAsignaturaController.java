@@ -447,7 +447,7 @@ public class CrearAsignaturaController implements Serializable{
         
         checkUniversidadStr=true;
         checkTabla=true;
-        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr,universidadService.listarCursos().get(0).getCurso());
+        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr,universidadService.listarCursos().get(0).getCurso());
        checkDetalles=false;
        codAsignatura=null;
       nombreAsignatura=null;
@@ -473,7 +473,7 @@ public class CrearAsignaturaController implements Serializable{
         }catch(InstanceNotFoundException ex){
             sessionController.creaMensaje("no existe la universidad", FacesMessage.SEVERITY_ERROR);
             universidadStr="";
-            listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+            listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr,seleccionCurso);
             return null;
         }
             
@@ -559,7 +559,7 @@ public class CrearAsignaturaController implements Serializable{
         checkUniversidadStr=false;
         checkTabla=false;
         checkPaisStr=false;
-          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr,universidadService.listarCursos().get(0).getCurso());
+          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr,universidadService.listarCursos().get(0).getCurso());
           disponible=true;
           curso="";
           idioma="";
@@ -606,7 +606,7 @@ public class CrearAsignaturaController implements Serializable{
         checkUniversidadStr=false;
         checkTabla=false;
         checkPaisStr=false;
-          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr,seleccionCurso);
           disponible=true;
           curso="";
           idioma="";
@@ -662,7 +662,7 @@ public class CrearAsignaturaController implements Serializable{
         checkTabla=false;
         checkUniversidadStr=false;
         checkPaisStr=false;
-          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+          listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr,seleccionCurso);
           checkComentario=false;
           checkComentarios=false;
           
@@ -734,7 +734,7 @@ public class CrearAsignaturaController implements Serializable{
         }catch(InstanceNotFoundException ex){
             
             sessionController.creaMensaje("No existe la asignatura", FacesMessage.SEVERITY_ERROR);
-            listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(universidadStr);
+            listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr,seleccionCurso);
             checkComentario=false;
             return null;
             
@@ -851,7 +851,7 @@ public class CrearAsignaturaController implements Serializable{
     public void cambioCurso(){
         
         
-        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(universidadStr, seleccionCurso);
+        listaAsignaturas=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(false,universidadStr, seleccionCurso);
         checkComentario=false;
         checkComentarios=false;
         checkDetalles=false;

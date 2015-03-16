@@ -8,12 +8,15 @@ package controllers;
 
 //import antlr.debug.Event;
 import entities.Asignatura;
+import entities.AsignaturaId;
+import entities.ComentarioAsignatura;
 import entities.Contrato;
 import entities.Equivalencia;
 import entities.Mensaje;
 import entities.MiembroGrupoAsignaturaA;
 import entities.MiembroGrupoAsignaturaB;
 import entities.Movilidad;
+import entities.Universidad;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
@@ -40,6 +43,7 @@ import model.services.AsignaturaService;
 import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.services.MovilidadService;
+import model.services.UniversidadService;
 import model.services.UsuarioService;
 import model.utils.ReportBean;
 import net.sf.jasperreports.engine.JRException;
@@ -67,6 +71,9 @@ public class MisEquivalenciasController implements Serializable{
     
     @ManagedProperty(value="#{asignaturaService}")
     private  AsignaturaService asignaturaService;
+    
+     @ManagedProperty(value="#{universidadService}")
+    private  UniversidadService universidadService;
     
     @ManagedProperty(value="#{equivalenciaService}")
     private  EquivalenciaService equivalenciaService;
@@ -147,8 +154,8 @@ public class MisEquivalenciasController implements Serializable{
         
         listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("UDC");
         if(listaAsignaturasFic.isEmpty())
-            listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("Universidade da Coruña");
-        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(selectedMovilidad.getUniversidad().getNombre());
+            listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,"Universidade da Coruña", universidadService.listarCursos().get(0).getCurso());
+        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre(),universidadService.listarCursos().get(0).getCurso());
         
         
            
@@ -203,6 +210,14 @@ public class MisEquivalenciasController implements Serializable{
 
     public void setReportBean(ReportBean reportBean) {
         this.reportBean = reportBean;
+    }
+
+    public UniversidadService getUniversidadService() {
+        return universidadService;
+    }
+
+    public void setUniversidadService(UniversidadService universidadService) {
+        this.universidadService = universidadService;
     }
     
     
@@ -650,14 +665,7 @@ public class MisEquivalenciasController implements Serializable{
         
     }
     
-    public void detallesAsign(){
-         
-        //verInfo=true;
-        
-        
-        
-        
-    }
+    
     
     public void cerrarDetallesAsign(){
         
@@ -714,6 +722,294 @@ public class MisEquivalenciasController implements Serializable{
     }
     
    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    private String seleccionCurso;
+    private ArrayList<ComentarioAsignatura> listaComentariosAsignatura;
+    private String seleccionCursoFic;
+    
+    
+    
+    
+    
+    
+    private String codAsignatura;
+    private String nombreAsignatura;
+    private String curso;
+    private String idioma;
+    private Float creditos;
+    private String facultad;
+    private String titulacion;
+    private boolean disponible=true;
+    private String periodo;
+    private String webAsignatura;
+    
+    
+    private Asignatura selectedAsignatura2;
+    
+    
+    private ArrayList<Asignatura> selectedAsignaturas;
+
+    public ArrayList<Asignatura> getSelectedAsignaturas() {
+        return selectedAsignaturas;
+    }
+
+    public void setSelectedAsignaturas(ArrayList<Asignatura> selectedAsignaturas) {
+        this.selectedAsignaturas = selectedAsignaturas;
+    }
+
+    public Asignatura getSelectedAsignatura2() {
+        return selectedAsignatura2;
+    }
+
+    public void setSelectedAsignatura2(Asignatura selectedAsignatura2) {
+        this.selectedAsignatura2 = selectedAsignatura2;
+    }
+    
+    
+    
+    
+    
+    
+    
+    public String getSeleccionCurso() {
+        return seleccionCurso;
+    }
+
+    public void setSeleccionCurso(String seleccionCurso) {
+        this.seleccionCurso = seleccionCurso;
+    }
+
+    public ArrayList<ComentarioAsignatura> getListaComentariosAsignatura() {
+        return listaComentariosAsignatura;
+    }
+
+    public void setListaComentariosAsignatura(ArrayList<ComentarioAsignatura> listaComentariosAsignatura) {
+        this.listaComentariosAsignatura = listaComentariosAsignatura;
+    }
+
+    public String getSeleccionCursoFic() {
+        return seleccionCursoFic;
+    }
+
+    public void setSeleccionCursoFic(String seleccionCursoFic) {
+        this.seleccionCursoFic = seleccionCursoFic;
+    }
+
+    public String getCodAsignatura() {
+        return codAsignatura;
+    }
+
+    public void setCodAsignatura(String codAsignatura) {
+        this.codAsignatura = codAsignatura;
+    }
+
+    public String getNombreAsignatura() {
+        return nombreAsignatura;
+    }
+
+    public void setNombreAsignatura(String nombreAsignatura) {
+        this.nombreAsignatura = nombreAsignatura;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    public Float getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(Float creditos) {
+        this.creditos = creditos;
+    }
+
+    public String getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
+    }
+
+    public String getTitulacion() {
+        return titulacion;
+    }
+
+    public void setTitulacion(String titulacion) {
+        this.titulacion = titulacion;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
+    }
+
+    public String getWebAsignatura() {
+        return webAsignatura;
+    }
+
+    public void setWebAsignatura(String webAsignatura) {
+        this.webAsignatura = webAsignatura;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    public void cambioCurso(){
+        
+        
+        listaAsignaturasUniversidad=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre(), seleccionCurso);
+        
+        
+    }
+    
+    
+    public void cambioCursoFic(){
+        
+        listaAsignaturasUniversidad=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,"Universidade da Coruña", seleccionCursoFic);
+        
+        
+        
+    }
+    
+    
+    public void crearAsignatura(){
+        
+        
+        
+    }
+    
+    
+    public void detallesAsign(){
+         
+        
+        listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosPorAsignatura(selectedAsignatura.getId());
+        
+        
+        
+    }
+    
+    
+    public String editarAsignatura(){
+        
+        if (selectedAsignaturas.isEmpty()||selectedAsignaturas.size()>1){
+            sessionController.creaMensaje("Hay que seleccionar una asignatura para editar", FacesMessage.SEVERITY_ERROR);
+            return null;
+        }
+        
+        selectedAsignatura=selectedAsignaturas.get(0);
+        return null;
+    }
+    
+    
+    public String enviarAsignatura(){
+        
+        
+        
+        
+            
+            
+        AsignaturaId id=new AsignaturaId(codAsignatura,selectedMovilidad.getUniversidad().getNombre());
+        Asignatura a=new Asignatura(id, selectedMovilidad.getUniversidad());
+        a.setCreditos(creditos);
+        a.setCurso(curso);
+        a.setIdioma(idioma);
+        a.setDisponible(disponible);
+        a.setFacultad(facultad);
+        a.setNombreAsignatura(nombreAsignatura);
+        a.setWebAsignatura(webAsignatura);
+        a.setTitulacion(titulacion);
+        a.setPeriodo(periodo);
+        
+        
+        
+        try{
+        asignaturaService.crearAsignatura(a);
+        }catch(org.springframework.dao.DataIntegrityViolationException ex){
+            sessionController.creaMensaje("Ya existe la asignatura", FacesMessage.SEVERITY_ERROR);
+            codAsignatura="";
+            nombreAsignatura="";
+            return null;
+        }
+       
+        
+         sessionController.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
+         nombreAsignatura="";
+         codAsignatura=null;
+        creditos=null;
+        periodo="";
+        titulacion=null;
+        facultad=null;
+        idioma="";
+        webAsignatura=null;
+        curso="";
+        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre(),seleccionCurso);
+        
+        return null;
+    }
+    
+    public String confirmarEdicion(){
+        
+        try{
+            
+            
+            
+            asignaturaService.actualizarAsignatura(selectedAsignatura);
+            
+            
+        }catch(InstanceNotFoundException ex){
+            
+            sessionController.creaMensaje("Se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            return null;
+            
+        }
+        
+        
+        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre() , selectedAsignatura.getCurso());
+        return null;
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
      

@@ -52,11 +52,15 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
     }
     
   @Override  
-  public List<Asignatura> listarAsignaturasPorUniversidadYCurso ( String nombreUniversidad, String curso){
+  public List<Asignatura> listarAsignaturasPorUniversidadYCurso (boolean disponible, String nombreUniversidad, String curso){
     
+      if(disponible==false){
       return getSession().createQuery("SELECT a from Asignatura a where a.universidad.nombre=:nombreUniversidad and a.curso=:curso")
               .setParameter("nombreUniversidad", nombreUniversidad).setParameter("curso", curso).list();
+      }
       
+      return getSession().createQuery("SELECT a from Asignatura a where a.disponible=1 and a.universidad.nombre=:nombreUniversidad and a.curso=:curso")
+              .setParameter("nombreUniversidad", nombreUniversidad).setParameter("curso", curso).list();
   }
   
   @Override
@@ -87,4 +91,14 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
   
   
 }
+  
+  @Override
+  public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id){
+      
+      
+      return getSession().createQuery("select c from ComentarioAsignatura c where c.estado='aceptado' and c.asignatura.id=:id").setParameter("id", id).list();
+      
+  }
+  
+  
 }

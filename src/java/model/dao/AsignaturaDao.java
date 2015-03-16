@@ -24,7 +24,8 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     public void insertarComentario(ComentarioAsignatura c);
     public void eliminarComentario(ComentarioAsignatura c);
     public void editarComentario(ComentarioAsignatura c);
-    public List<Asignatura> listarAsignaturasPorUniversidadYCurso (String nombreUniversidad, String curso);
+    public List<Asignatura> listarAsignaturasPorUniversidadYCurso (boolean disponible,String nombreUniversidad, String curso);
     public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario);
     public List<Asignatura> asignaturasMovilidad(Movilidad m);
+    public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id);
 }

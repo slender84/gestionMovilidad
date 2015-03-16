@@ -223,7 +223,7 @@ public class EscribirComentarioAsignaturaController {
                 
             }
             
-            String textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha escrito un comentario \n asignatura: "+selectedAsignatura.getNombreAsignatura()+"\n Universidad: "+selectedAsignatura.getId().getNombreUniversidad();
+            String textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha escrito un comentario \n asignatura: "+selectedAsignatura.getNombreAsignatura()+"\n Universidad: "+selectedAsignatura.getId().getNombreUniversidad()+"\n Curso: "+selectedAsignatura.getCurso();
             
             
             Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Asignatura comentada",textoMensaje,false ,true, false);

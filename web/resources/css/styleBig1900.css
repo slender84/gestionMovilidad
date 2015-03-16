@@ -198,3 +198,9 @@ body.blue{
     font-size: 14px;
     
 }
+
+.preformat{
+        
+        white-space: pre-wrap;
+            
+    }    

@@ -62,7 +62,7 @@
                 <p:outputLabel for="cod" value="Código: " />
                 <p:inputText id="cod" value="#{crearAsignaturaController.codAsignatura}"  required="true"
                              requiredMessage="el campo código está vacío"
-                             validatorMessage=" Código debe ser un número válido">
+                             validatorMessage=" Código debe ser de 50 caracteres como mucho">
                              
                     <f:validateLength minimum="1" maximum="50"/>
                 

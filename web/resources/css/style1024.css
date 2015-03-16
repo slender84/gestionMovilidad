@@ -219,7 +219,11 @@ body.blue{
 
 
 
-
+.preformat{
+        
+        white-space: pre-wrap;
+            
+    }    
 
 
 

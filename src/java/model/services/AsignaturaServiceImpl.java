@@ -132,9 +132,9 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     }
     
     @Override
-    public List<Asignatura> listarAsignaturasPorUniversidadYCurso(String nombreUniversidad, String curso){
+    public List<Asignatura> listarAsignaturasPorUniversidadYCurso(boolean disponible,String nombreUniversidad, String curso){
         
-        return asignaturaDao.listarAsignaturasPorUniversidadYCurso (nombreUniversidad, curso);
+        return asignaturaDao.listarAsignaturasPorUniversidadYCurso (disponible,nombreUniversidad, curso);
         
         
     }
@@ -159,6 +159,14 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
         
         
         return asignaturaDao.asignaturasMovilidad(m);
+    }
+    
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id){
+        
+        return asignaturaDao.listarComentariosPorAsignatura(id);
     }
     
 }

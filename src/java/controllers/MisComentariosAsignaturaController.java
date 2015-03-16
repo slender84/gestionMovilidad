@@ -151,7 +151,7 @@ public class MisComentariosAsignaturaController {
                 
             }
             
-            String textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha escrito un comentario \n asignatura: "+selectedComentario.getAsignatura().getNombreAsignatura()+"\n Universidad: "+selectedComentario.getAsignatura().getUniversidad().getNombre();
+            String textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha escrito un comentario \n asignatura: "+selectedComentario.getAsignatura().getNombreAsignatura()+"\n Universidad: "+selectedComentario.getAsignatura().getUniversidad().getNombre()+"\n Curso: "+selectedComentario.getAsignatura().getCurso();
             
             Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Comentario de asignatura editado",textoMensaje,false ,true, false);
             mensajeService.enviarMensaje(m);
