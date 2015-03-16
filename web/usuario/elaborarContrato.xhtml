@@ -74,42 +74,10 @@
             </p:dataTable>
        
             
-            <p:dialog  header="información adicional" closeOnEscape="true"  fitViewport="true" maximizable="true"  widgetVar="dialog1" width="1000" height="1000" >
-                
-                <h:panelGrid columns="4" cellpadding="2" cellspacing="10">
-                    <f:facet name="header">
-                        
-                        <h:outputText value="#{misEquivalenciasController.selectedAsignatura.nombreAsignatura}"/>
-                        
-                    </f:facet>
-                    <p:outputLabel value="Código asignatura: "/>
-                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.id.codAsignatura}"/>
-                    <p:outputLabel value="Facultad: "/>
-                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.facultad}"/>
-                    <p:outputLabel value="Titulación: "/>
-                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.titulacion}"/>
-                    <p:outputLabel value="Idioma:"/>
-                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.idioma}"/>
-                    
-                    </h:panelGrid>
-                <p:separator/>
-                    
-                    <p:outputLabel value="Comentarios" /><br/>
-                    <ui:repeat value="#{misEquivalenciasController.listaComentariosAsignatura}" var="comentario">
-                    
-                        <h:outputText value="#{comentario.fecha}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="#{sessionController.zonaHoraria}"/>
-                        
-                        </h:outputText><br/>
-                        <h:outputText style="white-space: pre-wrap" value="#{comentario.texto}"/><br/><br/>
-                    
-                    
-                    </ui:repeat>
-                  
-            </p:dialog>
             
             
-            <p:dialog  header="Crear asignatura" closeOnEscape="true"  fitViewport="true" maximizable="true"  widgetVar="dialog2" width="1000" height="1000" >
+            
+            <p:dialog  rendered="#{misEquivalenciasController.checkDialog}" header="Crear asignatura" closeOnEscape="true"  fitViewport="true" maximizable="true"  widgetVar="dialog2" width="1000" height="1000" >
                 
                 Asegúrate de que la asignatura no está en la tabla y de que la información es correcta. Los campos con * son obligatorios<br/>
                 
@@ -333,7 +301,7 @@
                
                 <p:column headerText="+info" styleClass="info">
                         
-                    <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formEquivalenciaFic" 
+                    <p:commandLink value="+info" action="#{misEquivalenciasController.detallesAsign}" update=":formDialog1" 
                                     oncomplete="PF('dialog1').show();" >
                         
                             <f:setPropertyActionListener value="#{asigUni}" target="#{misEquivalenciasController.selectedAsignatura}"/>
@@ -405,7 +373,52 @@
              </h:form>
        
            </p:outputPanel> 
-        
+   
+         
+         <h:form id="formDialog1">
+             
+             <p:dialog  header="información adicional" closeOnEscape="true"  fitViewport="true" maximizable="true"  widgetVar="dialog1" width="1000" height="1000" >
+                
+                <h:panelGrid columns="4" cellpadding="2" cellspacing="10">
+                    <f:facet name="header">
+                        
+                        <h:outputText value="#{misEquivalenciasController.selectedAsignatura.nombreAsignatura}"/>
+                        
+                    </f:facet>
+                    <p:outputLabel value="Código asignatura: "/>
+                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.id.codAsignatura}"/>
+                    <p:outputLabel value="Facultad: "/>
+                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.facultad}"/>
+                    <p:outputLabel value="Titulación: "/>
+                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.titulacion}"/>
+                    <p:outputLabel value="Idioma:"/>
+                    <h:outputText value="#{misEquivalenciasController.selectedAsignatura.idioma}"/>
+                    
+                    </h:panelGrid>
+                <p:separator/>
+                    
+                    <p:outputLabel value="Comentarios" /><br/>
+                    <ui:repeat value="#{misEquivalenciasController.listaComentariosAsignatura}" var="comentario">
+                    
+                        <h:outputText value="#{comentario.fecha}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="#{sessionController.zonaHoraria}"/>
+                        
+                        </h:outputText><br/>
+                        <h:outputText style="white-space: pre-wrap" value="#{comentario.texto}"/><br/><br/>
+                    
+                    
+                    </ui:repeat>
+                  
+            </p:dialog>
+             
+             
+             
+             
+         </h:form>
+         
+         
+         
+         
             
        
         

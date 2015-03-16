@@ -730,7 +730,7 @@ public class MisEquivalenciasController implements Serializable{
     private String seleccionCursoFic;
     
     
-    
+    private boolean checkDialog;
     
     
     
@@ -765,6 +765,14 @@ public class MisEquivalenciasController implements Serializable{
 
     public void setSelectedAsignatura2(Asignatura selectedAsignatura2) {
         this.selectedAsignatura2 = selectedAsignatura2;
+    }
+
+    public boolean isCheckDialog() {
+        return checkDialog;
+    }
+
+    public void setCheckDialog(boolean checkDialog) {
+        this.checkDialog = checkDialog;
     }
     
     
@@ -896,7 +904,7 @@ public class MisEquivalenciasController implements Serializable{
     
     public void crearAsignatura(){
         
-        
+        checkDialog=true;
         
     }
     
@@ -905,7 +913,7 @@ public class MisEquivalenciasController implements Serializable{
          
         
         listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosPorAsignatura(selectedAsignatura.getId());
-        
+        checkDialog=false;
         
         
     }
@@ -918,7 +926,8 @@ public class MisEquivalenciasController implements Serializable{
             return null;
         }
         
-        selectedAsignatura=selectedAsignaturas.get(0);
+        checkDialog=false;
+        selectedAsignatura2=selectedAsignaturas.get(0);
         return null;
     }
     
