@@ -64,6 +64,16 @@
                         <br/>
                     </ui:repeat>
                 </p:column>
+                   
+                   <p:column headerText="Curso" styleClass="cursoGestion">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.curso} "/>
+                            
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                   
                 
                    <p:column headerText="Cr" styleClass="creditosPublicaAdmin">
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
@@ -86,10 +96,19 @@
                    
                    <p:column headerText="#{equivalenciasPublicasController.universidadStr}" styleClass="asignaturaPublicaAdmin">
                        <f:facet name="header">#{equivalenciasPublicasController.universidadStr}</f:facet>
+                       
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
                          <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
                          <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                   <p:column headerText="Curso" styleClass="cursoGestion">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.curso} "/>
+                            
+                        <br/>
                     </ui:repeat>
                 </p:column>
                        <p:column headerText="Cr" styleClass="creditosPublicaAdmin">

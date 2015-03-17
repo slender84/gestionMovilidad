@@ -64,11 +64,16 @@
                 </f:facet>
                 
                 <p:column headerText="UDC" styleClass="nuevoAsignaturaAdmin">
+                    
+                    
                     <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
-                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
-                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                        <p:commandLink value="#{asignatura.asignatura.nombreAsignatura}" action="#{equivalenciasController.detallesAsign}" oncomplete="PF('dialog1').show();" update=":formDialog1">
+                            <f:setPropertyActionListener value="#{asignatura.asignatura}" target="#{equivalenciasController.selectedAsignatura}"/>
+                        </p:commandLink>
                         <br/>
                     </ui:repeat>
+                    
+                    
                 </p:column>
                    
                 <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
@@ -98,9 +103,10 @@
                            <h:outputText value="#{equivalenciasController.selectedMovilidad.universidad.nombre}" rendered="#{empty equivalenciasController.selectedMovilidad.universidad.web}"/>
                        </f:facet>
                        <ui:repeat value="#{equivalencia.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
-                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
-                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
-                         <br/>
+                        <p:commandLink value="#{asignatura.asignatura.nombreAsignatura}" action="#{equivalenciasController.detallesAsign}" oncomplete="PF('dialog1').show();" update=":formDialog1">
+                            <f:setPropertyActionListener value="#{asignatura.asignatura}" target="#{equivalenciasController.selectedAsignatura}"/>
+                        </p:commandLink>
+                        <br/>
                     </ui:repeat>
                            
                 </p:column>
@@ -190,10 +196,14 @@
                 </f:facet>
                   <p:column headerText="UDC" styleClass="nuevoAsignaturaAdmin">
                       <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
-                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
-                        <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
+                        <p:commandLink value="#{asignatura.asignatura.nombreAsignatura}" action="#{equivalenciasController.detallesAsign}" oncomplete="PF('dialog1').show();" update=":formDialog1">
+                            <f:setPropertyActionListener value="#{asignatura.asignatura}" target="#{equivalenciasController.selectedAsignatura}"/>
+                        </p:commandLink>
                         <br/>
                     </ui:repeat>
+                      
+                      
+                      
                 </p:column>
                    
                 <p:column headerText="Cr" styleClass="nuevoCreditosAdmin">
@@ -222,9 +232,10 @@
                            <h:outputText value="#{equivalenciasController.selectedMovilidad.universidad.nombre}" rendered="#{empty equivalenciasController.selectedMovilidad.universidad.web}"/>
                        </f:facet>
                     <ui:repeat value="#{equivalenciaB.equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
-                        <h:outputLink target="_blank" value="#{asignatura.asignatura.webAsignatura}" rendered="#{ not empty asignatura.asignatura.webAsignatura}">#{asignatura.asignatura.nombreAsignatura}</h:outputLink>
-                         <h:outputText value="#{asignatura.asignatura.nombreAsignatura}" rendered="#{empty asignatura.asignatura.webAsignatura}"/>
-                         <br/>
+                        <p:commandLink value="#{asignatura.asignatura.nombreAsignatura}" action="#{equivalenciasController.detallesAsign}" oncomplete="PF('dialog1').show();" update=":formDialog1">
+                            <f:setPropertyActionListener value="#{asignatura.asignatura}" target="#{equivalenciasController.selectedAsignatura}"/>
+                        </p:commandLink>
+                        <br/>
                     </ui:repeat>
                 </p:column>
                    
@@ -309,6 +320,51 @@
         </h:form>
         </p:outputPanel>   
     
+        <h:form id="formDialog1">
+             
+             <p:dialog  header="información adicional" closeOnEscape="true"  fitViewport="true" maximizable="true"  widgetVar="dialog1" width="1000" height="1000" >
+                
+                <h:panelGrid columns="6" cellpadding="2" cellspacing="2">
+                    <f:facet name="header">
+                        
+                        <h:outputText value="#{equivalenciasController.selectedAsignatura.nombreAsignatura}"/>
+                        
+                    </f:facet>
+                    <p:outputLabel value="Universidad:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.id.nombreUniversidad}"/>&nbsp;
+                    <p:outputLabel value="Código asignatura:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.id.codAsignatura}"/>&nbsp;
+                    <p:outputLabel value="Facultad:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.facultad}"/>&nbsp;
+                    <p:outputLabel value="Titulación:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.titulacion}"/>&nbsp;
+                    <p:outputLabel value="Idioma:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.idioma}"/>&nbsp;
+                    <h:outputLabel value="Curso:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.curso}"/>&nbsp;
+                    <p:outputLabel value="Periodo:"/>
+                    <h:outputText value="#{equivalenciasController.selectedAsignatura.periodo}"/>&nbsp;
+                    <h:outputLink target="_blank" value="#{equivalenciasController.selectedAsignatura.webAsignatura}" rendered="#{not empty equivalenciasController.selectedAsignatura.webAsignatura}">WEB</h:outputLink>
+                    
+                    </h:panelGrid>
+                <p:separator/>
+                    
+                    <p:outputLabel value="Comentarios" /><br/>
+                    <ui:repeat value="#{equivalenciasController.listaComentariosAsignatura}" var="comentario">
+                    
+                        <h:outputText value="#{comentario.fecha}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="#{sessionController.zonaHoraria}"/>
+                        
+                        </h:outputText><br/>
+                        <h:outputText style="white-space: pre-wrap" value="#{comentario.texto}"/><br/><br/>
+                    
+                    
+                    </ui:repeat>
+                  
+            </p:dialog>
+        
+        </h:form>
+        
     
        <br/>
        <br/>

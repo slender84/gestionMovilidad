@@ -24,7 +24,7 @@ public interface AsignaturaService {
     
     public void crearAsignatura(Asignatura a);
     public List<Asignatura> listarAsignaturas();
-    public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
+    public List<Asignatura> listarAsignaturasPorUniversidad(boolean disponible,String codUniversidad);
     public List<Asignatura> listarAsignaturasPorUniversidadYCurso(boolean disponible,String nombreUniversidad, String curso);
     public void eliminarAsignatura(Asignatura a)throws InstanceNotFoundException;
     public void actualizarAsignatura(Asignatura a)throws InstanceNotFoundException;

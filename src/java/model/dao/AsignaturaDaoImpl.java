@@ -20,19 +20,20 @@ import org.springframework.stereotype.Repository;
 public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, AsignaturaId> implements AsignaturaDao{
    
     @Override
-    public List<Asignatura> listarAsignaturasPorUniversidad(String nombre){
+    public List<Asignatura> listarAsignaturasPorUniversidad(boolean disponible,String nombre){
         
         if(nombre.equalsIgnoreCase("Universidade da Coruña")){
             
-            Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre like '%coruña%' order by a.nombreAsignatura asc" );
+            Query q=getSession().createQuery("select a from Asignatura a where a.disponible=:disponible and a.universidad.nombre like '%coruña%' order by a.curso" ).setParameter("disponible", disponible);
         //q.setParameter("nombre", nombre);
         return q.list();
             
         }
         
         
-        Query q=getSession().createQuery("select a from Asignatura a where a.universidad.nombre=:nombre order by a.nombreAsignatura asc" );
-        q.setParameter("nombre", nombre);
+        Query q=getSession().createQuery("select a from Asignatura a where a.disponible=:disponible and a.universidad.nombre=:nombre order by a.curso" );
+        q.setParameter("nombre", nombre).setParameter("disponible", disponible);
+                
         return q.list();
         
     }

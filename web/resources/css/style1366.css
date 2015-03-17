@@ -3,9 +3,9 @@
 
 
 .tablaFic{
-    height: 45%;
+    height: 48%;
     width: 45%;
-    font-size: 14px;
+    font-size: 12px;
     position: absolute;
     top: 112px;
     //left:50px;
@@ -13,55 +13,16 @@
 
 
 .tablaUniversidad{
-    width: 45%;
+    width: 48%;
     height: 45%;
-    font-size: 14px;
+    font-size: 12px;
     position:absolute;
     top: 112px;
-    left: 650px; 
-}
-
-.areaTexto{
-    
-    position: absolute;
-    top: 589px;
-}
-
-.cerrarAreaTexto{
-    
-    position: relative;
-    top: 590px;
-}
-
-
-.nuevoAsignatura{
-    
-    width: 68%;
-    font-size: 13px;
-}
-
-.multiple{
-   width:3% ;
-   text-align:center;
-}
-
-
-.nuevoMultiple{
-    
-    width: 9%;
-    font-size: 14px;
-    text-align: center;
-}
-
-.nuevoCreditos{
-    
-    width: 15%;
-    font-size: 13px;
-    text-align: center;
+    left: 700px; 
 }
 
 .periodo{
-    font-size: 14px;
+    font-size: 12px;
     height: 15%;
     width: 4%;
     text-align: center;
@@ -69,35 +30,125 @@
 
 .asignatura{
     
-    font-size: 14px;
+    font-size: 12px;
     height: 20%;
-    width: 14%;
+    width: 11%;
   
 }
 
+.curso{
+    font-size: 12px;
+    height: 20%;
+    width: 4%;
+    
+}
+
+
 .creditos{
-    font-size: 14px;
+    font-size: 12px;
     height: 15%;
     width: 3%;
     text-align: center;
 }
 
-.info{
+
+
+
+
+.asignatura2{
+    
+    width: 30%;
+    font-size: 12px;
+    text-align: left;
+}
+
+
+
+
+.multiple2{
+    
+    width: 6%;
+    font-size: 12px;
     text-align: center;
-    font-size: 14px;
-    width: 3%;
-    height: 3%;
+}
+
+.creditos2{
+    
+    width: 8%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.periodo2{
+    
+    width: 14%;
+    font-size: 12px;
+    text-align: left;
     
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+.multiple{
+   width:3% ;
+   text-align:center;
+}
+
+
+.nuevoAsignatura{
+    
+    width: 25%;
+    font-size: 12px;
+}
+
+.nuevoCurso{
+    
+    width: 12%; 
+    font-size: 12px;
+    
+}
+
+
+.nuevoMultiple{
+    
+    width: 3%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.nuevoCreditos{
+    
+    width: 5%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.nuevoPeriodo{
+    
+    width: 5%;
+    font-size: 12px;
+    
+    
+    
+}
 
 
 .añadir{
     
     position: absolute;
     top: 589px;
-    left: 580px;
+    left: 600px;
     text-align:center; 
 }
 
@@ -105,21 +156,21 @@
     top: 660px;
     //left: 50px;
     height: 45%;
-    width: 45%;
+    width: 40%;
     position:absolute;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
   
 }
 
 .tablaEquivalenciasAceptadoNuevo{
     top: 660px;
-    left: 650px;
+    left: 600px;
     height: 45%;
-    width: 50%;
+    width: 55%;
     position:absolute;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
   
 }
 
@@ -152,20 +203,10 @@ body.blue{
 
 
 
-
-
-
-
-
-
-
-
-
-
 .nuevoAsignaturaAdmin{
     
     width: 53%;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .tablaEquivalenciasAdmin{
@@ -175,14 +216,14 @@ body.blue{
     width: 51%;
     position:relative;
     //text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     
 }
 
 .nuevoCreditosAdmin{
     
     width: 14%;
-    font-size: 13px;
+    font-size: 12px;
     text-align: center;
         
 }
@@ -191,21 +232,21 @@ body.blue{
 
 .nuevoPeriodoAdmin{
     width: 7%;
-    font-size: 13px;
+    font-size: 12px;
     
 }
 
 .nuevoMultipleAdmin{
     
     width: 8%;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
 }
 
 .visible{
     
     
-    font-size: 14px;
+    font-size: 12px;
     height: 15%;
     width: 8%;
     
@@ -217,20 +258,25 @@ body.blue{
     width: 45%;
     position:absolute;
     //text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     
 }
 
 .tablaEquivalencias{
-    height: 65%;
-    width: 80%;
-    position:absolute;
+    //height: 65%;
+    //width: 80%;
+    //position:absolute;
     top: 660px;
-    left:140px;
-    text-align: center;
-    font-size: 14px;
+    //left:140px;
+    //text-align: center;
+    font-size: 12px;
    
 }
+
+
+
+
+
 
 .preformat{
         

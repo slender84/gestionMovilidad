@@ -20,7 +20,7 @@ import java.util.List;
 public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     
     
-    public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad);
+    public List<Asignatura> listarAsignaturasPorUniversidad(boolean disponible,String codUniversidad);
     public void insertarComentario(ComentarioAsignatura c);
     public void eliminarComentario(ComentarioAsignatura c);
     public void editarComentario(ComentarioAsignatura c);

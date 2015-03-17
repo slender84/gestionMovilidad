@@ -1,7 +1,7 @@
 .tablaFic{
     height: 45%;
     width: 45%;
-    font-size: 14px;
+    font-size: 12px;
     position: absolute;
     top: 58px;
     //left:50px;
@@ -10,10 +10,10 @@
 .tablaUniversidad{
     width: 45%;
     height: 45%;
-    font-size: 14px;
+    font-size: 12px;
     position:absolute;
     top: 58px;
-    left: 870px; 
+    left: 950px; 
 }
 
 .areaTexto{
@@ -34,14 +34,14 @@
 }
 
 .periodo{
-    font-size: 14px;
+    font-size: 12px;
     height: 15%;
     width: 6%;
 }
 
 .asignatura{
     
-    font-size: 14px;
+    font-size: 12px;
     height: 20%;
     width: 12%;
   
@@ -50,11 +50,11 @@
 .nuevoAsignatura{
     
     width: 74%;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .creditos{
-    font-size: 14px;
+    font-size: 12px;
     height: 15%;
     width: 3%;
     text-align: center;
@@ -62,7 +62,7 @@
 
 .info{
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     width: 3%;
     height: 3%;
     
@@ -71,14 +71,14 @@
 .nuevoMultiple{
     
     width: 9%;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
 }
 
 .nuevoCreditos{
     
     width: 9%;
-    font-size: 14px;
+    font-size: 12px;
     text-align: left;
 }
 
@@ -87,7 +87,7 @@
     
     position: absolute;
     top: 535px;
-    left: 820px;
+    left: 900px;
     text-align:center; 
 }
 
@@ -98,7 +98,7 @@
     width: 45%;
     position:absolute;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
   
 }
 
@@ -109,7 +109,7 @@
     width: 50%;
     position:absolute;
     text-align: left;
-    font-size: 14px;
+    font-size: 12px;
   
 }
 
@@ -142,7 +142,7 @@ body.blue{
 .nuevoAsignaturaAdmin{
     
     width: 53%;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .tablaEquivalenciasAdmin{
@@ -152,14 +152,14 @@ body.blue{
     width: 51%;
     position:relative;
     //text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     
 }
 
 .nuevoCreditosAdmin{
     
     width: 14%;
-    font-size: 13px;
+    font-size: 12px;
     text-align: left;
         
 }
@@ -168,21 +168,21 @@ body.blue{
 
 .nuevoPeriodoAdmin{
     width: 7%;
-    font-size: 13px;
+    font-size: 12px;
     
 }
 
 .nuevoMultipleAdmin{
     
     width: 8%;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
 }
 
 .visible{
     
     
-    font-size: 14px;
+    font-size: 12px;
     height: 15%;
     width: 8%;
     
@@ -195,7 +195,7 @@ body.blue{
     width: 45%;
     position:absolute;
     //text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     
 }
 

@@ -61,7 +61,7 @@
                          styleClass="tablaEquivalenciasPublicas"
                          rowKey="#{equivalencia.idequivalencia}"
                          widgetVar="equivalenciaTable"
-                         paginator="true" rows="10"
+                         paginator="true" rows="10" paginatorPosition="bottom"
                          >
                    
                    
@@ -74,6 +74,15 @@
                         <br/>
                     </ui:repeat>
                 </p:column>
+                   
+                   <p:column headerText="Curso" styleClass="cursoGestion">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.curso} "/>
+                            
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
                 
                    <p:column headerText="Cr" styleClass="creditosPublica">
                        <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
@@ -102,6 +111,16 @@
                          <br/>
                     </ui:repeat>
                 </p:column>
+                   
+                   <p:column headerText="Curso" styleClass="cursoGestion">
+                    <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaAs.toArray()}" var="asignatura">
+                        <h:outputText value="#{asignatura.asignatura.curso} "/>
+                            
+                        <br/>
+                    </ui:repeat>
+                </p:column>
+                   
+                   
                        <p:column headerText="Cr" styleClass="creditosPublica">
                            <ui:repeat value="#{equivalencia.miembroGrupoAsignaturaBs.toArray()}" var="asignatura">
                         

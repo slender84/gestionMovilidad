@@ -254,8 +254,8 @@
                 <p:outputLabel/>
                 <p:outputLabel/>
                 <p:outputLabel/>
-                <p:outputLabel value="creditos" />
-                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.creditos}" 
+                <p:outputLabel for="cr" value="creditos" />
+                <p:inputText id="cr" value="#{crearAsignaturaController.selectedAsignatura.creditos}" required="true"
                              validatorMessage="Debe de ser un número entre 1 y 100">
                     <f:validateDoubleRange minimum="1" maximum="100"/>
                 </p:inputText>
@@ -271,8 +271,8 @@
                 
                 
                
-                <p:outputLabel value="periodo" />
-                <p:selectOneMenu value="#{crearAsignaturaController.selectedAsignatura.periodo}" >
+                <p:outputLabel for="per" value="periodo" />
+                <p:selectOneMenu id="per" value="#{crearAsignaturaController.selectedAsignatura.periodo}" required="true" >
                     <f:selectItem itemLabel="anual" itemValue="anual"/>
                     <f:selectItem itemLabel="invierno" itemValue="invierno"/>
                     <f:selectItem itemLabel="primavera" itemValue="primavera"/>
@@ -282,7 +282,7 @@
                 
                 
                 <p:outputLabel for="idi" value="Idioma: "/>
-                <p:selectOneMenu id="idi" value="#{crearAsignaturaController.selectedAsignatura.idioma}" filter="true" filterMatchMode="startsWith">
+                <p:selectOneMenu id="idi" value="#{crearAsignaturaController.selectedAsignatura.idioma}" filter="true" filterMatchMode="startsWith" required="true">
                     <f:selectItems value="#{crearIdiomaController.listaIdiomas}" var="idioma" itemLabel="#{idioma.idioma}" itemValue="#{idioma.idioma}"/> 
                 
                 </p:selectOneMenu>

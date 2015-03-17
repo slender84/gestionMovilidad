@@ -3,6 +3,8 @@
 package controllers;
 
 //import antlr.debug.Event;
+import entities.Asignatura;
+import entities.ComentarioAsignatura;
 import entities.Contrato;
 import entities.Equivalencia;
 import entities.Mensaje;
@@ -25,6 +27,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
+import model.services.AsignaturaService;
 import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.utils.EquivalenciaRevisada;
@@ -53,8 +56,8 @@ public class EquivalenciasController implements Serializable{
     @ManagedProperty(value = "#{reportBean}")
     private ReportBean reportBean;
 
-    
-    
+    @ManagedProperty(value="#{asignaturaService}")
+    private AsignaturaService asignaturaService;
     
     
    
@@ -72,10 +75,10 @@ public class EquivalenciasController implements Serializable{
     
     Equivalencia equivalencia;
     
+    private Asignatura selectedAsignatura;
     
     
-    
-    
+    private ArrayList<ComentarioAsignatura> listaComentariosAsignatura;
     
     private ArrayList<Equivalencia> listaAuxEquivalencias=new ArrayList<Equivalencia>();
     private ArrayList<Equivalencia> listaAuxEquivalenciasComparado=new ArrayList<Equivalencia>();
@@ -167,6 +170,14 @@ public class EquivalenciasController implements Serializable{
         this.sessionController = sessionController;
     }
 
+    public AsignaturaService getAsignaturaService() {
+        return asignaturaService;
+    }
+
+    public void setAsignaturaService(AsignaturaService asignaturaService) {
+        this.asignaturaService = asignaturaService;
+    }
+
     
     
     public MensajeService getMensajeService() {
@@ -211,6 +222,14 @@ public class EquivalenciasController implements Serializable{
 
     public void setEquivalenciasRevisadasComparado(ArrayList<EquivalenciaRevisada> equivalenciasRevisadasComparado) {
         this.equivalenciasRevisadasComparado = equivalenciasRevisadasComparado;
+    }
+
+    public ArrayList<ComentarioAsignatura> getListaComentariosAsignatura() {
+        return listaComentariosAsignatura;
+    }
+
+    public void setListaComentariosAsignatura(ArrayList<ComentarioAsignatura> listaComentariosAsignatura) {
+        this.listaComentariosAsignatura = listaComentariosAsignatura;
     }
     
     
@@ -303,6 +322,17 @@ public class EquivalenciasController implements Serializable{
     public void setCreditosComparadoB(Float creditosComparadoB) {
         this.creditosComparadoB = creditosComparadoB;
     }
+
+    public Asignatura getSelectedAsignatura() {
+        return selectedAsignatura;
+    }
+
+    public void setSelectedAsignatura(Asignatura selectedAsignatura) {
+        this.selectedAsignatura = selectedAsignatura;
+    }
+    
+    
+    
 
     public ArrayList<Equivalencia> getSelectedEquivalenciasSimples() {
         return selectedEquivalenciasSimples;
@@ -488,6 +518,15 @@ public class EquivalenciasController implements Serializable{
         
     }
     
+     
+     public void detallesAsign(){
+         
+        
+        listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosPorAsignatura(selectedAsignatura.getId());
+        
+        
+    }
+     
 }
      
     

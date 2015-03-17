@@ -62,9 +62,9 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     
     @Override
     @Transactional(readOnly = true)
-    public List<Asignatura> listarAsignaturasPorUniversidad(String codUniversidad){
+    public List<Asignatura> listarAsignaturasPorUniversidad(boolean disponible,String codUniversidad){
         
-        return asignaturaDao.listarAsignaturasPorUniversidad(codUniversidad);
+        return asignaturaDao.listarAsignaturasPorUniversidad(disponible,codUniversidad);
                 
                 
     }

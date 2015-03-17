@@ -28,7 +28,8 @@ public class EquivalenciaJasper {
     while(i.hasNext()){
       MiembroGrupoAsignaturaA mA=(MiembroGrupoAsignaturaA)i.next();
       asignaturasA.add(mA.getAsignatura());
-        
+    }
+    
       Iterator j=e.getMiembroGrupoAsignaturaBs().iterator();
     while(j.hasNext()){
       MiembroGrupoAsignaturaB mB=(MiembroGrupoAsignaturaB)j.next();
@@ -38,7 +39,7 @@ public class EquivalenciaJasper {
     }
     
         
-    }
+    
     }
 
     public Integer getIdequivalencia() {

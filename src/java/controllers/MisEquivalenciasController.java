@@ -152,11 +152,11 @@ public class MisEquivalenciasController implements Serializable{
         
         
         
-        listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad("UDC");
+        listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(true,"UDC");
         if(listaAsignaturasFic.isEmpty())
-            listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,"Universidade da Coruña", universidadService.listarCursos().get(0).getCurso());
-        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre(),universidadService.listarCursos().get(0).getCurso());
-        
+            listaAsignaturasFic=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(true,"Universidade da Coruña");
+        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(true,selectedMovilidad.getUniversidad().getNombre());
+            
         
            
         
@@ -717,6 +717,11 @@ public class MisEquivalenciasController implements Serializable{
         parametros.put("curso",selectedMovilidad.getCursoacademico().getCursoAcademico());
         parametros.put("fecha",sdf2.format(selectedContrato.getFecha()));
        
+        
+        
+        
+        
+        
         reportBean.PDF(event,reportBean.crearEquivalenciasJasper(listaAuxEquivalencias),parametros);
         
     }
@@ -730,8 +735,11 @@ public class MisEquivalenciasController implements Serializable{
     private String seleccionCursoFic;
     
     
-    private boolean checkDialog;
+    private boolean checkDialog2;
+    private boolean checkDialog3;
     
+    private boolean checkDialog2Fic;
+    private boolean checkFic;
     
     
     private String codAsignatura;
@@ -749,7 +757,7 @@ public class MisEquivalenciasController implements Serializable{
     private Asignatura selectedAsignatura2;
     
     
-    private ArrayList<Asignatura> selectedAsignaturas;
+    private ArrayList<Asignatura> selectedAsignaturas=new ArrayList<>();
 
     public ArrayList<Asignatura> getSelectedAsignaturas() {
         return selectedAsignaturas;
@@ -767,13 +775,40 @@ public class MisEquivalenciasController implements Serializable{
         this.selectedAsignatura2 = selectedAsignatura2;
     }
 
-    public boolean isCheckDialog() {
-        return checkDialog;
+    public boolean isCheckDialog2() {
+        return checkDialog2;
     }
 
-    public void setCheckDialog(boolean checkDialog) {
-        this.checkDialog = checkDialog;
+    public void setCheckDialog2(boolean checkDialog2) {
+        this.checkDialog2 = checkDialog2;
     }
+
+    public boolean isCheckDialog3() {
+        return checkDialog3;
+    }
+
+    public void setCheckDialog3(boolean checkDialog3) {
+        this.checkDialog3 = checkDialog3;
+    }
+
+    public boolean isCheckDialog2Fic() {
+        return checkDialog2Fic;
+    }
+
+    public boolean isCheckFic() {
+        return checkFic;
+    }
+
+    public void setCheckFic(boolean checkFic) {
+        this.checkFic = checkFic;
+    }
+    
+    
+
+    public void setCheckDialog2Fic(boolean checkDialog2Fic) {
+        this.checkDialog2Fic = checkDialog2Fic;
+    }
+
     
     
     
@@ -879,68 +914,153 @@ public class MisEquivalenciasController implements Serializable{
     
     
     
-    
-    
-    
-    
-    
-    public void cambioCurso(){
+    public void crearFic(){
         
-        
-        listaAsignaturasUniversidad=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre(), seleccionCurso);
-        
+        checkFic=true;
+        crearAsignatura();
         
     }
     
-    
-    public void cambioCursoFic(){
+    public void crearUni(){
         
-        listaAsignaturasUniversidad=(ArrayList < Asignatura >)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,"Universidade da Coruña", seleccionCursoFic);
-        
-        
-        
+        checkFic=false;
+       
+        crearAsignatura();
     }
     
+    public void editarFic(){
+        
+        checkFic=true;
+        editarAsignatura();
+    }
+    
+    public void editarUni(){
+        
+        checkFic=false;
+        editarAsignatura();
+    }
     
     public void crearAsignatura(){
+        checkDialog2=true;
+        checkDialog2Fic=false;
         
-        checkDialog=true;
-        
+        checkDialog3=false;
+         nombreAsignatura="";
+         codAsignatura=null;
+        creditos=null;
+        periodo="";
+        titulacion=null;
+        facultad=null;
+        idioma="";
+        webAsignatura=null;
+        curso="";
     }
+    
     
     
     public void detallesAsign(){
          
         
         listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosPorAsignatura(selectedAsignatura.getId());
-        checkDialog=false;
-        
+        checkDialog2Fic=false;
+       checkDialog2=false;
+        checkDialog3=false;
         
     }
     
     
     public String editarAsignatura(){
         
-        if (selectedAsignaturas.isEmpty()||selectedAsignaturas.size()>1){
-            sessionController.creaMensaje("Hay que seleccionar una asignatura para editar", FacesMessage.SEVERITY_ERROR);
+        
+        if(checkFic==false){
+        
+        if (selectedAsignaturasUni==null){
+            
+            checkDialog2=false;
+            checkDialog3=true;
+            selectedAsignatura2=null;
+            //resetAsignatura(selectedAsignatura2);
             return null;
         }
         
-        checkDialog=false;
-        selectedAsignatura2=selectedAsignaturas.get(0);
+        if (selectedAsignaturasUni.size()>1||selectedAsignaturasUni.isEmpty()){
+            checkDialog2Fic=false;
+            checkDialog2=false;
+            checkDialog3=true;
+             //resetAsignatura(selectedAsignatura2);
+            selectedAsignatura2=null;
+            return null;
+        }
+        
+        
+        selectedAsignatura2=selectedAsignaturasUni.get(0);
+        checkDialog2=false;
+        checkDialog3=true;
         return null;
+        }
+        else{
+            
+            
+            if (selectedAsignaturasFic==null){
+            
+            checkDialog2=false;
+            checkDialog3=true;
+            selectedAsignatura2=null;
+            //resetAsignatura(selectedAsignatura2);
+            return null;
+        }
+        
+        if (selectedAsignaturasFic.size()>1||selectedAsignaturasFic.isEmpty()){
+           
+            checkDialog2=false;
+            checkDialog3=true;
+             //resetAsignatura(selectedAsignatura2);
+            selectedAsignatura2=null;
+            return null;
+        }
+        
+        
+        selectedAsignatura2=selectedAsignaturasFic.get(0);
+        checkDialog2=false;
+        checkDialog3=true;
+        return null;
+         
+        }
     }
     
     
     public String enviarAsignatura(){
         
+        Asignatura a=new Asignatura();
         
-        
-        
+        if(checkFic==false){
+            
+            AsignaturaId id=new AsignaturaId(codAsignatura,selectedMovilidad.getUniversidad().getNombre());
+            a=new Asignatura(id, selectedMovilidad.getUniversidad());
+            
+        }else{
             
             
-        AsignaturaId id=new AsignaturaId(codAsignatura,selectedMovilidad.getUniversidad().getNombre());
-        Asignatura a=new Asignatura(id, selectedMovilidad.getUniversidad());
+        Universidad uniFic=null;
+        try{
+         uniFic=universidadService.buscarUniversidad("Universidade da Coruña");
+         
+         a.setUniversidad(uniFic);
+         AsignaturaId id=new AsignaturaId(codAsignatura, uniFic.getNombre());
+         a.setId(id);
+        }catch(InstanceNotFoundException ex){
+            try{
+            uniFic=universidadService.buscarUniversidad("UDC");
+            a.setUniversidad(uniFic);
+            AsignaturaId id2=new AsignaturaId(codAsignatura,uniFic.getNombre());
+            a.setId(id2);
+            }catch(InstanceNotFoundException ex2){
+                
+            }
+        }
+        }
+            
+        System.out.println("curso es "+curso);
         a.setCreditos(creditos);
         a.setCurso(curso);
         a.setIdioma(idioma);
@@ -972,9 +1092,16 @@ public class MisEquivalenciasController implements Serializable{
         facultad=null;
         idioma="";
         webAsignatura=null;
-        curso="";
-        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre(),seleccionCurso);
         
+        if(checkFic==false){
+        //listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(true,selectedMovilidad.getUniversidad().getNombre(),seleccionCurso);
+        curso="";
+        listaAsignaturasUniversidad.add(a);
+        return null;
+        }
+        else listaAsignaturasFic.add(a);
+        curso="";
+    
         return null;
     }
     
@@ -984,7 +1111,7 @@ public class MisEquivalenciasController implements Serializable{
             
             
             
-            asignaturaService.actualizarAsignatura(selectedAsignatura);
+            asignaturaService.actualizarAsignatura(selectedAsignatura2);
             
             
         }catch(InstanceNotFoundException ex){
@@ -994,18 +1121,43 @@ public class MisEquivalenciasController implements Serializable{
             
         }
         
-        
-        listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidadYCurso(true,selectedMovilidad.getUniversidad().getNombre() , selectedAsignatura.getCurso());
+       
+        sessionController.creaMensaje("Asignatura editada", FacesMessage.SEVERITY_INFO);
+        //selectedAsignatura2=null;
         return null;
-        
-        
-        
-        
+       
     }
     
     
     
     
+    
+    
+    
+    public void resetAsignatura(Asignatura a){
+        
+        if(a!=null){
+        a.setCreditos(null);
+        a.setCurso("");
+        a.setFacultad("");
+        a.getId().setCodAsignatura("");
+        a.setIdioma("");
+        a.setNombreAsignatura("");
+        a.setPeriodo("");
+        a.setTitulacion("");
+        a.setUniversidad(null);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
     
     
     
