@@ -153,7 +153,7 @@ public class EscribirComentarioAsignaturaController {
     @PostConstruct
     public void init(){
         
-        System.out.println("aqui");
+        
         ExternalContext context=FacesContext.getCurrentInstance().getExternalContext();
         
         if(context.getSessionMap().containsKey("movilidad")){

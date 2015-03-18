@@ -43,7 +43,7 @@
                <p:outputPanel id="panelPais" style="font-size: 12px;">
                     
                 <p:outputLabel value="Pais: "/>
-                <p:selectOneMenu value="#{sessionController.filtroPais}" filterMatchMode="contains">
+                <p:selectOneMenu value="#{sessionController.filtroPais}" filterMatchMode="contains" filter="true">
                                  <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro:panelPais :formFiltro:panelUniversidad"/>
                     <f:selectItem itemLabel="Todos" itemValue="todos"/>
                     <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
@@ -54,7 +54,7 @@
                 
                 <p:outputPanel id="panelUniversidad" style="font-size: 12px;">
                 <p:outputLabel value="Universidad: "/>
-                <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains">
+                <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains" filter="true">
                     <f:selectItem itemLabel="Todas" itemValue="todos"/>
                     <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
                                    itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>

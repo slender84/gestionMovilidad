@@ -161,35 +161,68 @@
                    
                 </p:column>
                 
-                <p:column selectionMode="multiple" styleClass="multiple"/> 
+               
+                
+                 <p:column style="width: 3%;font-size: 12px;" headerText="Vi" sortBy="#{equivalencia.visible}" >
+                    
+                     <h:outputText value="si" rendered="#{equivalencia.visible eq true}"/>
+                    <h:outputText value="no" rendered="#{equivalencia.visible eq false}"/>
+                </p:column>
                  
-         <p:columnGroup type="footer">
-            <p:row>
-                <p:column/>
-                <p:column/>
-                <p:column footerText="total créditos: "  styleClass="asignatura"/>
-               <p:column >
+                    <p:column selectionMode="multiple" styleClass="multiple"/> 
+                   
+          <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column/>
+                        <p:column/>
+                        <p:column footerText="Total:" style="font-size: 12px;"/>
+                        <p:column style="font-size: 12px;">
                             <f:facet name="footer">
                                 <h:outputText value="#{equivalenciasController.creditosA}">
                                     <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                <p:column/>
-                
-                <p:column/>
-                <p:column footerText="total créditos: "  styleClass="asignatura"/>
-                <p:column >
+                        <p:column/>
+                        <p:column/>
+                        <p:column footerText="Total:" style="font-size: 12px;"/>
+                        <p:column style="font-size: 12px;" >
                             <f:facet name="footer">
                                 <h:outputText value="#{equivalenciasController.creditosB}">
                                     <f:convertNumber locale="en-US" minFractionDigits="0" maxFractionDigits="1"/> 
                                 </h:outputText>
                             </f:facet>
                         </p:column>
-                <p:column/>
-            </p:row>
-            
-                </p:columnGroup>
+                        <p:column/>
+                        <p:column/>
+                        
+                        
+                    </p:row>
+                    <p:row>
+                        <p:column colspan="3"  exportable="false" style="font-size: 13px;">
+                            <f:facet name="footer">
+                
+                                <p:commandButton  id="publicaBtn"  update=":formTablaEquivalencias:" icon="ui-icon-search" value="publicar" action="#{equivalenciasController.publicarEquivalenciaSimple}"
+                                      oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{sessionController.user.tipoUsuario eq 0}" />
+                            </f:facet>
+                        </p:column>
+                    
+                    
+                        <p:column colspan="5" exportable="false" style="font-size: 13px">
+                        
+                        <f:facet name="footer">
+                            
+                           <p:commandButton   process=":formTablaEquivalencias:" update=":formTablaEquivalencias" icon="ui-icon-search" value="invisible" action="#{equivalenciasController.noPublicarSimple}"
+                                   oncomplete="PF('equivalenciaTable').unselectAllRows();" rendered="#{sessionController.user.tipoUsuario eq 0}"/> 
+                        </f:facet>
+                        
+                    </p:column>
+                        <p:column/>
+                        <p:column/>
+                    
+                    
+                    </p:row>
+               </p:columnGroup>
                
            <br/>
             </p:dataTable>

@@ -457,7 +457,6 @@ public class CrearAsignaturaController implements Serializable{
      webAsignatura=null;
       facultadAsignatura=null;
       titulacionAsignatura=null;
-      idioma="Español";
       disponible=true;
       curso="";
       checkDetalles=false;
@@ -814,23 +813,16 @@ public class CrearAsignaturaController implements Serializable{
     
     public String aprobarOrechazar(){
         
-        String estadoAux;
-        if(estadoComentario==true){
-            estadoAux="aceptado";
+        
+        if(selectedComentario.getEstado().equals("aceptado")){
+            selectedComentario.setEstado("pendiente");
+        }else{
+            selectedComentario.setEstado("aceptado");
+            
+            
+            
         }
-        else{
-            estadoAux="pendiente";
-        }
         
-        
-        
-            if(selectedComentario.getEstado().equals(estadoAux))
-                return null;
-            
-            selectedComentario.setEstado(estadoAux);
-            
-        
-            
              try{
         asignaturaService.actualizarAsignatura(SelectedAsignatura);
         }catch(InstanceNotFoundException ex){

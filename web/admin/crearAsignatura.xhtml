@@ -375,7 +375,7 @@
                     </p:column>
                 <p:column headerText="ver/editar" style="text-align: center">
                                     
-                                    <p:commandLink action="#{crearAsignaturaController.verComentario}" update=":formLeerComentario">
+                    <p:commandLink action="#{crearAsignaturaController.verComentario}" update=":formLeerComentario" >
                                         <f:setPropertyActionListener value="#{comentario}" target="#{crearAsignaturaController.selectedComentario}"/>
                                         <h:graphicImage value="/resources/img/edit26.png" title="ver/editar comentario"/>
                                     </p:commandLink>
@@ -447,8 +447,8 @@
                                <p:inputTextarea readonly="true" value="#{crearAsignaturaController.selectedComentario.texto}" cols="50" rows="8"/>
             <p:outputLabel value="Estado: "/>
             
-            <p:selectBooleanCheckbox value="#{crearAsignaturaController.estadoComentario}"/>
-            <p:commandButton value="editar" action="#{crearAsignaturaController.aprobarOrechazar}" update=":formComentarios :formUniversidad :formLeerComentario"/>
+            <h:outputText value="#{crearAsignaturaController.selectedComentario.estado}"/>
+            <p:commandButton value="cambiar" action="#{crearAsignaturaController.aprobarOrechazar}" update=":formComentarios :formUniversidad :formLeerComentario"/>
             <p:commandButton id="cerrarComentarioBtn" value="cerrar" action="#{crearAsignaturaController.cerrarComentario}" process="cerrarComentarioBtn" update=":formLeerComentario"/>
             
             </h:panelGrid>

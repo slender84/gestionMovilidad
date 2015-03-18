@@ -141,7 +141,7 @@ public class EliminarUsuarioController implements Serializable{
                  return null;
              }
              
-             System.out.println(listaUsuarios.remove(u));
+             listaUsuarios.remove(u);
              
              
          }

@@ -86,8 +86,8 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
   public List<Asignatura> asignaturasMovilidad(Movilidad m){
   
   return getSession().createQuery("SELECT DISTINCT a from Asignatura a where a.universidad.nombre not like '%coruña%' and a.universidad.nombre not like '%udc%' and a.id.codAsignatura in"
-          + "(SELECT m.asignatura.id.codAsignatura from MiembroGrupoAsignaturaB m where m.equivalencia=(select e from Equivalencia e JOIN e.contratos c where c.idContrato"
-          + "=(select d from Contrato d where d.movilidad=:movilidad)))")
+          + "(SELECT m.asignatura.id.codAsignatura from MiembroGrupoAsignaturaB m where m.equivalencia in(select e from Equivalencia e JOIN e.contratos c where c.idContrato"
+          + " in(select d from Contrato d where d.movilidad=:movilidad)))")
           .setParameter("movilidad", m).list();
   
   

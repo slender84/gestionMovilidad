@@ -14,7 +14,7 @@
     font-size: 12px;
     position:absolute;
     top: 112px;
-    left: 700px; 
+    left: 600px; 
 }
 
 .areaTexto{
@@ -45,9 +45,25 @@
     
     font-size: 12px;
     height: 20%;
-    width: 14%;
+    width: 11%;
   
 }
+
+.curso{
+    font-size: 12px;
+    height: 20%;
+    width: 4%;
+    
+}
+
+
+.creditos{
+    font-size: 12px;
+    height: 15%;
+    width: 3%;
+    text-align: center;
+}
+
 
 .nuevoAsignatura{
     
@@ -108,7 +124,7 @@
 
 .tablaEquivalenciasAceptadoNuevo{
     top: 660px;
-    left: 650px;
+    left: 600px;
     height: 45%;
     width: 50%;
     position:absolute;

@@ -490,7 +490,7 @@ public class EquivalenciasController implements Serializable{
                 
             }
         sessionController.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
-        Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, false,false,false);
+        Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, false,true,false);
         mensajeService.enviarMensaje(m);
         context.getSessionMap().remove("contrato");
         

@@ -222,7 +222,7 @@ public class MisMovilidadesController implements Serializable{
     
     public String escribirComentario(){
         
-        System.out.println("en mov");
+        
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movilidad", selectedMovilidad);
         return "escribirComentarioAsignatura.xhtml?faces-redirect=true";
         

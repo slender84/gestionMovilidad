@@ -22,13 +22,13 @@
                
                 <f:facet name="header">
                     <h:outputText value="#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.nombre}" rendered="#{empty escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}"/>
-                    <h:outputLink value="#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}" rendered="#{not empty escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}">#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.nombre}</h:outputLink>
+                    <h:outputLink target="_blank" value="#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}" rendered="#{not empty escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}">#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.nombre}</h:outputLink>
                 </f:facet>
             
                 <p:column headerText="nombre" sortBy="#{asignatura.nombreAsignatura}" filterBy="#{asignatura.nombreAsignatura}" filterMatchMode="contains" style="text-align: center">
                 
                     <h:outputText value="#{asignatura.nombreAsignatura}" rendered="#{empty asignatura.webAsignatura}"/>
-                    <h:outputLink value="#{asignatura.webAsignatura}" rendered="#{not empty asignatura.webAsignatura}">#{asignatura.nombreAsignatura}</h:outputLink>
+                    <h:outputLink target="_blank" value="#{asignatura.webAsignatura}" rendered="#{not empty asignatura.webAsignatura}">#{asignatura.nombreAsignatura}</h:outputLink>
                 </p:column>
             
                 

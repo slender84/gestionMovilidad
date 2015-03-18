@@ -1083,6 +1083,39 @@ public class MisEquivalenciasController implements Serializable{
         }
        
         
+         Usuario admin=null;
+        String textoMensaje;
+        if(checkFic==true){
+           textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha creado una asignatura \n asignatura: "+nombreAsignatura+"\n Universidade Da Coruña"+"\n Curso: "+ curso;
+           
+        }else{
+           
+        textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha creado una asignatura \n asignatura: "+nombreAsignatura+"\n Universidad: "+selectedMovilidad.getUniversidad().getNombre()+"\n Curso: "+ selectedAsignatura2.getCurso();
+        }
+        
+            
+            try{
+                
+               admin=usuarioService.buscarUsuario("admin");
+                
+            }catch(InstanceNotFoundException ex){
+                
+            }
+            
+            
+            
+            Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Asignatura creada",textoMensaje,false ,true, false);
+            mensajeService.enviarMensaje(m);
+            
+            
+            
+        
+        
+        
+        
+        
+        
+        
          sessionController.creaMensaje("asignatura creada correctamente", FacesMessage.SEVERITY_INFO);
          nombreAsignatura="";
          codAsignatura=null;
@@ -1097,6 +1130,11 @@ public class MisEquivalenciasController implements Serializable{
         //listaAsignaturasUniversidad=(ArrayList<Asignatura>)asignaturaService.listarAsignaturasPorUniversidad(true,selectedMovilidad.getUniversidad().getNombre(),seleccionCurso);
         curso="";
         listaAsignaturasUniversidad.add(a);
+        
+        
+        
+        
+        
         return null;
         }
         else listaAsignaturasFic.add(a);
@@ -1120,6 +1158,37 @@ public class MisEquivalenciasController implements Serializable{
             return null;
             
         }
+        
+        Usuario admin=null;
+        String textoMensaje;
+        if(checkFic==true){
+           textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha editado una asignatura \n asignatura: "+selectedAsignatura2.getNombreAsignatura()+"\n Universidade Da Coruña"+"\n Curso: "+ selectedAsignatura2.getCurso();
+           
+        }else{
+           
+        textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha editado una asignatura \n asignatura: "+selectedAsignatura2.getNombreAsignatura()+"\n Universidad: "+selectedMovilidad.getUniversidad().getNombre()+"\n Curso: "+ selectedAsignatura2.getCurso();
+        }
+        
+            try{
+                
+               admin=usuarioService.buscarUsuario("admin");
+                
+            }catch(InstanceNotFoundException ex){
+                
+            }
+            
+            
+            
+            
+            Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Asignatura editada",textoMensaje,false ,true, false);
+            mensajeService.enviarMensaje(m);
+            
+        
+        
+        
+        
+        
+        
         
        
         sessionController.creaMensaje("Asignatura editada", FacesMessage.SEVERITY_INFO);
