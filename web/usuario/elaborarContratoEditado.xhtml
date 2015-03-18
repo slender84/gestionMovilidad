@@ -93,7 +93,8 @@
                             <f:facet name="footer">
                                 
                                 <p:commandLink action="#{misEquivalenciasController.crearFic}" oncomplete="PF('dialog2').show();"
-                                                 update=":formEquivalenciaFic :formDialog2 :formDialog3">
+                                                 update=":formEquivalenciaFic :formDialog2 :formDialog3"
+                                                 rendered="#{sessionController.correoConf.permitirAlumnos}">
                                     
                                     <h:graphicImage value="/resources/img/pen16.png" title="crear asignatura"/>
                                 </p:commandLink>
@@ -108,7 +109,8 @@
                             <f:facet name="footer">
                                 
                                 <p:commandLink action="#{misEquivalenciasController.editarFic}"
-                                               update=":formEquivalenciaFic:msgs :formDialog3 :formDialog2" oncomplete="PF('dialog3').show();">
+                                               update=":formEquivalenciaFic:msgs :formDialog3 :formDialog2" oncomplete="PF('dialog3').show();"
+                                               rendered="#{sessionController.correoConf.permitirAlumnos}">
                                     
                                     <h:graphicImage value="/resources/img/edit16.png" title="editar asignatura"/>
                                 
@@ -211,7 +213,8 @@
                             <f:facet name="footer">
                                 
                                 <p:commandLink action="#{misEquivalenciasController.crearUni}" oncomplete="PF('dialog2').show();"
-                                                 update=":formEquivalenciaFic :formDialog2 :formDialog3">
+                                                 update=":formEquivalenciaFic :formDialog2 :formDialog3"
+                                                 rendered="#{sessionController.correoConf.permitirAlumnos}">
                                     
                                     <h:graphicImage value="/resources/img/pen16.png" title="crear asignatura"/>
                                 </p:commandLink>
@@ -226,7 +229,8 @@
                             <f:facet name="footer">
                                 
                                 <p:commandLink action="#{misEquivalenciasController.editarUni}"
-                                               update=":formEquivalenciaFic :formDialog3 :formDialog2"  oncomplete="PF('dialog3').show();">
+                                               update=":formEquivalenciaFic :formDialog3 :formDialog2"  oncomplete="PF('dialog3').show();"
+                                               rendered="#{sessionController.correoConf.permitirAlumnos}">
                                     
                                     <h:graphicImage value="/resources/img/edit16.png" title="editar asignatura"/>
                                 

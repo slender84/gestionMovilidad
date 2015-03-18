@@ -1060,7 +1060,7 @@ public class MisEquivalenciasController implements Serializable{
         }
         }
             
-        System.out.println("curso es "+curso);
+        
         a.setCreditos(creditos);
         a.setCurso(curso);
         a.setIdioma(idioma);
