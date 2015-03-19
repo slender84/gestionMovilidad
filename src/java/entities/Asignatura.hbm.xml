@@ -57,7 +57,7 @@
             </key>
             <one-to-many class="entities.MiembroGrupoAsignaturaB" />
         </set>
-        <set name="miembroGrupoAsignaturaAs" table="miembro_grupo_asignatura_a" inverse="true" lazy="true" fetch="select">
+        <set name="miembroGrupoAsignaturaAs" table="miembro_grupo_asignatura_a" cascade="all" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="codAsignatura" />
                 <column name="nombreUniversidad" length="200" />

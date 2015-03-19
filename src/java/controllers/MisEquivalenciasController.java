@@ -1090,7 +1090,7 @@ public class MisEquivalenciasController implements Serializable{
            
         }else{
            
-        textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha creado una asignatura \n asignatura: "+nombreAsignatura+"\n Universidad: "+selectedMovilidad.getUniversidad().getNombre()+"\n Curso: "+ selectedAsignatura2.getCurso();
+        textoMensaje="el usuario "+sessionController.getUser().getLogin()+" ha creado una asignatura \n asignatura: "+nombreAsignatura+"\n Universidad: "+selectedMovilidad.getUniversidad().getNombre()+"\n Curso: "+ curso;
         }
         
             
