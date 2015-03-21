@@ -223,7 +223,7 @@ public class AutenticarUsuarioController implements Serializable{
     
     public String autenticarUsuario(){
           
-        //sessionController.version();
+        sessionController.version();
         
         
         Usuario u;
