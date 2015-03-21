@@ -38,4 +38,5 @@ public interface AsignaturaService {
     public void editarComentario(ComentarioAsignatura c);
     public List<Asignatura> asignaturasMovilidad(Movilidad m);
     public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id);
+    public ComentarioAsignatura buscarComentarioAsignatura(Integer id) throws InstanceNotFoundException;
 }

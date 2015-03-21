@@ -136,10 +136,6 @@ public class MisEquivalenciasController implements Serializable{
     public void init(){
         context=FacesContext.getCurrentInstance().getExternalContext();
         
-        
-       
-       
-      
         user=sessionController.getUser();
         
         
@@ -167,13 +163,13 @@ public class MisEquivalenciasController implements Serializable{
             
         try{
         c=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
+            
         }catch(InstanceNotFoundException ex){
-             try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");
-            }catch(IOException ex2){
-                    
-                    }
+           
         }
+             
+             
+             if(c!=null){
         listaAuxEquivalencias.addAll(c.getEquivalencias());   //(ArrayList<Equivalencia>)equivalenciaService.listarEquivalenciasPorContrato(selectedContrato.getIdContrato());
         listaAuxEquivalenciasComparado.addAll(c.getEquivalencias()); //=(ArrayList<Equivalencia>)equivalenciaService.listarEquivalenciasPorContrato(selectedContrato.getIdContrato());
         //lo comparamos igual en la version b
@@ -186,7 +182,16 @@ public class MisEquivalenciasController implements Serializable{
            ultimo=true;
         context.getSessionMap().remove("ultimo");
         }
-        
+             }else{
+                 
+                  try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/usuario/error.xhtml");
+                 
+            }catch(IOException ex2){
+                    
+                    }
+                 
+             }
          }
         
         }

@@ -10,6 +10,7 @@ import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
 import entities.Movilidad;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 
 import java.util.List;
 import org.hibernate.Query;
@@ -67,7 +68,7 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
   @Override
   public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario){
       
-      return getSession().createQuery("select c from ComentarioAsignatura c where c.usuario=:user").setParameter("user", usuario).list();
+      return getSession().createQuery("select c from ComentarioAsignatura c where c.usuario=:user order by c.fecha desc").setParameter("user", usuario).list();
       
       
       
@@ -102,6 +103,18 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
       return getSession().createQuery("select c from ComentarioAsignatura c where c.estado='aceptado' and c.asignatura.id=:id").setParameter("id", id).list();
       
   }
+  
+  @Override
+  public ComentarioAsignatura buscarComentarioAsignatura(Integer id) throws InstanceNotFoundException{
+      
+      Object o=getSession().get(ComentarioAsignatura.class, id);
+      if(o==null)
+          throw new InstanceNotFoundException();
+      
+      return ((ComentarioAsignatura)o);
+  }
+  
+  
   
   
 }

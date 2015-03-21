@@ -12,6 +12,7 @@ import entities.AsignaturaId;
 import entities.ComentarioAsignatura;
 import entities.Movilidad;
 import entities.Usuario;
+import exceptions.InstanceNotFoundException;
 
 
 import java.util.List;
@@ -28,4 +29,5 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     public List<ComentarioAsignatura> listarComentariosAsignatura(Usuario usuario);
     public List<Asignatura> asignaturasMovilidad(Movilidad m);
     public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id);
+    public ComentarioAsignatura buscarComentarioAsignatura(Integer id) throws InstanceNotFoundException;
 }

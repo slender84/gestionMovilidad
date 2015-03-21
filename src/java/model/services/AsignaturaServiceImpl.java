@@ -169,4 +169,13 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
         return asignaturaDao.listarComentariosPorAsignatura(id);
     }
     
+    
+    @Override
+    public ComentarioAsignatura buscarComentarioAsignatura(Integer id) throws InstanceNotFoundException{
+        
+        
+        return asignaturaDao.buscarComentarioAsignatura(id);
+        
+    }
+    
 }

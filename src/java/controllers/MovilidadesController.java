@@ -104,9 +104,13 @@ public class MovilidadesController implements Serializable{
         if(sessionController.getFiltroPais().equals("todos")==false){
             
           m.put("pais", sessionController.getFiltroPais());
-          todosNulos=false;  
+          todosNulos=false; 
+          checkPais=true;
+           listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(sessionController.getFiltroPais());
              if(sessionController.getFiltroUniversidad().equals("todos")==false){
                  m.put("universidad", sessionController.getFiltroUniversidad());
+                 
+                
                  
              }
                 }

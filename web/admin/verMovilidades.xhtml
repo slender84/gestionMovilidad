@@ -56,6 +56,8 @@
                 <p:outputLabel value="Universidad: "/>
                 <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains" filter="true">
                     <f:selectItem itemLabel="Todas" itemValue="todos"/>
+                    
+                    
                     <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
                                    itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
                 

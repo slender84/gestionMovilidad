@@ -87,11 +87,11 @@ public class ConfiguracionCorreoController implements Serializable{
     //correoConf.setPassword(Seguridad.encrypt(correoConf.getPassword()));
     sessionController.setCorreoConf(correoConf);
     }catch(Exception ex){
-        ex.printStackTrace();
+        
         sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
     }
     
-    sessionController.creaMensaje("Configuración de correo guardada correctamente", FacesMessage.SEVERITY_INFO);
+    sessionController.creaMensaje("Configuración guardada correctamente", FacesMessage.SEVERITY_INFO);
     correoConf=sessionController.getCorreoConf();
     return null;
     

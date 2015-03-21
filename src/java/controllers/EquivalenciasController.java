@@ -118,15 +118,16 @@ public class EquivalenciasController implements Serializable{
            //context.getSessionMap().remove("movilidad");
               
            try{
-           selectedContrato=equivalenciaService.buscarContrato(selectedContrato.getIdContrato());
+               Integer iC=selectedContrato.getIdContrato();
+               selectedContrato=null;
+           selectedContrato=equivalenciaService.buscarContrato(iC);
            }catch(InstanceNotFoundException ex){
-               try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
-            }catch(IOException ex2){
-                    
-                    }
+               
            }
            
+           
+           if(selectedContrato!=null){
+              
            listaAuxEquivalencias.addAll(selectedContrato.getEquivalencias());
             creditosA=equivalenciaService.totalCreditos(listaAuxEquivalencias)[0];
             creditosB=equivalenciaService.totalCreditos(listaAuxEquivalencias)[1];
@@ -148,11 +149,22 @@ public class EquivalenciasController implements Serializable{
         equivalenciasRevisadasComparado=equivalenciaService.compararEquivalencias(listaAuxEquivalenciasComparado, listaAuxEquivalencias);
         creditosComparadoA=equivalenciaService.totalCreditos(listaAuxEquivalenciasComparado)[0];
         creditosComparadoB=equivalenciaService.totalCreditos(listaAuxEquivalenciasComparado)[1];
-       
+           }
          
+           }else{
+           
+           try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
+            }catch(IOException ex2){
+                    
+                    }
+           
+           
            }
            
+           
         }
+           
        else{
             try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/verMovilidades.xhtml");

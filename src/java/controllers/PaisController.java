@@ -106,12 +106,12 @@ public class PaisController implements Serializable{
   public String eliminaPais(){
       
       try{
-          
-          universidadService.eliminarPais(pais);
           listaPaises.remove(pais);
+          universidadService.eliminarPais(pais);
+          
           
       }catch(RuntimeException ex){
-           //listaPaises=(ArrayList<Pais>)universidadService.listarPaises();
+           listaPaises=(ArrayList<Pais>)universidadService.listarPaises();
           sessionController.creaMensaje("se ha producido un error eliminando el país", FacesMessage.SEVERITY_ERROR);
           return null;
       }

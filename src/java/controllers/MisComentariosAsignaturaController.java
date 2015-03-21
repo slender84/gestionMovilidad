@@ -134,13 +134,19 @@ public class MisComentariosAsignaturaController {
         
         
         try{
-            
+            selectedComentario=asignaturaService.buscarComentarioAsignatura(selectedComentario.getIdcomentario());
+            if(selectedComentario.getEstado().equals("aceptado")){
+                panelEdicion=false;
+                listaComentarios=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignatura(sessionController.getUser());
+                return null;
+            }
             asignaturaService.editarComentario(selectedComentario);
             
-        }catch(RuntimeException ex){
+        }catch(InstanceNotFoundException ex){
             
             sessionController.creaMensaje("no existe el comentario", FacesMessage.SEVERITY_ERROR);
             listaComentarios=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignatura(sessionController.getUser());
+            return null;
         }
          Usuario admin=null;
         try{
