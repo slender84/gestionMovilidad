@@ -136,19 +136,28 @@ public class EquivalenciasController implements Serializable{
         contratoComparado=(Contrato)context.getSessionMap().get("contratoComparado");
         context.getSessionMap().remove("contratoComparado");
              try{
-        contratoComparado=equivalenciaService.buscarContrato(contratoComparado.getIdContrato());
+                 Integer iC2=contratoComparado.getIdContrato();
+                 contratoComparado=null;
+        contratoComparado=equivalenciaService.buscarContrato(iC2);
              }catch(InstanceNotFoundException ex3){
-                 try{
-            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
-            }catch(IOException ex4){
-                    
-                    }
+                 
              }
+             
+             if(contratoComparado!=null){
         listaAuxEquivalenciasComparado.addAll(contratoComparado.getEquivalencias());
         equivalenciasRevisadas=equivalenciaService.compararEquivalencias(listaAuxEquivalencias, listaAuxEquivalenciasComparado);
         equivalenciasRevisadasComparado=equivalenciaService.compararEquivalencias(listaAuxEquivalenciasComparado, listaAuxEquivalencias);
         creditosComparadoA=equivalenciaService.totalCreditos(listaAuxEquivalenciasComparado)[0];
         creditosComparadoB=equivalenciaService.totalCreditos(listaAuxEquivalenciasComparado)[1];
+           }else{
+                try{
+            FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
+            }catch(IOException ex2){
+                    
+                    }
+             
+           }
+               
            }
          
            }else{

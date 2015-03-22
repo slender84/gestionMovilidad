@@ -288,7 +288,7 @@
                 </p:selectOneMenu>
                 
                 <p:outputLabel for="cur" value="Curso: "/>
-                <p:selectOneMenu id="cur" value="#{crearAsignaturaController.cursoEdicion}" required="true">
+                <p:selectOneMenu id="cur" value="#{crearAsignaturaController.selectedAsignatura.curso}" required="true">
                     <f:selectItems value="#{cursoAcademicoController.listaCursos}" var="curso" itemLabel="#{curso.curso}" itemValue="#{curso.curso}"/>
                     
                 </p:selectOneMenu>

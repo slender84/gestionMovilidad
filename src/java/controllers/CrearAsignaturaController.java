@@ -536,9 +536,9 @@ public class CrearAsignaturaController implements Serializable{
     public String editar(){
         
         
-        if(cursoEdicion.equals(SelectedAsignatura.getCurso())==false){
+        if(seleccionCurso.equals(SelectedAsignatura.getCurso())==false){
             listaAsignaturas.remove(SelectedAsignatura);
-            SelectedAsignatura.setCurso(cursoEdicion);
+           //SelectedAsignatura.setCurso(cursoEdicion);
         }
         
         
