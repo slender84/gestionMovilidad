@@ -64,7 +64,7 @@
                              requiredMessage="el campo código está vacío"
                              validatorMessage=" Código debe ser de 50 caracteres como mucho">
                              
-                    <f:validateLength minimum="1" maximum="50"/>
+                    <f:validateLength  maximum="50"/>
                 
                 </p:inputText>
                              
@@ -109,10 +109,16 @@
                 </p:selectOneMenu>
                 
                 <p:outputLabel for="tit" value="Titulación: "/>
-                <p:inputText id="tit" value="#{crearAsignaturaController.titulacionAsignatura}"/>
-                
+                <p:inputText id="tit" value="#{crearAsignaturaController.titulacionAsignatura}"
+                    validatorMessage="como máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
+                </p:inputText>
                 <p:outputLabel for="fac" value="Facultad: "/>
-                <p:inputText id="fac" value="#{crearAsignaturaController.facultadAsignatura}"/>
+                              
+                <p:inputText id="fac" value="#{crearAsignaturaController.facultadAsignatura}"
+                              validatorMessage="como máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
+                </p:inputText>
                 
                 
                 <p:outputLabel for="disp" value="disponible: "/>
@@ -121,8 +127,8 @@
                 
                 <p:outputLabel value="web: " />
                 <p:inputText id="texto1" value="#{crearAsignaturaController.webAsignatura}" 
-                             validatorMessage="La web debe tener como máximo 200 caracteres">
-                    <f:validateLength maximum="200"/>
+                             validatorMessage="La web debe tener como máximo 500 caracteres">
+                    <f:validateLength maximum="500"/>
                 </p:inputText>
                     
                 <p:watermark for="texto1" value="http://"/>
@@ -263,8 +269,8 @@
                 
                 <p:outputLabel value="web" />
                 <p:inputText id="texto2" value="#{crearAsignaturaController.selectedAsignatura.webAsignatura}"
-                             validatorMessage="Máximo 200 caracteres">
-                    <f:validateLength maximum="200"/>
+                             validatorMessage="Máximo 500 caracteres">
+                    <f:validateLength maximum="500"/>
                 </p:inputText>    
                 <p:watermark for="texto2" value="http://"/>
                 <h:outputLabel/>
@@ -294,13 +300,13 @@
                 </p:selectOneMenu>
                 
                 <p:outputLabel for="tit" value="Titulación: "/>
-                <p:inputText id="tit" value="#{crearAsignaturaController.selectedAsignatura.titulacion}">
-                    <f:validateLength maximum="45"/>
+                <p:inputText id="tit" value="#{crearAsignaturaController.selectedAsignatura.titulacion}" validatorMessage="Máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
                 </p:inputText>
                     
                 <p:outputLabel for="fac" value="Facultad: "/>
-                <p:inputText id="fac" value="#{crearAsignaturaController.selectedAsignatura.facultad}">
-                    <f:validateLength maximum="50"/>
+                <p:inputText id="fac" value="#{crearAsignaturaController.selectedAsignatura.facultad}" validatorMessage="Máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
                 </p:inputText>
                 
                 <p:outputLabel for="disp" value="disponible: "/>

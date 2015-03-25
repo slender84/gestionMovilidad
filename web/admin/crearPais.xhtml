@@ -21,8 +21,8 @@
             <p:inputText value="#{paisController.paisStr}"
                          required="true"
                          requiredMessage="el campo pais está vacío"
-                         validatorMessage="Máximo 45 caracteres ">
-                <f:validateLength minimum="1" maximum="50"/>
+                         validatorMessage="Máximo 100 caracteres ">
+                <f:validateLength  maximum="100"/>
             </p:inputText>
                 
             <p:commandButton value="crear país" action="#{paisController.creaPais}" update="formPais"/>

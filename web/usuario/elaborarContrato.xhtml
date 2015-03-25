@@ -331,7 +331,7 @@
                              requiredMessage="el campo código está vacío"
                              validatorMessage=" Código debe ser de 50  caracteres máximo">
                              
-                    <f:validateLength minimum="1" maximum="50"/>
+                    <f:validateLength maximum="50"/>
                 
                 </p:inputText>
                              
@@ -382,16 +382,20 @@
                 </p:selectOneMenu>
                 
                 <p:outputLabel for="titu" value="Titulación: "/>
-                <p:inputText id="titu" value="#{misEquivalenciasController.titulacion}"/>
-                
+                <p:inputText id="titu" value="#{misEquivalenciasController.titulacion}"
+                              validatorMessage="como máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
+                </p:inputText>
                 <p:outputLabel for="facu" value="Facultad: "/>
-                <p:inputText id="facu" value="#{misEquivalenciasController.facultad}"/>
+                <p:inputText id="facu" value="#{misEquivalenciasController.facultad}"
+                              validatorMessage="como máximo 200 caracteres">
+                    <f:validateLength maximum="200"/>
                 
-                
+                </p:inputText>
                 <p:outputLabel value="web: " />
                 <p:inputText id="text1" value="#{misEquivalenciasController.webAsignatura}" 
-                             validatorMessage="La web debe tener como máximo 200 caracteres">
-                    <f:validateLength maximum="200"/>
+                             validatorMessage="La web debe tener como máximo 500 caracteres">
+                    <f:validateLength maximum="500"/>
                 </p:inputText>
                     
                 <p:watermark for="text1" value="http://"/>
@@ -431,7 +435,7 @@
                     <p:outputLabel value="Nombre asignatura:"/>
                     <p:inputText value="#{misEquivalenciasController.selectedAsignatura2.nombreAsignatura}" required="true"
                                  requiredMessage="el campo nombre de asignatura está vacío" validatorMessage="Como mucho 100 caracteres">
-                        <f:validateLength minimum="1" maximum="100"/>
+                        <f:validateLength  maximum="100"/>
                     </p:inputText>
                         
                 <p:outputLabel for="creditosUni" value="creditos"/>
@@ -443,8 +447,8 @@
                 
                 <p:outputLabel value="web" />
                 <p:inputText id="texto2" value="#{misEquivalenciasController.selectedAsignatura2.webAsignatura}" 
-                             validatorMessage="Máximo 200 caracteres">
-                    <f:validateLength maximum="200"/>
+                             validatorMessage="Máximo 500 caracteres">
+                    <f:validateLength maximum="500"/>
                 </p:inputText>    
                 <p:watermark for="texto2" value="http://"/>
                 <h:outputLabel/>
@@ -475,12 +479,12 @@
                 
                 <p:outputLabel for="tit" value="Titulación: "/>
                 <p:inputText id="tit" value="#{misEquivalenciasController.selectedAsignatura2.titulacion}">
-                    <f:validateLength maximum="45"/>
+                    <f:validateLength maximum="200"/>
                 </p:inputText>
                     
                 <p:outputLabel for="fac" value="Facultad: "/>
                 <p:inputText id="fac" value="#{misEquivalenciasController.selectedAsignatura2.facultad}">
-                    <f:validateLength maximum="50"/>
+                    <f:validateLength maximum="200"/>
                 </p:inputText>
                 
                 

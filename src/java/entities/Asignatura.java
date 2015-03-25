@@ -123,7 +123,7 @@ public class Asignatura  implements java.io.Serializable {
     }
 
    
-    @Column(name="webAsignatura", length=200)
+    @Column(name="webAsignatura", length=500)
     public String getWebAsignatura() {
         return this.webAsignatura;
     }
@@ -133,7 +133,7 @@ public class Asignatura  implements java.io.Serializable {
     }
 
     
-    @Column(name="facultad", length=50)
+    @Column(name="facultad", length=200)
     public String getFacultad() {
         return this.facultad;
     }
@@ -143,7 +143,7 @@ public class Asignatura  implements java.io.Serializable {
     }
 
     
-    @Column(name="titulacion", length=45)
+    @Column(name="titulacion", length=200)
     public String getTitulacion() {
         return this.titulacion;
     }

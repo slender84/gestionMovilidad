@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="entities.Pais" table="pais" catalog="gestordb" optimistic-lock="version">
         <id name="nombre" type="string">
-            <column name="nombre" length="45" />
+            <column name="nombre" length="100" />
             <generator class="assigned" />
         </id>
         <set name="universidads" table="universidad" cascade="delete" inverse="true" lazy="true" fetch="select">

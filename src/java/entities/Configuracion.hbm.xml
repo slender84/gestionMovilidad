@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <property name="direccion" type="string">
-            <column name="direccion" length="80" />
+            <column name="direccion" length="500" />
         </property>
         <property name="password" type="string">
             <column name="password" length="50" />
@@ -18,10 +18,10 @@
             <column name="smtpPort" />
         </property>
         <property name="hostName" type="string">
-            <column name="hostName" length="80" />
+            <column name="hostName" length="500" />
         </property>
         <property name="addTo" type="string">
-            <column name="addTo" length="80" />
+            <column name="addTo" length="500" />
         </property>
         <property name="permitirAlumnos" type="java.lang.Boolean">
             <column name="permitirAlumnos" />

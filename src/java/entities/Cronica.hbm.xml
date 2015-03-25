@@ -12,7 +12,7 @@
             <column name="universidad" length="200" not-null="true" />
         </many-to-one>
         <many-to-one name="usuario" class="entities.Usuario" fetch="select">
-            <column name="login" length="20" />
+            <column name="login" length="50" />
         </many-to-one>
         <property name="fecha" type="timestamp">
             <column name="fecha" length="19" not-null="true" />

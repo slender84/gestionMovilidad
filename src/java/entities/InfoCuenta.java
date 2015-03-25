@@ -42,7 +42,7 @@ public class InfoCuenta  implements java.io.Serializable {
      @GenericGenerator(name="generator", strategy="foreign", parameters=@Parameter(name="property", value="usuario"))@Id @GeneratedValue(generator="generator")
 
     
-    @Column(name="login", unique=true, nullable=false, length=20)
+    @Column(name="login", unique=true, nullable=false, length=50)
     public String getLogin() {
         return this.login;
     }

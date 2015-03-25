@@ -19,13 +19,13 @@
          <h:panelGrid id="panel1" columns="2" cellpadding="5">
              <p:outputLabel value="login"/>
             <p:inputText value="#{crearAdminController.login}" required="true" requiredMessage="El campo login está vacío"
-                         validatorMessage="Máximo 20 caracteres">
-                <f:validateLength maximum="20"/>
+                         validatorMessage="Máximo 50 caracteres">
+                <f:validateLength maximum="50"/>
             </p:inputText>
             <p:outputLabel value="password"/>
             <p:password value="#{crearAdminController.password}" required="true" requiredMessage="El campo password está vacío"
-                        validatorMessage="Máximo 20 caracteres">
-                <f:validateLength maximum="20"/>
+                        validatorMessage="Máximo 40 caracteres">
+                <f:validateLength maximum="40"/>
             </p:password>
             <p:outputLabel value="repetir password"/>
             <p:password value="#{crearAdminController.passwordAux}" required="true" requiredMessage="El campo repetir password está vacío"/>

@@ -39,7 +39,7 @@ public class Pais  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="nombre", unique=true, nullable=false, length=45)
+    @Column(name="nombre", unique=true, nullable=false, length=100)
     public String getNombre() {
         return this.nombre;
     }

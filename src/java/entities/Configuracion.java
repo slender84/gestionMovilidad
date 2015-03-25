@@ -52,7 +52,7 @@ public class Configuracion  implements java.io.Serializable {
     }
 
     
-    @Column(name="direccion", length=80)
+    @Column(name="direccion", length=500)
     public String getDireccion() {
         return this.direccion;
     }
@@ -82,7 +82,7 @@ public class Configuracion  implements java.io.Serializable {
     }
 
     
-    @Column(name="hostName", length=80)
+    @Column(name="hostName", length=500)
     public String getHostName() {
         return this.hostName;
     }
@@ -92,7 +92,7 @@ public class Configuracion  implements java.io.Serializable {
     }
 
     
-    @Column(name="addTo", length=80)
+    @Column(name="addTo", length=500)
     public String getAddTo() {
         return this.addTo;
     }

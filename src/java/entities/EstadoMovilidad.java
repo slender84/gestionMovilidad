@@ -29,7 +29,7 @@ public class EstadoMovilidad  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="estadoMovilidad", unique=true, nullable=false, length=10)
+    @Column(name="estadoMovilidad", unique=true, nullable=false, length=50)
     public String getEstadoMovilidad() {
         return this.estadoMovilidad;
     }

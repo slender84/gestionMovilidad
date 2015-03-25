@@ -16,8 +16,10 @@
             <h:panelGrid columns="2" cellpadding="6">
                 
                 <p:outputLabel value="Curso: "/>
-                <p:inputText value="#{crearIdiomaController.idioma}" required="true" requiredMessage="El campo idioma está vacío"/>
-                
+                <p:inputText value="#{crearIdiomaController.idioma}" required="true" requiredMessage="El campo idioma está vacío"
+                              validatorMessage="como máximo 45 caracteres">
+                    <f:validateLength maximum="45"/>
+                </p:inputText>
                 <p:outputLabel/>
                 <p:commandButton value="Crear" action="#{crearIdiomaController.insertarIdioma}" ajax="false"/>
                 

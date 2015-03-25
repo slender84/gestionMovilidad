@@ -25,13 +25,13 @@
             <column name="periodo" length="10" />
         </property>
         <property name="webAsignatura" type="string">
-            <column name="webAsignatura" length="200" />
+            <column name="webAsignatura" length="500" />
         </property>
         <property name="facultad" type="string">
-            <column name="facultad" length="50" />
+            <column name="facultad" length="200" />
         </property>
         <property name="titulacion" type="string">
-            <column name="titulacion" length="45" />
+            <column name="titulacion" length="200" />
         </property>
         <property name="curso" type="string">
             <column name="curso" length="15" />

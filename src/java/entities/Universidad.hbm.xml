@@ -5,20 +5,20 @@
 <hibernate-mapping>
     <class name="entities.Universidad" table="universidad" catalog="gestordb" optimistic-lock="version">
         <id name="nombre" type="string">
-            <column name="nombre" length="45" />
+            <column name="nombre" length="200" />
             <generator class="assigned" />
         </id>
         <many-to-one name="pais" class="entities.Pais" fetch="select">
-            <column name="pais" length="45" />
+            <column name="pais" length="100" />
         </many-to-one>
         <property name="info" type="string">
             <column name="info" />
         </property>
         <property name="web" type="string">
-            <column name="web" length="100" />
+            <column name="web" length="500" />
         </property>
         <property name="codUniversidad" type="string">
-            <column name="codUniversidad" length="15" not-null="true" unique="true" />
+            <column name="codUniversidad" length="50" not-null="true" unique="true" />
         </property>
         <set name="movilidads" cascade="delete" table="movilidad" inverse="true" lazy="true" fetch="select">
             <key>

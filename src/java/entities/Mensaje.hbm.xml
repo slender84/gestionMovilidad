@@ -9,10 +9,10 @@
             <generator class="identity" />
         </id>
         <many-to-one name="usuarioByDestino" class="entities.Usuario" fetch="select" lazy="false">
-            <column name="destino" length="20" not-null="true" />
+            <column name="destino" length="50" not-null="true" />
         </many-to-one>
         <many-to-one name="usuarioByOrigen" class="entities.Usuario" fetch="select" lazy="false">
-            <column name="origen" length="20" not-null="true" />
+            <column name="origen" length="50" not-null="true" />
         </many-to-one>
         <property name="fecha" type="timestamp">
             <column name="fecha" length="19" not-null="true" />

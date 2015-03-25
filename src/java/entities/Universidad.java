@@ -56,7 +56,7 @@ public class Universidad  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="nombre", unique=true, nullable=false, length=45)
+    @Column(name="nombre", unique=true, nullable=false, length=200)
     public String getNombre() {
         return this.nombre;
     }
@@ -86,7 +86,7 @@ public class Universidad  implements java.io.Serializable {
     }
 
     
-    @Column(name="web", length=100)
+    @Column(name="web", length=500)
     public String getWeb() {
         return this.web;
     }
@@ -96,7 +96,7 @@ public class Universidad  implements java.io.Serializable {
     }
 
     
-    @Column(name="codUniversidad", unique=true, nullable=false, length=15)
+    @Column(name="codUniversidad", unique=true, nullable=false, length=50)
     public String getCodUniversidad() {
         return this.codUniversidad;
     }

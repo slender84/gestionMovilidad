@@ -29,7 +29,7 @@ public class Estado  implements java.io.Serializable {
      @Id 
 
     
-    @Column(name="estado", unique=true, nullable=false, length=15)
+    @Column(name="estado", unique=true, nullable=false, length=50)
     public String getEstado() {
         return this.estado;
     }
