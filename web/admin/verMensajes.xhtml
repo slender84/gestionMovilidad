@@ -47,8 +47,8 @@
                <p:column filterBy="#{mensaje.leidoDestino}" headerText="leido" filterMatchMode="exact" styleClass="leidoMensaje">
                    <f:facet name="filter">
                        <p:selectOneMenu onchange="PF('mensTabla').filter()">
-                            <f:selectItem itemLabel="no" itemValue="no" />
-                            <f:selectItem itemLabel="si" itemValue="si"/>
+                            <f:selectItem itemLabel="no" itemValue="false" />
+                            <f:selectItem itemLabel="si" itemValue="true"/>
                             <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
                         </p:selectOneMenu>
                             
