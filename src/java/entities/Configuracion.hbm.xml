@@ -26,5 +26,8 @@
         <property name="permitirAlumnos" type="java.lang.Boolean">
             <column name="permitirAlumnos" />
         </property>
+        <property name="permitirAlumnosDestino" type="java.lang.Boolean">
+            <column name="permitirAlumnosDestino" />
+        </property>
     </class>
 </hibernate-mapping>

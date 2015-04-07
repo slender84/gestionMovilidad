@@ -175,10 +175,10 @@ public class SessionController implements Serializable {
     
     public void limpiarFiltros(){
         
-        filtroCursoAcademico=null;
-        filtroEstado=null;
-        filtroPais=null;
-        filtroUniversidad=null;
+        filtroCursoAcademico="todos";
+        filtroEstado="todos";
+        filtroPais="todos";
+        filtroUniversidad="todos";
         
         
     }

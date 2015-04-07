@@ -88,6 +88,9 @@ public class MovilidadesController implements Serializable{
        boolean todosNulos=true;
         Map<String,String> m=new HashMap<String,String>();
          
+        
+        
+        
         if(sessionController.getFiltroEstado().equals("todos")==false){
             
           m.put("estado", sessionController.getFiltroEstado());
@@ -306,6 +309,8 @@ public class MovilidadesController implements Serializable{
         boolean todosNulos=false;
         Map<String,String> m=new HashMap<String,String>();
          
+       
+        
         if(sessionController.getFiltroEstado().equals("todos")==false){
             
           m.put("estado", sessionController.getFiltroEstado());

@@ -51,10 +51,10 @@
         
             <h:panelGrid columns="2" cellspacing="5">
                 
-                <p:outputLabel value="permitir edición por los usuarios"/>
+                <p:outputLabel value="Permitir edición de las asignaturas de origen"/>
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnos}"/>
-                
-                
+                <p:outputLabel value="Permitir edición de las asignaturas de destino"/>
+                <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnosDestino}"/>
                 
                 
             </h:panelGrid> 

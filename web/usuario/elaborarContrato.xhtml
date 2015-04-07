@@ -214,7 +214,7 @@
                                 
                                 <p:commandLink action="#{misEquivalenciasController.crearUni}" oncomplete="PF('dialog2').show();"
                                                  update=":formEquivalenciaFic :formDialog2 :formDialog3"
-                                                 rendered="#{sessionController.correoConf.permitirAlumnos}">
+                                                 rendered="#{sessionController.correoConf.permitirAlumnosDestino}">
                                     
                                     <h:graphicImage value="/resources/img/pen16.png" title="crear asignatura"/>
                                 </p:commandLink>
@@ -230,7 +230,7 @@
                                 
                                 <p:commandLink action="#{misEquivalenciasController.editarUni}"
                                                update=":formEquivalenciaFic :formDialog3 :formDialog2"  oncomplete="PF('dialog3').show();"
-                                               rendered="#{sessionController.correoConf.permitirAlumnos}">
+                                               rendered="#{sessionController.correoConf.permitirAlumnosDestino}">
                                     
                                     <h:graphicImage value="/resources/img/edit16.png" title="editar asignatura"/>
                                 

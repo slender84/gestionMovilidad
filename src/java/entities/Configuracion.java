@@ -26,17 +26,19 @@ public class Configuracion  implements java.io.Serializable {
      private String hostName;
      private String addTo;
      private Boolean permitirAlumnos;
-
+     private Boolean permitirAlumnosDestino;
+     
     public Configuracion() {
     }
 
-    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos) {
+    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino) {
        this.direccion = direccion;
        this.password = password;
        this.smtpPort = smtpPort;
        this.hostName = hostName;
        this.addTo = addTo;
        this.permitirAlumnos = permitirAlumnos;
+       this.permitirAlumnosDestino=permitirAlumnosDestino;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -111,6 +113,15 @@ public class Configuracion  implements java.io.Serializable {
         this.permitirAlumnos = permitirAlumnos;
     }
 
+    
+     @Column(name="permitirAlumnosDestino")
+    public Boolean getPermitirAlumnosDestino() {
+        return this.permitirAlumnosDestino;
+    }
+    
+    public void setPermitirAlumnosDestino(Boolean permitirAlumnosDestino) {
+        this.permitirAlumnosDestino = permitirAlumnosDestino;
+    }
 
 
 
