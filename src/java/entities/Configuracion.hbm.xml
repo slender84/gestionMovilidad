@@ -29,5 +29,11 @@
         <property name="permitirAlumnosDestino" type="java.lang.Boolean">
             <column name="permitirAlumnosDestino" />
         </property>
+        <property name="cargarTodasMovilidades" type="java.lang.Boolean">
+            <column name="cargarTodasMovilidades" />
+        </property>
+        <property name="direccionAdmin" type="string">
+            <column name="direccionAdmin" length="500" />
+        </property>
     </class>
 </hibernate-mapping>

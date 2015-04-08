@@ -52,10 +52,7 @@ import net.sf.jasperreports.engine.JRException;
 
 
 
-/**
- *
- * @author abc
- */
+
 @ManagedBean
 @ViewScoped
 public class MisEquivalenciasController implements Serializable{

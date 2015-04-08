@@ -44,7 +44,7 @@
                     <f:facet name="filter">
                         
                         <p:selectOneMenu style="width: 100%" onchange="PF('asigFicBtn').filter()" >
-                           
+                            
                             <f:selectItems var="curso" value="#{cursoAcademicoController.listaCursos}" itemLabel="#{curso.curso}" itemValue="#{curso.curso}"/>
                         </p:selectOneMenu>
                         
@@ -161,12 +161,12 @@
                         
                     </f:facet>
                 
-                <p:column styleClass="curso" headerText="Curso" sortBy="#{asigUni.curso}" filterBy="#{asigUni.curso}" filterMatchMode="exact">
+                <p:column styleClass="curso" headerText="Curso"  filterBy="#{asigUni.curso}" filterMatchMode="exact">
                 
                     <f:facet name="filter">
                         
                         <p:selectOneMenu style="width: 100%" onchange="PF('asigUniBtn').filter()" >
-                           
+                           <f:selectItem itemLabel="Todos" itemValue="#{null}" />
                             <f:selectItems var="curso" value="#{cursoAcademicoController.listaCursos}" itemLabel="#{curso.curso}" itemValue="#{curso.curso}"/>
                         </p:selectOneMenu>
                         

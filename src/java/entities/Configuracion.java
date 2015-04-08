@@ -27,11 +27,13 @@ public class Configuracion  implements java.io.Serializable {
      private String addTo;
      private Boolean permitirAlumnos;
      private Boolean permitirAlumnosDestino;
+     private Boolean cargarTodasMovilidades;
+     private String direccionAdmin;
      
     public Configuracion() {
     }
 
-    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino) {
+    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin) {
        this.direccion = direccion;
        this.password = password;
        this.smtpPort = smtpPort;
@@ -39,6 +41,8 @@ public class Configuracion  implements java.io.Serializable {
        this.addTo = addTo;
        this.permitirAlumnos = permitirAlumnos;
        this.permitirAlumnosDestino=permitirAlumnosDestino;
+       this.cargarTodasMovilidades=cargarTodasMovilidades;
+       this.direccionAdmin=direccionAdmin;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -123,6 +127,25 @@ public class Configuracion  implements java.io.Serializable {
         this.permitirAlumnosDestino = permitirAlumnosDestino;
     }
 
+    @Column(name="cargarTodasMovilidades")
+    public Boolean getCargarTodasMovilidades() {
+        return this.cargarTodasMovilidades;
+    }
+    
+    public void setCargarTodasMovilidades(Boolean cargarTodasMovilidades) {
+        this.cargarTodasMovilidades = cargarTodasMovilidades;
+    }
+
+    
+    @Column(name="direccionAdmin", length=500)
+    public String getDireccionAdmin() {
+        return this.direccionAdmin;
+    }
+    
+    public void setDireccionAdmin(String direccionAdmin) {
+        this.direccionAdmin = direccionAdmin;
+    }
+    
 
 
 }

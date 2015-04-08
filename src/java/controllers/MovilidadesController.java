@@ -85,11 +85,13 @@ public class MovilidadesController implements Serializable{
        //listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
        
-       boolean todosNulos=true;
-        Map<String,String> m=new HashMap<String,String>();
+       
+        
+         
          
         
-        
+        boolean todosNulos=true;
+        Map<String,String> m=new HashMap<String,String>();
         
         if(sessionController.getFiltroEstado().equals("todos")==false){
             
@@ -122,13 +124,19 @@ public class MovilidadesController implements Serializable{
         
         if(todosNulos==true){
            
-            //listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+            if(sessionController.getCorreoConf().getCargarTodasMovilidades()==true){
+             
+             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+             
+         } 
        
        }else{
             
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarMovilidadPorFiltro(m);
         }
-       }
+       
+         
+    }
 
     public SessionController getSessionController() {
         return sessionController;

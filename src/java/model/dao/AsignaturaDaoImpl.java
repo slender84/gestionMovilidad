@@ -25,14 +25,14 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         
         if(nombre.equalsIgnoreCase("Universidade da Coruña")){
             
-            Query q=getSession().createQuery("select a from Asignatura a where a.disponible=:disponible and a.universidad.nombre like '%coruña%' order by a.curso" ).setParameter("disponible", disponible);
+            Query q=getSession().createQuery("select a from Asignatura a where a.disponible=:disponible and a.universidad.nombre like '%coruña%' order by a.curso asc,a.id.codAsignatura asc" ).setParameter("disponible", disponible);
         //q.setParameter("nombre", nombre);
         return q.list();
             
         }
         
         
-        Query q=getSession().createQuery("select a from Asignatura a where a.disponible=:disponible and a.universidad.nombre=:nombre order by a.curso" );
+        Query q=getSession().createQuery("select a from Asignatura a where a.disponible=:disponible and a.universidad.nombre=:nombre order by a.curso asc,a.id.codAsignatura asc" );
         q.setParameter("nombre", nombre).setParameter("disponible", disponible);
                 
         return q.list();

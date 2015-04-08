@@ -55,9 +55,24 @@
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnos}"/>
                 <p:outputLabel value="Permitir edición de las asignaturas de destino"/>
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnosDestino}"/>
-                
-                
+                <p:outputLabel value="Cargar todas las movilidades si no hay filtros"/>
+                <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.cargarTodasMovilidades}"/>
             </h:panelGrid> 
+                <p:separator/>
+                
+                <h:panelGrid columns="2" cellspacing="5">
+                    
+                    <p:outputLabel value="Dirección de envío de notificaciones"/>
+                    <p:inputText value="#{configuracionCorreoController.correoConf.direccionAdmin}"
+                                 validatorMessage="Debe ser un correo válido, por ejemplo user@abc.es o user2@cde.com">
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                    </p:inputText>
+                    
+                </h:panelGrid>    
+                
+                
+                
+            
             
             <br/>
             <br/>
