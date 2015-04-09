@@ -7,6 +7,7 @@
 package model.services;
 
 
+import entities.Contrato;
 import entities.Cursoacademico;
 import entities.Movilidad;
 import entities.Universidad;
@@ -14,13 +15,13 @@ import entities.Usuario;
 import exceptions.DuracionException;
 import exceptions.InstanceNotFoundException;
 import exceptions.NumeroDeMovilidadesException;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import model.dao.ContratoDao;
 import model.dao.MovilidadDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,10 @@ public class MovilidadServiceImpl implements MovilidadService{
     
     @Autowired
     private MovilidadDao movilidadDao;
+    
+    @Autowired
+    private ContratoDao contratoDao;
+    
     SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
 
     public MovilidadDao getMovilidadDao() {
@@ -44,6 +49,16 @@ public class MovilidadServiceImpl implements MovilidadService{
     public void setMovilidadDao(MovilidadDao movilidadDao) {
         this.movilidadDao = movilidadDao;
     }
+
+    public ContratoDao getContratoDao() {
+        return contratoDao;
+    }
+
+    public void setContratoDao(ContratoDao contratoDao) {
+        this.contratoDao = contratoDao;
+    }
+    
+    
     
     @Override
     @Transactional
@@ -208,15 +223,22 @@ public class MovilidadServiceImpl implements MovilidadService{
     
     
     @Override
+    @Transactional(readOnly = true)
     public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros){
         
         
         return movilidadDao.listarMovilidadPorFiltro(listaFiltros);
         
-    
-        
-        
     }
     
+    
+     @Override
+     @Transactional(readOnly = true)
+     public List<Contrato> listarContratosPendientes(){
+         
+         
+         return contratoDao.listarContratosPendientes();
+         
+     }
     
 }

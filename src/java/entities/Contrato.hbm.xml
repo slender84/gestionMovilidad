@@ -8,7 +8,7 @@
             <column name="idContrato" />
             <generator class="identity" />
         </id>
-        <many-to-one name="movilidad" class="entities.Movilidad" fetch="select">
+        <many-to-one name="movilidad" class="entities.Movilidad" lazy="false" fetch="select">
             <column name="idMovilidad" />
         </many-to-one>
         <property name="fecha" type="timestamp">

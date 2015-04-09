@@ -7,6 +7,7 @@
 package model.services;
 
 
+import entities.Contrato;
 import entities.Cursoacademico;
 import entities.Movilidad;
 import entities.Universidad;
@@ -33,4 +34,5 @@ public interface MovilidadService {
     public void crearMovilidad(Date fechaInicio,Date fechaFin,Usuario user,Universidad u,Cursoacademico ca) throws DuracionException,NumeroDeMovilidadesException;
     public void editarMovilidad(Movilidad m);
     public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros);
+    public List<Contrato> listarContratosPendientes();
 }

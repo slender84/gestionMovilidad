@@ -213,6 +213,20 @@
                         
                     </p:column>
                     
+                    <p:column headerText="Disp." sortBy="#{asignatura.disponible}" filterBy="#{asignatura.disponible}" filterMatchMode="exact" styleClass="dispAsignatura">
+                        <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('asignaturaBtn').filter();">
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="si" itemValue="true"/>
+                            <f:selectItem itemLabel="no" itemValue="false"/>
+                        </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="si" rendered="#{asignatura.disponible eq true}"/>
+                        <h:outputText value="no" rendered="#{asignatura.disponible eq false}"/>
+                            
+                    
+                    </p:column>
+                    
                     <p:column headerText="Comentarios" styleClass="webAsignatura">
                         <p:commandLink action="#{crearAsignaturaController.verComentarios}"  update=":formComentarios :formDetalles" oncomplete="PF('comentariosBtn').filter();">
                             <f:setPropertyActionListener value="#{asignatura}" target="#{crearAsignaturaController.selectedAsignatura}"/>

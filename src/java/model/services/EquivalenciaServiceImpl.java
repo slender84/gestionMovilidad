@@ -569,7 +569,7 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
      @Override
      public Movilidad buscarMovilidadPorContrato(Contrato c)throws InstanceNotFoundException{
         c=buscarContrato(c.getIdContrato());
-        Hibernate.initialize(c.getMovilidad());
+        //Hibernate.initialize(c.getMovilidad());
         if(c.getMovilidad()==null)
             throw new InstanceNotFoundException();
         Hibernate.initialize(c.getMovilidad().getUniversidad());

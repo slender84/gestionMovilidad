@@ -225,7 +225,7 @@ public class EquivalenciasPublicasController implements Serializable{
         
         try{
         c=equivalenciaService.verContratoPorEquivalencia(selectedEquivalencia);
-         m=equivalenciaService.buscarMovilidadPorContrato(c);
+         //m=equivalenciaService.buscarMovilidadPorContrato(c);
         }catch(InstanceNotFoundException|RuntimeException ex){
            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
            
@@ -234,7 +234,7 @@ public class EquivalenciasPublicasController implements Serializable{
       
         
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("contrato", c);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movilidad", m);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movilidad", c.getMovilidad());
        // return "equivalenciasPublicasAdmin.xhtml?faces-redirect=true";
         return "gestionarContrato.xhtml?faces-redirect=true";
     }

@@ -760,21 +760,21 @@ and (min-width : 1200px) {
     .codAsignatura{
     
     width: 15%;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
    
 }
 
 .nombreAsignatura{
     width: 30%;
-    font-size: 14px;
+    font-size: 12px;
    text-align: center;
 }
 
 .periodoAsignatura{
     
     width: 15%;
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
 }
 
@@ -788,16 +788,24 @@ and (min-width : 1200px) {
 
 .detallesAsignatura{
     
-    width: 10%;
+    width: 9%;
     font-size: 12px;
     text-align: center;
 }
 
 .webAsignatura{
     
-    width: 10%;
+    width: 9%;
     font-size: 12px;
     text-align: center;
+}
+
+.dispAsignatura{
+    
+    width: 9%;
+    font-size: 12px;
+    text-align: center;
+    
 }
 
 
