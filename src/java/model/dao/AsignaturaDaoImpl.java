@@ -14,6 +14,8 @@ import exceptions.InstanceNotFoundException;
 
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 
@@ -112,6 +114,17 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
           throw new InstanceNotFoundException();
       
       return ((ComentarioAsignatura)o);
+  }
+  
+  
+  
+  @Override
+  public List<ComentarioAsignatura> listarComentariosAsignaturaPendientes(){
+      
+      return getSession().createCriteria(ComentarioAsignatura.class)
+              .add(Restrictions.like("estado", "pendiente"))
+              .addOrder(Order.desc("fecha")).list();
+      
   }
   
   

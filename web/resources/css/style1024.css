@@ -242,5 +242,36 @@ body.blue{
     }    
 
 
+.asignatura2{
+    
+    width: 30%;
+    font-size: 12px;
+    text-align: left;
+}
+
+
+
+
+.multiple2{
+    
+    width: 6%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.creditos2{
+    
+    width: 8%;
+    font-size: 12px;
+    text-align: center;
+}
+
+.periodo2{
+    
+    width: 14%;
+    font-size: 12px;
+    text-align: left;
+    
+}
 
 

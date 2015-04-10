@@ -148,7 +148,7 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
     
     
     @Override
-    public void editarComentario(ComentarioAsignatura c){
+    public void editarComentario(ComentarioAsignatura c) {
         
         asignaturaDao.editarComentario(c);
     }
@@ -177,5 +177,18 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
         return asignaturaDao.buscarComentarioAsignatura(id);
         
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<ComentarioAsignatura> listarComentariosAsignaturaPendientes(){
+        
+        return asignaturaDao.listarComentariosAsignaturaPendientes();
+        
+        
+    }
+    
+    
+    
+    
     
 }

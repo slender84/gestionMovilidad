@@ -409,6 +409,98 @@ and (min-width : 1200px) {
     
 }
 
+.nombrePendiente{
+    
+    width: 30%;
+    text-align: center;
+    font-size: 12px;
+    
+}
+
+.paisPendiente{
+    
+    width: 27%;
+    text-align: center;
+    font-size: 12px;
+    
+    
+}
+
+
+.universidadPendiente{
+    width: 27%;
+    text-align: center;
+    font-size: 12px;
+    
+    
+}
+
+.fechaPendiente{
+    
+    width:11%;
+    text-align: center;
+    font-size: 12px;
+    
+}
+
+
+
+.verContratoPendiente{
+    
+    
+    width: 5%;
+    text-align: center;
+    font-size: 12px;
+    
+}
+
+
+
+.nombreComPendiente{
+    
+    width: 25%;
+    text-align: center;
+    font-size: 12px;
+    
+}
+
+.asignaturaComPendiente{
+    
+    width: 29%;
+    text-align: center;
+    font-size: 12px;
+    
+    
+}
+
+
+.universidadComPendiente{
+    width: 27%;
+    text-align: center;
+    font-size: 12px;
+    
+    
+}
+
+.fechaComPendiente{
+    
+    width:11%;
+    text-align: center;
+    font-size: 12px;
+    
+}
+
+
+
+.verComPendiente{
+    
+    
+    width: 5%;
+    text-align: center;
+    font-size: 12px;
+    
+}
+
 
 
 

@@ -344,24 +344,25 @@
                     <h:outputText value="#{equivalenciasController.selectedAsignatura.curso}"/>&nbsp;
                     <p:outputLabel value="Periodo:"/>
                     <h:outputText value="#{equivalenciasController.selectedAsignatura.periodo}"/>&nbsp;
-                    <h:outputLink target="_blank" value="#{equivalenciasController.selectedAsignatura.webAsignatura}" rendered="#{not empty equivalenciasController.selectedAsignatura.webAsignatura}">WEB</h:outputLink>
+                    <h:outputLabel value="WEB:"/>
+                    <h:outputLink target="_blank" value="#{equivalenciasController.selectedAsignatura.webAsignatura}" rendered="#{not empty equivalenciasController.selectedAsignatura.webAsignatura}">Link</h:outputLink>
                     
                     </h:panelGrid>
-                <p:separator/>
-                    
+                 
+                 <p:separator/>
                     <p:outputLabel value="Comentarios" /><br/>
                     <ui:repeat value="#{equivalenciasController.listaComentariosAsignatura}" var="comentario">
                     
                         <h:outputText value="#{comentario.fecha}">
-                            <f:convertDateTime pattern="dd-MM-yyyy" timeZone="#{sessionController.zonaHoraria}"/>
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
                         
                         </h:outputText><br/>
                         <h:outputText style="white-space: pre-wrap" value="#{comentario.texto}"/><br/><br/>
                     
                     
                     </ui:repeat>
-                  
-            </p:dialog>
+                 
+             </p:dialog>        
         
         </h:form>
         

@@ -30,4 +30,5 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     public List<Asignatura> asignaturasMovilidad(Movilidad m);
     public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id);
     public ComentarioAsignatura buscarComentarioAsignatura(Integer id) throws InstanceNotFoundException;
+    public List<ComentarioAsignatura> listarComentariosAsignaturaPendientes();
 }

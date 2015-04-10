@@ -71,7 +71,7 @@ public class CronicasController implements Serializable{
     private Cronica selectedCronica;
     private ArrayList<Cronica> listaCronicas;
     private ArrayList<Cronica> filteredCronicas;
-    private ArrayList<Cronica> selectedCronicas;
+    private ArrayList<Cronica> selectedCronicas=new ArrayList<>();
     
     private String nuevoEstado;
     

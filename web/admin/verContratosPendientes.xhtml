@@ -23,25 +23,34 @@
                          widgetVar="tablaContratos" rows="10" paginatorPosition="bottom">
             
             
-                <p:column headerText="Login" sortBy="#{contrato.movilidad.usuario.login}" filterBy="#{contrato.movilidad.usuario.login}" filterMatchMode="contains">
+                <p:column headerText="Login" sortBy="#{contrato.movilidad.usuario.login}" filterBy="#{contrato.movilidad.usuario.login}" filterMatchMode="contains" styleClass="nombrePendiente">
                 
                     <h:outputText value="#{contrato.movilidad.usuario.login}"/>
                 
                 </p:column>
                  
-                <p:column headerText="Pais" sortBy="#{contrato.movilidad.universidad.pais.nombre}" filterMatchMode="contains" filterBy="#{contrato.movilidad.universidad.pais.nombre}">
+                <p:column headerText="Pais" sortBy="#{contrato.movilidad.universidad.pais.nombre}" filterMatchMode="contains" filterBy="#{contrato.movilidad.universidad.pais.nombre}" styleClass="paisPendiente">
                 
                     <h:outputText value="#{contrato.movilidad.universidad.pais.nombre}"/>
                 
                 </p:column>
                 
-                <p:column headerText="Universidad" sortBy="#{contrato.movilidad.universidad.nombre}" filterBy="#{contrato.movilidad.universidad.nombre}" filterMatchMode="contains">
+                <p:column headerText="Universidad" sortBy="#{contrato.movilidad.universidad.nombre}" filterBy="#{contrato.movilidad.universidad.nombre}" filterMatchMode="contains" styleClass="universidadPendiente">
                 
                     <h:outputText value="#{contrato.movilidad.universidad.nombre}"/>
                 
                 </p:column>
                 
-                <p:column headerText="Ver contrato">
+                
+                <p:column headerText="Fecha" sortBy="#{contrato.fecha}" styleClass="fechaPendiente">
+                
+                    <h:outputText value="#{contrato.fecha}">
+                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
+                    </h:outputText>
+                
+                </p:column>
+                
+                <p:column headerText="Ver contrato" styleClass="verContratoPendiente">
                     
                     <p:commandLink action="#{contratosPendientesController.verContrato}" ajax="false">
                         <f:setPropertyActionListener value="#{contrato}" target="#{contratosPendientesController.selectedContrato}"/>
