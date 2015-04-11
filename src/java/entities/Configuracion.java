@@ -2,11 +2,15 @@ package entities;
 // Generated 09-mar-2015 20:16:39 by Hibernate Tools 4.3.1
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,11 +33,12 @@ public class Configuracion  implements java.io.Serializable {
      private Boolean permitirAlumnosDestino;
      private Boolean cargarTodasMovilidades;
      private String direccionAdmin;
-     
+     private Boolean permitirCopia;
+     private Set<Direccion> direccions = new HashSet<Direccion>(0);
     public Configuracion() {
     }
 
-    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin) {
+    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Set<Direccion> direccions) {
        this.direccion = direccion;
        this.password = password;
        this.smtpPort = smtpPort;
@@ -43,6 +48,8 @@ public class Configuracion  implements java.io.Serializable {
        this.permitirAlumnosDestino=permitirAlumnosDestino;
        this.cargarTodasMovilidades=cargarTodasMovilidades;
        this.direccionAdmin=direccionAdmin;
+       this.permitirCopia = permitirCopia;
+       this.direccions = direccions;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -145,6 +152,25 @@ public class Configuracion  implements java.io.Serializable {
     public void setDireccionAdmin(String direccionAdmin) {
         this.direccionAdmin = direccionAdmin;
     }
+    
+     @Column(name="permitirCopia")
+    public Boolean getPermitirCopia() {
+        return this.permitirCopia;
+    }
+    
+    public void setPermitirCopia(Boolean permitirCopia) {
+        this.permitirCopia = permitirCopia;
+    }
+    
+    @OneToMany(fetch=FetchType.EAGER, mappedBy="configuracion")
+    public Set<Direccion> getDireccions() {
+        return this.direccions;
+    }
+    
+    public void setDireccions(Set<Direccion> direccions) {
+        this.direccions = direccions;
+    }
+
     
 
 

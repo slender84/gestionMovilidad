@@ -2,6 +2,7 @@
 package controllers;
 
 
+import com.sun.java.swing.plaf.windows.WindowsTreeUI;
 import entities.Configuracion;
 import entities.Estado;
 import entities.EstadoMovilidad;
@@ -9,6 +10,7 @@ import entities.Usuario;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -50,6 +52,7 @@ public class SessionController implements Serializable {
     public UtilidadService getUtilidadService() {
         return utilidadService;
     }
+    
     
     
     

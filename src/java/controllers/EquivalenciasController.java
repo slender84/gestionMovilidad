@@ -11,7 +11,10 @@ import entities.Mensaje;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,6 +36,9 @@ import model.services.MensajeService;
 import model.utils.EquivalenciaRevisada;
 import model.utils.ReportBean;
 import net.sf.jasperreports.engine.JRException;
+import org.primefaces.component.fileupload.FileUpload;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 
 /**
@@ -92,8 +98,8 @@ public class EquivalenciasController implements Serializable{
     
     private static int j=0;
     
-    
-    
+    private FileUpload fileUpload;
+    private UploadedFile file;
     private String apruebaOrechaza;
     
     public EquivalenciasController() {
@@ -198,6 +204,24 @@ public class EquivalenciasController implements Serializable{
     public void setAsignaturaService(AsignaturaService asignaturaService) {
         this.asignaturaService = asignaturaService;
     }
+
+    public FileUpload getFileUpload() {
+        return fileUpload;
+    }
+
+    public void setFileUpload(FileUpload fileUpload) {
+        this.fileUpload = fileUpload;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+    
+    
 
     
     
@@ -547,6 +571,21 @@ public class EquivalenciasController implements Serializable{
         
         
     }
+     
+     public void subirArchivo(FileUploadEvent event)throws IOException{
+         
+         
+         file=event.getFile();
+         InputStream fin=file.getInputstream();
+         String fileName=file.getFileName();
+         Long fileSize=file.getSize();
+         
+         
+         
+     }
+     
+     
+     
      
 }
      

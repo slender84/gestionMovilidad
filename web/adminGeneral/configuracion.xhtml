@@ -67,6 +67,10 @@
                                  validatorMessage="Debe ser un correo válido, por ejemplo user@abc.es o user2@cde.com">
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                     </p:inputText>
+                    <p:outputLabel value="Permitir enviar en copia"/>
+                    <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirCopia}"/>
+                    
+                    <h:outputLink value="#{request.contextPath}/adminGeneral/direcciones.xhtml">Direcciones para enviar en copia</h:outputLink>
                     
                 </h:panelGrid>    
                 

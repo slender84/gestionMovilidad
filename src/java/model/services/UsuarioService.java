@@ -7,6 +7,7 @@
 package model.services;
 
 import entities.Configuracion;
+import entities.Direccion;
 import entities.InfoCuenta;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
@@ -29,4 +30,7 @@ public interface UsuarioService {
      public InfoCuenta recuperarIntentos(String login);
      public void actualizarIntentos(InfoCuenta intentos);
      public void editarUsuario(Usuario u)throws InstanceNotFoundException;
+     public void eliminarDireccion(Direccion d);
+     public void crearDireccion(Direccion d);
+     public List<Direccion> listaDirecciones();
 }

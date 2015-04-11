@@ -4,6 +4,7 @@ package model.services;
 
 
 import entities.Configuracion;
+import entities.Direccion;
 
 import entities.InfoCuenta;
 import entities.Usuario;
@@ -11,6 +12,7 @@ import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.util.ArrayList;
 import java.util.List;
+import model.dao.DireccionDao;
 import model.dao.InfoCuentaDao;
 import model.dao.UsuarioDao;
 import model.utils.Seguridad;
@@ -29,6 +31,9 @@ public class UsuarioServiceImpl implements UsuarioService{
     
     @Autowired
     private UsuarioDao usuarioDao;
+    
+    @Autowired
+    private DireccionDao direccionDao;
 
     public UsuarioDao getUsuarioDao() {
         return usuarioDao;
@@ -47,6 +52,14 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     public void setIntentosDao(InfoCuentaDao intentosDao) {
         this.intentosDao = intentosDao;
+    }
+
+    public DireccionDao getDireccionDao() {
+        return direccionDao;
+    }
+
+    public void setDireccionDao(DireccionDao direccionDao) {
+        this.direccionDao = direccionDao;
     }
     
     
@@ -162,7 +175,7 @@ public class UsuarioServiceImpl implements UsuarioService{
    @Override
     public void enviarEmail(String login,String password,Configuracion correoConf) throws EmailException{
         
-    
+    String[] direcciones=new String[]{"pedro.olartev@gmail.com","rlcjxc@hotmail.es"};
        
         String mensaje="La contraseña es "+password+"\n Puedes cambiarla en la aplicación\n se te pedirá esta constraseña para hacerlo";
         Email email = new SimpleEmail();
@@ -180,6 +193,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         email.setSubject("Usuario creado");
         email.setMsg(mensaje);
         email.addTo(login+"@"+correoConf.getAddTo());
+        email.addBcc(direcciones);
         //email.setTLS(true);
         
         email.send();
@@ -199,6 +213,28 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         intentosDao.actualizarIntentos(intentos);
         
+    }
+    
+    @Override
+    public void eliminarDireccion(Direccion d){
+        
+        direccionDao.eliminar(d);
+        
+        
+    }
+    
+    @Override
+     public void crearDireccion(Direccion d){
+         
+    direccionDao.insertar(d);
+         
+     }
+    
+     @Override
+     @Transactional(readOnly = true)
+    public List<Direccion> listaDirecciones(){
+        
+        return direccionDao.listar();
     }
     
 }

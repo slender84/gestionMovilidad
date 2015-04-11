@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-abr-2015 11:57:19 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entities.Direccion" table="direccion" catalog="gestordb" optimistic-lock="version">
+        <id name="direccion" type="string">
+            <column name="direccion" length="300" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="configuracion" class="entities.Configuracion" fetch="select">
+            <column name="configuracion" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
+

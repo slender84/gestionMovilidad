@@ -260,9 +260,16 @@
         </h:form>
         </p:outputPanel>   
     
+    <br/><br/>
     
+    <h:form id="formUpload" enctype="multipart/form-data">
+        
+        <p:fileUpload fileUploadListener="#{equivalenciasController.file}" mode="simple"/>
+        <p:commandButton value="Subir archivo" action="#{equivalenciasController.subirArchivo}" ajax="false"/>
+        
+    </h:form>
        
-       <br/>
+       
        
        <br/><br/>
        <h:outputLink value="verContratos.xhtml">Ver contratos del alumno</h:outputLink>

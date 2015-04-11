@@ -18,6 +18,7 @@ import javax.faces.bean.RequestScoped;
 import model.services.MensajeService;
 import model.services.UsuarioService;
 import model.utils.Seguridad;
+import model.utils.email;
 
 
 
@@ -196,8 +197,8 @@ public class CrearUsuarioController implements Serializable{
         
        try{
             correoConf=sessionController.getCorreoConf();
-            usuarioService.enviarEmail(login,password,correoConf);
-            
+            //usuarioService.enviarEmail(login,password,correoConf);
+            email.enviarEmailAlta(login, password, correoConf);
         }catch(Exception ex){
             
             usuarioService.eliminarUsuario(u);
@@ -228,7 +229,10 @@ public class CrearUsuarioController implements Serializable{
         m.setTema("usuario creado");
         m.setTexto("el usuario "+login+" se ha dado de alta en el sistema");
         mensajeService.enviarMensaje(m);
-        }catch(InstanceNotFoundException|RuntimeException ex){
+        
+        email.enviarMensajeUsuario(correoConf, "usuario creado", "el usuario "+login+" se ha dado de alta en el sistema",0);
+        
+        }catch(Exception ex){
             
             sessionController.creaMensaje("se ha producido un error. Inténtalo más tarde", FacesMessage.SEVERITY_ERROR);
                 return null;

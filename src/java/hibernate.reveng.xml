@@ -22,4 +22,5 @@
   <table-filter match-name="cursoacademico"/>
   <table-filter match-name="curso"/>
   <table-filter match-name="idioma"/>
+  <table-filter match-name="direccion"/>
 </hibernate-reverse-engineering>

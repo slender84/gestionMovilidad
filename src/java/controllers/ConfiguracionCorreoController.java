@@ -4,7 +4,10 @@ package controllers;
 
 
 import entities.Configuracion;
+import entities.Direccion;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -29,6 +32,11 @@ public class ConfiguracionCorreoController implements Serializable{
     private Configuracion correoConf;
     private String nuevoPassword;
     
+    private ArrayList<Direccion> listaDireccionesCopia;
+    private String direccionCopia;
+    
+    private Direccion selectedDireccion;
+    
     public ConfiguracionCorreoController() {
     }
 
@@ -47,6 +55,32 @@ public class ConfiguracionCorreoController implements Serializable{
     public void setNuevoPassword(String nuevoPassword) {
         this.nuevoPassword = nuevoPassword;
     }
+
+    public ArrayList<Direccion> getListaDireccionesCopia() {
+        return listaDireccionesCopia;
+    }
+
+    public void setListaDireccionesCopia(ArrayList<Direccion> listaDireccionesCopia) {
+        this.listaDireccionesCopia = listaDireccionesCopia;
+    }
+
+    public String getDireccionCopia() {
+        return direccionCopia;
+    }
+
+    public void setDireccionCopia(String direccionCopia) {
+        this.direccionCopia = direccionCopia;
+    }
+
+    public Direccion getSelectedDireccion() {
+        return selectedDireccion;
+    }
+
+    public void setSelectedDireccion(Direccion selectedDireccion) {
+        this.selectedDireccion = selectedDireccion;
+    }
+    
+    
 
    
 
@@ -74,7 +108,7 @@ public class ConfiguracionCorreoController implements Serializable{
     public void init(){
         
         correoConf=(Configuracion)sessionController.getCorreoConf();
-        
+        listaDireccionesCopia=(ArrayList<Direccion>)usuarioService.listaDirecciones();
         
     }
     
@@ -97,6 +131,81 @@ public class ConfiguracionCorreoController implements Serializable{
     
 }
     
+    public String eliminarDireccionCopia(){
+        
+        try{
+            
+            
+            
+            listaDireccionesCopia.remove(selectedDireccion);
+            correoConf.getDireccions().remove(selectedDireccion);
+            usuarioService.eliminarDireccion(selectedDireccion);
+            sessionController.setCorreoConf(correoConf);
+        }catch(RuntimeException ex){
+            
+            sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+            listaDireccionesCopia=(ArrayList<Direccion>)usuarioService.listaDirecciones();
+            
+        }
+        
+        sessionController.creaMensaje("Direccion eliminada", FacesMessage.SEVERITY_INFO);
+       return null;
+        
+    }
+    
+    public String crearDireccionCopia(){
+        
+        
+        
+        
+        
+        
+         Direccion d=new Direccion(direccionCopia,correoConf);
+         
+         Iterator i=correoConf.getDireccions().iterator();
+         while(i.hasNext()){
+             
+             Direccion aux=(Direccion)i.next();
+             if(aux.equals(d)){
+                sessionController.creaMensaje("Ya existe ese correo", FacesMessage.SEVERITY_ERROR);
+                direccionCopia=null;
+                return null;
+                 
+             }
+             
+         }
+         
+         
+         
+             
+            
+         
+         
+         correoConf.getDireccions().add(d);
+        
+        try{
+            
+           
+            
+            sessionController.setCorreoConf(correoConf);
+            
+            }catch(Exception ex){
+        
+        sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+    }
+    
+    sessionController.creaMensaje("Configuración guardada correctamente", FacesMessage.SEVERITY_INFO);
+    //correoConf=sessionController.getCorreoConf();
+    listaDireccionesCopia.add(d);
+    direccionCopia=null;
+    return null;
+            
+            
+        }
+        
+        
+    }
     
     
-}
+    
+

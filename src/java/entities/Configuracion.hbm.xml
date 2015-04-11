@@ -35,5 +35,14 @@
         <property name="direccionAdmin" type="string">
             <column name="direccionAdmin" length="500" />
         </property>
+        <property name="permitirCopia" type="java.lang.Boolean">
+            <column name="permitirCopia" />
+        </property>
+        <set name="direccions" cascade="save-update" table="direccion" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="configuracion" not-null="true" />
+            </key>
+            <one-to-many class="entities.Direccion" />
+        </set>
     </class>
 </hibernate-mapping>
