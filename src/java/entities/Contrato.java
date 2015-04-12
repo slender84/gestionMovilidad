@@ -34,15 +34,17 @@ public class Contrato  implements java.io.Serializable {
      private Movilidad movilidad;
      private Date fecha;
      private String estado;
+     private byte[] archivo;
      private Set<Equivalencia> equivalencias = new HashSet<Equivalencia>(0);
 
     public Contrato() {
     }
 
-    public Contrato(Movilidad movilidad, Date fecha, String estado, Set<Equivalencia> equivalencias) {
+    public Contrato(Movilidad movilidad, Date fecha, String estado, byte[] archivo, Set<Equivalencia> equivalencias) {
        this.movilidad = movilidad;
        this.fecha = fecha;
        this.estado = estado;
+       this.archivo=archivo;
        this.equivalencias = equivalencias;
     }
    
@@ -86,6 +88,15 @@ public class Contrato  implements java.io.Serializable {
     
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+    
+     @Column(name="archivo")
+    public byte[] getArchivo() {
+        return this.archivo;
+    }
+    
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
     }
 
 @ManyToMany(fetch=FetchType.LAZY)

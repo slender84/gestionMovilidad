@@ -253,19 +253,19 @@
             <br/>
            
             <p:commandButton value="Confirmar" action="#{equivalenciasController.cambiarEstadoContrato}" update=":formTablaEquivalencias"
-                             oncomplete="PF('equivalenciaTable').unselectAllRows();" />
+                             oncomplete="PF('equivalenciaTable').unselectAllRows();" style="font-size: 12px;"/>
          
              
           
         </h:form>
         </p:outputPanel>   
     
-    <br/><br/>
+    <br/><br/><br/>
     
     <h:form id="formUpload" enctype="multipart/form-data">
         
-        <p:fileUpload fileUploadListener="#{equivalenciasController.file}" mode="simple"/>
-        <p:commandButton value="Subir archivo" action="#{equivalenciasController.subirArchivo}" ajax="false"/>
+        <p:fileUpload value="#{equivalenciasController.file}" mode="simple"/>
+        <p:commandButton style="font-size: 12px;" value="Subir archivo" actionListener="#{equivalenciasController.subirArchivo}" ajax="false" />
         
     </h:form>
        

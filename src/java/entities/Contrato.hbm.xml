@@ -17,6 +17,9 @@
         <property name="estado" type="string">
             <column name="estado" length="10" />
         </property>
+        <property name="archivo" type="binary">
+            <column name="archivo" />
+        </property>
         <set name="equivalencias" cascade="delete" table="contrato_equivalencia" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="idContrato" not-null="true" />

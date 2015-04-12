@@ -11,8 +11,6 @@ import entities.Mensaje;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -37,7 +35,6 @@ import model.utils.EquivalenciaRevisada;
 import model.utils.ReportBean;
 import net.sf.jasperreports.engine.JRException;
 import org.primefaces.component.fileupload.FileUpload;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 
@@ -120,7 +117,7 @@ public class EquivalenciasController implements Serializable{
            user=sessionController.getUser();
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-           context.getSessionMap().remove("contrato");
+           //context.getSessionMap().remove("contrato");
            //context.getSessionMap().remove("movilidad");
               
            try{
@@ -140,7 +137,7 @@ public class EquivalenciasController implements Serializable{
              
            if(context.getSessionMap().containsKey("contratoComparado")){
         contratoComparado=(Contrato)context.getSessionMap().get("contratoComparado");
-        context.getSessionMap().remove("contratoComparado");
+        //context.getSessionMap().remove("contratoComparado");
              try{
                  Integer iC2=contratoComparado.getIdContrato();
                  contratoComparado=null;
@@ -572,15 +569,43 @@ public class EquivalenciasController implements Serializable{
         
     }
      
-     public void subirArchivo(FileUploadEvent event)throws IOException{
+     public String subirArchivo()throws IOException{
          
+         if(file==null){
+             sessionController.creaMensaje("el file esta vacio", FacesMessage.SEVERITY_ERROR);
+             return null;
+         }
          
-         file=event.getFile();
-         InputStream fin=file.getInputstream();
          String fileName=file.getFileName();
          Long fileSize=file.getSize();
+         byte[] aux=new byte[fileSize.intValue()];
+         try{
+         
+         InputStream fin=file.getInputstream();
          
          
+         fin.read(aux);
+         }catch(Exception ex){
+             ex.printStackTrace();
+         }
+         
+         
+         
+         selectedContrato.setArchivo(aux);
+         try{
+             
+             equivalenciaService.modificarContrato(selectedContrato);
+             
+         }catch(InstanceNotFoundException ex){
+             
+             sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
+             return null;
+             
+             
+         }
+         
+         sessionController.creaMensaje("Archivo subido correctamente", FacesMessage.SEVERITY_INFO);
+         return null;
          
      }
      
