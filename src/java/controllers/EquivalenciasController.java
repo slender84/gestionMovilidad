@@ -117,9 +117,10 @@ public class EquivalenciasController implements Serializable{
            user=sessionController.getUser();
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-           //context.getSessionMap().remove("contrato");
+           context.getSessionMap().remove("contrato");
            //context.getSessionMap().remove("movilidad");
               
+                
            try{
                Integer iC=selectedContrato.getIdContrato();
                selectedContrato=null;
@@ -178,6 +179,8 @@ public class EquivalenciasController implements Serializable{
         }
            
        else{
+               
+               
             try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/verMovilidades.xhtml");
             }catch(IOException ex){

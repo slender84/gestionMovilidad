@@ -7,6 +7,7 @@ package model.utils;
 
 import entities.Equivalencia;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -32,7 +33,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ViewScoped
 @ManagedBean
-public class ReportBean {
+public class ReportBean implements Serializable{
 
     
     private JasperPrint jasperPrint;
