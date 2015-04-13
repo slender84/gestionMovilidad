@@ -12,7 +12,6 @@ import entities.Movilidad;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +33,7 @@ import model.services.MensajeService;
 import model.utils.EquivalenciaRevisada;
 import model.utils.ReportBean;
 import net.sf.jasperreports.engine.JRException;
-import org.primefaces.component.fileupload.FileUpload;
-import org.primefaces.model.UploadedFile;
+
 
 
 /**
@@ -95,8 +93,7 @@ public class EquivalenciasController implements Serializable{
     
     private static int j=0;
     
-    private FileUpload fileUpload;
-    private UploadedFile file;
+    
     private String apruebaOrechaza;
     
     public EquivalenciasController() {
@@ -117,7 +114,7 @@ public class EquivalenciasController implements Serializable{
            user=sessionController.getUser();
            selectedMovilidad=(Movilidad)context.getSessionMap().get("movilidad");
            selectedContrato=(Contrato)context.getSessionMap().get("contrato");
-           context.getSessionMap().remove("contrato");
+           //context.getSessionMap().remove("contrato");
            //context.getSessionMap().remove("movilidad");
               
                 
@@ -136,6 +133,9 @@ public class EquivalenciasController implements Serializable{
             creditosA=equivalenciaService.totalCreditos(listaAuxEquivalencias)[0];
             creditosB=equivalenciaService.totalCreditos(listaAuxEquivalencias)[1];
              
+            
+            
+            
            if(context.getSessionMap().containsKey("contratoComparado")){
         contratoComparado=(Contrato)context.getSessionMap().get("contratoComparado");
         //context.getSessionMap().remove("contratoComparado");
@@ -205,25 +205,6 @@ public class EquivalenciasController implements Serializable{
         this.asignaturaService = asignaturaService;
     }
 
-    public FileUpload getFileUpload() {
-        return fileUpload;
-    }
-
-    public void setFileUpload(FileUpload fileUpload) {
-        this.fileUpload = fileUpload;
-    }
-
-    public UploadedFile getFile() {
-        return file;
-    }
-
-    public void setFile(UploadedFile file) {
-        this.file = file;
-    }
-    
-    
-
-    
     
     public MensajeService getMensajeService() {
         return mensajeService;
@@ -571,49 +552,6 @@ public class EquivalenciasController implements Serializable{
         
         
     }
-     
-     public String subirArchivo()throws IOException{
-         
-         if(file==null){
-             sessionController.creaMensaje("el file esta vacio", FacesMessage.SEVERITY_ERROR);
-             return null;
-         }
-         
-         String fileName=file.getFileName();
-         Long fileSize=file.getSize();
-         byte[] aux=new byte[fileSize.intValue()];
-         try{
-         
-         InputStream fin=file.getInputstream();
-         
-         
-         fin.read(aux);
-         }catch(Exception ex){
-             ex.printStackTrace();
-         }
-         
-         
-         
-         selectedContrato.setArchivo(aux);
-         try{
-             
-             equivalenciaService.modificarContrato(selectedContrato);
-             
-         }catch(InstanceNotFoundException ex){
-             
-             sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
-             return null;
-             
-             
-         }
-         
-         sessionController.creaMensaje("Archivo subido correctamente", FacesMessage.SEVERITY_INFO);
-         return null;
-         
-     }
-     
-     
-     
      
 }
      

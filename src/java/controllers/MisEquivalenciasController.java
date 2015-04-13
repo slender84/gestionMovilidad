@@ -699,6 +699,20 @@ public class MisEquivalenciasController implements Serializable{
      
         
     }
+    
+    public String verArchivo(){
+        
+        
+       
+         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("contrato", selectedContrato);
+         
+         return ("verArchivo.xhtml?faces-redirect=true"); 
+        
+        
+    }
+    
+    
+    
    
     
     public void PDF(ActionEvent event)throws JRException,IOException{

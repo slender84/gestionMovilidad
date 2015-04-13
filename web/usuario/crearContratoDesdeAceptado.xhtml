@@ -323,8 +323,8 @@
                 </f:facet> 
                     
                     <p:outputLabel value="Nombre universidad:"/>
-                    <h:outputText value="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}"/>
-                
+                    <h:outputText value="Universidade da Coruña" rendered="#{misEquivalenciasController.checkFic eq 'true'}"/>
+                    <h:outputText value="#{misEquivalenciasController.selectedMovilidad.universidad.nombre}" rendered="#{misEquivalenciasController.checkFic eq 'false'}"/>
                 
                 <p:outputLabel for="cod" value="Código: " />
                 <p:inputText id="cod" value="#{misEquivalenciasController.codAsignatura}"  required="true"

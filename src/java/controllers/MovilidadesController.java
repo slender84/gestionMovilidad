@@ -414,6 +414,13 @@ public class MovilidadesController implements Serializable{
         
     public String eliminaMovilidadLista(){
         
+        if(selectedMovilidades==null)
+            return null;
+        
+        if(selectedMovilidades.isEmpty())
+            return null;
+        
+        
         for(Movilidad m:selectedMovilidades){
             try{
         movilidadService.eliminarMovilidad(m);

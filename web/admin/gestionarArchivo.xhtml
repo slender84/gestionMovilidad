@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+      
+    <h:head>
+        <title>Archivo</title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <script type="text/javascript">
+            
+            function start(){
+                
+                PF('statusDialog').show();
+                
+            }
+            function stop(){
+                
+                PF('statusDialog').hide();
+            }
+            
+            
+            
+        </script>
+    </h:head>
+    <h:body styleClass="blue">
+        
+        <h2 style="text-align: center">Gestionar archivo</h2>
+        
+            <h:form id="formUpload" enctype="multipart/form-data" rendered="#{sessionController.user.tipoUsuario eq 0}">
+         <p:growl id="msg"/>
+        <p:fileUpload value="#{fileController.file}" mode="simple"/>&nbsp;&nbsp;&nbsp;&nbsp;
+        <p:commandButton style="font-size: 12px;" value="Subir archivo" actionListener="#{fileController.subirArchivo}" ajax="false" />
+        
+    </h:form>
+    <br/>
+    
+    
+       
+ <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+    <p:graphicImage name="/resources/ajax-loader.gif" />
+ </p:dialog>
+ 
+    
+    <p:outputPanel id="panelDown">
+    <h:form id="downForm" rendered="#{fileController.selectedContrato.archivo ne null}">
+    <p:commandLink  ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" style="font-size: 12px;">
+       <h:graphicImage value="/resources/img/pdf48.png" title="Descargar PDF"/>
+        <p:fileDownload value="#{fileController.descarga}" />
+    </p:commandLink>
+    </h:form>
+    </p:outputPanel>&nbsp;
+    
+    <p:outputPanel id="panelDelete">
+    <h:form rendered="#{fileController.selectedContrato.archivo ne null}">
+       
+        
+        <p:commandLink  style="font-size: 12px" action="#{fileController.eliminarArchivo}" update=":panelDown :panelDelete :formUpload:msg">
+            <h:graphicImage value="/resources/img/trash48.png" title="Eliminar PDF"/>
+        </p:commandLink>
+        
+        
+    </h:form>
+    </p:outputPanel>    
+        
+        
+        <br/><br/>
+        
+       
+       
+       
+       <h:outputLink value="gestionarContrato.xhtml">
+           <h:graphicImage value="/resources/iniciar-icono-4628-48.png"/>
+       </h:outputLink>
+        <br/><br/>
+        
+            
+               
+               
+           
+       
+           
+      <br/><br/>
+      
+       
+       
+        
+    </h:body>
+</html>

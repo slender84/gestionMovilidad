@@ -3,6 +3,8 @@
 package controllers;
 
 
+import entities.Asignatura;
+import entities.ComentarioAsignatura;
 import entities.Contrato;
 import entities.Equivalencia;
 import entities.Movilidad;
@@ -17,6 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import model.services.AsignaturaService;
 import model.services.EquivalenciaService;
 import model.services.UniversidadService;
 
@@ -37,7 +40,8 @@ public class EquivalenciasPublicasController implements Serializable{
     @ManagedProperty(value="#{universidadService}")
     private UniversidadService universidadService;
     
-   
+   @ManagedProperty(value="#{asignaturaService}")
+    private AsignaturaService asignaturaService;
     
     
    
@@ -48,7 +52,7 @@ public class EquivalenciasPublicasController implements Serializable{
     private ArrayList<Universidad> listaUniversidad;
     private String universidadStr;
     private Universidad universidad;
-    
+     private ArrayList<ComentarioAsignatura> listaComentariosAsignatura;
     private boolean checkPais;
    private boolean checkUni;
     
@@ -58,7 +62,7 @@ public class EquivalenciasPublicasController implements Serializable{
     
     private boolean mostrarInfo;
     
-    
+    private Asignatura selectedAsignatura;
    
     
     public EquivalenciasPublicasController() {
@@ -78,6 +82,24 @@ public class EquivalenciasPublicasController implements Serializable{
         this.sessionController = sessionController;
     }
 
+    public Asignatura getSelectedAsignatura() {
+        return selectedAsignatura;
+    }
+
+    public void setSelectedAsignatura(Asignatura selectedAsignatura) {
+        this.selectedAsignatura = selectedAsignatura;
+    }
+
+    public ArrayList<ComentarioAsignatura> getListaComentariosAsignatura() {
+        return listaComentariosAsignatura;
+    }
+
+    public void setListaComentariosAsignatura(ArrayList<ComentarioAsignatura> listaComentariosAsignatura) {
+        this.listaComentariosAsignatura = listaComentariosAsignatura;
+    }
+
+    
+    
     
    
     public EquivalenciaService getEquivalenciaService() {
@@ -90,6 +112,14 @@ public class EquivalenciasPublicasController implements Serializable{
 
     public void setUniversidadService(UniversidadService universidadService) {
         this.universidadService = universidadService;
+    }
+
+    public AsignaturaService getAsignaturaService() {
+        return asignaturaService;
+    }
+
+    public void setAsignaturaService(AsignaturaService asignaturaService) {
+        this.asignaturaService = asignaturaService;
     }
 
     
@@ -238,6 +268,15 @@ public class EquivalenciasPublicasController implements Serializable{
        // return "equivalenciasPublicasAdmin.xhtml?faces-redirect=true";
         return "gestionarContrato.xhtml?faces-redirect=true";
     }
+    
+    public void detallesAsign(){
+        
+        
+        listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosPorAsignatura(selectedAsignatura.getId());
+        
+    }
+    
+    
     
     
    

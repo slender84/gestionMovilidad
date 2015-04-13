@@ -11,16 +11,23 @@
         <title>Gestión de contrato</title>
         <h:outputStylesheet library="css" name="estilos.css"/>
         <h:outputScript library="js" name="funciones.js"/>
+        
     </h:head>
     <h:body styleClass="blue">
         <ezcomp:out/>
          <h2 style="text-align: center">Editar contrato</h2>
          
          <h:form>
+             
+             <h:panelGrid columns="2" cellpadding="20">
              <p:commandLink  actionListener="#{equivalenciasController.PDF}" ajax="false">
            
            <h:graphicImage value="/resources/img/pdf48.png" title="Exportar a PDF"/>
              </p:commandLink>
+                 
+                 <h:outputLink value="gestionarArchivo.xhtml" title="Gestionar archivo"><h:graphicImage value="/resources/img/edit48.png"/></h:outputLink>
+                 
+             </h:panelGrid> 
              
          </h:form>
         
@@ -262,20 +269,15 @@
     
     <br/><br/><br/>
     
-    <h:form id="formUpload" enctype="multipart/form-data">
+   
         
-        <p:fileUpload value="#{equivalenciasController.file}" mode="simple"/>
-        <p:commandButton style="font-size: 12px;" value="Subir archivo" actionListener="#{equivalenciasController.subirArchivo}" ajax="false" />
         
-    </h:form>
-       
-       
-       
+        
        <br/><br/>
        <h:outputLink value="verContratos.xhtml">Ver contratos del alumno</h:outputLink>
-        <br/>
+        <br/><br/>
         <h:outputLink value="verContratosPendientes.xhtml">Volver a contratos pendientes</h:outputLink>
-        
+        <br/><br/>
         <h:form id="formDialog1">
              
              <p:dialog  header="información adicional" closeOnEscape="true"  fitViewport="true" maximizable="true"  widgetVar="dialog1" width="1000" height="1000" >
@@ -329,7 +331,7 @@
         
         
         
-        <br />
+        
 
        
         

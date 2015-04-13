@@ -18,7 +18,7 @@
             <p:growl/>
             <p:dataTable value="#{escribirComentarioAsignaturaController.listaAsignaturas}" var="asignatura"
                          paginator="true" rows="10" rowKey="#{asignatura.id}" paginatorPosition="bottom"
-                         styleClass="borderless" >
+                         styleClass="borderless" emptyMessage="No hay asignaturas disponibles">
                
                 <f:facet name="header">
                     <h:outputText value="#{escribirComentarioAsignaturaController.selectedMovilidad.universidad.nombre}" rendered="#{empty escribirComentarioAsignaturaController.selectedMovilidad.universidad.web}"/>

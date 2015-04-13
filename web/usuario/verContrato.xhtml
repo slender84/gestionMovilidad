@@ -25,7 +25,7 @@
      
          
          <h:form>   
-             <h:panelGrid columns="2">
+             <h:panelGrid columns="3" cellpadding="20">
        <p:commandLink style="display:block;margin-bottom: 20px">
            <p:printer target=":formTablaEquivalencias" />
            <h:graphicImage value="/resources/img/print48.png" title="Imprimir"/>
@@ -33,7 +33,9 @@
                  <p:commandLink actionListener="#{misEquivalenciasController.PDF}" ajax="false">
                      <h:graphicImage value="/resources/img/pdf48.png" title="Exportar a PDF"/>
                  </p:commandLink>          
-                 
+                 <p:commandLink action="#{misEquivalenciasController.verArchivo}" ajax="false" rendered="#{misEquivalenciasController.selectedContrato.archivo ne null}">
+                     <h:graphicImage value="/resources/img/edit48.png" title="ver documento"/>
+                 </p:commandLink>
              </h:panelGrid>
           </h:form>
          

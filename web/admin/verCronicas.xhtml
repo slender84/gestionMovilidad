@@ -30,7 +30,8 @@
                          rowKey="#{cronica.idcronica}"
                          selection="#{cronicasController.selectedCronicas}"
                          styleClass="borderless"
-                         paginatorPosition="bottom"> 
+                         paginatorPosition="bottom"
+                         filteredValue="#{cronicasController.filteredCronicas}"> 
                          
                 
                 <p:column headerText="autor" sortBy="#{cronica.usuario.login}" filterBy="#{cronica.usuario.login}" filterMatchMode="contains" styleClass="nombreCronica">
