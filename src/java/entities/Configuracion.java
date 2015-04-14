@@ -34,11 +34,12 @@ public class Configuracion  implements java.io.Serializable {
      private Boolean cargarTodasMovilidades;
      private String direccionAdmin;
      private Boolean permitirCopia;
+     private Boolean notificarAsignaturas;
      private Set<Direccion> direccions = new HashSet<Direccion>(0);
     public Configuracion() {
     }
 
-    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Set<Direccion> direccions) {
+    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Boolean notificarAsignaturas,Set<Direccion> direccions) {
        this.direccion = direccion;
        this.password = password;
        this.smtpPort = smtpPort;
@@ -49,6 +50,7 @@ public class Configuracion  implements java.io.Serializable {
        this.cargarTodasMovilidades=cargarTodasMovilidades;
        this.direccionAdmin=direccionAdmin;
        this.permitirCopia = permitirCopia;
+       this.notificarAsignaturas=notificarAsignaturas;
        this.direccions = direccions;
     }
    
@@ -160,6 +162,15 @@ public class Configuracion  implements java.io.Serializable {
     
     public void setPermitirCopia(Boolean permitirCopia) {
         this.permitirCopia = permitirCopia;
+    }
+    
+    @Column(name="notificarAsignaturas")
+    public Boolean getNotificarAsignaturas() {
+        return this.notificarAsignaturas;
+    }
+    
+    public void setNotificarAsignaturas(Boolean notificarAsignaturas) {
+        this.notificarAsignaturas = notificarAsignaturas;
     }
     
     @OneToMany(fetch=FetchType.EAGER, mappedBy="configuracion")

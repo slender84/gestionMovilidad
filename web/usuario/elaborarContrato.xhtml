@@ -293,11 +293,11 @@
                     <p:outputLabel value="Comentarios" /><br/>
                     <ui:repeat value="#{misEquivalenciasController.listaComentariosAsignatura}" var="comentario">
                     
-                        <h:outputText value="#{comentario.fecha}">
+                        <h:outputText value="#{comentario.fecha}" style="font-size: 12px;">
                             <f:convertDateTime pattern="dd-MM-yyyy" timeZone="#{sessionController.zonaHoraria}"/>
                         
                         </h:outputText><br/>
-                        <h:outputText style="white-space: pre-wrap" value="#{comentario.texto}"/><br/><br/>
+                        <h:outputText style="white-space: pre-wrap;font-size: 12px;" value="#{comentario.texto}"/><br/><br/>
                     
                     
                     </ui:repeat>

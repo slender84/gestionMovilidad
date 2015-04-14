@@ -57,6 +57,7 @@
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnosDestino}"/>
                 <p:outputLabel value="Cargar todas las movilidades si no hay filtros"/>
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.cargarTodasMovilidades}"/>
+                
             </h:panelGrid> 
                 <p:separator/>
                 
@@ -67,6 +68,8 @@
                                  validatorMessage="Debe ser un correo válido, por ejemplo user@abc.es o user2@cde.com">
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                     </p:inputText>
+                    <p:outputLabel value="Notificar por correo cuando el alumno crea o edita asignaturas"/>
+                    <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.notificarAsignaturas}"/>
                     <p:outputLabel value="Permitir enviar en copia"/>
                     <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirCopia}"/>
                     
