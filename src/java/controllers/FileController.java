@@ -14,6 +14,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import model.services.EquivalenciaService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -32,7 +34,7 @@ public class FileController implements Serializable{
     private EquivalenciaService equivalenciaService;
     
     private Contrato selectedContrato;
-    private UploadedFile file;
+    private UploadedFile file=null;
 
     public Contrato getSelectedContrato() {
         return selectedContrato;
@@ -126,7 +128,9 @@ public class FileController implements Serializable{
     
     public String subirArchivo()throws IOException{
          
-         if(file==null){
+        
+        
+         if(file.getFileName().equals("")){
              sessionController.creaMensaje("Hay que seleccionar un archivo", FacesMessage.SEVERITY_ERROR);
              return null;
          }
@@ -158,6 +162,20 @@ public class FileController implements Serializable{
              
          }
          
+         String mensaje="La administración ha subido un documento para la movilidad "+selectedContrato.getMovilidad().getUniversidad().getNombre();
+         
+         try{
+             
+             email.enviarEmailAdmin(selectedContrato.getMovilidad().getUsuario().getLogin(), sessionController.getCorreoConf(), "Documento subido", mensaje);
+             
+             
+         }catch(EmailException ex){
+             
+             sessionController.creaMensaje("no se pudo enviar el correo", FacesMessage.SEVERITY_ERROR);
+             
+         }
+         
+         
          sessionController.creaMensaje("Archivo subido correctamente", FacesMessage.SEVERITY_INFO);
          file=null;
          return null;
@@ -173,7 +191,7 @@ public class FileController implements Serializable{
          
          InputStream bis=new ByteArrayInputStream(selectedContrato.getArchivo());
          
-         descarga=new DefaultStreamedContent(bis, "application/pdf", "documento_erasmus_"+"archivo.pdf");
+         descarga=new DefaultStreamedContent(bis, "application/pdf", "documento_erasmus_"+selectedContrato.getMovilidad().getUsuario().getLogin()+".pdf");
          return descarga;
         
          

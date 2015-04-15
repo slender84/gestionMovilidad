@@ -3,6 +3,7 @@ package model.utils;
 
 import entities.Configuracion;
 import entities.Direccion;
+import entities.Usuario;
 import java.util.Iterator;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -12,6 +13,9 @@ import org.apache.commons.mail.SimpleEmail;
 
 public class email {
 
+    
+    
+    
     
      public static void enviarEmailAlta(String login,String password,Configuracion correoConf) throws EmailException{
         
@@ -41,7 +45,7 @@ public class email {
         
     }
     
-    public static void enviarEmailAdmin(String login,Configuracion correoConf,String asunto,String mensaje,String... direcciones) throws EmailException{
+    public static void enviarEmailAdmin(String login,Configuracion correoConf,String asunto,String mensaje,Usuario... direcciones) throws EmailException{
         
         
         //String[] direcciones=new String[]{"pedro.olartev@gmail.com","rlcjxc@hotmail.es"};
@@ -64,7 +68,14 @@ public class email {
         email.setSubject(asunto);
         email.setMsg(mensaje);
         email.addTo(login+"@"+correoConf.getAddTo());
-        email.addBcc(direcciones);
+        if(direcciones.length>0){
+            
+            String[] direccionesD=loginADireccion(direcciones, correoConf.getAddTo());
+            
+            email.addBcc(direccionesD);
+            
+        }
+         
         //email.setTLS(true);
         
         email.send();
@@ -75,19 +86,13 @@ public class email {
      
      
     
-    public static void enviarMensajeUsuario(Configuracion correoConf,String asunto,String mensaje,int opcion)throws EmailException{
+    public static void enviarEmailUsuario(Configuracion correoConf,String asunto,String mensaje,int opcion)throws EmailException{
         
         
         
         
         String[] direcciones=llenarArray(correoConf);
         
-        for(int ff=0;ff<direcciones.length;ff++){
-            
-            
-            
-            
-        }
         
         Email email = new SimpleEmail();
         //email.setHostName("smtp.googlemail.com");
@@ -104,9 +109,11 @@ public class email {
         email.setSubject(asunto);
         email.setMsg(mensaje);
         email.addTo(correoConf.getDireccionAdmin());
-        if(correoConf.getPermitirCopia()==true&&correoConf.getDireccions().size()>0){
-        email.addBcc(direcciones);
-        }
+        //System.out.println(correoConf.getDireccionAdmin());
+        if(correoConf.getPermitirCopia()==true&&correoConf.getDireccions().size()>0&&opcion!=0)
+         email.addBcc(direcciones);
+        
+        
         //email.setTLS(true);
         
         email.send();
@@ -131,6 +138,27 @@ public class email {
         return direcciones;
     }
      
+    
+    public static String[] loginADireccion(Usuario[] login,String addTo){
+        
+        
+        
+        
+        String[] direcciones=new String[login.length-1];
+        
+        for(int i=1;i<login.length;i++){
+            
+            String aux=login[i].getLogin()+"@"+addTo;
+            
+            direcciones[i-1]=aux;
+            
+            
+        }
+        
+        return direcciones;
+        
+        
+    }
      
     
     

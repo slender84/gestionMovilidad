@@ -8,7 +8,7 @@ import exceptions.InstanceNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;

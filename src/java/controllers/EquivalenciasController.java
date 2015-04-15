@@ -32,7 +32,9 @@ import model.services.EquivalenciaService;
 import model.services.MensajeService;
 import model.utils.EquivalenciaRevisada;
 import model.utils.ReportBean;
+import model.utils.email;
 import net.sf.jasperreports.engine.JRException;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -518,7 +520,18 @@ public class EquivalenciasController implements Serializable{
         sessionController.creaMensaje("contrato modificado correctamente, se le ha enviado un mensaje al usuario", FacesMessage.SEVERITY_INFO);
         Mensaje m=new Mensaje(selectedMovilidad.getUsuario(), user, Calendar.getInstance().getTime(), "cambio de estado de contrato", "El estado de un contrato ahora es:"+apruebaOrechaza, false,true,false);
         mensajeService.enviarMensaje(m);
-        context.getSessionMap().remove("contrato");
+        
+        try{
+            
+            email.enviarEmailAdmin(selectedMovilidad.getUsuario().getLogin(), sessionController.getCorreoConf(),"cambio de estado de contrato" , "El estado de un contrato ahora es:"+apruebaOrechaza);
+            
+        }catch (EmailException ex){
+            
+            sessionController.creaMensaje("error al enviar el correo", FacesMessage.SEVERITY_ERROR);
+            
+        }
+        
+        
         
         return null;
     }

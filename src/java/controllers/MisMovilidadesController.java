@@ -20,6 +20,8 @@ import javax.faces.context.FacesContext;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UsuarioService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -182,11 +184,24 @@ public class MisMovilidadesController implements Serializable{
             
          
             if(selectedMovilidad.getEstado().equalsIgnoreCase("aceptada")){
-                
+                String textoMensaje="el usuario "+usuario.getLogin()+" quiere cancelar una movilidad en curso en: "+selectedMovilidad.getUniversidad().getNombre()+" con fecha de inicio:"+ sdf.format(selectedMovilidad.getFechaInicio())+" y fecha fin:"+sdf.format(selectedMovilidad.getFechaFin());
                 Mensaje mensaje=new Mensaje( admin,usuario, Calendar.getInstance().getTime(), "movilidad eliminada", "el usuario "+usuario.getLogin()+" quiere cancelar una movilidad en curso en: "+selectedMovilidad.getUniversidad().getNombre()+" con fecha de inicio:"+ sdf.format(selectedMovilidad.getFechaInicio())+" y fecha fin:"+sdf.format(selectedMovilidad.getFechaFin()), false,false,false);
                 mensajeService.enviarMensaje(mensaje);
                 sessionController.creaMensaje("se ha enviado un mensaje al coordinador para su cancelación", FacesMessage.SEVERITY_INFO);
                 selectedMovilidad=null;
+                
+                
+                try{
+         
+         email.enviarEmailUsuario(sessionController.getCorreoConf(), "Movilidad eliminada", textoMensaje, 1);
+         
+     }catch(EmailException ex){
+         
+         sessionController.creaMensaje("No se pudo enviar el correo", FacesMessage.SEVERITY_ERROR);
+         
+     }
+                
+                
                 return null;
                     
             }

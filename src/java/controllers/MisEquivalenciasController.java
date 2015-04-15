@@ -46,7 +46,9 @@ import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.services.UsuarioService;
 import model.utils.ReportBean;
+import model.utils.email;
 import net.sf.jasperreports.engine.JRException;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -543,6 +545,7 @@ public class MisEquivalenciasController implements Serializable{
             
         
         sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
+        String textoMensaje="el usuario "+user.getLogin()+" ha creado un contrato para la movilidad en "+selectedMovilidad.getUniversidad().getNombre();
         try{
         Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,true,false);
         mensajeService.enviarMensaje(m);
@@ -550,6 +553,17 @@ public class MisEquivalenciasController implements Serializable{
             sessionController.creaMensaje("Usuario inexistente", FacesMessage.SEVERITY_ERROR);
         }
         verConfirmar=false;
+        
+        
+        try{
+            
+            email.enviarEmailUsuario(sessionController.getCorreoConf(), "Contrato creado", textoMensaje, 1);
+            
+        }catch(EmailException ex){
+            
+           sessionController.creaMensaje("No se pudo enviar el email", FacesMessage.SEVERITY_ERROR);
+            
+        }
         
         return null;
         
@@ -583,12 +597,25 @@ public class MisEquivalenciasController implements Serializable{
         }
         
         sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
+        String textoMensaje="el usuario "+user.getLogin()+" ha modificado un contrato en la movilidad a "+selectedMovilidad.getUniversidad().getNombre();
      try{
      Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato modificado", "el usuario "+user.getLogin()+" ha modificado un contrato",false,true,false);
      mensajeService.enviarMensaje(m);
      }catch(Exception ex){
          
      }
+     
+     
+     try{
+         
+         email.enviarEmailUsuario(sessionController.getCorreoConf(), "Contrato modificado", textoMensaje, 1);
+         
+     }catch(EmailException ex){
+         
+         sessionController.creaMensaje("No se pudo enviar el correo", FacesMessage.SEVERITY_ERROR);
+         
+     }
+     
         
         verConfirmar=false;
         return null;
@@ -627,12 +654,24 @@ public class MisEquivalenciasController implements Serializable{
        
         
      sessionController.creaMensaje("se ha registrado el contrato correctamente", FacesMessage.SEVERITY_INFO);
+     String textoMensaje= "el usuario "+user.getLogin()+" ha creado un contrato para la movilidad en "+selectedMovilidad.getUniversidad().getNombre();
      try{
      Mensaje m=new Mensaje(usuarioService.buscarUsuario("admin"), user, Calendar.getInstance().getTime(),"contrato creado", "el usuario "+user.getLogin()+" ha creado un contrato",false,true,false);
      mensajeService.enviarMensaje(m);
      }catch(InstanceNotFoundException ex){
          
      }
+     
+     try{
+         
+         email.enviarEmailUsuario(sessionController.getCorreoConf(), "Contrato creado", textoMensaje, 1);
+         
+     }catch(EmailException ex){
+         
+         sessionController.creaMensaje("No se pudo enviar el correo", FacesMessage.SEVERITY_ERROR);
+         
+     }
+     
         verConfirmar=false;
         return null;
     
@@ -1123,10 +1162,18 @@ public class MisEquivalenciasController implements Serializable{
             Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Asignatura creada",textoMensaje,false ,true, false);
             mensajeService.enviarMensaje(m);
             
+            if(sessionController.getCorreoConf().getNotificarAsignaturas()==true){
             
-            
-        
-        
+        try{
+         
+         email.enviarEmailUsuario(sessionController.getCorreoConf(), "Asignatura creada", textoMensaje, 1);
+         
+     }catch(EmailException ex){
+         
+         sessionController.creaMensaje("No se pudo enviar el correo", FacesMessage.SEVERITY_ERROR);
+         
+     }
+            }
         
         
         
@@ -1199,11 +1246,19 @@ public class MisEquivalenciasController implements Serializable{
             Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Asignatura editada",textoMensaje,false ,true, false);
             mensajeService.enviarMensaje(m);
             
+        if(sessionController.getCorreoConf().getNotificarAsignaturas()==true){
         
+        try{
+         
+         email.enviarEmailUsuario(sessionController.getCorreoConf(), "Asignatura editada", textoMensaje, 1);
+         
+     }catch(EmailException ex){
+         
+         sessionController.creaMensaje("No se pudo enviar el correo", FacesMessage.SEVERITY_ERROR);
+         
+     }
         
-        
-        
-        
+        }
         
         
        

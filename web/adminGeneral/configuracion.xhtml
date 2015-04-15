@@ -63,17 +63,17 @@
                 
                 <h:panelGrid columns="2" cellspacing="5">
                     
-                    <p:outputLabel value="Dirección de envío de notificaciones"/>
+                    <p:outputLabel value="Dirección de recepción de notificaciones"/>
                     <p:inputText value="#{configuracionCorreoController.correoConf.direccionAdmin}"
                                  validatorMessage="Debe ser un correo válido, por ejemplo user@abc.es o user2@cde.com">
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                     </p:inputText>
                     <p:outputLabel value="Notificar por correo cuando el alumno crea o edita asignaturas"/>
                     <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.notificarAsignaturas}"/>
-                    <p:outputLabel value="Permitir enviar en copia"/>
+                    <p:outputLabel value="Permitir enviar copia"/>
                     <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirCopia}"/>
                     
-                    <h:outputLink value="#{request.contextPath}/adminGeneral/direcciones.xhtml">Direcciones para enviar en copia</h:outputLink>
+                    <h:outputLink value="#{request.contextPath}/adminGeneral/direcciones.xhtml">Direcciones para enviar copia</h:outputLink>
                     
                 </h:panelGrid>    
                 

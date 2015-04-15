@@ -185,7 +185,7 @@
                         <f:facet name="footer">
                             
                              <p:commandLink action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades:msgs">
-                                 <h:graphicImage value="/resources/img/message32.png" title="Escribir mensaje. Los usuarios repetidos se cuentan como uno"/>
+                                 <h:graphicImage value="/resources/img/message32.png" title="Escribir mensaje. A los usuarios repetidos solo se le envía una vez"/>
                              </p:commandLink>
                 
                             
@@ -235,7 +235,11 @@
             <br/><br/>
             
            
-            
+             <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+                   <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                       <p:graphicImage value="/resources/ajax-loader.gif" />
+                   </p:dialog>
             
              <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
             

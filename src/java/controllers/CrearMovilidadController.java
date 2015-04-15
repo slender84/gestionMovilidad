@@ -23,6 +23,8 @@ import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.services.UsuarioService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -279,13 +281,25 @@ public String crearMovilidad(){
                    
                }
                 
-                
-                Mensaje mensaje=new Mensaje(admin,usuario,  Calendar.getInstance().getTime(), "movilidad creada", "el usuario "+usuario.getNombre()+" "+usuario.getApellido1()+""
-                        + " ha creado una movilidad a "+selectedUniversidad+" entre el "+sdf.format(fechaInicio)+" y "+sdf.format(fechaFin) , false,true,false);
+                String mensajeTexto="el usuario "+usuario.getLogin()
+                        + " ha creado una movilidad a "+selectedUniversidad+" entre el "+sdf.format(fechaInicio)+" y "+sdf.format(fechaFin);
+                Mensaje mensaje=new Mensaje(admin,usuario,  Calendar.getInstance().getTime(), mensajeTexto , false,true,false);
                 
                     mensajeService.enviarMensaje(mensaje);
                 
-                
+                try{
+                    
+                    email.enviarEmailUsuario(sessionController.getCorreoConf(),"movilidad creada",mensajeTexto,1 );
+                    
+                    
+                }catch(EmailException emEx){
+                    
+                    
+                    sessionController.creaMensaje("El correo no ha podido ser enviado", FacesMessage.SEVERITY_ERROR);
+                }
+                    
+                    
+                    
                 sessionController.creaMensaje("movilidad creada", FacesMessage.SEVERITY_INFO);
                 sessionController.creaMensaje(usuario.getLogin()+" a "+ selectedUniversidad+" "+selectedPais+" "+" " + " de "+sdf.format(fechaInicio)+" a "+ sdf.format(fechaFin), FacesMessage.SEVERITY_INFO);
                 selectedUniversidad="";

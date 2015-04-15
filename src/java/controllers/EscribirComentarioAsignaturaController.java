@@ -20,6 +20,8 @@ import javax.faces.context.FacesContext;
 import model.services.AsignaturaService;
 import model.services.MensajeService;
 import model.services.UsuarioService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -228,6 +230,17 @@ public class EscribirComentarioAsignaturaController {
             
             Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Asignatura comentada",textoMensaje,false ,true, false);
             mensajeService.enviarMensaje(m);
+            
+            try{
+                
+                email.enviarEmailUsuario(sessionController.getCorreoConf(), "asignatura comentada", textoMensaje, 1);
+                
+            }catch(EmailException ex){
+                
+                sessionController.creaMensaje("se ha producido un error enviando el mensaje", FacesMessage.SEVERITY_ERROR);
+                
+            }
+            
             
             return null;
             

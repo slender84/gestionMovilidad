@@ -25,6 +25,8 @@ import org.primefaces.event.RowEditEvent;
 import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -406,6 +408,19 @@ public class MovilidadesController implements Serializable{
         Mensaje mensaje=new Mensaje(m.getUsuario() ,usuario, Calendar.getInstance().getTime(),"cambio de estado de movilidad","destino:"+m.getUniversidad().getNombre()+" \n"+"fecha de inicio:"+sdf.format(m.getFechaInicio())+" \n"+"fecha fin:"+sdf.format(m.getFechaFin())+"\n\n"+ "el estado de la movilidad ahora es: "+m.getEstado(), false,true,false);
             mensajeService.enviarMensaje(mensaje);
             sessionController.creaMensaje("estado de una movilidad modificado, se ha enviado un mensaje", FacesMessage.SEVERITY_INFO);
+            
+            try{
+                
+                email.enviarEmailAdmin(m.getUsuario().getLogin(),sessionController.correoConf, "cambio de estado de movilidad", "destino:"+m.getUniversidad().getNombre()+" \n"+"fecha de inicio:"+sdf.format(m.getFechaInicio())+" \n"+"fecha fin:"+sdf.format(m.getFechaFin())+"\n\n"+ "el estado de la movilidad ahora es: "+m.getEstado());
+                
+                
+                
+            }catch(EmailException ex){
+                
+                sessionController.creaMensaje("No se ha podido enviar el correo",FacesMessage.SEVERITY_ERROR);
+            }
+            
+            
         }
                return null;
     }
@@ -446,6 +461,8 @@ public class MovilidadesController implements Serializable{
     
     public void activaTexto(){
         
+        
+        
         if(selectedMovilidades.isEmpty()==false){
         activaTexto=true;
     }else{
@@ -455,6 +472,9 @@ public class MovilidadesController implements Serializable{
     
     
     public String enviarMensajesVarios(){
+        if(selectedMovilidades==null)
+            return null;
+        
     if(selectedMovilidades.isEmpty()){
         return null;
     }
@@ -464,13 +484,37 @@ public class MovilidadesController implements Serializable{
         s.add(m.getUsuario());
     }
     
+    Usuario[] auxArray=new Usuario[s.size()];
         
-    
+    int i=0;
     for(Usuario u:s){
         Mensaje mensaje=new Mensaje(u,usuario,  Calendar.getInstance().getTime(), tema, texto, false,false,false);
         mensajeService.enviarMensaje(mensaje);
+        auxArray[i]=u;
+        i++;
         
     } 
+    
+    
+    
+    
+    String loginPrincipal=auxArray[0].getLogin();
+    
+    try{
+        
+        if(auxArray.length>1){
+        email.enviarEmailAdmin(loginPrincipal, sessionController.getCorreoConf(), tema, texto, auxArray);
+        
+        }else{
+            email.enviarEmailAdmin(loginPrincipal, sessionController.getCorreoConf(), tema, texto);
+        }
+        
+        
+    }catch(EmailException ex){
+        
+        sessionController.creaMensaje("Error enviando el correo", FacesMessage.SEVERITY_ERROR);
+        
+    }
     
         sessionController.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
         activaTexto=false;

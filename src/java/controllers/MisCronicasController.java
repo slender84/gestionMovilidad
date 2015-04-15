@@ -21,6 +21,8 @@ import model.services.MensajeService;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.services.UsuarioService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -234,7 +236,7 @@ public class MisCronicasController implements Serializable{
         
         
         if (alias.equals("")){
-            alias=usuario.getNombre()+" "+usuario.getApellido1()+" "+usuario.getApellido2();
+            alias=usuario.getLogin();
         }
         
         Cronica c=new Cronica(selectedMovilidad.getUniversidad(), usuario, Calendar.getInstance().getTime(),"pendiente", alias,texto);
@@ -258,9 +260,19 @@ public class MisCronicasController implements Serializable{
             
         }
         
-        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario creado ", "el usuario "+usuario.getLogin()+" ha escrito una crónica",false,true,false);
+        Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Crónica creada ", "el usuario "+usuario.getLogin()+" ha escrito una crónica",false,true,false);
         mensajeService.enviarMensaje(m);
         sessionController.creaMensaje("crónica enviada correctamente, a la espera de moderación", FacesMessage.SEVERITY_INFO);
+        
+        try{
+            String textoMensaje="el usuario "+usuario.getLogin()+" ha escrito una crónica sobre su movilidad en "+selectedMovilidad.getUniversidad().getNombre();
+            email.enviarEmailUsuario(sessionController.getCorreoConf(), "crónica creada",textoMensaje , 1);
+            
+        }catch(EmailException ex){
+            
+            sessionController.creaMensaje("Se ha producido un error enviando el correo", FacesMessage.SEVERITY_ERROR);
+        }
+        
         btnActivados=false;
         texto="";
         alias="";
@@ -302,6 +314,18 @@ public class MisCronicasController implements Serializable{
         Mensaje m=new Mensaje(admin, usuario, Calendar.getInstance().getTime(), "Comentario editado ", "el usuario "+usuario.getLogin()+" ha editado un comentario",false,true,false);
         mensajeService.enviarMensaje(m);
     sessionController.creaMensaje("Cronica actualizada, pendiente de moderación", FacesMessage.SEVERITY_INFO);
+    
+    String textoMensaje= "el usuario "+usuario.getLogin()+" ha editado un comentario sobre su movilidad en "+selectedCronica.getUniversidad().getNombre();
+    
+    try{
+        
+        email.enviarEmailUsuario(sessionController.getCorreoConf(), "Crónica editada", textoMensaje, 1);
+        
+    }catch(EmailException ex){
+        
+        sessionController.creaMensaje("se ha producido un error enviando el correo", FacesMessage.SEVERITY_ERROR);
+    }
+    
     return null;
     
 }

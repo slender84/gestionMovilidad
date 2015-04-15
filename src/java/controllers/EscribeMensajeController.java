@@ -13,6 +13,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.MensajeService;
 import model.services.UsuarioService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -119,18 +121,27 @@ public class EscribeMensajeController implements Serializable{
     
     
     
-    public void activarTexto(){
+    public String activarTexto(){
+        
+        if(selectedUsuarios==null)
+            return null;
         
         if(selectedUsuarios.isEmpty()==false){
         activaTexto=true;
+        return null;
     }else{
             sessionController.creaMensaje("hay que seleccionar al menos un usuario", FacesMessage.SEVERITY_ERROR);
+            return null;
+                    
         }
     }
     
    
     
      public String enviarMensajesVarios(){
+         if(selectedUsuarios==null)
+             return null;
+         
     if(selectedUsuarios.isEmpty()){
         return null;
     }
@@ -141,8 +152,13 @@ public class EscribeMensajeController implements Serializable{
          }catch(InstanceNotFoundException ex){
              
          }
+         
+         Usuario[] logins=new Usuario[selectedUsuarios.size()];
+         int i=0;
     for(Usuario u:selectedUsuarios){
+        logins[i]=u;
         Mensaje mensaje=new Mensaje(u, aux, Calendar.getInstance().getTime(), tema, texto,false,false,false);
+        i++;
         try{
         mensajeService.enviarMensaje(mensaje);
         }catch(Exception ex){
@@ -151,6 +167,26 @@ public class EscribeMensajeController implements Serializable{
             return null;
         }
     }
+    
+    String loginPrincipal=logins[0].getLogin();
+    
+     try{
+        
+        if(logins.length>1){
+        email.enviarEmailAdmin(loginPrincipal, sessionController.getCorreoConf(), tema, texto, logins);
+        
+        }else{
+            email.enviarEmailAdmin(loginPrincipal, sessionController.getCorreoConf(), tema, texto);
+        }
+        
+        
+    }catch(EmailException ex){
+        
+        sessionController.creaMensaje("Error enviando el correo", FacesMessage.SEVERITY_ERROR);
+        
+    }
+    
+    
          
         sessionController.creaMensaje("mensajes enviados correctamente", FacesMessage.SEVERITY_INFO);
         activaTexto=false;

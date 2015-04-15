@@ -15,6 +15,8 @@ import javax.faces.bean.ViewScoped;
 import model.services.AsignaturaService;
 import model.services.MensajeService;
 import model.services.UsuarioService;
+import model.utils.email;
+import org.apache.commons.mail.EmailException;
 
 
 
@@ -162,6 +164,15 @@ public class MisComentariosAsignaturaController {
             Mensaje m=new Mensaje(admin, sessionController.getUser(), Calendar.getInstance().getTime(),"Comentario de asignatura editado",textoMensaje,false ,true, false);
             mensajeService.enviarMensaje(m);
         sessionController.creaMensaje("comentario editado correctamente", FacesMessage.SEVERITY_INFO);
+        
+        try{
+            
+            email.enviarEmailUsuario(sessionController.getCorreoConf(),"Comentario de asignatura editado" , textoMensaje, 1);
+            
+        }catch(EmailException ex){
+            sessionController.creaMensaje("no se ha podido enviar el mensaje", FacesMessage.SEVERITY_ERROR);
+        }
+        
         return null;
     }
     

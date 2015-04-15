@@ -143,6 +143,8 @@
                 </p:column>
                 <p:column headerText="estado" sortBy="#{contrato.estado}" styleClass="centrar">
                     <h:outputText value="#{contrato.estado}"/>
+                    <h:graphicImage value="/resources/img/logo-udc.png" style="width: 20px;height: 20px;" title="Documento disponible" rendered="#{contrato.archivo ne null}"/>
+
                 </p:column>
                 
                 <p:column headerText="ver contrato/editar" styleClass="centrar">

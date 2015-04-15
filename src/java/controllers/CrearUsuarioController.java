@@ -230,7 +230,7 @@ public class CrearUsuarioController implements Serializable{
         m.setTexto("el usuario "+login+" se ha dado de alta en el sistema");
         mensajeService.enviarMensaje(m);
         
-        email.enviarMensajeUsuario(correoConf, "usuario creado", "el usuario "+login+" se ha dado de alta en el sistema",0);
+        email.enviarEmailUsuario(correoConf, "usuario creado", "el usuario "+login+" se ha dado de alta en el sistema",0);
         
         }catch(Exception ex){
             
