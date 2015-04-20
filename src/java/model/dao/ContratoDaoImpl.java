@@ -4,6 +4,7 @@ package model.dao;
 import entities.Contrato;
 import entities.Movilidad;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,10 +24,51 @@ public class ContratoDaoImpl extends GenericDaoHibernate<Contrato, Integer> impl
         
         return getSession().createCriteria(Contrato.class)
                 .add(Restrictions.like("estado","pendiente")).list();
-                
-                        
+               
+    }
+    
+    
+    @Override
+    public List<Contrato> listarTodosContratos(){
         
+        return getSession().createQuery("select c from Contrato c order by c.fecha desc").list();
         
     }
     
-}
+    @Override
+     public List<Contrato> listarContratosPorFiltro(Map<String,String> listaFiltros){
+         
+         if(listaFiltros.containsKey("curso"))
+            
+            getSession().enableFilter("cursoAcademicoContrato").setParameter("cursoAcademicoContratoParam", listaFiltros.get("curso"));
+        if(listaFiltros.containsKey("estado")){
+            
+            getSession().enableFilter("estadoContrato").setParameter("estadoContratoParam", listaFiltros.get("estado"));
+        }
+        if(listaFiltros.containsKey("pais")){
+           
+            if(listaFiltros.containsKey("universidad")==false){
+                
+                return getSession().createQuery("select c from Contrato c where c.movilidad.universidad.nombre=:universidad order by c.fecha desc").setParameter("paisContrato", listaFiltros.get("pais")).list();
+            }else{
+                
+                getSession().enableFilter("universidadContrato").setParameter("universidadContratoParam", listaFiltros.get("universidad"));
+                
+                
+            }
+                
+            
+        }
+        
+        return listarTodosContratos();
+        
+    }
+         
+         
+         
+     }
+    
+    
+    
+    
+    

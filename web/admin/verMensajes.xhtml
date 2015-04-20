@@ -111,7 +111,7 @@
                         
                          <f:facet name="header">Mensajes enviados</f:facet>
                          
-                         <p:column headerText="login" sortBy="#{mensaje.usuarioByDestino.login}" filterBy="#{mensaje.usuarioByDestino.login}" styleClass="mandadoPor">
+                         <p:column headerText="login" sortBy="#{mensaje.usuarioByDestino.login}" filterMatchMode="contains" filterBy="#{mensaje.usuarioByDestino.login}" styleClass="mandadoPor">
                              <h:outputText value="#{mensaje.usuarioByDestino.login}"/>
                          </p:column>
                          

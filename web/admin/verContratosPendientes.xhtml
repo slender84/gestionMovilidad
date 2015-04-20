@@ -12,7 +12,75 @@
     <h:body styleClass="blue" onload="PF('tablaContratos').filter();">
         
         <ezcomp:out/>
-        <h2 style="text-align: center">Contratos pendientes</h2>
+        <h2 style="text-align: center">Contratos</h2>
+        
+        
+        <h:form id="formFiltro">
+            <p:panel header="Filtros" style="background-color: khaki;font-size: 12px">
+                <h:panelGrid columns="9" cellpadding="20" >
+                
+                    <p:outputPanel id="panelCurso" style="font-size: 12px;">
+                <p:outputLabel value="curso académico: "/>
+                <p:selectOneMenu value="#{sessionController.filtroContratoCursoAcademico}">
+                
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
+                    <f:selectItems value="#{contratosPendientesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
+                                   itemValue="#{cursoAcademico.cursoAcademico}"/>
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+                
+                <p:outputPanel id="panelEstado" style="font-size: 12px;">
+                <p:outputLabel value="Estado: "/>
+                <p:selectOneMenu value="#{sessionController.filtroContratoEstado}">
+                
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
+                    <f:selectItems value="#{sessionController.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+               <p:outputPanel id="panelPais" style="font-size: 12px;">
+                    
+                <p:outputLabel value="Pais: "/>
+                <p:selectOneMenu value="#{sessionController.filtroContratoPais}" filterMatchMode="contains" filter="true">
+                    <p:ajax event="change" listener="#{contratosPendientesController.onChangePais}" update=":formFiltro:panelPais :formFiltro:panelUniversidad"/>
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
+                    <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
+                
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+                
+                <p:outputPanel id="panelUniversidad" style="font-size: 12px;">
+                <p:outputLabel value="Universidad: "/>
+                <p:selectOneMenu value="#{sessionController.filtroContratoUniversidad}" rendered="#{contratosPendientesController.checkPais}" filterMatchMode="contains" filter="true">
+                    <f:selectItem itemLabel="Todas" itemValue="todos"/>
+                    
+                    
+                    <f:selectItems value="#{contratosPendientesController.listaUniversidades}" var="universidad" 
+                                   itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+                
+               
+                    <p:commandButton style="font-size: 12px" value="buscar" action="#{contratosPendientesController.buscarContratos}" update=":form1" oncomplete="PF('tablaContratos').filter();"/>
+                    <p:commandButton  style="font-size: 12px" value="limpiar" action="#{contratosPendientesController.limpiarFiltros}" update=":formFiltro"/>
+                
+            
+            </h:panelGrid>
+            
+            </p:panel>
+        </h:form>
+        
+        <br/>
+        
+        
+        
+        
+        
+        
+        
         <h:form id="form1">
             
             <p:growl />
@@ -41,6 +109,42 @@
                 
                 </p:column>
                 
+                <p:column headerText="Estado" filterBy="#{contrato.estado}" filterMatchMode="exact" sortBy="#{contrato.estado}" styleClass="estadoPendiente">
+                
+                    <f:facet name="filter">
+                        
+                        <p:selectOneMenu onchange="PF('tablaContratos').filter()">
+                            
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                            <f:selectItems var="estados" value="#{sessionController.listaEstados}" itemLabel="#{estados.estado}" itemValue="#{estados.estado}"/>
+                        </p:selectOneMenu>
+                        
+                    </f:facet>
+                    
+                    <h:outputText value="#{contrato.estado}"/>
+                
+                </p:column>
+                
+                <p:column headerText="Curso" sortBy="#{contrato.movilidad.cursoacademico.cursoAcademico}" filterBy="#{contrato.movilidad.cursoacademico.cursoAcademico}" filterMatchMode="exact" styleClass="cursoPendiente">
+                    
+                    <f:facet name="filter">
+                        
+                        <p:selectOneMenu onchange="PF('tablaContratos').filter();">
+                            
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                            <f:selectItems value="#{contratosPendientesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
+                                   itemValue="#{cursoAcademico.cursoAcademico}"/>
+                            
+                        </p:selectOneMenu>
+                        
+                    </f:facet>
+                    
+                    <h:outputText value="#{contrato.movilidad.cursoacademico.cursoAcademico}"/>
+                    
+                </p:column>
+                
+                
+                
                 
                 <p:column headerText="Fecha" sortBy="#{contrato.fecha}" styleClass="fechaPendiente">
                 
@@ -49,6 +153,9 @@
                     </h:outputText>
                 
                 </p:column>
+                
+                
+                
                 
                 <p:column headerText="Ver contrato" styleClass="verContratoPendiente">
                     

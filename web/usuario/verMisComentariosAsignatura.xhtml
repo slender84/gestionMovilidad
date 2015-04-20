@@ -40,7 +40,7 @@
                 
                 </p:column>
                 
-                <p:column headerText="asignatura" sortBy="#{comentario.asignatura.nombreAsignatura}" filterBy="#{comentario.asignatura.nombreAsignatura}">
+                <p:column headerText="asignatura" sortBy="#{comentario.asignatura.nombreAsignatura}" filterBy="#{comentario.asignatura.nombreAsignatura}" filterMatchMode="contains">
                 
                     <h:outputText value="#{comentario.asignatura.nombreAsignatura}"/>
                 

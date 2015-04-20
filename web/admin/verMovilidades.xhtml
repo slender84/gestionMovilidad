@@ -97,7 +97,7 @@
                     <h:outputText value="Movilidades"/>
                 </f:facet> 
                 
-                <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="loginMovilidadAdmin" filterBy="#{movilidad.usuario.login}">
+                <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="loginMovilidadAdmin" filterBy="#{movilidad.usuario.login}" filterMatchMode="contains">
                     
                     <h:outputText value="#{movilidad.usuario.login}"/>
                 </p:column>
@@ -108,7 +108,7 @@
                 
                 </p:column>
                 
-                <p:column headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidadMovilidadAdmin" filterBy="#{movilidad.universidad.nombre}">
+                <p:column headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidadMovilidadAdmin" filterBy="#{movilidad.universidad.nombre}" filterMatchMode="contains">
                     
                     <h:outputText value="#{movilidad.universidad.nombre}"/>
                     

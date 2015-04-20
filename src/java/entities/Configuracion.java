@@ -35,11 +35,12 @@ public class Configuracion  implements java.io.Serializable {
      private String direccionAdmin;
      private Boolean permitirCopia;
      private Boolean notificarAsignaturas;
+     private Boolean cargarTodosContratos;
      private Set<Direccion> direccions = new HashSet<Direccion>(0);
     public Configuracion() {
     }
 
-    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Boolean notificarAsignaturas,Set<Direccion> direccions) {
+    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Boolean notificarAsignaturas,Boolean cargarTodosContratos,Set<Direccion> direccions) {
        this.direccion = direccion;
        this.password = password;
        this.smtpPort = smtpPort;
@@ -51,6 +52,7 @@ public class Configuracion  implements java.io.Serializable {
        this.direccionAdmin=direccionAdmin;
        this.permitirCopia = permitirCopia;
        this.notificarAsignaturas=notificarAsignaturas;
+       this.cargarTodosContratos=cargarTodosContratos;
        this.direccions = direccions;
     }
    
@@ -169,8 +171,21 @@ public class Configuracion  implements java.io.Serializable {
         return this.notificarAsignaturas;
     }
     
+    
+    
     public void setNotificarAsignaturas(Boolean notificarAsignaturas) {
         this.notificarAsignaturas = notificarAsignaturas;
+    }
+    
+    @Column(name="cargarTodosContratos")
+    public Boolean getCargarTodosContratos() {
+        return this.cargarTodosContratos;
+    }
+    
+    
+    
+    public void setCargarTodosContratos(Boolean cargarTodosContratos) {
+        this.cargarTodosContratos = cargarTodosContratos;
     }
     
     @OneToMany(fetch=FetchType.EAGER, mappedBy="configuracion")

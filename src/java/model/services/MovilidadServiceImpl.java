@@ -231,6 +231,17 @@ public class MovilidadServiceImpl implements MovilidadService{
         
     }
     
+    @Override
+    @Transactional(readOnly = true)
+    public List<Contrato> listarContratosPorFiltro(Map<String,String> listaFiltros){
+        
+        return contratoDao.listarContratosPorFiltro(listaFiltros);
+        
+    }
+    
+    
+    
+    
     
      @Override
      @Transactional(readOnly = true)
@@ -241,4 +252,13 @@ public class MovilidadServiceImpl implements MovilidadService{
          
      }
     
+     @Override
+     @Transactional(readOnly = true)
+     public List<Contrato> listarTodosContratos(){
+         
+         return contratoDao.listarTodosContratos();
+         
+         
+     }
+     
 }

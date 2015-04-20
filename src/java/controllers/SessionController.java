@@ -35,7 +35,10 @@ public class SessionController implements Serializable {
     private String filtroPais="todos";
     private String filtroUniversidad="todos";
     
-    
+    private String filtroContratoEstado="todos";
+    private String filtroContratoCursoAcademico="todos";
+    private String filtroContratoPais="todos";
+    private String filtroContratoUniversidad="todos";
     
     Configuracion correoConf;
     
@@ -135,6 +138,38 @@ public class SessionController implements Serializable {
     public void setFiltroUniversidad(String filtroUniversidad) {
         this.filtroUniversidad = filtroUniversidad;
     }
+
+    public String getFiltroContratoEstado() {
+        return filtroContratoEstado;
+    }
+
+    public void setFiltroContratoEstado(String filtroContratoEstado) {
+        this.filtroContratoEstado = filtroContratoEstado;
+    }
+
+    public String getFiltroContratoCursoAcademico() {
+        return filtroContratoCursoAcademico;
+    }
+
+    public void setFiltroContratoCursoAcademico(String filtroContratoCursoAcademico) {
+        this.filtroContratoCursoAcademico = filtroContratoCursoAcademico;
+    }
+
+    public String getFiltroContratoPais() {
+        return filtroContratoPais;
+    }
+
+    public void setFiltroContratoPais(String filtroContratoPais) {
+        this.filtroContratoPais = filtroContratoPais;
+    }
+
+    public String getFiltroContratoUniversidad() {
+        return filtroContratoUniversidad;
+    }
+
+    public void setFiltroContratoUniversidad(String filtroContratoUniversidad) {
+        this.filtroContratoUniversidad = filtroContratoUniversidad;
+    }
     
     
     
@@ -185,6 +220,17 @@ public class SessionController implements Serializable {
         
         
     }
+    
+    
+    public void limpiarFiltrosContrato(){
+        
+        filtroContratoCursoAcademico="todos";
+        filtroContratoEstado="todos";
+        filtroContratoPais="todos";
+        filtroContratoUniversidad="todos";
+        
+    }
+    
     
          public Configuracion getCorreoConf(){
         try{

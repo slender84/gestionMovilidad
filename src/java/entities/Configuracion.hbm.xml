@@ -41,6 +41,9 @@
         <property name="notificarAsignaturas" type="java.lang.Boolean">
             <column name="notificarAsignaturas" />
         </property>
+        <property name="cargarTodosContratos" type="java.lang.Boolean">
+            <column name="cargarTodosContratos" />
+        </property>
         <set name="direccions" cascade="save-update" table="direccion" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="configuracion" not-null="true" />

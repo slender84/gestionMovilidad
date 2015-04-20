@@ -2,14 +2,19 @@
 package controllers;
 
 import entities.Contrato;
+import entities.Cursoacademico;
 import entities.Movilidad;
+import entities.Universidad;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.services.MovilidadService;
+import model.services.UniversidadService;
 
 
 @ManagedBean
@@ -22,12 +27,20 @@ public class ContratosPendientesController {
     @ManagedProperty(value="#{movilidadService}")
     private MovilidadService movilidadService;
     
+    @ManagedProperty(value="#{universidadService}")
+    private UniversidadService universidadService;
+    
+    
     private ArrayList<Contrato> listaContratos;
     private ArrayList<Contrato> filteredContratos;
     
     private Contrato selectedContrato;
     private Movilidad selectedMovilidad;
     
+    private ArrayList<Cursoacademico>listaCursoAcademico;
+    private ArrayList<Universidad> listaUniversidades;
+    
+    private Boolean checkPais;
     
     
     
@@ -48,6 +61,40 @@ public class ContratosPendientesController {
 
     public void setMovilidadService(MovilidadService movilidadService) {
         this.movilidadService = movilidadService;
+    }
+
+    public UniversidadService getUniversidadService() {
+        return universidadService;
+    }
+
+    public void setUniversidadService(UniversidadService universidadService) {
+        this.universidadService = universidadService;
+    }
+
+    public ArrayList<Universidad> getListaUniversidades() {
+        return listaUniversidades;
+    }
+
+    public void setListaUniversidades(ArrayList<Universidad> listaUniversidades) {
+        this.listaUniversidades = listaUniversidades;
+    }
+
+    public Boolean getCheckPais() {
+        return checkPais;
+    }
+
+    public void setCheckPais(Boolean checkPais) {
+        this.checkPais = checkPais;
+    }
+    
+    
+
+    public ArrayList<Cursoacademico> getListaCursoAcademico() {
+        return listaCursoAcademico;
+    }
+
+    public void setListaCursoAcademico(ArrayList<Cursoacademico> listaCursoAcademico) {
+        this.listaCursoAcademico = listaCursoAcademico;
     }
     
     
@@ -95,9 +142,55 @@ public class ContratosPendientesController {
     @PostConstruct
     public void init(){
         
-        listaContratos=(ArrayList<Contrato>)movilidadService.listarContratosPendientes();
+        listaContratos=(ArrayList<Contrato>)movilidadService.listarTodosContratos();
+        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
+        
+    boolean todosNulos=true;
+        Map<String,String> m=new HashMap<String,String>();
+        
+        if(sessionController.getFiltroContratoEstado().equals("todos")==false){
+            
+          m.put("estado", sessionController.getFiltroEstado());
+        todosNulos=false;
+            
+        }
+        
+        if(sessionController.getFiltroCursoAcademico().equals("todos")==false){
+          m.put("curso", sessionController.getFiltroContratoCursoAcademico());
+           
+        todosNulos=false;
+        }
+         
+        if(sessionController.getFiltroPais().equals("todos")==false){
+            
+          m.put("pais", sessionController.getFiltroContratoPais());
+          todosNulos=false; 
+          checkPais=true;
+           listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(sessionController.getFiltroContratoPais());
+             if(sessionController.getFiltroContratoUniversidad().equals("todos")==false){
+                 m.put("universidad", sessionController.getFiltroContratoUniversidad());
+                 
+                
+                 
+             }
+                }
+     
         
         
+        if(todosNulos==true){
+           
+            if(sessionController.getCorreoConf().getCargarTodosContratos()==true){
+             
+             listaContratos=(ArrayList<Contrato>)movilidadService.listarTodosContratos();
+             
+         } 
+       
+       }else{
+            
+            listaContratos=(ArrayList<Contrato>)movilidadService.listarContratosPorFiltro(m);
+        }
+       
+         
     }
     
     
@@ -116,6 +209,74 @@ public class ContratosPendientesController {
         
     }
     
+    
+    public void limpiarFiltros(){
+        
+        
+        sessionController.limpiarFiltrosContrato();
+        checkPais=false;
+        
+        
+    }
+    
+    
+    public void onChangePais(){
+        
+        
+        
+        if(sessionController.getFiltroContratoPais().equals("todos")){
+            checkPais=false;
+        }
+        else{
+            if(checkPais==false)
+            checkPais=true;
+            
+          listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(sessionController.getFiltroPais());  
+        }
+        
+    }
+    
+    public String buscarContratos(){
+        
+        boolean todosNulos=false;
+        Map<String,String> m=new HashMap<String,String>();
+         
+       
+        
+        if(sessionController.getFiltroContratoEstado().equals("todos")==false){
+            
+          m.put("estado", sessionController.getFiltroContratoEstado());
+        todosNulos=false;
+            
+        }
+        
+        if(sessionController.getFiltroContratoCursoAcademico().equals("todos")==false){
+          m.put("curso", sessionController.getFiltroContratoCursoAcademico());
+           
+        todosNulos=false;
+        }
+        
+        if(sessionController.getFiltroContratoPais().equals("todos")==false){
+            
+          m.put("pais", sessionController.getFiltroContratoPais());
+          todosNulos=false;  
+             if(sessionController.getFiltroContratoUniversidad().equals("todos")==false){
+                 m.put("universidad", sessionController.getFiltroContratoUniversidad());
+                 
+             }
+                }
+     
+        if(todosNulos==true){
+           
+            listaContratos=(ArrayList<Contrato>)movilidadService.listarTodosContratos();
+        return null;
+                }
+        
+        listaContratos=(ArrayList<Contrato>)movilidadService.listarContratosPorFiltro(m);
+        return null;
+        
+        
+    }
     
     
     

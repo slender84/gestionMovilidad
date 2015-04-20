@@ -24,7 +24,7 @@
                          rowKey="#{usuario.login}"
                          styleClass="borderless">
             
-                <p:column headerText="login" filterBy="#{usuario.login}" >
+                <p:column headerText="login" filterBy="#{usuario.login}" filterMatchMode="contains" >
                 
                     <h:outputText value="#{usuario.login}"/>
                     

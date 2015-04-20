@@ -38,7 +38,7 @@
                     
                 </p:column>
                 
-                <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="startsWith" styleClass="uniCronica">
+                <p:column headerText="universidad" sortBy="#{cronica.universidad.nombre}" filterBy="#{cronica.universidad.nombre}" filterMatchMode="contains" styleClass="uniCronica">
                 
                     <h:outputLink value="#{cronica.universidad.web}" target="_blank" rendered="#{not empty cronica.universidad.web}"><h:outputText value="#{cronica.universidad.nombre}"/></h:outputLink>
                     <h:outputText value="#{cronica.universidad.nombre}" rendered="#{empty cronica.universidad.web}"/>

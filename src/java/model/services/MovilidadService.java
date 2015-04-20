@@ -35,4 +35,6 @@ public interface MovilidadService {
     public void editarMovilidad(Movilidad m);
     public List<Movilidad> listarMovilidadPorFiltro(Map<String,String> listaFiltros);
     public List<Contrato> listarContratosPendientes();
+    public List<Contrato> listarTodosContratos();
+    public List<Contrato> listarContratosPorFiltro(Map<String,String> listaFiltros);
 }

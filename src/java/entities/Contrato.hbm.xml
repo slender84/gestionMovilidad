@@ -28,5 +28,17 @@
                 <column name="idEquivalencia" not-null="true" />
             </many-to-many>
         </set>
+        <filter name="cursoAcademicoContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.cursoAcademico=:cursoAcademicoContratoParam)"/>
+        <filter name="universidadContrato" condition="nombreUniversidad=:universidadContratoParam"/>
+        <filter name="estadoContrato" condition="estado=:estadoContratoParam"/>
     </class>
+    <filter-def name="cursoAcademicoContrato">
+        <filter-param name="cursoAcademicoContratoParam" type="string"/>
+    </filter-def>
+    <filter-def name="universidadContrato">
+        <filter-param name="universidadContratoParam" type="string"/>
+    </filter-def>
+    <filter-def name="estadoContrato">
+        <filter-param name="estadoContratoParam" type="string"/>
+    </filter-def>
 </hibernate-mapping>
