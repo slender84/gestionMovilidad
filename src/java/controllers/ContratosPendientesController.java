@@ -40,7 +40,7 @@ public class ContratosPendientesController {
     private ArrayList<Cursoacademico>listaCursoAcademico;
     private ArrayList<Universidad> listaUniversidades;
     
-    private Boolean checkPais;
+    private boolean checkPais;
     
     
     
@@ -79,11 +79,11 @@ public class ContratosPendientesController {
         this.listaUniversidades = listaUniversidades;
     }
 
-    public Boolean getCheckPais() {
+    public boolean getCheckPais() {
         return checkPais;
     }
 
-    public void setCheckPais(Boolean checkPais) {
+    public void setCheckPais(boolean checkPais) {
         this.checkPais = checkPais;
     }
     
@@ -142,7 +142,7 @@ public class ContratosPendientesController {
     @PostConstruct
     public void init(){
         
-        listaContratos=(ArrayList<Contrato>)movilidadService.listarTodosContratos();
+        //listaContratos=(ArrayList<Contrato>)movilidadService.listarTodosContratos();
         listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
         
     boolean todosNulos=true;
@@ -150,18 +150,18 @@ public class ContratosPendientesController {
         
         if(sessionController.getFiltroContratoEstado().equals("todos")==false){
             
-          m.put("estado", sessionController.getFiltroEstado());
+          m.put("estado", sessionController.getFiltroContratoEstado());
         todosNulos=false;
             
         }
         
-        if(sessionController.getFiltroCursoAcademico().equals("todos")==false){
+        if(sessionController.getFiltroContratoCursoAcademico().equals("todos")==false){
           m.put("curso", sessionController.getFiltroContratoCursoAcademico());
            
         todosNulos=false;
         }
          
-        if(sessionController.getFiltroPais().equals("todos")==false){
+        if(sessionController.getFiltroContratoPais().equals("todos")==false){
             
           m.put("pais", sessionController.getFiltroContratoPais());
           todosNulos=false; 
@@ -231,7 +231,7 @@ public class ContratosPendientesController {
             if(checkPais==false)
             checkPais=true;
             
-          listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(sessionController.getFiltroPais());  
+          listaUniversidades=(ArrayList < Universidad >)universidadService.listarPorPais(sessionController.getFiltroContratoPais());  
         }
         
     }

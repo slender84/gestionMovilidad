@@ -29,7 +29,7 @@
             </many-to-many>
         </set>
         <filter name="cursoAcademicoContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.cursoAcademico=:cursoAcademicoContratoParam)"/>
-        <filter name="universidadContrato" condition="nombreUniversidad=:universidadContratoParam"/>
+        <filter name="universidadContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.nombreUniversidad=:universidadContratoParam)"/>
         <filter name="estadoContrato" condition="estado=:estadoContratoParam"/>
     </class>
     <filter-def name="cursoAcademicoContrato">

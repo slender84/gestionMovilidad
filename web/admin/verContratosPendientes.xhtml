@@ -35,7 +35,7 @@
                 <p:selectOneMenu value="#{sessionController.filtroContratoEstado}">
                 
                     <f:selectItem itemLabel="Todos" itemValue="todos"/>
-                    <f:selectItems value="#{sessionController.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
+                    <f:selectItems value="#{sessionController.listaEstados}" var="estado" itemValue="#{estado.estado}" itemLabel="#{estado.estado}"/>
                 
                 </p:selectOneMenu>
                 </p:outputPanel>
@@ -121,7 +121,8 @@
                         
                     </f:facet>
                     
-                    <h:outputText value="#{contrato.estado}"/>
+                    <h:outputText value="#{contrato.estado}"/>&nbsp;
+                    <h:graphicImage value="/resources/img/logo-udc.png" style="width: 20px;height: 20px;" title="Documento disponible" rendered="#{contrato.archivo ne null}"/>
                 
                 </p:column>
                 
@@ -175,7 +176,11 @@
             
         </h:form>
         
-        
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+                   <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                       <p:graphicImage value="/resources/ajax-loader.gif" />
+                   </p:dialog>
         
          <br/><br/>
             

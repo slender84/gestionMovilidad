@@ -12,15 +12,15 @@
     <h:body onload="PF('tablaContratos').filter();" styleClass="blue">
         <ezcomp:out/>
         
-         <h2 style="text-align: center">Contratos</h2>
+         <h2 style="text-align: center">Contratos de una movilidad</h2>
        
             
         <p:panel id="headerContratos">
         
             <h:outputLabel value="Contratos de: "/>
-            <h:outputText value="#{verContratosController.selectedMovilidad.usuario.nombre }"/>
             
-            <h:outputText value=" #{verContratosController.selectedMovilidad.usuario.apellido1}"/>
+            
+            <h:outputText value=" #{verContratosController.selectedMovilidad.usuario.login}"/>
             <br/>
             <h:outputLabel value="país: "/>
             <h:outputText value="#{verContratosController.selectedMovilidad.universidad.pais.nombre}"/><br/>
@@ -118,7 +118,10 @@
        <br/>
        <br/>
         
-         <h:outputLink value="verMovilidades.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
+         <h:outputLink value="verMovilidades.xhtml">Ver movilidades</h:outputLink>
+         <br/>
+         <br/>
+         <h:outputLink value="verContratosPendientes.xhtml">Ver contratos</h:outputLink>
         
         <br/>
         

@@ -49,7 +49,7 @@ public class ContratoDaoImpl extends GenericDaoHibernate<Contrato, Integer> impl
            
             if(listaFiltros.containsKey("universidad")==false){
                 
-                return getSession().createQuery("select c from Contrato c where c.movilidad.universidad.nombre=:universidad order by c.fecha desc").setParameter("paisContrato", listaFiltros.get("pais")).list();
+                return getSession().createQuery("select c from Contrato c where c.movilidad.universidad.pais.nombre=:pais order by c.fecha desc").setParameter("pais", listaFiltros.get("pais")).list();
             }else{
                 
                 getSession().enableFilter("universidadContrato").setParameter("universidadContratoParam", listaFiltros.get("universidad"));
