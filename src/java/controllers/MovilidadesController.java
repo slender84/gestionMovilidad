@@ -302,6 +302,7 @@ public class MovilidadesController implements Serializable{
         
         if(sessionController.getFiltroPais().equals("todos")){
             checkPais=false;
+            sessionController.setFiltroUniversidad("todos");
         }
         else{
             if(checkPais==false)

@@ -226,6 +226,7 @@ public class ContratosPendientesController {
         
         if(sessionController.getFiltroContratoPais().equals("todos")){
             checkPais=false;
+            sessionController.setFiltroContratoUniversidad("todos");
         }
         else{
             if(checkPais==false)
