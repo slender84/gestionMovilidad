@@ -274,6 +274,13 @@
                 <p:outputLabel/>
                 <p:outputLabel/>
                 <p:outputLabel/>
+                <p:outputLabel value="nombre"/>
+                <p:inputText value="#{crearAsignaturaController.selectedAsignatura.nombreAsignatura}" required="true" requiredMessage="El campo nombre asignatura no puede estar vacío">
+                    <f:validateLength maximum="100"/>
+                    
+                </p:inputText>
+                 <p:outputLabel/>
+                <p:outputLabel/>
                 <p:outputLabel for="cr" value="creditos" />
                 <p:inputText id="cr" value="#{crearAsignaturaController.selectedAsignatura.creditos}" required="true"
                              validatorMessage="Debe de ser un número entre 1 y 100">

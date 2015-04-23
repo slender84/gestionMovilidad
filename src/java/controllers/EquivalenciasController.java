@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -386,6 +387,17 @@ public class EquivalenciasController implements Serializable{
         }
         
         for(EquivalenciaRevisada e:selectedEquivalencias){
+            
+            
+            Collection<Equivalencia> listaEquivalenciasPublicadas=equivalenciaService.equivalenciasPublicas(selectedMovilidad.getUniversidad().getNombre());
+            
+            if(equivalenciaService.equivalenciaRepetida(e.getEquivalencia(), listaEquivalenciasPublicadas)==true){
+                
+                sessionController.creaMensaje("La equivalencia ya ha sido publicada", FacesMessage.SEVERITY_ERROR);
+                return null;
+            }
+            
+            
             e.getEquivalencia().setVisible(true);
            
                 try{
@@ -417,6 +429,17 @@ public class EquivalenciasController implements Serializable{
         
         
         for(Equivalencia e:selectedEquivalenciasSimples){
+            
+            Collection<Equivalencia> listaEquivalenciasPublicadas=equivalenciaService.equivalenciasPublicas(selectedMovilidad.getUniversidad().getNombre());
+            
+            if(equivalenciaService.equivalenciaRepetida(e, listaEquivalenciasPublicadas)==true){
+                
+                sessionController.creaMensaje("La equivalencia ya ha sido publicada", FacesMessage.SEVERITY_ERROR);
+                return null;
+            }
+            
+            
+            
             e.setVisible(true);
            
                  try{
@@ -535,6 +558,25 @@ public class EquivalenciasController implements Serializable{
         
         return null;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
      public void PDF(ActionEvent event)throws JRException,IOException{
         
