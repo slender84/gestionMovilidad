@@ -393,7 +393,7 @@ public class EquivalenciasController implements Serializable{
             
             if(equivalenciaService.equivalenciaRepetida(e.getEquivalencia(), listaEquivalenciasPublicadas)==true){
                 
-                sessionController.creaMensaje("La equivalencia ya ha sido publicada", FacesMessage.SEVERITY_ERROR);
+                sessionController.creaMensaje("La equivalencia ya había sido publicada anteriormente", FacesMessage.SEVERITY_ERROR);
                 return null;
             }
             
@@ -434,7 +434,7 @@ public class EquivalenciasController implements Serializable{
             
             if(equivalenciaService.equivalenciaRepetida(e, listaEquivalenciasPublicadas)==true){
                 
-                sessionController.creaMensaje("La equivalencia ya ha sido publicada", FacesMessage.SEVERITY_ERROR);
+                sessionController.creaMensaje("La equivalencia ya ha sido publicada anteriormente", FacesMessage.SEVERITY_ERROR);
                 return null;
             }
             

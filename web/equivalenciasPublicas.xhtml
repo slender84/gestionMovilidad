@@ -49,69 +49,27 @@
                                      readonly="true" rows="10" cols="50"/>
                 </p:dialog>
             
-                <p:commandButton value="Buscar por asignatura" action="#{equivalenciasPublicasController.buscarPorAsignatura}" update=":formTablaEquivalencias"/>
+                
                 
             </h:panelGrid>
             
-            <p:dataTable id="tablaAsignaturas" rendered="#{equivalenciasPublicasController.mostrarListaAsignaturas}" value="#{equivalenciasPublicasController.listaAsignaturas}" rows="10" paginator="true"
-                         var="asignaturaF" paginatorPosition="bottom" filteredValue="#{equivalenciasPublicasController.filteredAsignaturas}" emptyMessage="No hay asignaturas"
-                         widgetVar="asigTabla" rowKey="#{asignaturaF.nombreAsignatura}">
-            
-                <p:column headerText="Nombre" sortBy="#{asignaturaF.nombreAsignatura}" filterBy="#{asignaturaF.nombreAsignatura}" filterMatchMode="contains">
-                 
-                    <p:commandLink value="#{asignaturaF.nombreAsignatura}" action="#{equivalenciasPublicasController.detallesAsign}" oncomplete="PF('dialog1').show();" update=":formDialog1">
-                            <f:setPropertyActionListener value="#{asignaturaF}" target="#{equivalenciasPublicasController.selectedAsignatura}"/>
-                        </p:commandLink>
-                
-                </p:column>
-            
-            
-            
-                <p:columnGroup type="footer">
-                    
-                    <p:row>
-                        
-                        <p:column >
-                            
-                            <f:facet name="footer">
-                            
-                            
-                            <p:commandButton value="cerrar" action="#{equivalenciasPublicasController.cerrar}" update=":formTablaEquivalencias"/>
-                            
-                            </f:facet>
-                        </p:column>
-                        
-                        
-                        
-                    </p:row>
-                    
-                    
-                    
-                </p:columnGroup>
-                    
-                    
-                    
-                    
-                
-            
-            </p:dataTable>
-            
-            <br/>
             <br/>
             
             
             <h:panelGrid id="panel1" columns="4"  rendered="#{equivalenciasPublicasController.mostrarInfo}" >
-                <p:outputLabel value="Filtro UDC"/>
-               <p:inputText value="#{equivalenciasPublicasController.valorAjax}" rendered="#{equivalenciasPublicasController.mostrarInfo}">
+                <p:outputLabel value="Filtro UDC" style="font-size: 12px;"/>
+                <p:inputText style="font-size: 12px;" id="inAjaxA" value="#{equivalenciasPublicasController.valorAjax}" rendered="#{equivalenciasPublicasController.mostrarInfo}">
                        
-                           <p:ajax event="keyup" listener="#{equivalenciasPublicasController.cambioAjax}" update="tablaEquivalencias" />
+                           <p:ajax event="keyup" listener="#{equivalenciasPublicasController.cambioAjax}" update="tablaEquivalencias :formTablaEquivalencias:inAjaxB" />
                        
                </p:inputText> 
                
                
-               <p:outputLabel value="Filtro destino" style="position: relative;left: 480px"/>
-                <p:inputText  value="inactivo" style=" position: relative;left: 500px;" />   
-              
+               <p:outputLabel value="Filtro destino" style="position: relative;left: 480px;font-size: 12px;"/>
+               <p:inputText id="inAjaxB" value="#{equivalenciasPublicasController.valorAjaxB}" style=" position: relative;left: 500px;font-size: 12px;" >   
+              <p:ajax event="keyup" listener="#{equivalenciasPublicasController.cambioAjaxB}" update="tablaEquivalencias :formTablaEquivalencias:inAjaxA" />
+                       
+               </p:inputText> 
                
             </h:panelGrid>
             <br/>

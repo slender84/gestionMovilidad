@@ -5,9 +5,11 @@ import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import org.hibernate.Criteria;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaQuery;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +75,9 @@ public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDa
         
         @Override
         public void eliminar(T entity){
+            
+            
+            
             
             getSession().delete(entity);
         }

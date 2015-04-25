@@ -42,6 +42,26 @@
         <br/><br/><br/>
         
         <h:form id="formTablaEquivalencias">
+            
+            <h:panelGrid id="panel1" columns="4"  rendered="#{equivalenciasPublicasController.mostrarInfo}" >
+                <p:outputLabel value="Filtro UDC" style="font-size: 12px;"/>
+                <p:inputText style="font-size: 12px;" id="inAjaxA" value="#{equivalenciasPublicasController.valorAjax}" rendered="#{equivalenciasPublicasController.mostrarInfo}">
+                       
+                           <p:ajax event="keyup" listener="#{equivalenciasPublicasController.cambioAjax}" update="tablaEquivalencias :formTablaEquivalencias:inAjaxB" />
+                       
+               </p:inputText> 
+               
+               
+               <p:outputLabel value="Filtro destino" style="position: relative;left: 480px;font-size: 12px;"/>
+               <p:inputText id="inAjaxB" value="#{equivalenciasPublicasController.valorAjaxB}" style=" position: relative;left: 500px;font-size: 12px;" >   
+              <p:ajax event="keyup" listener="#{equivalenciasPublicasController.cambioAjaxB}" update="tablaEquivalencias :formTablaEquivalencias:inAjaxA" />
+                       
+               </p:inputText> 
+               
+            </h:panelGrid>
+            
+            
+            
            
                <p:dataTable id="tablaEquivalencias"
                          emptyMessage="no hay equivalencias publicas"

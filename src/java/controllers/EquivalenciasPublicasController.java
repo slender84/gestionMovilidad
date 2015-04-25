@@ -8,6 +8,7 @@ import entities.ComentarioAsignatura;
 import entities.Contrato;
 import entities.Equivalencia;
 import entities.MiembroGrupoAsignaturaA;
+import entities.MiembroGrupoAsignaturaB;
 import entities.Movilidad;
 import entities.Pais;
 import entities.Universidad;
@@ -249,12 +250,16 @@ public class EquivalenciasPublicasController implements Serializable{
         listaEquivalencias=(ArrayList < Equivalencia >)equivalenciaService.equivalenciasPublicas(universidadStr);
         listaCompletaEquivalencias=(ArrayList<Equivalencia>)equivalenciaService.equivalenciasPublicas(universidadStr);
         arrayDeListasAsignatura=new ArrayList[listaCompletaEquivalencias.size()];
+        arrayDeListasAsignaturaB=new ArrayList[listaCompletaEquivalencias.size()];
+        
         mostrarInfo=true;
         String a;
-        ArrayList<String> listaAsignaturasArray=new ArrayList();
+        ArrayList<String> listaAsignaturasArray;
+        ArrayList<String> listaAsignaturasArrayB;
         int i=0;
         for(Equivalencia e:listaEquivalencias){
-            
+           listaAsignaturasArray=new ArrayList();
+            listaAsignaturasArrayB=new ArrayList();
             Iterator it=e.getMiembroGrupoAsignaturaAs().iterator();
             while(it.hasNext()){
                 
@@ -263,8 +268,26 @@ public class EquivalenciasPublicasController implements Serializable{
                 
             }
             
+            Iterator itB=e.getMiembroGrupoAsignaturaBs().iterator();
+            while(itB.hasNext()){
+                
+                a=((MiembroGrupoAsignaturaB)itB.next()).getAsignatura().getNombreAsignatura();
+                listaAsignaturasArrayB.add(a);
+             
+            }
+            
             arrayDeListasAsignatura[i]=listaAsignaturasArray;
+            arrayDeListasAsignaturaB[i]=listaAsignaturasArrayB;
             i++;
+            
+        }
+        
+        
+        
+        for(int n=0;n<arrayDeListasAsignatura.length;n++){
+            
+            
+            
         }
         
         
@@ -360,14 +383,29 @@ public class EquivalenciasPublicasController implements Serializable{
     
   
   
-    private String valorAjax;
-    private ArrayList<Asignatura> listaAsignaturasAjax;
+    private String valorAjax="";
+    private String valorAjaxB="";
     private ArrayList<Equivalencia> listaCompletaEquivalencias;
     private ArrayList<String>[] arrayDeListasAsignatura;
+    private ArrayList<String>[] arrayDeListasAsignaturaB;
 
-    public ArrayList<Asignatura> getListaAsignaturasAjax() {
-        return listaAsignaturasAjax;
+    public String getValorAjaxB() {
+        return valorAjaxB;
     }
+
+    public void setValorAjaxB(String valorAjaxB) {
+        this.valorAjaxB = valorAjaxB;
+    }
+
+    public ArrayList<String>[] getArrayDeListasAsignaturaB() {
+        return arrayDeListasAsignaturaB;
+    }
+
+    public void setArrayDeListasAsignaturaB(ArrayList<String>[] arrayDeListasAsignaturaB) {
+        this.arrayDeListasAsignaturaB = arrayDeListasAsignaturaB;
+    }
+
+   
 
     public ArrayList<String>[] getArrayDeListasAsignatura() {
         return arrayDeListasAsignatura;
@@ -376,14 +414,7 @@ public class EquivalenciasPublicasController implements Serializable{
     public void setArrayDeListasAsignatura(ArrayList<String>[] arrayDeListasAsignatura) {
         this.arrayDeListasAsignatura = arrayDeListasAsignatura;
     }
-    
-    
-    
-
-    public void setListaAsignaturasAjax(ArrayList<Asignatura> listaAsignaturasAjax) {
-        this.listaAsignaturasAjax = listaAsignaturasAjax;
-    }
-
+  
     public ArrayList<Equivalencia> getListaCompletaEquivalencias() {
         return listaCompletaEquivalencias;
     }
@@ -408,14 +439,27 @@ public class EquivalenciasPublicasController implements Serializable{
     
     public void cambioAjax(){
         
+        if(valorAjaxB.isEmpty()==false)
+            valorAjaxB="";
+        
+        
+        
+        
+        
         if(valorAjax.equals("")==false){
         
-        listaEquivalencias=new ArrayList<Equivalencia>();
+            
+            
+            
+        listaEquivalencias.clear();
         loopA:
         for(int i=0;i<arrayDeListasAsignatura.length;i++){
             for(int j=0;j<arrayDeListasAsignatura[i].size();j++){
                 
-                if(valorAjax.equals(arrayDeListasAsignatura[i].get(j))){
+                
+                
+                
+                if(arrayDeListasAsignatura[i].get(j).contains(valorAjax)){
                     
                     listaEquivalencias.add(listaCompletaEquivalencias.get(i));
                     continue loopA;
@@ -423,30 +467,58 @@ public class EquivalenciasPublicasController implements Serializable{
                     
                 }
             
-                
-                
             }
-            
-            
-            
             
         }
         
         }else{
             
-            
+                listaEquivalencias.clear();
                 listaEquivalencias.addAll(listaCompletaEquivalencias);
             
             
         }
        
-        
-        
     }
     
     
     
-    
+    public void cambioAjaxB(){
+        
+        if(valorAjax.isEmpty()==false)
+            valorAjax="";
+        
+        
+        if(valorAjaxB.equals("")==false){
+        
+        listaEquivalencias.clear();
+        loopA:
+        for(int i=0;i<arrayDeListasAsignaturaB.length;i++){
+            for(int j=0;j<arrayDeListasAsignaturaB[i].size();j++){
+                
+                
+                
+                if(arrayDeListasAsignaturaB[i].get(j).contains(valorAjaxB)){
+                    
+                    listaEquivalencias.add(listaCompletaEquivalencias.get(i));
+                    continue loopA;
+                    
+                    
+                }
+            
+            }
+            
+        }
+        
+        }else{
+            
+                listaEquivalencias.clear();
+                listaEquivalencias.addAll(listaCompletaEquivalencias);
+            
+            
+        }
+       
+    }
     
     
     
