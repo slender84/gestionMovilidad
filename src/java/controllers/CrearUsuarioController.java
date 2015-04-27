@@ -201,6 +201,7 @@ public class CrearUsuarioController implements Serializable{
             email.enviarEmailAlta(login, password, correoConf);
         }catch(Exception ex){
             
+            ex.printStackTrace();
             usuarioService.eliminarUsuario(u);
             sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
             return null;

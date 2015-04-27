@@ -33,7 +33,7 @@
             <one-to-many class="entities.Contrato" />
         </set>
         <filter name="cursoAcademico" condition="cursoAcademico=:cursoAcademicoParam"/>
-        <filter name="universidad" condition="nombreUniversidad=:universidadParam"/>
+        <filter name="universidad" condition="nombreUniversidad= '%' :universidadParam '%'"/>
         <filter name="estado" condition="estado=:estadoParam"/>
         
     </class>

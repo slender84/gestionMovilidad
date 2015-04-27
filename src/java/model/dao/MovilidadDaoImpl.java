@@ -10,9 +10,12 @@ package model.dao;
 
 import entities.Movilidad;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Query;
+import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;
 
 
@@ -73,6 +76,142 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
         return listar();
         
     }
+    
+    @Override
+    public List<Movilidad> listaLazy(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+        
+        String orden=null;
+        
+        String s;
+        Iterator i=filters.keySet().iterator();
+        while(i.hasNext()){
+            s=(String)i.next();
+            System.out.println("el filters hay: "+s);
+        }
+        
+        System.out.println("sortField: "+sortField);
+        System.out.println("SortOrder: "+sortOrder.toString());
+        System.out.println("pagesize :"+pageSize);
+        System.out.println("first: "+first);
+        
+        String campo=null;
+        
+        
+        if(sortField!=null){
+            
+         if(sortField.equals("estado")){
+            
+            campo="estado";
+            
+         }else if(sortField.equals("universidad.nombre")){
+              
+                campo="universidad";
+         }else if(sortField.equals("cursoacademico.cursoAcademico")){
+           
+                    campo="cursoacademico";
+                    
+         }else if(sortField.equals("universidad.pais.nombre")){
+                        campo="universidad.pais.nombre";
+                        
+         }else if(sortField.equals("usuario.login")){
+             campo="usuario.login";
+         }
+           
+            if(sortOrder.toString().equalsIgnoreCase("ascending")){
+                orden="asc";    
+            }else{
+                orden="desc";
+                
+            }
+        }
+            
+        if(filters.containsKey("estado")){
+            getSession().enableFilter("filtroEstado").setParameter("filtroEstadoParam", filters.get("estado"));
+        
+        }
+        
+        
+        if(filters.containsKey("universidad.nombre")){
+            //System.out.println("enable filtroUni");
+            getSession().enableFilter("filtroUniversidad").setParameter("filtroUniversidadParam", filters.get("universidad.nombre"));
+                    }
+        
+        if(filters.containsKey("cursoacademico.cursoAcademico")){
+            
+            getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", filters.get("cursoacademico.cursoAcademico"));
+        }
+        
+        if(filters.containsKey("universidad.pais.nombre")){
+            
+            getSession().enableFilter("pais").setParameter("paisParam", filters.get("universidad.pais.nombre"));
+        }
+        
+        if(filters.containsKey("usuario.login")){
+            
+            getSession().enableFilter("usuario").setParameter("usuarioParam", filters.get("usuario.login"));
+        }
+        
+        
+        
+       List<Movilidad> l=new ArrayList<Movilidad>();
+        
+        if(sortField==null){
+            
+             l=getSession().createQuery("select m from Movilidad m").setFirstResult(first).setMaxResults(pageSize).list();
+            
+        }else{
+            
+            
+            
+             
+             l=getSession().createQuery("select m. from Movilidad m order by m."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
+              
+            
+        }
+        
+        return l;
+        
+        
+    }
+    
+    @Override
+     public int count(Map<String,Object>filters){
+         
+         
+        if(filters.containsKey("estado")){
+            getSession().enableFilter("filtroEstado").setParameter("filtroEstadoParam", filters.get("estado"));
+        
+        }
+        
+        
+        if(filters.containsKey("universidad.nombre")){
+            //System.out.println("enable filtroUni");
+            getSession().enableFilter("filtroUniversidad").setParameter("filtroUniversidadParam", filters.get("universidad.nombre"));
+                    }
+        
+        if(filters.containsKey("cursoacademico.cursoAcademico")){
+            
+            getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", filters.get("cursoacademico.cursoAcademico"));
+        }
+        
+        if(filters.containsKey("universidad.pais.nombre")){
+            
+            getSession().enableFilter("pais").setParameter("paisParam", filters.get("universidad.pais.nombre"));
+        }
+        
+        if(filters.containsKey("usuario.login")){
+            
+            getSession().enableFilter("usuario").setParameter("usuarioParam", filters.get("usuario.login"));
+        }
+        
+        
+        
+       List<Movilidad> l=new ArrayList<Movilidad>();
+         
+         l=getSession().createQuery("select m from Movilidad m").list();
+         return l.size();
+         
+     }
     
     
    

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import model.dao.ContratoDao;
 import model.dao.MovilidadDao;
+import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -260,5 +261,22 @@ public class MovilidadServiceImpl implements MovilidadService{
          
          
      }
+     
+     
+     @Override
+     public List<Movilidad> listaLazy(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+         
+         return movilidadDao.listaLazy(first,pageSize,sortField,sortOrder,filters);
+         
+     }
+     
+     @Override
+      public int count(Map<String,Object>filters){
+      
+      return movilidadDao.count(filters);
+      
+  }
+     
+     
      
 }

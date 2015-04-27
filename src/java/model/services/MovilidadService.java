@@ -18,6 +18,7 @@ import exceptions.NumeroDeMovilidadesException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -37,4 +38,10 @@ public interface MovilidadService {
     public List<Contrato> listarContratosPendientes();
     public List<Contrato> listarTodosContratos();
     public List<Contrato> listarContratosPorFiltro(Map<String,String> listaFiltros);
+    public List<Movilidad> listaLazy(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters);
+     public int count(Map<String,Object>filters);
+      
+      
+      
+  
 }

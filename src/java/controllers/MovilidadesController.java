@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -27,6 +28,8 @@ import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.utils.email;
 import org.apache.commons.mail.EmailException;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -75,6 +78,9 @@ public class MovilidadesController implements Serializable{
     private ArrayList<Cursoacademico> listaCursoAcademico;
     private ArrayList<Universidad> listaUniversidades;
     
+    private LazyDataModel<Movilidad> model;
+    private List<Movilidad> result;
+    
     SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
     
   
@@ -88,7 +94,43 @@ public class MovilidadesController implements Serializable{
        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
        
        
+       model=new LazyDataModel<Movilidad>(){
+          
+            @Override
+            public List<Movilidad> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+             result=movilidadService.listaLazy(first,pageSize,sortField,sortOrder,filters);
+            
+                //setRowCount(service.count(sortField,sortOrder,filters));
+                setRowCount(movilidadService.count(filters));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(Movilidad movilidad){
+                  
+                  return movilidad.getCodMovilidad();
+                  
+              }
+            
+            public Movilidad getRowData(int rowKey){
+                
+                for(Movilidad m:result){
+                    
+                    if(m.getCodMovilidad()==rowKey)
+                        return m;
+                    
+                }
+                return null;
+            }
+            
         
+    };
+           
+
          
          
         
@@ -146,6 +188,14 @@ public class MovilidadesController implements Serializable{
 
     public void setSessionController(SessionController sessionController) {
         this.sessionController = sessionController;
+    }
+
+    public List<Movilidad> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Movilidad> result) {
+        this.result = result;
     }
 
     
@@ -238,6 +288,14 @@ public class MovilidadesController implements Serializable{
 
     public void setSelectedMovilidad(Movilidad selectedMovilidad) {
         this.selectedMovilidad = selectedMovilidad;
+    }
+
+    public LazyDataModel<Movilidad> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<Movilidad> model) {
+        this.model = model;
     }
     
     
