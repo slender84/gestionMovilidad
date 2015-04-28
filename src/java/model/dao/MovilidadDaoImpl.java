@@ -126,15 +126,16 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
         }
             
         if(filters.containsKey("estado")){
-            getSession().enableFilter("filtroEstado").setParameter("filtroEstadoParam", filters.get("estado"));
+            getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
         
         }
         
+        if(filters.containsKey("usuario.login")){
+            
+            getSession().enableFilter("login").setParameter("loginParam", filters.get("usuario.login"));
+        }
         
-        if(filters.containsKey("universidad.nombre")){
-            //System.out.println("enable filtroUni");
-            getSession().enableFilter("filtroUniversidad").setParameter("filtroUniversidadParam", filters.get("universidad.nombre"));
-                    }
+        
         
         if(filters.containsKey("cursoacademico.cursoAcademico")){
             
@@ -144,12 +145,13 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
         if(filters.containsKey("universidad.pais.nombre")){
             
             getSession().enableFilter("pais").setParameter("paisParam", filters.get("universidad.pais.nombre"));
-        }
         
-        if(filters.containsKey("usuario.login")){
-            
-            getSession().enableFilter("usuario").setParameter("usuarioParam", filters.get("usuario.login"));
         }
+                  if(filters.containsKey("universidad.nombre")){
+            //System.out.println("enable filtroUni");
+                  getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("universidad.nombre"));
+                    }
+        
         
         
         
@@ -164,7 +166,7 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
             
             
              
-             l=getSession().createQuery("select m. from Movilidad m order by m."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
+             l=getSession().createQuery("select m from Movilidad m order by m."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
               
             
         }
@@ -179,14 +181,14 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
          
          
         if(filters.containsKey("estado")){
-            getSession().enableFilter("filtroEstado").setParameter("filtroEstadoParam", filters.get("estado"));
+            getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
         
         }
-        
+        //getSession().createQuery("select u from Universidad u where u.pais.nombre")
         
         if(filters.containsKey("universidad.nombre")){
             //System.out.println("enable filtroUni");
-            getSession().enableFilter("filtroUniversidad").setParameter("filtroUniversidadParam", filters.get("universidad.nombre"));
+            getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("universidad.nombre"));
                     }
         
         if(filters.containsKey("cursoacademico.cursoAcademico")){
@@ -195,13 +197,13 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
         }
         
         if(filters.containsKey("universidad.pais.nombre")){
-            
-            getSession().enableFilter("pais").setParameter("paisParam", filters.get("universidad.pais.nombre"));
+            System.out.println("en filter pais");
+            getSession().enableFilter("pais").setParameter("paisParam", "Alemania");
         }
         
         if(filters.containsKey("usuario.login")){
             
-            getSession().enableFilter("usuario").setParameter("usuarioParam", filters.get("usuario.login"));
+            getSession().enableFilter("login").setParameter("loginParam", filters.get("usuario.login"));
         }
         
         

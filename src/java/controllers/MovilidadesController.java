@@ -81,6 +81,8 @@ public class MovilidadesController implements Serializable{
     private LazyDataModel<Movilidad> model;
     private List<Movilidad> result;
     
+    private String field="codMovilidad";
+    
     SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
     
   
@@ -196,6 +198,14 @@ public class MovilidadesController implements Serializable{
 
     public void setResult(List<Movilidad> result) {
         this.result = result;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
     }
 
     

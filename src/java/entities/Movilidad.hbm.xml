@@ -33,8 +33,11 @@
             <one-to-many class="entities.Contrato" />
         </set>
         <filter name="cursoAcademico" condition="cursoAcademico=:cursoAcademicoParam"/>
-        <filter name="universidad" condition="nombreUniversidad= '%' :universidadParam '%'"/>
+        <filter name="universidad" condition="nombreUniversidad like '%' :universidadParam '%'"/>
         <filter name="estado" condition="estado=:estadoParam"/>
+        <filter name="login" condition="loginUsuario like '%' :loginParam '%'"/>
+        <filter name="pais" condition="nombreUniversidad in (select u.nombre from Universidad u where u.pais like :paisParam '%')"/>
+        
         
     </class>
     <filter-def name="cursoAcademico">
@@ -46,7 +49,12 @@
     <filter-def name="estado">
         <filter-param name="estadoParam" type="string"/>
     </filter-def>
-    
+    <filter-def name="login">
+        <filter-param name="loginParam" type="string"/>
+    </filter-def>
+    <filter-def name="pais">
+        <filter-param name="paisParam" type="string"/>
+    </filter-def>
     
     
 </hibernate-mapping>

@@ -13,75 +13,15 @@
     <h:body onload="PF('movTable').filter()" styleClass="blue">
         <ezcomp:out/>
         
-       
-        <br/>
+       <br/>
         
-        <h:form id="formFiltro">
-            <p:panel header="Filtros" style="background-color: khaki;font-size: 12px">
-                <h:panelGrid columns="9" cellpadding="20" >
-                
-                    <p:outputPanel id="panelCurso" style="font-size: 12px;">
-                <p:outputLabel value="curso académico: "/>
-                <p:selectOneMenu value="#{sessionController.filtroCursoAcademico}">
-                
-                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
-                    <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
-                                   itemValue="#{cursoAcademico.cursoAcademico}"/>
-                
-                </p:selectOneMenu>
-                </p:outputPanel>
-                
-                <p:outputPanel id="panelEstado" style="font-size: 12px;">
-                <p:outputLabel value="Estado: "/>
-                <p:selectOneMenu value="#{sessionController.filtroEstado}">
-                
-                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
-                    <f:selectItems value="#{sessionController.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
-                
-                </p:selectOneMenu>
-                </p:outputPanel>
-               <p:outputPanel id="panelPais" style="font-size: 12px;">
-                    
-                <p:outputLabel value="Pais: "/>
-                <p:selectOneMenu value="#{sessionController.filtroPais}" filterMatchMode="contains" filter="true">
-                                 <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro:panelPais :formFiltro:panelUniversidad"/>
-                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
-                    <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
-                
-                
-                </p:selectOneMenu>
-                </p:outputPanel>
-                
-                <p:outputPanel id="panelUniversidad" style="font-size: 12px;">
-                <p:outputLabel value="Universidad: "/>
-                <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains" filter="true">
-                    <f:selectItem itemLabel="Todas" itemValue="todos"/>
-                    
-                    
-                    <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
-                                   itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
-                
-                </p:selectOneMenu>
-                </p:outputPanel>
-                
-               
-                    <p:commandButton style="font-size: 12px" value="buscar" action="#{movilidadesController.buscarMovilidades}" update=":formMovilidades" oncomplete="PF('movTable').filter();"/>
-                    <p:commandButton  style="font-size: 12px" value="limpiar" action="#{movilidadesController.limpiarFiltros}" update=":formFiltro"/>
-                
-            
-            </h:panelGrid>
-            
-            </p:panel>
-        </h:form>
-        
-        <br/>
         
         <h:form id="formMovilidades" onkeypress="return event.keyCode != 13">
             
             <p:growl id="msgs"/>
-            <p:dataTable  id="t1" var="movilidad" value="#{movilidadesController.listaMovilidades}"
-                          emptyMessage="no hay movilidades" editable="true"
-                         filteredValue="#{movilidadesController.filteredMovilidades}"
+            <p:dataTable  id="t1" var="movilidad" value="#{movilidadesController.model}"
+                          emptyMessage="no hay movilidades" editable="true" lazy="true"
+                          sortOrder="descending" sortBy="#{movilidad.universidad.nombre}"
                          selection="#{movilidadesController.selectedMovilidades}"
                          widgetVar="movTable"
                          rowKey="#{movilidad.codMovilidad}"
