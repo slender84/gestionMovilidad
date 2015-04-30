@@ -28,6 +28,7 @@ import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.utils.email;
 import org.apache.commons.mail.EmailException;
+import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -81,7 +82,7 @@ public class MovilidadesController implements Serializable{
     private LazyDataModel<Movilidad> model;
     private List<Movilidad> result;
     
-    private String field="codMovilidad";
+    private Map<String,Object> filteredState;
     
     SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
     
@@ -92,9 +93,10 @@ public class MovilidadesController implements Serializable{
        
       
        usuario=sessionController.getUser();
-       //listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
+       
        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
        
+       if(sessionController.correoConf.getPageToPage()==true){
        
        model=new LazyDataModel<Movilidad>(){
           
@@ -103,7 +105,7 @@ public class MovilidadesController implements Serializable{
     
              result=movilidadService.listaLazy(first,pageSize,sortField,sortOrder,filters);
             
-                //setRowCount(service.count(sortField,sortOrder,filters));
+                //setRowCount(10);
                 setRowCount(movilidadService.count(filters));
               return result;
               
@@ -132,7 +134,11 @@ public class MovilidadesController implements Serializable{
         
     };
            
-
+       }else{
+           
+           
+           
+       
          
          
         
@@ -181,7 +187,7 @@ public class MovilidadesController implements Serializable{
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarMovilidadPorFiltro(m);
         }
        
-         
+       }
     }
 
     public SessionController getSessionController() {
@@ -200,13 +206,7 @@ public class MovilidadesController implements Serializable{
         this.result = result;
     }
 
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
-    }
+   
 
     
    
@@ -508,7 +508,11 @@ public class MovilidadesController implements Serializable{
         for(Movilidad m:selectedMovilidades){
             try{
         movilidadService.eliminarMovilidad(m);
+        
+        if(sessionController.correoConf.getPageToPage()==false){
         listaMovilidades.remove(m);
+        }else result.remove(m);
+            
             }catch(RuntimeException ex){
                 actualizarTodasMovilidades();
                 sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
@@ -527,6 +531,18 @@ public class MovilidadesController implements Serializable{
         listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
         
     }
+
+    public Map<String, Object> getFilteredState() {
+        return filteredState;
+    }
+
+    public void setFilteredState(Map<String, Object> filteredState) {
+        this.filteredState = filteredState;
+    }
+     
+     
+     
+     
     
     public void activaTexto(){
         
@@ -534,6 +550,7 @@ public class MovilidadesController implements Serializable{
         
         if(selectedMovilidades.isEmpty()==false){
         activaTexto=true;
+           
     }else{
             sessionController.creaMensaje("hay que seleccionar al menos un usuario", FacesMessage.SEVERITY_ERROR);
         }

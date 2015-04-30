@@ -44,6 +44,9 @@
         <property name="cargarTodosContratos" type="java.lang.Boolean">
             <column name="cargarTodosContratos" />
         </property>
+        <property name="pageToPage" type="java.lang.Boolean">
+            <column name="pageToPage" />
+        </property>
         <set name="direccions" cascade="save-update" table="direccion" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="configuracion" not-null="true" />

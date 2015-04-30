@@ -8,7 +8,7 @@
             <column name="nombre" length="200" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="pais" class="entities.Pais" fetch="select">
+        <many-to-one name="pais" class="entities.Pais" lazy="false" fetch="select">
             <column name="pais" length="100" />
         </many-to-one>
         <property name="info" type="string">

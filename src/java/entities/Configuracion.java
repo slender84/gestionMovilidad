@@ -36,11 +36,12 @@ public class Configuracion  implements java.io.Serializable {
      private Boolean permitirCopia;
      private Boolean notificarAsignaturas;
      private Boolean cargarTodosContratos;
+     private Boolean pageToPage;
      private Set<Direccion> direccions = new HashSet<Direccion>(0);
     public Configuracion() {
     }
 
-    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Boolean notificarAsignaturas,Boolean cargarTodosContratos,Set<Direccion> direccions) {
+    public Configuracion(String direccion, String password, Short smtpPort, String hostName, String addTo, Boolean permitirAlumnos,Boolean permitirAlumnosDestino,Boolean cargarTodasMovilidades, String direccionAdmin,Boolean permitirCopia,Boolean notificarAsignaturas,Boolean cargarTodosContratos,Boolean pageToPage,Set<Direccion> direccions) {
        this.direccion = direccion;
        this.password = password;
        this.smtpPort = smtpPort;
@@ -53,6 +54,7 @@ public class Configuracion  implements java.io.Serializable {
        this.permitirCopia = permitirCopia;
        this.notificarAsignaturas=notificarAsignaturas;
        this.cargarTodosContratos=cargarTodosContratos;
+       this.pageToPage=pageToPage;
        this.direccions = direccions;
     }
    
@@ -192,6 +194,17 @@ public class Configuracion  implements java.io.Serializable {
     public Set<Direccion> getDireccions() {
         return this.direccions;
     }
+    
+    
+     @Column(name="pageToPage")
+    public Boolean getPageToPage() {
+        return this.pageToPage;
+    }
+    
+    public void setPageToPage(Boolean pageToPage) {
+        this.pageToPage = pageToPage;
+    }
+    
     
     public void setDireccions(Set<Direccion> direccions) {
         this.direccions = direccions;

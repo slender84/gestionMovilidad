@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.faces.application.ProjectStage;
 import org.hibernate.Query;
 import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;
@@ -81,42 +82,36 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
     public List<Movilidad> listaLazy(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
         
         String orden=null;
+        List<Movilidad> l=null;
         
-        String s;
-        Iterator i=filters.keySet().iterator();
-        while(i.hasNext()){
-            s=(String)i.next();
-            System.out.println("el filters hay: "+s);
-        }
-        
-        System.out.println("sortField: "+sortField);
-        System.out.println("SortOrder: "+sortOrder.toString());
-        System.out.println("pagesize :"+pageSize);
-        System.out.println("first: "+first);
         
         String campo=null;
         
         
         if(sortField!=null){
+          
+        switch(sortField){
             
-         if(sortField.equals("estado")){
+            case "estado":campo="estado";
+                break;
+            case "fechaInicio":campo="fechaInicio";
+            break;
+            case "fechaFin":campo="fechaFin";
+                break;
+            case "universidad.nombre":campo="universidad";
+                break;
+            case "cursoacademico.cursoAcademico":campo="cursoacademico";
+                break;
+            case "universidad.pais.nombre":campo="universidad.pais.nombre";
+                break;
+            case "usuario.login":campo="usuario.login";
+                break;
+            case "codMovilidad":campo="codMovilidad";
+                break;
             
-            campo="estado";
+        }
+         
             
-         }else if(sortField.equals("universidad.nombre")){
-              
-                campo="universidad";
-         }else if(sortField.equals("cursoacademico.cursoAcademico")){
-           
-                    campo="cursoacademico";
-                    
-         }else if(sortField.equals("universidad.pais.nombre")){
-                        campo="universidad.pais.nombre";
-                        
-         }else if(sortField.equals("usuario.login")){
-             campo="usuario.login";
-         }
-           
             if(sortOrder.toString().equalsIgnoreCase("ascending")){
                 orden="asc";    
             }else{
@@ -126,6 +121,7 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
         }
             
         if(filters.containsKey("estado")){
+                 
             getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
         
         }
@@ -135,10 +131,8 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
             getSession().enableFilter("login").setParameter("loginParam", filters.get("usuario.login"));
         }
         
-        
-        
         if(filters.containsKey("cursoacademico.cursoAcademico")){
-            
+             
             getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", filters.get("cursoacademico.cursoAcademico"));
         }
         
@@ -147,15 +141,12 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
             getSession().enableFilter("pais").setParameter("paisParam", filters.get("universidad.pais.nombre"));
         
         }
-                  if(filters.containsKey("universidad.nombre")){
-            //System.out.println("enable filtroUni");
-                  getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("universidad.nombre"));
-                    }
-        
-        
-        
-        
-       List<Movilidad> l=new ArrayList<Movilidad>();
+        if(filters.containsKey("universidad.nombre")){
+            
+        getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("universidad.nombre"));
+         
+                  }
+               
         
         if(sortField==null){
             
@@ -163,16 +154,11 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
             
         }else{
             
-            
-            
-             
              l=getSession().createQuery("select m from Movilidad m order by m."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
               
-            
         }
         
         return l;
-        
         
     }
     
@@ -181,41 +167,38 @@ public class MovilidadDaoImpl extends GenericDaoHibernate<Movilidad, Integer> im
          
          
         if(filters.containsKey("estado")){
-            getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
+             
+             getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
         
         }
         //getSession().createQuery("select u from Universidad u where u.pais.nombre")
         
         if(filters.containsKey("universidad.nombre")){
+            
             //System.out.println("enable filtroUni");
             getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("universidad.nombre"));
                     }
         
         if(filters.containsKey("cursoacademico.cursoAcademico")){
-            
+                 
             getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", filters.get("cursoacademico.cursoAcademico"));
         }
         
         if(filters.containsKey("universidad.pais.nombre")){
-            System.out.println("en filter pais");
-            getSession().enableFilter("pais").setParameter("paisParam", "Alemania");
+            
+            
         }
         
         if(filters.containsKey("usuario.login")){
             
             getSession().enableFilter("login").setParameter("loginParam", filters.get("usuario.login"));
         }
-        
-        
-        
+       
        List<Movilidad> l=new ArrayList<Movilidad>();
          
          l=getSession().createQuery("select m from Movilidad m").list();
          return l.size();
          
      }
-    
-    
-   
     
 }

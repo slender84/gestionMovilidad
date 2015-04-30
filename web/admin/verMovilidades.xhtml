@@ -14,25 +14,87 @@
         <ezcomp:out/>
         
        <br/>
+       
+       <h:form id="formFiltro" rendered="#{sessionController.correoConf.pageToPage eq 'false'}">
+            <p:panel header="Filtros" style="background-color: khaki;font-size: 12px">
+                <h:panelGrid columns="9" cellpadding="20" >
+                
+                    <p:outputPanel id="panelCurso" style="font-size: 12px;">
+                <p:outputLabel value="curso académico: "/>
+                <p:selectOneMenu value="#{sessionController.filtroCursoAcademico}">
+                
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
+                    <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="cursoAcademico" itemLabel="#{cursoAcademico.cursoAcademico}"
+                                   itemValue="#{cursoAcademico.cursoAcademico}"/>
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+                
+                <p:outputPanel id="panelEstado" style="font-size: 12px;">
+                <p:outputLabel value="Estado: "/>
+                <p:selectOneMenu value="#{sessionController.filtroEstado}">
+                
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
+                    <f:selectItems value="#{sessionController.listaEstadosMovilidad}" var="estado" itemValue="#{estado.estadoMovilidad}" itemLabel="#{estado.estadoMovilidad}"/>
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+               <p:outputPanel id="panelPais" style="font-size: 12px;">
+                    
+                <p:outputLabel value="Pais: "/>
+                <p:selectOneMenu value="#{sessionController.filtroPais}" filterMatchMode="contains" filter="true">
+                                 <p:ajax event="change" listener="#{movilidadesController.onChangePais}" update=":formFiltro:panelPais :formFiltro:panelUniversidad"/>
+                    <f:selectItem itemLabel="Todos" itemValue="todos"/>
+                    <f:selectItems value="#{paisController.listaPaises}" var="pais" itemLabel="#{pais.nombre}" itemValue="#{pais.nombre}"/>
+                
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+                
+                <p:outputPanel id="panelUniversidad" style="font-size: 12px;">
+                <p:outputLabel value="Universidad: "/>
+                <p:selectOneMenu value="#{sessionController.filtroUniversidad}" rendered="#{movilidadesController.checkPais}" filterMatchMode="contains" filter="true">
+                    <f:selectItem itemLabel="Todas" itemValue="todos"/>
+                    
+                    
+                    <f:selectItems value="#{movilidadesController.listaUniversidades}" var="universidad" 
+                                   itemValue="#{universidad.nombre}" itemLabel="#{universidad.nombre}"/>
+                
+                </p:selectOneMenu>
+                </p:outputPanel>
+                
+               
+                    <p:commandButton style="font-size: 12px" value="buscar" action="#{movilidadesController.buscarMovilidades}" update=":formMovilidades" oncomplete="PF('movTable').filter();"/>
+                    <p:commandButton  style="font-size: 12px" value="limpiar" action="#{movilidadesController.limpiarFiltros}" update=":formFiltro"/>
+                
+            
+            </h:panelGrid>
+            
+            </p:panel>
+        </h:form>
+
+        <br/>
         
-        
-        <h:form id="formMovilidades" onkeypress="return event.keyCode != 13">
+        <h:form id="formMovilidades" rendered="#{sessionController.correoConf.pageToPage eq 'false'}" onkeypress="return event.keyCode != 13">
             
             <p:growl id="msgs"/>
-            <p:dataTable  id="t1" var="movilidad" value="#{movilidadesController.model}"
-                          emptyMessage="no hay movilidades" editable="true" lazy="true"
-                          sortOrder="descending" sortBy="#{movilidad.universidad.nombre}"
+            <p:dataTable  id="t1" var="movilidad" value="#{movilidadesController.listaMovilidades}"
+                          emptyMessage="no hay movilidades" editable="true" 
+                          sortOrder="descending" sortBy="#{movilidad.codMovilidad}"
                          selection="#{movilidadesController.selectedMovilidades}"
                          widgetVar="movTable"
                          rowKey="#{movilidad.codMovilidad}"
                          styleClass="borderless"
                          paginator="true" rows="10" paginatorPosition="bottom"
-                          
+                         filteredValue="#{movilidadesController.filteredMovilidades}"
                          
                          >
                 <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable').unselectAllRows();PF('movTable').filter();" update=":formMovilidades:t1 :formMovilidades:msgs"/>
                 <p:ajax event="rowEditCancel" listener="#{movilidadesController.onRowCancel}" />
                    
+                
+                
+                
                 <f:facet name="header">
                     <h:outputText value="Movilidades"/>
                 </f:facet> 
@@ -42,26 +104,28 @@
                     <h:outputText value="#{movilidad.usuario.login}"/>
                 </p:column>
                 
-                <p:column headerText="Pais" filterBy="#{movilidad.universidad.pais.nombre}" sortBy="#{movilidad.universidad.pais.nombre}" styleClass="paisMovilidadAdmin">
+                <p:column headerText="Pais" filterBy="#{movilidad.universidad.pais.nombre}"  filterMatchMode="startsWith" sortBy="#{movilidad.universidad.pais.nombre}" styleClass="paisMovilidadAdmin">
                 
                     <h:outputText value="#{movilidad.universidad.pais.nombre}"/>
                 
                 </p:column>
                 
-                <p:column headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidadMovilidadAdmin" filterBy="#{movilidad.universidad.nombre}" filterMatchMode="contains">
+                <p:column  headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidadMovilidadAdmin" filterBy="#{movilidad.universidad.nombre}" filterMatchMode="contains">
                     
                     <h:outputText value="#{movilidad.universidad.nombre}"/>
                     
                 </p:column>
-              
-                <p:column filterBy="#{movilidad.estado}" filterMatchMode="exact" headerText="estado" styleClass="estadoMovilidadAdmin" >
                 
-                    <f:facet name="filter">
-                        <p:selectOneMenu onchange="PF('movTable').filter()" style="width: 100%">
+                <p:column  filterBy="#{movilidad.estado}" sortBy="#{movilidad.estado}" filterMatchMode="exact" headerText="estado" styleClass="estadoMovilidadAdmin" >
+                
+                    <f:facet name="filter"  >
+                        <p:selectOneMenu   onchange="PF('movTable').filter()" style="width: 100%">
+                            
                             <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
                             <f:selectItems var="estados" value="#{sessionController.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
                         </p:selectOneMenu>
                     </f:facet>
+                    
                     <p:cellEditor>
                     <f:facet name="output"><h:outputText value="#{movilidad.estado}"/></f:facet>
                     <f:facet name="input">
@@ -75,13 +139,29 @@
                     </p:cellEditor>
                 </p:column>
                 
+                
+                
+                
                 <p:column headerText="cambiar" styleClass="cambiarMovilidadAdmin" rendered="#{sessionController.user.tipoUsuario eq 0}">
                         <p:rowEditor/>
                 </p:column>
                 
                 
-                <p:column headerText="curso" sortBy="#{movilidad.cursoacademico.cursoAcademico}" styleClass="cursoMovilidadAdmin">
+                <p:column headerText="curso" filterMatchMode="exact" filterBy="#{movilidad.cursoacademico.cursoAcademico}" sortBy="#{movilidad.cursoacademico.cursoAcademico}" styleClass="cursoMovilidadAdmin">
                 
+                    <f:facet name="filter">
+                        
+                        <p:selectOneMenu onchange="PF('movTable').filter();">
+                            
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                            <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="curso" itemLabel="#{curso.cursoAcademico}" itemValue="#{curso.cursoAcademico}"/>
+                            
+                        </p:selectOneMenu>
+                        
+                        
+                    </f:facet>
+                    
+                    
                     <h:outputText value="#{movilidad.cursoacademico.cursoAcademico}"/>
                     
                 </p:column>
@@ -159,15 +239,185 @@
             
         </h:form>
         
+        
+        <h:form id="formMovilidades2" rendered="#{sessionController.correoConf.pageToPage eq 'true'}" onkeypress="return event.keyCode != 13">
+            
+            <p:growl id="msgs2"/>
+            <p:dataTable  id="t12" var="movilidad" value="#{movilidadesController.model}"
+                          emptyMessage="no hay movilidades" editable="true" lazy="true"
+                          sortOrder="descending" sortBy="#{movilidad.codMovilidad}"
+                         selection="#{movilidadesController.selectedMovilidades}"
+                         widgetVar="movTable2"
+                         rowKey="#{movilidad.codMovilidad}"
+                         styleClass="borderless"
+                         paginator="true" rows="10" paginatorPosition="bottom"
+                         filteredValue="#{movilidadesController.filteredMovilidades}"
+                         
+                         >
+                <p:ajax event="rowEdit" listener="#{movilidadesController.onRowEdit}" oncomplete="PF('movTable2').unselectAllRows();PF('movTable2').filter();" update=":formMovilidades2:t12 :formMovilidades2:msgs2"/>
+                <p:ajax event="rowEditCancel" listener="#{movilidadesController.onRowCancel}" />
+                   
+                
+                
+                
+                <f:facet name="header">
+                    <h:outputText value="Movilidades"/>
+                </f:facet> 
+                
+                <p:column headerText="login" sortBy="#{movilidad.usuario.login}" styleClass="loginMovilidadAdmin" filterBy="#{movilidad.usuario.login}" filterMatchMode="contains">
+                    
+                    <h:outputText value="#{movilidad.usuario.login}"/>
+                </p:column>
+                
+                <p:column headerText="Pais" filterBy="#{movilidad.universidad.pais.nombre}"  filterMatchMode="startsWith" sortBy="#{movilidad.universidad.pais.nombre}" styleClass="paisMovilidadAdmin">
+                
+                    <h:outputText value="#{movilidad.universidad.pais.nombre}"/>
+                
+                </p:column>
+                
+                <p:column  headerText="destino" sortBy="#{movilidad.universidad.nombre}" styleClass="universidadMovilidadAdmin" filterBy="#{movilidad.universidad.nombre}" filterMatchMode="contains">
+                    
+                    <h:outputText value="#{movilidad.universidad.nombre}"/>
+                    
+                </p:column>
+                
+                <p:column  filterBy="#{movilidad.estado}" sortBy="#{movilidad.estado}" filterMatchMode="exact" headerText="estado" styleClass="estadoMovilidadAdmin" >
+                
+                    <f:facet name="filter"  >
+                        <p:selectOneMenu   onchange="PF('movTable2').filter()" style="width: 100%">
+                            
+                            <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems var="estados" value="#{sessionController.listaEstadosMovilidad}" itemLabel="#{estados.estadoMovilidad}" itemValue="#{estados.estadoMovilidad}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    
+                    <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{movilidad.estado}"/></f:facet>
+                    <f:facet name="input">
+                        
+                        <p:selectOneMenu value="#{movilidadesController.changeEstado}" style="width: 100%"
+                                         required="true" requiredMessage="hay que elegir un estado">
+                            <f:selectItem itemLabel="seleccionar" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems var="estados2" value="#{sessionController.listaEstadosMovilidad}" itemLabel="#{estados2.estadoMovilidad}" itemValue="#{estados2.estadoMovilidad}"/>             
+                        </p:selectOneMenu>
+                    </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+                
+                
+                <p:column headerText="cambiar" styleClass="cambiarMovilidadAdmin" rendered="#{sessionController.user.tipoUsuario eq 0}">
+                        <p:rowEditor/>
+                </p:column>
+                
+                
+                <p:column headerText="curso" filterMatchMode="exact" filterBy="#{movilidad.cursoacademico.cursoAcademico}" sortBy="#{movilidad.cursoacademico.cursoAcademico}" styleClass="cursoMovilidadAdmin">
+                
+                    <f:facet name="filter">
+                        
+                        <p:selectOneMenu onchange="PF('movTable2').filter();">
+                            
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                            <f:selectItems value="#{movilidadesController.listaCursoAcademico}" var="curso" itemLabel="#{curso.cursoAcademico}" itemValue="#{curso.cursoAcademico}"/>
+                            
+                        </p:selectOneMenu>
+                        
+                        
+                    </f:facet>
+                    
+                    
+                    <h:outputText value="#{movilidad.cursoacademico.cursoAcademico}"/>
+                    
+                </p:column>
+                
+                <p:column headerText="Inicio" sortBy="#{movilidad.fechaInicio}" styleClass="fechaMovilidadAdmin">
+                
+                    <h:outputText value="#{movilidad.fechaInicio}">
+                    
+                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                
+                </p:column>
+                
+                
+                <p:column headerText="Fin" sortBy="#{movilidad.fechaFin}" styleClass="fechaMovilidadAdmin">
+                
+                    <h:outputText value="#{movilidad.fechaFin}">
+                    
+                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                
+                </p:column>
+                
+                <p:column headerText="contratos" styleClass="contratosMovilidadAdmin">
+                    
+                    <p:commandLink action="#{movilidadesController.verContratos}" ajax="false" rendered="#{movilidad.estado eq 'aceptada'||movilidad.estado eq 'cancelada'||movilidad.estado eq 'terminada'}">
+                    
+                        <f:setPropertyActionListener value="#{movilidad}" target="#{movilidadesController.selectedMovilidad}"/>
+                        <h:graphicImage value="/resources/img/doc24.png" title="ver contratos"/>
+                        
+                    </p:commandLink>
+                    
+                </p:column>
+                
+                <p:column selectionMode="multiple" styleClass="multipleMovilidadAdmin"/>
+                
+                <p:columnGroup type="footer">
+                    
+                    <p:column colspan="4">
+                        
+                        <f:facet name="footer">
+                            
+                             <p:commandLink action="#{movilidadesController.activaTexto}" update=":formMensajes :formMovilidades2:msgs2">
+                                 <h:graphicImage value="/resources/img/message32.png" title="Escribir mensaje. A los usuarios repetidos solo se le envía una vez"/>
+                             </p:commandLink>
+                
+                            
+                        </f:facet>
+                        
+                        
+                    </p:column>
+                    
+                    
+                    
+                    <p:column colspan="6">
+                        <f:facet name="footer">
+                             <p:commandLink   onclick="if (! confirm('¿seguro que quieres borrar?')) return false" update=":formMovilidades2:"  action="#{movilidadesController.eliminaMovilidadLista}" 
+                                              oncomplete="PF('movTable2').filter()" rendered="#{sessionController.user.tipoUsuario eq 0}">
+                                 <h:graphicImage value="/resources/img/trash26.png" title="eliminar"/>
+                             </p:commandLink>
+                        </f:facet>
+                    </p:column>
+                    
+                    
+                    
+                </p:columnGroup>
+                        
+                
+            </p:dataTable>
+            
+        </h:form>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <br/>
         
         <h:form id="formMensajes">    
-            <h:panelGrid columns="2" cellpadding="5" rendered="#{movilidadesController.activaTexto}">
+            <h:panelGrid columns="2" cellpadding="5" rendered="#{movilidadesController.activaTexto}" >
             <p:outputLabel value="asunto:" />
             <p:inputText value="#{movilidadesController.tema}" />
             <p:outputLabel/>
             <p:inputTextarea value="#{movilidadesController.texto}" required="true" requiredMessage="el texto no puede estar vacío" cols="80" rows="10" autoResize="true"/>
-            <p:commandButton value="enviar" action="#{movilidadesController.enviarMensajesVarios}" update=":formMovilidades :formMensajes" oncomplete="PF('movTable').unselectAllRows();"  />
+            <p:commandButton value="enviar" action="#{movilidadesController.enviarMensajesVarios}" update=":formMovilidades :formMovilidades2 :formMensajes" oncomplete="PF('movTable').unselectAllRows();PF('movTable2').unselectAllRows();"  />
             <p:commandButton id="cancelBtn" value="cancelar" action="#{movilidadesController.cancelar}" process="cancelBtn" update=":formMensajes" />
             </h:panelGrid>
         </h:form>
