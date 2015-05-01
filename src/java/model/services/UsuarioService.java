@@ -13,7 +13,9 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.mail.EmailException;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -33,4 +35,6 @@ public interface UsuarioService {
      public void eliminarDireccion(Direccion d);
      public void crearDireccion(Direccion d);
      public List<Direccion> listaDirecciones();
+     public List<Usuario> listaLazyUsuario(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters);
+     public int countUsuario(Map<String,Object>filters);
 }

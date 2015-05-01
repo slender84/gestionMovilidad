@@ -12,11 +12,13 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import model.dao.CronicaDao;
 import model.dao.CursoAcademicoDao;
 import model.dao.CursoDao;
 import model.dao.PaisDao;
 import model.dao.UniversidadDao;
+import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -338,6 +340,27 @@ public class UniversidadServiceImpl implements UniversidadService,Serializable{
       return cursoDao.listar();
       
   }
+  
+
+  
+  @Override
+  public List<Cronica> listaLazyCronica(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+      
+      
+      return universidadDao.listaLazyCronica(first, pageSize, sortField, sortOrder, filters);
+      
+      
+  }
+  
+  @Override
+    public int countCronica(Map<String,Object>filters){
+        
+        
+        return universidadDao.countCronica(filters);
+        
+        
+    }
+  
   
   
   

@@ -11,11 +11,14 @@ import entities.ComentarioAsignatura;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
+import java.util.Iterator;
 
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;
 
 
@@ -126,6 +129,115 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
               .addOrder(Order.desc("fecha")).list();
       
   }
+  
+  
+  @Override     
+   public List<ComentarioAsignatura> listaLazyComentarioAsignatura(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+       
+       
+       String orden=null;
+        List<ComentarioAsignatura> l=null;
+        
+        
+        String campo=null;
+        
+        
+        if(sortField!=null){
+          
+        switch(sortField){
+            
+            
+            case "usuario.login":campo="usuario.login";
+                break;
+            case "asignatura.id.nombreUniversidad":campo="asignatura.id.nombreUniversidad";
+                break;
+            case "asignatura.nombreAsignatura":campo="asignatura.nombreAsignatura";
+                break;
+            case "fecha":campo="fecha";
+                break;
+            case "estado":campo="estado";
+                break;    
+            case "idcomentario":campo="idcomentario";
+                break;      
+        }
+         
+            
+            if(sortOrder.toString().equalsIgnoreCase("ascending")){
+                orden="asc";    
+            }else{
+                orden="desc";
+                
+            }
+        }
+            
+        if(filters.containsKey("usuario.login")){
+                 
+            getSession().enableFilter("login").setParameter("loginParam", filters.get("usuario.login"));
+        
+        }
+        
+        if(filters.containsKey("asignatura.id.nombreUniversidad")){
+            
+            getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("asignatura.id.nombreUniversidad"));
+        }
+        
+        if(filters.containsKey("asignatura.nombreAsignatura")){
+            
+            getSession().enableFilter("asignatura").setParameter("asignaturaParam", filters.get("asignatura.nombreAsignatura"));
+        }
+        
+        
+        if(filters.containsKey("estado")){
+            getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
+        }
+               
+        
+        if(sortField==null){
+            
+             l=getSession().createQuery("select c from ComentarioAsignatura c").setFirstResult(first).setMaxResults(pageSize).list();
+            
+        }else{
+            
+             l=getSession().createQuery("select c from ComentarioAsignatura c order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
+              
+        }
+        
+        return l;
+        
+       
+       
+       
+   }
+   
+     @Override   
+     public int countComentarioAsignatura(Map<String,Object>filters){
+         
+        if(filters.containsKey("usuario.login")){
+                 
+            getSession().enableFilter("login").setParameter("loginParam", filters.get("usuario.login"));
+        
+        }
+        
+        if(filters.containsKey("asignatura.id.nombreUniversidad")){
+            
+            getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("asignatura.id.nombreUniversidad"));
+        }
+        
+        if(filters.containsKey("asignatura.nombreAsignatura")){
+            
+            getSession().enableFilter("asignatura").setParameter("asignaturaParam", filters.get("asignatura.nombreAsignatura"));
+        }
+        
+        
+        if(filters.containsKey("estado")){
+            getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
+        }
+        
+        List<ComentarioAsignatura> l=getSession().createQuery("select c from ComentarioAsignatura c").list();
+        return l.size();
+         
+     }
+  
   
   
   

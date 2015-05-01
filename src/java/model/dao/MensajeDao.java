@@ -7,9 +7,12 @@
 package model.dao;
 
 
+
 import entities.Mensaje;
 
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.SortOrder;
 
 
 public interface MensajeDao extends GenericDao<Mensaje, Integer>{
@@ -20,6 +23,7 @@ public interface MensajeDao extends GenericDao<Mensaje, Integer>{
    
     public List<Mensaje> mensajesEnviadosTotal(String origen);
     public List<Mensaje> mensajesRecibidosTotal(String destino);
-    
+    public List<Mensaje> listaLazyMensajeRecibido(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String destino);
+    public int countMensajeRecibido(Map<String,Object>filters,String destino);
     
 }

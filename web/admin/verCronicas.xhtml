@@ -24,13 +24,14 @@
             
             <p:growl id="msgs"/>
             
-            <p:dataTable id="t1" var="cronica" value="#{cronicasController.listaCronicas}" paginator="true" rows="10"
+            <p:dataTable id="t1" var="cronica" value="#{cronicasController.model}" paginator="true" rows="10" lazy="true"
                          emptyMessage="no hay comentarios"
                          widgetVar="cronicaTable"
                          rowKey="#{cronica.idcronica}"
                          selection="#{cronicasController.selectedCronicas}"
                          styleClass="borderless"
                          paginatorPosition="bottom"
+                         sortOrder="descending" sortBy="#{cronica.idcronica}"
                          filteredValue="#{cronicasController.filteredCronicas}"> 
                          
                 

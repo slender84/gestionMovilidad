@@ -8,8 +8,11 @@ package model.dao;
 
 
     
+import entities.Cronica;
 import entities.Universidad;
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.SortOrder;
 
 
 public interface UniversidadDao extends GenericDao<Universidad, String>{
@@ -19,7 +22,8 @@ public interface UniversidadDao extends GenericDao<Universidad, String>{
     
 
     public List<Universidad> listarPorPais(String pais);
-   
+   public List<Cronica> listaLazyCronica(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters);
+    public int countCronica(Map<String,Object>filters);
    
    
    

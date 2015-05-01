@@ -6,8 +6,11 @@
 
 package model.dao;
 
+import entities.Movilidad;
 import entities.Usuario;
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;
 
 @Repository("usuarioDao")
@@ -22,70 +25,85 @@ public class UsuarioDaoImpl extends GenericDaoHibernate<Usuario, String> impleme
         }
         
         
-   /*     
-    
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory SessionFactory) {
-        this.sessionFactory = SessionFactory;
-    }
-    
-    
-    protected Session getSession(){
-        return sessionFactory.getCurrentSession();
-    }
-    
-    
-    @Override
-    public Usuario find(String nombre){
-        
-        Session session=sessionFactory.getCurrentSession();
-        Query q=session.createQuery("select u from Usuario u where u.login=:nombre");
-        q.setParameter("nombre", nombre);
-        Usuario u=(Usuario)q.uniqueResult();
-        return u;
+   @Override     
+   public List<Usuario> listaLazyUsuario(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+       
+       
+       String orden=null;
+        List<Usuario> l=null;
         
         
-        
-    }
-    
-    @Override
-    public void delete(Usuario u) {
-        
-        sessionFactory.getCurrentSession().delete(u);
+        String campo=null;
         
         
-    }
-    
-    @Override
-    public List<Usuario> listar(){
-        
-        
-        return((List<Usuario>)sessionFactory.getCurrentSession().createQuery("select u from Usuario u").list());
-        
-        
-    }
-    
-    
-    
-    @Override
-    public void insertarUsuario(Usuario u){ //throws org.springframework.dao.DataIntegrityViolationException{
-        
+        if(sortField!=null){
+          
+        switch(sortField){
             
-            sessionFactory.getCurrentSession().save(u);
             
+            case "login":campo="login";
+                break;
+            case "titulacion":campo="titulacion";
+                break;
+            
+        }
+         
+            
+            if(sortOrder.toString().equalsIgnoreCase("ascending")){
+                orden="asc";    
+            }else{
+                orden="desc";
+                
+            }
+        }
+            
+        if(filters.containsKey("login")){
+                 
+            getSession().enableFilter("login").setParameter("loginParam", filters.get("login"));
         
-    }
-    @Override
-    public void actualizar(Usuario u){
+        }
         
-        sessionFactory.getCurrentSession().saveOrUpdate(u);
+        if(filters.containsKey("titulacion")){
+            
+            getSession().enableFilter("titulacion").setParameter("titulacionParam", filters.get("titulacion"));
+        }
         
-    }
-    
-  
-    */
+        
+               
+        
+        if(sortField==null){
+            
+             l=getSession().createQuery("select u from Usuario u").setFirstResult(first).setMaxResults(pageSize).list();
+            
+        }else{
+            
+             l=getSession().createQuery("select u from Usuario u order by u."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
+              
+        }
+        
+        return l;
+        
+       
+       
+       
+   }
+   
+     @Override   
+     public int countUsuario(Map<String,Object>filters){
+         
+         if(filters.containsKey("login")){
+                 
+            getSession().enableFilter("login").setParameter("loginParam", filters.get("login"));
+        
+        }
+        
+        if(filters.containsKey("titulacion")){
+            
+            getSession().enableFilter("titulacion").setParameter("titulacionParam", filters.get("titulacion"));
+        }
+        
+        List<Usuario> l=getSession().createQuery("select u from Usuario u").list();
+        return l.size();
+         
+     }
 }

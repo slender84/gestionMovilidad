@@ -1,15 +1,20 @@
 package controllers;
 
+import entities.Cronica;
 import entities.Mensaje;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.MensajeService;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -38,21 +43,62 @@ public class MensajesRecibidosAdminController implements Serializable{
     
     private ArrayList<Usuario> selectedUsuarios;
     
-    private ArrayList<String> estados;
+    private LazyDataModel<Mensaje> model;
+    private List<Mensaje> result;
     
     public MensajesRecibidosAdminController() {
     }
     
     @PostConstruct
     public void init(){
-         ArrayList<String> aux= new ArrayList<String>();
-        aux.add("si");
-        aux.add("no");
-        setEstados(aux);
+         
         
         
         user=sessionController.getUser();
-        setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
+        //setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
+        
+         model=new LazyDataModel<Mensaje>(){
+          
+            @Override
+            public List<Mensaje> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+                
+                
+             result=mensajeService.listaLazyMensajeRecibido(first,pageSize,sortField,sortOrder,filters,"admin");
+            
+                //setRowCount(10);
+                setRowCount(mensajeService.countMensajeRecibido(filters,"admin"));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(Mensaje m){
+                  
+                  return m.getIdmensaje();
+                  
+              }
+            
+           
+            public Mensaje getRowData(int rowKey){
+                
+                for(Mensaje m:result){
+                    
+                    if(m.getIdmensaje()==rowKey)
+                        return m;
+                    
+                }
+                return null;
+            }
+            
+        
+    };       
+        
+        
+        
+        
         
     }
 
@@ -62,6 +108,22 @@ public class MensajesRecibidosAdminController implements Serializable{
 
     public void setSessionController(SessionController sessionController) {
         this.sessionController = sessionController;
+    }
+
+    public LazyDataModel<Mensaje> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<Mensaje> model) {
+        this.model = model;
+    }
+
+    public List<Mensaje> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Mensaje> result) {
+        this.result = result;
     }
 
     
@@ -146,13 +208,7 @@ public class MensajesRecibidosAdminController implements Serializable{
         this.selectedUsuarios = selectedUsuarios;
     }
 
-    public ArrayList<String> getEstados() {
-        return estados;
-    }
-
-    public void setEstados(ArrayList<String> estados) {
-        this.estados = estados;
-    }
+    
     
     
     

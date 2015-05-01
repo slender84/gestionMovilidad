@@ -24,5 +24,21 @@
         <property name="estado" type="string">
             <column name="estado" length="50" not-null="true" />
         </property>
+        <filter name="login" condition="login like '%' :loginParam '%'"/>
+        <filter name="estado" condition="estado =:estadoParam"/>
+        <filter name="asignatura" condition="codAsignatura in(select a.codAsignatura from Asignatura a where a.nombreAsignatura like '%' :asignaturaParam '%')"/>
+        <filter name="universidad" condition="nombreUniversidad like '%' :universidadParam '%'"/>
     </class>
+    <filter-def name="login">
+        <filter-param name="loginParam" type="string"/>
+    </filter-def>
+    <filter-def name="estado">
+        <filter-param name="estadoParam" type="string"/>
+     </filter-def>
+     <filter-def name="asignatura">
+         <filter-param name="asignaturaParam" type="string"/>
+     </filter-def>
+     <filter-def name="universidad" >
+         <filter-param name="universidadParam" type="string"/>
+     </filter-def>
 </hibernate-mapping>

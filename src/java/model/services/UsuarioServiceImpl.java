@@ -12,6 +12,7 @@ import exceptions.InstanceNotFoundException;
 import exceptions.PasswordIncorrectoException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import model.dao.DireccionDao;
 import model.dao.InfoCuentaDao;
 import model.dao.UsuarioDao;
@@ -20,6 +21,7 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
+import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -236,6 +238,25 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         return direccionDao.listar();
     }
+    
+    @Override
+    public List<Usuario> listaLazyUsuario(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+        
+        
+        return usuarioDao.listaLazyUsuario(first, pageSize, sortField, sortOrder, filters);
+        
+        
+    }
+    
+    @Override
+     public int countUsuario(Map<String,Object>filters){
+         
+         
+         return usuarioDao.countUsuario(filters);
+         
+     }
+    
+    
     
 }
 

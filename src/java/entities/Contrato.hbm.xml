@@ -29,8 +29,11 @@
             </many-to-many>
         </set>
         <filter name="cursoAcademicoContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.cursoAcademico=:cursoAcademicoContratoParam)"/>
-        <filter name="universidadContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.nombreUniversidad=:universidadContratoParam)"/>
+        <filter name="universidadContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.nombreUniversidad like '%' :universidadContratoParam '%')"/>
         <filter name="estadoContrato" condition="estado=:estadoContratoParam"/>
+        <filter name="usuarioContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.loginUsuario like '%' :usuarioContratoParam '%')"/>
+        <filter name="paisContrato" condition="idMovilidad in (select m.codMovilidad from Movilidad m where m.nombreUniversidad in(select u.nombre from Universidad u where u.pais like :paisContratoParam '%'))"/>
+        
     </class>
     <filter-def name="cursoAcademicoContrato">
         <filter-param name="cursoAcademicoContratoParam" type="string"/>
@@ -40,5 +43,11 @@
     </filter-def>
     <filter-def name="estadoContrato">
         <filter-param name="estadoContratoParam" type="string"/>
+    </filter-def>
+    <filter-def name="usuarioContrato">
+        <filter-param name="usuarioContratoParam" type="string"/>
+    </filter-def>
+    <filter-def name="paisContrato">
+        <filter-param name="paisContratoParam" type="string"/>
     </filter-def>
 </hibernate-mapping>

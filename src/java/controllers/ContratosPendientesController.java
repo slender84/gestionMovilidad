@@ -7,6 +7,7 @@ import entities.Movilidad;
 import entities.Universidad;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -15,6 +16,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 @ManagedBean
@@ -42,7 +45,8 @@ public class ContratosPendientesController {
     
     private boolean checkPais;
     
-    
+    private List<Contrato> result;
+    private LazyDataModel<Contrato> model;
     
     public ContratosPendientesController() {
     }
@@ -85,6 +89,22 @@ public class ContratosPendientesController {
 
     public void setCheckPais(boolean checkPais) {
         this.checkPais = checkPais;
+    }
+
+    public List<Contrato> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Contrato> result) {
+        this.result = result;
+    }
+
+    public LazyDataModel<Contrato> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<Contrato> model) {
+        this.model = model;
     }
     
     
@@ -142,8 +162,50 @@ public class ContratosPendientesController {
     @PostConstruct
     public void init(){
         
-        //listaContratos=(ArrayList<Contrato>)movilidadService.listarTodosContratos();
-        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
+        if(sessionController.correoConf.getPageToPage()==true){
+            
+       listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
+            
+         model=new LazyDataModel<Contrato>(){
+          
+            @Override
+            public List<Contrato> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+             result=movilidadService.listaLazyContrato(first,pageSize,sortField,sortOrder,filters);
+            
+                //setRowCount(10);
+                setRowCount(movilidadService.countContrato(filters));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(Contrato contrato){
+                  
+                  return contrato.getIdContrato();
+                  
+              }
+            
+            public Contrato getRowData(int rowKey){
+                
+                for(Contrato c:result){
+                    
+                    if(c.getIdContrato()==rowKey)
+                        return c;
+                    
+                }
+                return null;
+            }
+            
+        
+    };           
+
+           
+            
+        }else{
+        
         
     boolean todosNulos=true;
         Map<String,String> m=new HashMap<String,String>();
@@ -190,7 +252,7 @@ public class ContratosPendientesController {
             listaContratos=(ArrayList<Contrato>)movilidadService.listarContratosPorFiltro(m);
         }
        
-         
+        }
     }
     
     

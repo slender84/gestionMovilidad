@@ -471,6 +471,7 @@ public class MovilidadesController implements Serializable{
         movilidadService.editarMovilidad(m);
         }catch(RuntimeException ex){
             sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
+            if(sessionController.correoConf.getPageToPage()==false)
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarTodasMovilidades();
             return null;
         }
@@ -514,6 +515,7 @@ public class MovilidadesController implements Serializable{
         }else result.remove(m);
             
             }catch(RuntimeException ex){
+                if(sessionController.correoConf.getPageToPage()==false)
                 actualizarTodasMovilidades();
                 sessionController.creaMensaje("No existe la movilidad", FacesMessage.SEVERITY_ERROR);
                 return null;

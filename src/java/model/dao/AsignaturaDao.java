@@ -16,6 +16,8 @@ import exceptions.InstanceNotFoundException;
 
 
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.SortOrder;
 
 
 public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
@@ -31,4 +33,6 @@ public interface AsignaturaDao extends GenericDao<Asignatura, AsignaturaId>{
     public List<ComentarioAsignatura> listarComentariosPorAsignatura(AsignaturaId id);
     public ComentarioAsignatura buscarComentarioAsignatura(Integer id) throws InstanceNotFoundException;
     public List<ComentarioAsignatura> listarComentariosAsignaturaPendientes();
+    public List<ComentarioAsignatura> listaLazyComentarioAsignatura(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters);
+    public int countComentarioAsignatura(Map<String,Object>filters);
 }

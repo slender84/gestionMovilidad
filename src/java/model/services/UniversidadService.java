@@ -9,6 +9,8 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.SortOrder;
 
 
 /**
@@ -42,5 +44,6 @@ public interface UniversidadService {
     public void eliminarCronica(Cronica c) throws InstanceNotFoundException;
     public List<Cronica> listaCronicas();
     public List<Cronica> listarCronicasPublicas(String Universidad)throws InstanceNotFoundException;
-    
+    public List<Cronica> listaLazyCronica(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters);
+    public int countCronica(Map<String,Object>filters);
 }

@@ -507,6 +507,13 @@ and (min-width : 1200px) {
 }
 
 
+.estadoComPendiente{
+    
+    width: 11%;
+    text-align: center;
+    font-size: 12px;
+}
+
 
 .verComPendiente{
     

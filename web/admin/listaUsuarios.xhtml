@@ -21,8 +21,8 @@
             
             <p:growl />
             
-            <p:dataTable id="tabla" var="usuario" value="#{eliminarUsuarioController.listaUsuarios}" paginator="true" rows="10"
-                         filteredValue="#{eliminarUsuarioController.filteredUsuarios}"
+            <p:dataTable id="tabla" var="usuario" value="#{eliminarUsuarioController.model}" paginator="true" rows="10"
+                         filteredValue="#{eliminarUsuarioController.filteredUsuarios}" lazy="true"
                          selection="#{eliminarUsuarioController.selectedUsuarios}"
                          widgetVar="usTable"
                          emptyMessage="no se han encontrado usuarios"
@@ -35,24 +35,24 @@
                     <h:outputText value="#{usuario.login}"/>
                 </p:column>
             
-                <p:column headerText="nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}" styleClass="campoUsuario" filterMatchMode="contains">
+                <p:column headerText="nombre"   styleClass="campoUsuario" >
                 
                           <h:outputText value="#{usuario.nombre}"/>
                           
                 </p:column>
                 
-                <p:column headerText="apellido" sortBy="#{usuario.apellido1}" filterBy="#{usuario.apellido1}"  styleClass="campoUsuario" filterMatchMode="contains">
+                <p:column headerText="apellido"   styleClass="campoUsuario" >
                 
                     <h:outputText value="#{usuario.apellido1}"/>
                 
                 </p:column>
                 
-                <p:column headerText="apellido2" sortBy="#{usuario.apellido2}" styleClass="campoUsuario">
+                <p:column headerText="apellido2"  styleClass="campoUsuario">
                 
                     <h:outputText value="#{usuario.apellido2}"/>
                 </p:column> 
                           
-                <p:column headerText="titulacion" filterBy="#{usuario.titulacion}" filterMatchMode="exact" styleClass="campoUsuario">
+                <p:column headerText="titulacion" filterBy="#{usuario.titulacion}" sortBy="#{usuario.titulacion}" filterMatchMode="exact" styleClass="campoUsuario">
                     <f:facet name="filter">
                         <p:selectOneMenu onchange="PF('usTable').filter()">
                     <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />

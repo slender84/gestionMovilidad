@@ -1,11 +1,14 @@
 
 package controllers;
 
+import entities.ComentarioAsignatura;
 import entities.Cronica;
 import entities.Universidad;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,6 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import model.services.UniversidadService;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -59,7 +64,51 @@ public class CronicasController implements Serializable{
         HttpServletRequest request=(HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         if(request.getRequestURI().equals(request.getContextPath()+"/admin/verCronicas.xhtml")){
             
-           listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas(); 
+           //listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas(); 
+            
+             model=new LazyDataModel<Cronica>(){
+          
+            @Override
+            public List<Cronica> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+                
+                
+             result=universidadService.listaLazyCronica(first,pageSize,sortField,sortOrder,filters);
+            
+                //setRowCount(10);
+                setRowCount(universidadService.countCronica(filters));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(Cronica c){
+                  
+                  return c.getIdcronica();
+                  
+              }
+            
+           
+            public Cronica getRowData(int rowKey){
+                
+                for(Cronica c:result){
+                    
+                    if(c.getIdcronica()==rowKey)
+                        return c;
+                    
+                }
+                return null;
+            }
+            
+        
+    };       
+            
+            
+            
+            
+            
         }
         
         
@@ -67,6 +116,11 @@ public class CronicasController implements Serializable{
         
         
     }
+    
+    LazyDataModel<Cronica> model;
+    List<Cronica> result;
+    
+    
     
     private Cronica selectedCronica;
     private ArrayList<Cronica> listaCronicas;
@@ -187,6 +241,30 @@ public class CronicasController implements Serializable{
     public void cerrarEdicion(){
         panelTexto=false;
     }
+
+    public LazyDataModel<Cronica> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<Cronica> model) {
+        this.model = model;
+    }
+
+    public List<Cronica> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Cronica> result) {
+        this.result = result;
+    }
+
+    
+    
+    
+    
+    
+    
+    
     
     public String modificarEstado(){
         
@@ -204,7 +282,7 @@ public class CronicasController implements Serializable{
             
             sessionController.creaMensaje("El comentario no existe", FacesMessage.SEVERITY_ERROR);
             panelTexto=false;
-            listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
+            //listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
             return null;
         }
         
@@ -227,11 +305,12 @@ public class CronicasController implements Serializable{
             }catch(InstanceNotFoundException ex){
                 
                 sessionController.creaMensaje("No existe ese comentario", FacesMessage.SEVERITY_ERROR);
-                listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
+                //listaCronicas=(ArrayList<Cronica>)universidadService.listaCronicas();
                 panelTexto=false;
                 return null;
             }
-            listaCronicas.remove(c);
+            //listaCronicas.remove(c);
+            result.remove(c);
             if(selectedCronica!=null&&selectedCronica.equals(c))
                 panelTexto=false;
         }

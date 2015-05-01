@@ -276,7 +276,23 @@ public class MovilidadServiceImpl implements MovilidadService{
       return movilidadDao.count(filters);
       
   }
+     @Override
+     public List<Contrato> listaLazyContrato(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+         
+         
+         return contratoDao.listaLazyContrato(first, pageSize, sortField, sortOrder, filters);
+         
+         
+         
+     }
      
-     
+     @Override
+    public int countContrato(Map<String,Object> filters){
+        
+        
+        return contratoDao.countContrato(filters);
+        
+        
+    }
      
 }

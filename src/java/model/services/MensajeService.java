@@ -9,6 +9,8 @@ package model.services;
 import entities.Mensaje;
 import exceptions.InstanceNotFoundException;
 import java.util.List;
+import java.util.Map;
+import org.primefaces.model.SortOrder;
 
 
 public interface MensajeService {
@@ -21,4 +23,6 @@ public List<Mensaje> mensajesEnviadosTotal(String origen);
 public void eliminarMensaje(Mensaje m,String accion) throws InstanceNotFoundException ;
 public Mensaje buscarMensaje(Integer msgId) throws InstanceNotFoundException;
 public void leerMensajeRecibido(Mensaje m) throws InstanceNotFoundException;
+public List<Mensaje> listaLazyMensajeRecibido(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String destino);
+public int countMensajeRecibido(Map<String,Object>filters,String destino);
 }

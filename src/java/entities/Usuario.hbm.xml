@@ -60,5 +60,13 @@
             </key>
             <one-to-many class="entities.Mensaje" />
         </set>
+        <filter name="login" condition="login like '%' :loginParam '%'"/>
+        <filter name="titulacion" condition="titulacion =:titulacionParam"/>
     </class>
+    <filter-def name="login">
+        <filter-param name="loginParam" type="string"/>
+    </filter-def> 
+    <filter-def name="titulacion">
+        <filter-param name="titulacionParam" type="string"/>
+    </filter-def>
 </hibernate-mapping>

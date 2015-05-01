@@ -1,15 +1,20 @@
 package controllers;
 
+import entities.Contrato;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.UsuarioService;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -28,13 +33,56 @@ public class EliminarUsuarioController implements Serializable{
     private ArrayList<Usuario> listaUsuarios;
     private ArrayList<Usuario> filteredUsuarios;
     
+    private LazyDataModel<Usuario> model;
+    private List<Usuario> result;
+    
+    
     
     public EliminarUsuarioController() {
     }
     @PostConstruct
     public void init(){
         
-        setListaUsuarios((ArrayList < Usuario >)usuarioService.listarUsuarios());
+        //setListaUsuarios((ArrayList < Usuario >)usuarioService.listarUsuarios());
+        
+         model=new LazyDataModel<Usuario>(){
+          
+            @Override
+            public List<Usuario> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+             result=usuarioService.listaLazyUsuario(first,pageSize,sortField,sortOrder,filters);
+            
+                //setRowCount(10);
+                setRowCount(usuarioService.countUsuario(filters));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(Usuario usuario){
+                  
+                  return usuario.getLogin();
+                  
+              }
+            
+            @Override
+            public Usuario getRowData(String rowKey){
+                
+                for(Usuario u:result){
+                    
+                    if(u.getLogin().equals(rowKey))
+                        return u;
+                    
+                }
+                return null;
+            }
+            
+        
+    };        
+        
+        
         
     }
 
@@ -79,6 +127,22 @@ public class EliminarUsuarioController implements Serializable{
     public void setFilteredUsuarios(ArrayList<Usuario> filteredUsuarios) {
         this.filteredUsuarios = filteredUsuarios;
     }
+
+    public LazyDataModel<Usuario> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<Usuario> model) {
+        this.model = model;
+    }
+
+    public List<Usuario> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Usuario> result) {
+        this.result = result;
+    }
     
     
     
@@ -93,7 +157,7 @@ public class EliminarUsuarioController implements Serializable{
             if(u.getTipoUsuario()==2){
                 try{
                 usuarioService.eliminarUsuario(u);
-                listaUsuarios.remove(u);
+                result.remove(u);
                 }catch(RuntimeException ex){
                     return null;
                 }
@@ -137,11 +201,11 @@ public class EliminarUsuarioController implements Serializable{
              }catch(RuntimeException ex){
                  
                  sessionController.creaMensaje("se ha producido un error", FacesMessage.SEVERITY_ERROR);
-                 listaUsuarios=(ArrayList < Usuario >)usuarioService.listarUsuarios();
+                 //listaUsuarios=(ArrayList < Usuario >)usuarioService.listarUsuarios();
                  return null;
              }
              
-             listaUsuarios.remove(u);
+             result.remove(u);
              
              
          }

@@ -24,14 +24,15 @@
             
             <p:growl id="msgs"/>
             
-            <p:dataTable id="t1" var="comentario" value="#{comentariosAsignaturaPendientesController.listaComentariosAsignatura}" paginator="true" rows="10"
+            <p:dataTable id="t1" var="comentario" value="#{comentariosAsignaturaPendientesController.model}" paginator="true" rows="10"
                          emptyMessage="no hay comentarios"
                          widgetVar="comentarioTable"
                          rowKey="#{comentario.idcomentario}"
                          selection="#{comentariosAsignaturaPendientesController.selectedComentariosAsignatura}"
                          filteredValue="#{comentariosAsignaturaPendientesController.filteredComentarioAsignatura}"
                          styleClass="borderless"
-                         paginatorPosition="bottom"> 
+                         sortBy="#{comentario.idcomentario}" sortOrder="descending"
+                         paginatorPosition="bottom" lazy="true"> 
                          
                 
                 <p:column headerText="autor" sortBy="#{comentario.usuario.login}" filterBy="#{comentario.usuario.login}" filterMatchMode="contains" styleClass="nombreComPendiente">
@@ -60,6 +61,28 @@
                     </h:outputText>
                 
                 </p:column>
+                
+                <p:column headerText="estado" sortBy="#{comentario.estado}" filterBy="#{comentario.estado}" filterMatchMode="exact" styleClass="estadoComPendiente">
+                    
+                    <f:facet name="filter">
+                        
+                        <p:selectOneMenu onchange="PF('comentarioTable').filter();">
+                            
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                            <f:selectItem itemLabel="pendiente" itemValue="pendiente"/>
+                            <f:selectItem itemLabel="aceptado" itemValue="aceptado"/>
+                            
+                        </p:selectOneMenu>
+                        
+                                         
+                    </f:facet>
+                    
+                    <h:outputText value="#{comentario.estado}"/>
+                    
+                </p:column>
+                
+                
+                
                 
                 <p:column headerText="Editar" styleClass="verComPendiente">
                     

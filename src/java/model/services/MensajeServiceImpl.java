@@ -10,7 +10,9 @@ package model.services;
 import entities.Mensaje;
 import exceptions.InstanceNotFoundException;
 import java.util.List;
+import java.util.Map;
 import model.dao.MensajeDao;
+import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -128,6 +130,22 @@ public class MensajeServiceImpl implements MensajeService{
             }
       
 }
+    
+    @Override
+    public List<Mensaje> listaLazyMensajeRecibido(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String destino){
+        
+        return mensajeDao.listaLazyMensajeRecibido(first, pageSize, sortField, sortOrder, filters,destino);
+        
+        
+    }
+    
+    @Override
+    public int countMensajeRecibido(Map<String,Object>filters,String destino){
+        
+        return mensajeDao.countMensajeRecibido(filters,destino);
+        
+    }
+    
     
     
     

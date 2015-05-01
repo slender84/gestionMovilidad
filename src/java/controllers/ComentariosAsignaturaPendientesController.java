@@ -2,13 +2,19 @@
 package controllers;
 
 import entities.ComentarioAsignatura;
+import entities.Usuario;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.AsignaturaService;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 @ManagedBean
 @ViewScoped
@@ -27,6 +33,10 @@ public class ComentariosAsignaturaPendientesController {
     private ComentarioAsignatura selectedComentarioAsignatura;
     
     private String nuevoEstado;
+    
+    private List<ComentarioAsignatura> result;
+    private LazyDataModel<ComentarioAsignatura> model;
+    
    
     public ComentariosAsignaturaPendientesController() {
     }
@@ -38,6 +48,25 @@ public class ComentariosAsignaturaPendientesController {
     public void setSessionController(SessionController sessionController) {
         this.sessionController = sessionController;
     }
+
+    public List<ComentarioAsignatura> getResult() {
+        return result;
+    }
+
+    public void setResult(List<ComentarioAsignatura> result) {
+        this.result = result;
+    }
+
+    public LazyDataModel<ComentarioAsignatura> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<ComentarioAsignatura> model) {
+        this.model = model;
+    }
+    
+    
+    
 
     public AsignaturaService getAsignaturaService() {
         return asignaturaService;
@@ -95,7 +124,52 @@ public class ComentariosAsignaturaPendientesController {
     @PostConstruct
     public void init(){
         
-        listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignaturaPendientes();
+        //listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignaturaPendientes();
+        
+        
+         model=new LazyDataModel<ComentarioAsignatura>(){
+          
+            @Override
+            public List<ComentarioAsignatura> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+                
+                
+             result=asignaturaService.listaLazyComentarioAsignatura(first,pageSize,sortField,sortOrder,filters);
+            
+                //setRowCount(10);
+                setRowCount(asignaturaService.countComentarioAsignatura(filters));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(ComentarioAsignatura c){
+                  
+                  return c.getIdcomentario();
+                  
+              }
+            
+           
+            public ComentarioAsignatura getRowData(int rowKey){
+                
+                for(ComentarioAsignatura c:result){
+                    
+                    if(c.getIdcomentario()==rowKey)
+                        return c;
+                    
+                }
+                return null;
+            }
+            
+        
+    };       
+        
+        
+        
+        
+        
         
     }
     
@@ -129,7 +203,7 @@ public class ComentariosAsignaturaPendientesController {
        }catch(RuntimeException ex){
            
            sessionController.creaMensaje("Se ha producido un error", FacesMessage.SEVERITY_ERROR);
-           listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignaturaPendientes();
+           //listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignaturaPendientes();
            return null;
            
         }
@@ -157,13 +231,13 @@ public class ComentariosAsignaturaPendientesController {
                 selectedComentarioAsignatura.setTexto("");
             try{
                 
-                listaComentariosAsignatura.remove(c);
+                result.remove(c);
                 asignaturaService.eliminarComentario(c);
                 
             }catch(RuntimeException ex){
                 
                 sessionController.creaMensaje("Se ha producido un error", FacesMessage.SEVERITY_ERROR);
-                listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignaturaPendientes();
+                //listaComentariosAsignatura=(ArrayList<ComentarioAsignatura>)asignaturaService.listarComentariosAsignaturaPendientes();
                 return null;
                         
             }

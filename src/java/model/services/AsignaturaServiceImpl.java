@@ -13,9 +13,11 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import model.dao.AsignaturaDao;
 import model.dao.IdiomaDao;
 import org.hibernate.Hibernate;
+import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -184,6 +186,23 @@ public class AsignaturaServiceImpl implements AsignaturaService,Serializable{
         
         return asignaturaDao.listarComentariosAsignaturaPendientes();
         
+        
+    }
+    
+    @Override
+    public List<ComentarioAsignatura> listaLazyComentarioAsignatura(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
+        
+        return asignaturaDao.listaLazyComentarioAsignatura(first, pageSize, sortField, sortOrder, filters);
+        
+        
+        
+    }
+    
+    @Override
+    public int countComentarioAsignatura(Map<String,Object>filters){
+        
+        
+        return asignaturaDao.countComentarioAsignatura(filters);
         
     }
     
