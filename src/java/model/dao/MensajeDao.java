@@ -25,5 +25,7 @@ public interface MensajeDao extends GenericDao<Mensaje, Integer>{
     public List<Mensaje> mensajesRecibidosTotal(String destino);
     public List<Mensaje> listaLazyMensajeRecibido(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String destino);
     public int countMensajeRecibido(Map<String,Object>filters,String destino);
+    public List<Mensaje> listaLazyMensajeEnviado(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String origen);
+    public int countMensajeEnviado(Map<String,Object>filters,String origen);
     
 }

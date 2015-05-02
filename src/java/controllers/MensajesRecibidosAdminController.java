@@ -232,14 +232,17 @@ public class MensajesRecibidosAdminController implements Serializable{
      
      public void actualizarRecibidos(){
      
-        setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
+        //setListaMensajesRecibidos((ArrayList<Mensaje>)mensajeService.mensajesRecibidosTotal("admin"));
         for(Mensaje m:selectedMensajesRecibidos){
             
             if(selectedMensajeRecibido!=null&&m.getIdmensaje().equals(selectedMensajeRecibido.getIdmensaje()))
              
             activaRecibido=false;
             
-        }    
+        }
+        
+        result.removeAll(selectedMensajesRecibidos);
+        
      }
     
     

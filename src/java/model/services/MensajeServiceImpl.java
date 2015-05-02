@@ -146,7 +146,18 @@ public class MensajeServiceImpl implements MensajeService{
         
     }
     
-    
+    @Override
+    public List<Mensaje> listaLazyMensajeEnviado(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String origen){
+        
+        
+        return mensajeDao.listaLazyMensajeEnviado(first, pageSize, sortField, sortOrder, filters, origen);
+        
+    }
+    @Override
+    public int countMensajeEnviado(Map<String,Object>filters,String origen){
+        
+        return mensajeDao.countMensajeEnviado(filters, origen);
+    }
     
     
 }

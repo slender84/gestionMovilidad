@@ -20,14 +20,15 @@
          <h:form id="recibidos">
            <p:growl id="msgsRecibidos" />
             
-           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosUserController.listaMensajesRecibidos}" rows="10"
-                         emptyMessage="no hay mensajes"
+           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosUserController.model}" rows="10"
+                        emptyMessage="no hay mensajes" lazy="true"
                          widgetVar="mensTabla"
                          filteredValue="#{mensajesRecibidosUserController.filteredMensajesRecibidos}"
                          selection="#{mensajesRecibidosUserController.selectedMensajesRecibidos}"
                          rowKey="#{mensaje.idmensaje}"
                          paginator="true"
                          paginatorPosition="bottom"
+                         sortBy="#{mensaje.idmensaje}" sortOrder="descending"
                          >
                <f:facet name="header">Mensajes recibidos</f:facet>
                 
@@ -35,7 +36,7 @@
                           <h:outputText value="#{mensaje.usuarioByOrigen.login}"/>
                       </p:column>
                     
-               <p:column headerText="asunto" styleClass="asuntoMensaje">
+               <p:column headerText="asunto" sortBy="#{mensaje.tema}" styleClass="asuntoMensaje">
                          <h:outputText value="#{mensaje.tema}"/>
                       </p:column>
                     
@@ -96,17 +97,18 @@
             
             <h:form id="enviados">
             <p:growl id="msgsEnviados" />
-            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosUserController.listaMensajesEnviados}" rowKey="#{mensaje.idmensaje}" rows="10"
+            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosUserController.model}" rowKey="#{mensaje.idmensaje}" rows="10" lazy="true"
                          emptyMessage="no hay mensajes"
                          style="margin-bottom:0"
                          selection="#{mensajesEnviadosUserController.selectedMensajesEnviados}"
                          paginator="true"
                          paginatorPosition="bottom"
+                         sortBy="#{mensaje.idmensaje}" sortOrder="descending"
                          >
                  
                          <f:facet name="header">Mensajes enviados</f:facet>
                              
-                         <p:column headerText="asunto" styleClass="mandadoPor">
+                         <p:column headerText="asunto" sortBy="#{mensaje.tema}" styleClass="mandadoPor">
                                  <h:outputText value="#{mensaje.tema}"/>
                               </p:column>
                          
@@ -165,7 +167,11 @@
            <h:outputLink value="index.xhtml"><h:graphicImage value="/resources/iniciar-icono-4628-48.png"/></h:outputLink>
             
         
-       
+       <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+                   <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                       <p:graphicImage value="/resources/ajax-loader.gif" />
+                   </p:dialog>
             
         
         

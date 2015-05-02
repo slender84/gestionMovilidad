@@ -5,11 +5,15 @@ import entities.Usuario;
 import exceptions.InstanceNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import model.services.MensajeService;
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 
 
@@ -36,6 +40,12 @@ public class MensajesEnviadosAdminController implements Serializable{
     private ArrayList<Mensaje> selectedMensajesEnviados;
     private ArrayList<Mensaje> filteredMensajesEnviados;
 
+    
+    private LazyDataModel<Mensaje> model;
+    private List<Mensaje> result;
+    
+    
+    
     public SessionController getSessionController() {
         return sessionController;
     }
@@ -54,7 +64,48 @@ public class MensajesEnviadosAdminController implements Serializable{
     public void init(){
         
         user=sessionController.getUser();
-        setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
+        //setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
+        
+        model=new LazyDataModel<Mensaje>(){
+          
+            @Override
+            public List<Mensaje> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+    
+                
+                
+             result=mensajeService.listaLazyMensajeEnviado(first,pageSize,sortField,sortOrder,filters,"admin");
+            
+                //setRowCount(10);
+                setRowCount(mensajeService.countMensajeEnviado(filters,"admin"));
+              return result;
+              
+              
+            }
+            
+            
+            @Override
+            public Object getRowKey(Mensaje m){
+                  
+                  return m.getIdmensaje();
+                  
+              }
+            
+           
+            public Mensaje getRowData(int rowKey){
+                
+                for(Mensaje m:result){
+                    
+                    if(m.getIdmensaje()==rowKey)
+                        return m;
+                    
+                }
+                return null;
+            }
+            
+        
+    };      
+        
+        
     }
 
    
@@ -131,6 +182,22 @@ public class MensajesEnviadosAdminController implements Serializable{
         this.filteredMensajesEnviados = filteredMensajesEnviados;
     }
 
+    public LazyDataModel<Mensaje> getModel() {
+        return model;
+    }
+
+    public void setModel(LazyDataModel<Mensaje> model) {
+        this.model = model;
+    }
+
+    public List<Mensaje> getResult() {
+        return result;
+    }
+
+    public void setResult(List<Mensaje> result) {
+        this.result = result;
+    }
+
     
     
     
@@ -145,7 +212,7 @@ public class MensajesEnviadosAdminController implements Serializable{
     
     
     public void actualizarEnviados(){
-        setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
+        //setListaMensajesEnviados((ArrayList<Mensaje>)mensajeService.mensajesEnviadosTotal("admin"));
         for(Mensaje m:selectedMensajesEnviados){
             
             if(selectedMensajeEnviado!=null&&m.getIdmensaje().equals(selectedMensajeEnviado.getIdmensaje()))
@@ -154,6 +221,9 @@ public class MensajesEnviadosAdminController implements Serializable{
             
         }       
          
+        result.removeAll(selectedMensajesEnviados);
+        
+        
     }
     
     

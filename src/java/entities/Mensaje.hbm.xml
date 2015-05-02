@@ -32,5 +32,17 @@
         <property name="eliminadoDestino" type="boolean">
             <column name="eliminadoDestino"  not-null="true" />
         </property>
+        <filter name="login" condition="origen like '%' :loginParam '%'"/>
+        <filter name="leido" condition="leidoDestino=1" />
+        <filter name="destino" condition="destino like '%' :destinoParam '%'"/>
     </class>
+    <filter-def name="destino">
+        <filter-param name="destinoParam" type="string"/>
+    </filter-def>
+    <filter-def name="login">
+        <filter-param name="loginParam" type="string"/>
+    </filter-def>
+    <filter-def name="leido">
+        <filter-param name="leidoParam" type="integer"/>
+    </filter-def>
 </hibernate-mapping>

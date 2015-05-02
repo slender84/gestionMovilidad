@@ -15,14 +15,14 @@
         <h:form id="recibidos">
            <p:growl id="msgsRecibidos" />
             
-           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosAdminController.listaMensajesRecibidos}" rows="10"
+           <p:dataTable id="t1" var="mensaje" value="#{mensajesRecibidosAdminController.model}" rows="10"
                          emptyMessage="no hay mensajes"
                          widgetVar="mensTabla"
                          filteredValue="#{mensajesRecibidosAdminController.filteredMensajesRecibidos}"
                          selection="#{mensajesRecibidosAdminController.selectedMensajesRecibidos}"
                          rowKey="#{mensaje.idmensaje}"
-                         paginator="true"
-                         paginatorPosition="bottom"
+                         paginator="true" sortBy="#{mensaje.idmensaje}" sortOrder="descending"
+                         paginatorPosition="bottom" lazy="true"
                          >
                          
                <f:facet name="header">Mensajes recibidos</f:facet>
@@ -33,7 +33,7 @@
                     
               
                
-               <p:column headerText="asunto" styleClass="asuntoMensaje">
+               <p:column headerText="asunto" sortBy="#{mensaje.tema}" styleClass="asuntoMensaje">
                          <h:outputText value="#{mensaje.tema}"/>
                       </p:column>
                
@@ -47,8 +47,8 @@
                <p:column filterBy="#{mensaje.leidoDestino}" headerText="leido" filterMatchMode="exact" styleClass="leidoMensaje">
                    <f:facet name="filter">
                        <p:selectOneMenu onchange="PF('mensTabla').filter()">
-                            <f:selectItem itemLabel="no" itemValue="false" />
-                            <f:selectItem itemLabel="si" itemValue="true"/>
+                            <f:selectItem itemLabel="no" itemValue='false' />
+                            <f:selectItem itemLabel="si" itemValue='true'/>
                             <f:selectItem itemLabel="todos" itemValue="#{null}" noSelectionOption="true"/>
                         </p:selectOneMenu>
                             
@@ -101,12 +101,13 @@
             
             <h:form id="enviados">
             <p:growl id="msgsEnviados" />
-            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosAdminController.listaMensajesEnviados}" rows="10"
+            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosAdminController.model}" rows="10"
                          emptyMessage="no hay mensajes"
                          selection="#{mensajesEnviadosAdminController.selectedMensajesEnviados}"
                          rowKey="#{mensaje.idmensaje}"
                          paginator="true"
                          paginatorPosition="bottom"
+                         lazy="true" sortOrder="descending" sortBy="#{mensaje.idmensaje}"
                          >
                         
                          <f:facet name="header">Mensajes enviados</f:facet>
@@ -115,7 +116,7 @@
                              <h:outputText value="#{mensaje.usuarioByDestino.login}"/>
                          </p:column>
                          
-                         <p:column headerText="asunto" styleClass="asuntoMensaje">
+                         <p:column headerText="asunto" sortBy="#{mensaje.tema}" styleClass="asuntoMensaje">
                                  <h:outputText value="#{mensaje.tema}"/>
                               </p:column>
                          
@@ -175,7 +176,11 @@
             
         <br/>
         
-            
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+                   <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                       <p:graphicImage value="/resources/ajax-loader.gif" />
+                   </p:dialog>
         
         
     </h:body>
