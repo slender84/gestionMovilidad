@@ -185,7 +185,8 @@
                          emptyMessage="No hay contratos pendientes" rowKey="#{contrato.idContrato}"
                          paginator="true" filteredValue="#{contratosPendientesController.filteredContratos}"
                          widgetVar="tablaContratosLazy" rows="10" paginatorPosition="bottom"
-                         sortOrder="descending" sortBy="#{contrato.idContrato}">
+                         sortOrder="descending" sortBy="#{contrato.idContrato}"
+                         styleClass="borderless">
             
             
                 <p:column headerText="Login" sortBy="#{contrato.movilidad.usuario.login}" filterBy="#{contrato.movilidad.usuario.login}" filterMatchMode="contains" styleClass="nombrePendiente">

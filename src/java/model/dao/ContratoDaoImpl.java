@@ -165,28 +165,28 @@ public class ContratoDaoImpl extends GenericDaoHibernate<Contrato, Integer> impl
          
          if(filters.containsKey("estado")){
                  
-            getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
+            getSession().enableFilter("estadoContrato").setParameter("estadoContratoParam", filters.get("estado"));
         
         }
         
         if(filters.containsKey("movilidad.usuario.login")){
             
-            getSession().enableFilter("login").setParameter("loginParam", filters.get("movilidad.usuario.login"));
+            getSession().enableFilter("usuarioContrato").setParameter("usuarioContratoParam", filters.get("movilidad.usuario.login"));
         }
         
         if(filters.containsKey("movilidad.cursoacademico.cursoAcademico")){
              
-            getSession().enableFilter("cursoAcademico").setParameter("cursoAcademicoParam", filters.get("movilidad.cursoacademico.cursoAcademico"));
+            getSession().enableFilter("cursoAcademicoContrato").setParameter("cursoAcademicoContratoParam", filters.get("movilidad.cursoacademico.cursoAcademico"));
         }
         
         if(filters.containsKey("movilidad.universidad.pais.nombre")){
             
-            getSession().enableFilter("pais").setParameter("paisParam", filters.get("movilidad.universidad.pais.nombre"));
+            getSession().enableFilter("paisContrato").setParameter("paisContratoParam", filters.get("movilidad.universidad.pais.nombre"));
         
         }
         if(filters.containsKey("movilidad.universidad.nombre")){
             
-        getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("movilidad.universidad.nombre"));
+        getSession().enableFilter("universidadContrato").setParameter("universidadContratoParam", filters.get("movilidad.universidad.nombre"));
          
                   }
         

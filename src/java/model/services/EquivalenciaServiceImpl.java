@@ -466,8 +466,43 @@ public class EquivalenciaServiceImpl implements EquivalenciaService{
          
       return false;   
   }
+     @Override    
+     public Equivalencia buscaEquivalenciaRepetida(Equivalencia e, Collection<Equivalencia>listaEquivalencias){
          
-     
+         for(Equivalencia aux:listaEquivalencias){
+             
+             if(e.getMiembroGrupoAsignaturaAs().size()==aux.getMiembroGrupoAsignaturaAs().size()){
+                
+                          if(e.getMiembroGrupoAsignaturaBs().size()==aux.getMiembroGrupoAsignaturaBs().size()){
+                              
+                              
+                              if(e.getMiembroGrupoAsignaturaAs().containsAll(aux.getMiembroGrupoAsignaturaAs())){
+                                     
+                                            
+                                         if(e.getMiembroGrupoAsignaturaBs().containsAll(aux.getMiembroGrupoAsignaturaBs())){
+                                                   
+                                            return aux;
+                                             
+                                             
+                                         }
+                 
+                              }
+           
+             
+             }
+         
+         
+         
+         
+       }
+    }
+         
+      return null;  
+         
+         
+         
+         
+     }
      
      
      /*@Override

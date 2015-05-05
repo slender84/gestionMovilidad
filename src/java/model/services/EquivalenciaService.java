@@ -38,6 +38,7 @@ public interface EquivalenciaService {
     public boolean equivalenciaRepetida(Equivalencia e, Collection<Equivalencia> listaEquivalencias);
     public List<Object> listarAsignaturasMovilidad();
     public List<Asignatura> lista2();
+    public Equivalencia buscaEquivalenciaRepetida(Equivalencia e, Collection<Equivalencia> listaEquivalencias);
     
     
 }

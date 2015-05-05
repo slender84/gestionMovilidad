@@ -162,9 +162,11 @@ public class ContratosPendientesController {
     @PostConstruct
     public void init(){
         
+        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
+        
         if(sessionController.correoConf.getPageToPage()==true){
             
-       listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
+       
             
          model=new LazyDataModel<Contrato>(){
           
@@ -175,6 +177,7 @@ public class ContratosPendientesController {
             
                 //setRowCount(10);
                 setRowCount(movilidadService.countContrato(filters));
+                
               return result;
               
               

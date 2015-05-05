@@ -77,6 +77,8 @@ public class EquivalenciasController implements Serializable{
     private Float creditosComparadoA;
     private Float creditosComparadoB;
     
+    private Collection<Equivalencia> listaEquivalenciasPublicadas;
+    
     Equivalencia equivalencia;
     
     private Asignatura selectedAsignatura;
@@ -120,6 +122,7 @@ public class EquivalenciasController implements Serializable{
            //context.getSessionMap().remove("contrato");
            //context.getSessionMap().remove("movilidad");
               
+           
                 
            try{
                Integer iC=selectedContrato.getIdContrato();
@@ -136,7 +139,16 @@ public class EquivalenciasController implements Serializable{
             creditosA=equivalenciaService.totalCreditos(listaAuxEquivalencias)[0];
             creditosB=equivalenciaService.totalCreditos(listaAuxEquivalencias)[1];
              
-            
+            listaEquivalenciasPublicadas=equivalenciaService.equivalenciasPublicas(selectedMovilidad.getUniversidad().getNombre());
+           for(Equivalencia e:listaAuxEquivalencias){
+               
+               if(equivalenciaService.equivalenciaRepetida(e, listaEquivalenciasPublicadas)==true){
+                   
+                   e.setVisible(true);
+               }
+               
+               
+           }
             
             
            if(context.getSessionMap().containsKey("contratoComparado")){
@@ -152,10 +164,29 @@ public class EquivalenciasController implements Serializable{
              
              if(contratoComparado!=null){
         listaAuxEquivalenciasComparado.addAll(contratoComparado.getEquivalencias());
+        
+        for(Equivalencia e:listaAuxEquivalenciasComparado){
+               
+               if(equivalenciaService.equivalenciaRepetida(e, listaEquivalenciasPublicadas)==true){
+                   
+                   e.setVisible(true);
+               }
+               
+               
+           }
+        
+        
+        
         equivalenciasRevisadas=equivalenciaService.compararEquivalencias(listaAuxEquivalencias, listaAuxEquivalenciasComparado);
         equivalenciasRevisadasComparado=equivalenciaService.compararEquivalencias(listaAuxEquivalenciasComparado, listaAuxEquivalencias);
         creditosComparadoA=equivalenciaService.totalCreditos(listaAuxEquivalenciasComparado)[0];
         creditosComparadoB=equivalenciaService.totalCreditos(listaAuxEquivalenciasComparado)[1];
+        
+        
+        
+        
+        
+        
            }else{
                 try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
@@ -385,13 +416,15 @@ public class EquivalenciasController implements Serializable{
         if(selectedEquivalencias.isEmpty()){
             return null;
         }
-        
+        Equivalencia repetida;
         for(EquivalenciaRevisada e:selectedEquivalencias){
             
             
-            Collection<Equivalencia> listaEquivalenciasPublicadas=equivalenciaService.equivalenciasPublicas(selectedMovilidad.getUniversidad().getNombre());
+            //Collection<Equivalencia> listaEquivalenciasPublicadas=equivalenciaService.equivalenciasPublicas(selectedMovilidad.getUniversidad().getNombre());
             
-            if(equivalenciaService.equivalenciaRepetida(e.getEquivalencia(), listaEquivalenciasPublicadas)==true){
+            
+            
+            if(equivalenciaService.buscaEquivalenciaRepetida(e.getEquivalencia(), listaEquivalenciasPublicadas)!=null){
                 
                 sessionController.creaMensaje("La equivalencia ya había sido publicada anteriormente", FacesMessage.SEVERITY_ERROR);
                 return null;
@@ -399,7 +432,7 @@ public class EquivalenciasController implements Serializable{
             
             
             e.getEquivalencia().setVisible(true);
-           
+           listaEquivalenciasPublicadas.add(e.getEquivalencia());
                 try{
                 equivalenciaService.actualizarEquivalencia(e.getEquivalencia());
             }catch(RuntimeException ex){
@@ -430,7 +463,7 @@ public class EquivalenciasController implements Serializable{
         
         for(Equivalencia e:selectedEquivalenciasSimples){
             
-            Collection<Equivalencia> listaEquivalenciasPublicadas=equivalenciaService.equivalenciasPublicas(selectedMovilidad.getUniversidad().getNombre());
+            
             
             if(equivalenciaService.equivalenciaRepetida(e, listaEquivalenciasPublicadas)==true){
                 
@@ -441,7 +474,7 @@ public class EquivalenciasController implements Serializable{
             
             
             e.setVisible(true);
-           
+            listaEquivalenciasPublicadas.add(e);
                  try{
                 equivalenciaService.actualizarEquivalencia(e);
             }catch(RuntimeException ex){
@@ -453,6 +486,7 @@ public class EquivalenciasController implements Serializable{
             }
             
         }
+        
         sessionController.creaMensaje("Las equivalencias han sido publicadas", FacesMessage.SEVERITY_INFO);
         
         
@@ -465,12 +499,18 @@ public class EquivalenciasController implements Serializable{
          if(selectedEquivalencias.isEmpty()){
             return null;
         }
+         Equivalencia repetida;
         
         for(EquivalenciaRevisada e:selectedEquivalencias){
-            e.getEquivalencia().setVisible(false);
             
-                 try{
-                equivalenciaService.actualizarEquivalencia(e.getEquivalencia());
+            repetida=equivalenciaService.buscaEquivalenciaRepetida(e.getEquivalencia(), listaEquivalenciasPublicadas);
+            if(repetida!=null){
+            repetida.setVisible(false);
+             e.getEquivalencia().setVisible(false);
+             listaEquivalenciasPublicadas.remove(repetida);
+            
+             try{
+                equivalenciaService.actualizarEquivalencia(repetida);
             }catch(RuntimeException ex){
                  try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
@@ -480,6 +520,13 @@ public class EquivalenciasController implements Serializable{
             }
             
         }
+            
+                
+            }
+            
+           
+            
+                
         sessionController.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);
         return null;
         
@@ -491,22 +538,32 @@ public class EquivalenciasController implements Serializable{
          if(selectedEquivalenciasSimples.isEmpty()){
             return null;
         }
+         Equivalencia repetida;
         
         for(Equivalencia e:selectedEquivalenciasSimples){
-            e.setVisible(false);
-            
-            try{
-                equivalenciaService.actualizarEquivalencia(e);
+            repetida=equivalenciaService.buscaEquivalenciaRepetida(e, listaEquivalenciasPublicadas);
+            if(repetida!=null){
+                listaEquivalenciasPublicadas.remove(repetida);
+                repetida.setVisible(false);
+                e.setVisible(false);
+                try{
+                equivalenciaService.actualizarEquivalencia(repetida);
             }catch(RuntimeException ex){
+                ex.printStackTrace();
                  try{
             FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+"/admin/error.xhtml");
             }catch(IOException ex2){
                     
                     }
             }
-            
+         sessionController.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);   
         }
-        sessionController.creaMensaje("Las equivalencias seleccionadas ya no son públicas", FacesMessage.SEVERITY_INFO);
+                
+            }
+            
+            
+            
+        
         return null;
         
         
