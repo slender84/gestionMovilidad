@@ -83,6 +83,35 @@ public class email {
         
         
     }
+    
+    public static void enviarEmailYo(Configuracion correoConf,String asunto, String mensaje) throws EmailException{
+        
+        Email email = new SimpleEmail();
+        //email.setHostName("smtp.googlemail.com");
+        //email.setHostName("smtp.gmail.com");
+        email.setHostName(correoConf.getHostName());
+        //email.setSmtpPort(489);    
+        //email.setSmtpPort(465);
+        email.setSmtpPort(correoConf.getSmtpPort());
+        //email.setAuthenticator(new DefaultAuthenticator("registroerasmus@gmail.com", "registrousers"));
+        email.setAuthenticator(new DefaultAuthenticator("registroerasmus3@gmail.com", correoConf.getPassword()));
+        email.setSSLOnConnect(true);
+        email.setFrom("registroerasmus3@gmail.com");
+        //email.setFrom(correoConf.getDireccion());
+        email.setSubject(asunto);
+        email.setMsg(mensaje);
+        email.addTo("pedro.olarte@udc.es");
+        
+         
+        //email.setTLS(true);
+        
+        email.send();
+        
+        
+        
+    }
+    
+    
      
      
     

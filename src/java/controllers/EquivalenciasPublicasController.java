@@ -25,7 +25,7 @@ import javax.faces.context.FacesContext;
 import model.services.AsignaturaService;
 import model.services.EquivalenciaService;
 import model.services.UniversidadService;
-
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 
 
@@ -443,9 +443,6 @@ public class EquivalenciasPublicasController implements Serializable{
             valorAjaxB="";
         
         
-        
-        
-        
         if(valorAjax.equals("")==false){
         
             
@@ -459,8 +456,10 @@ public class EquivalenciasPublicasController implements Serializable{
                 
                 
                 
-                if(arrayDeListasAsignatura[i].get(j).contains(valorAjax)){
-                    
+                //if(arrayDeListasAsignatura[i].get(j).contains(valorAjax)){
+                  
+                if(containsIgnoreCase(arrayDeListasAsignatura[i].get(j),valorAjax)){
+                
                     listaEquivalencias.add(listaCompletaEquivalencias.get(i));
                     continue loopA;
                     
@@ -498,8 +497,8 @@ public class EquivalenciasPublicasController implements Serializable{
                 
                 
                 
-                if(arrayDeListasAsignaturaB[i].get(j).contains(valorAjaxB)){
-                    
+                //if(arrayDeListasAsignaturaB[i].get(j).contains(valorAjaxB)){
+                  if(containsIgnoreCase(arrayDeListasAsignaturaB[i].get(j), valorAjaxB)){  
                     listaEquivalencias.add(listaCompletaEquivalencias.get(i));
                     continue loopA;
                     

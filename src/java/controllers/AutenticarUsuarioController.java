@@ -226,6 +226,7 @@ public class AutenticarUsuarioController implements Serializable{
         //sessionController.version();
         
         
+        
         Usuario u;
         
              try{

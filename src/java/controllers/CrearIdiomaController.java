@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import model.services.AsignaturaService;
+import model.utils.email;
 
 @ManagedBean
 @RequestScoped
@@ -74,6 +75,9 @@ public class CrearIdiomaController {
     public void init(){
         
         listaIdiomas=(ArrayList<Idioma>)asignaturaService.listarIdiomas();
+        
+        
+        
         
         
     }

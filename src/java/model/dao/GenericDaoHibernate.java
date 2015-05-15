@@ -15,7 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDao<T,PK>{
+public class GenericDaoHibernate<T,PK extends Serializable> implements GenericDao<T,PK>,Serializable{
     
     private SessionFactory sessionFactory;
     private Class<T> entityClass;

@@ -5,6 +5,7 @@ import entities.Contrato;
 import entities.Cursoacademico;
 import entities.Movilidad;
 import entities.Universidad;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,13 +17,15 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.services.MovilidadService;
 import model.services.UniversidadService;
+
+
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 
 @ManagedBean
 @ViewScoped
-public class ContratosPendientesController {
+public class ContratosPendientesController implements Serializable{
 
     @ManagedProperty(value="#{sessionController}")
     private SessionController sessionController;
@@ -173,7 +176,10 @@ public class ContratosPendientesController {
             @Override
             public List<Contrato> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
     
-             result=movilidadService.listaLazyContrato(first,pageSize,sortField,sortOrder,filters);
+                
+                
+                
+             result=movilidadService.listaLazyContrato(first,pageSize,sortField,sortOrder,filters,sessionController.correoConf);
             
                 //setRowCount(10);
                 setRowCount(movilidadService.countContrato(filters));

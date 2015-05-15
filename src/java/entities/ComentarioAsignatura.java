@@ -64,7 +64,7 @@ public class ComentarioAsignatura  implements java.io.Serializable {
         this.idcomentario = idcomentario;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumns( { 
         @JoinColumn(name="codAsignatura", referencedColumnName="codAsignatura", nullable=false), 
         @JoinColumn(name="nombreUniversidad", referencedColumnName="nombreUniversidad", nullable=false) } )
