@@ -296,49 +296,5 @@ public class MovilidadServiceImpl implements MovilidadService{
         
     }
     
-    @Override
-     public List<Contrato> listaLazyContratoPrueba(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,Configuracion correoConf){
-         
-         
-         return contratoDao.listaLazyContratoPrueba(first, pageSize, sortField, sortOrder, filters,correoConf);
-         
-         
-         
-     }
-     
-     @Override
-    public int countContratoPrueba(Map<String,Object> filters){
-        
-        
-        return contratoDao.countContratoPrueba(filters);
-        
-        
-    }
     
-    @Override
-    public List<Contrato> listaLazyContratoFilter(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,Configuracion correoConf){
-        
-        return contratoDao.listaLazyContratoFilter(first, pageSize, sortField, sortOrder, filters, correoConf);
-    }
-    
-    @Override
-    public int countContratoFilter(Map<String,Object> filters){
-        
-        return contratoDao.countContratoFilter(filters);
-    }
-    
-    
-     @Override
-    public List<Contrato> listaLazyContratoFilter2(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,Configuracion correoConf){
-        
-        return contratoDao.listaLazyContratoFilter2(first, pageSize, sortField, sortOrder, filters, correoConf);
-    }
-    
-    @Override
-    public int countContratoFilter2(Map<String,Object> filters){
-        
-        return contratoDao.countContratoFilter2(filters);
-    }
-    
-     
 }
