@@ -11,10 +11,10 @@ package model.dao;
 import entities.Movilidad;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
-import javax.faces.application.ProjectStage;
+
 import org.hibernate.Query;
 import org.primefaces.model.SortOrder;
 import org.springframework.stereotype.Repository;

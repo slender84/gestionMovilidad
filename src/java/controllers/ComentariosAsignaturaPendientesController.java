@@ -225,10 +225,14 @@ public class ComentariosAsignaturaPendientesController {
         if(selectedComentariosAsignatura.isEmpty())
             return null;
         
+        
+        
         for(ComentarioAsignatura c:selectedComentariosAsignatura){
             
+            if(selectedComentarioAsignatura!=null){
             if(c.getIdcomentario().equals(selectedComentarioAsignatura.getIdcomentario()))
                 selectedComentarioAsignatura.setTexto("");
+            }
             try{
                 
                 result.remove(c);
