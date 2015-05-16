@@ -11,7 +11,7 @@ import entities.ComentarioAsignatura;
 import entities.Movilidad;
 import entities.Usuario;
 import exceptions.InstanceNotFoundException;
-import java.util.Iterator;
+
 
 import java.util.List;
 import java.util.Map;
@@ -134,6 +134,8 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
   @Override     
    public List<ComentarioAsignatura> listaLazyComentarioAsignatura(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters){
        
+       String asignatura=null;
+       int filtro=0;
        
        String orden=null;
         List<ComentarioAsignatura> l=null;
@@ -179,30 +181,44 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         if(filters.containsKey("asignatura.id.nombreUniversidad")){
             
             getSession().enableFilter("universidad").setParameter("universidadParam", filters.get("asignatura.id.nombreUniversidad"));
-        }
-        
-        if(filters.containsKey("asignatura.nombreAsignatura")){
             
-            getSession().enableFilter("asignatura").setParameter("asignaturaParam", filters.get("asignatura.nombreAsignatura"));
         }
-        
         
         if(filters.containsKey("estado")){
             getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
         }
+        
+         if(filters.containsKey("asignatura.nombreAsignatura")){
+            
+            //getSession().enableFilter("asignatura").setParameter("asignaturaParam", filters.get("asignatura.nombreAsignatura"));
+             
+             filtro=1;
+             asignatura="%"+filters.get("asignatura.nombreAsignatura").toString()+"%";
+             
+             
+        }
+        
                
         
         if(sortField==null){
             
              l=getSession().createQuery("select c from ComentarioAsignatura c").setFirstResult(first).setMaxResults(pageSize).list();
-            
+            return l;
         }else{
             
-             l=getSession().createQuery("select c from ComentarioAsignatura c order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
-              
+            if(filtro==0){
+            l=getSession().createQuery("select c from ComentarioAsignatura c order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).list();
+            return l;
+            }
+            
+            //l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura like :asignatura order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
+            l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura in(select a.nombreAsignatura from Asignatura a where a.nombreAsignatura like :asignatura) order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
+
+            return l;
+            
         }
         
-        return l;
+        
         
        
        
@@ -211,6 +227,14 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
    
      @Override   
      public int countComentarioAsignatura(Map<String,Object>filters){
+         
+       String asignatura=null;
+       int filtro=0;
+       
+       String orden=null;
+        List<ComentarioAsignatura> l=null;
+         
+         
          
         if(filters.containsKey("usuario.login")){
                  
@@ -225,7 +249,9 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
         
         if(filters.containsKey("asignatura.nombreAsignatura")){
             
-            getSession().enableFilter("asignatura").setParameter("asignaturaParam", filters.get("asignatura.nombreAsignatura"));
+            //getSession().enableFilter("asignatura").setParameter("asignaturaParam", filters.get("asignatura.nombreAsignatura"));
+            filtro=1;
+             asignatura="%"+filters.get("asignatura.nombreAsignatura").toString()+"%";
         }
         
         
@@ -233,8 +259,18 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
             getSession().enableFilter("estado").setParameter("estadoParam", filters.get("estado"));
         }
         
-        List<ComentarioAsignatura> l=getSession().createQuery("select c from ComentarioAsignatura c").list();
-        return l.size();
+        if(filtro==0){
+            l=getSession().createQuery("select c from ComentarioAsignatura c" ).list();
+            return l.size();
+            }
+            
+            //l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura like :asignatura order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
+            l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura in(select a.nombreAsignatura from Asignatura a where a.nombreAsignatura like :asignatura)").setParameter("asignatura",asignatura).list();
+            
+            return l.size();
+        
+        
+        
          
      }
   
