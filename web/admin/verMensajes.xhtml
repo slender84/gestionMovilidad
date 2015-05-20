@@ -101,28 +101,29 @@
             
             <h:form id="enviados">
             <p:growl id="msgsEnviados" />
-            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosAdminController.model}" rows="10"
+            <p:dataTable id="t2" var="mensaje2" value="#{mensajesEnviadosAdminController.model}" rows="10"
                          emptyMessage="no hay mensajes"
                          selection="#{mensajesEnviadosAdminController.selectedMensajesEnviados}"
-                         rowKey="#{mensaje.idmensaje}"
+                         rowKey="#{mensaje2.idmensaje}"
                          paginator="true"
                          paginatorPosition="bottom"
-                         lazy="true" sortOrder="descending" sortBy="#{mensaje.idmensaje}"
+                         filteredValue="#{mensajesEnviadosAdminController.filteredMensajesEnviados}"
+                         lazy="true" sortOrder="descending" sortBy="#{mensaje2.idmensaje}"
                          >
                         
                          <f:facet name="header">Mensajes enviados</f:facet>
                          
-                         <p:column headerText="login" sortBy="#{mensaje.usuarioByDestino.login}" filterMatchMode="contains" filterBy="#{mensaje.usuarioByDestino.login}" styleClass="mandadoPor">
-                             <h:outputText value="#{mensaje.usuarioByDestino.login}"/>
+                         <p:column headerText="login" sortBy="#{mensaje2.usuarioByDestino.login}" filterMatchMode="contains" filterBy="#{mensaje2.usuarioByDestino.login}" styleClass="mandadoPor">
+                             <h:outputText value="#{mensaje2.usuarioByDestino.login}"/>
                          </p:column>
                          
-                         <p:column headerText="asunto" sortBy="#{mensaje.tema}" styleClass="asuntoMensaje">
-                                 <h:outputText value="#{mensaje.tema}"/>
+                         <p:column headerText="asunto" sortBy="#{mensaje2.tema}" styleClass="asuntoMensaje">
+                                 <h:outputText value="#{mensaje2.tema}"/>
                               </p:column>
                          
                          
-                         <p:column sortBy="#{mensaje.fecha}" headerText="fecha" styleClass="fechaMensaje" >
-                                   <h:outputText value="#{mensaje.fecha}">
+                         <p:column sortBy="#{mensaje2.fecha}" headerText="fecha" styleClass="fechaMensaje" >
+                                   <h:outputText value="#{mensaje2.fecha}">
                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>
                                    </h:outputText>
                               </p:column>
@@ -130,7 +131,7 @@
                          
                          <p:column styleClass="leerEnviados" headerText="Leer mensaje">
                                   <p:commandLink  update=":enviados :panelEnviados" action="#{mensajesEnviadosAdminController.leerMensajeEnviado}" >
-                                      <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosAdminController.selectedMensajeEnviado}"/>
+                                      <f:setPropertyActionListener value="#{mensaje2}" target="#{mensajesEnviadosAdminController.selectedMensajeEnviado}"/>
                                       <h:graphicImage value="/resources/img/lupa24.png" title="leer"/>
                                   </p:commandLink>
                               </p:column>

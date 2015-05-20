@@ -140,7 +140,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
                       if(filters.containsKey("leidoDestino")){
                               
                               if(filters.get("leidoDestino").equals("true")){
-                                 l=getSession().createQuery("select m from Mensaje m where m.usuarioByDestino.login=:destino and m.eliminadoDestino=0 and m.leidoDestino=1 order by  m."+campo+"  "+orden ).setParameter("destino", destino).list();
+                                 l=getSession().createQuery("select m from Mensaje m where m.usuarioByDestino.login=:destino and m.eliminadoDestino=0 and m.leidoDestino=1 order by  m."+campo+"  "+orden ).setFirstResult(first).setMaxResults(pageSize).setParameter("destino", destino).list();
                               }else if (filters.get("leidoDestino").equals("false")){
                                  l=getSession().createQuery("select m from Mensaje m where m.usuarioByDestino.login=:destino and m.eliminadoDestino=0 and m.leidoDestino=0 order by m."+campo+"  "+orden).setParameter("destino", destino).setFirstResult(first).setMaxResults(pageSize).list();
                               }
@@ -193,6 +193,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
       public List<Mensaje> listaLazyMensajeEnviado(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters,String origen){
           
           
+          
           String orden=null;
         List<Mensaje> l=null;
         
@@ -234,7 +235,7 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
         
         }else{
             
-            l=getSession().createQuery("select m FROM Mensaje m where m.eliminadoOrigen=0 and m.usuarioByOrigen.login=:origen").setParameter("origen", origen).list();
+            l=getSession().createQuery("select m FROM Mensaje m where m.eliminadoOrigen=0 and m.usuarioByOrigen.login=:origen").setFirstResult(first).setMaxResults(pageSize).setParameter("origen", origen).list();
             
         }
             
@@ -245,15 +246,20 @@ public class MensajeDaoImpl extends GenericDaoHibernate<Mensaje, Integer> implem
     @Override
     public int countMensajeEnviado(Map<String,Object>filters,String origen){
         
+        
+        
+        
          if(filters.containsKey("usuarioByDestino.login")){
                  
             getSession().enableFilter("destino").setParameter("destinoParam", filters.get("usuarioByDestino.login"));
         
         }
         
-        List<Mensaje> lista=getSession().createQuery("select m from Mensaje m where m.eliminadoOrigen=0 and m.usuarioByDestino.login=:origen").setParameter("origen", origen).list();
-        //return lista.size();
-        return 10;
+        //List<Mensaje> lista=getSession().createQuery("select m from Mensaje m where m.eliminadoOrigen=0 and m.usuarioByDestino.login=:origen").setParameter("origen", origen).list();
+         List<Mensaje> lista=getSession().createQuery("select m from Mensaje m where m.usuarioByOrigen.login=:origen and m.eliminadoOrigen=0").setParameter("origen", origen).list();
+        
+        return lista.size();
+        
         
         
     }

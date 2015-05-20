@@ -211,8 +211,9 @@ public class AsignaturaDaoImpl extends GenericDaoHibernate<Asignatura, Asignatur
             return l;
             }
             
-            //l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura like :asignatura order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
-            l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura in(select a.nombreAsignatura from Asignatura a where a.nombreAsignatura like :asignatura) order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
+            l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura like :asignatura order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
+            
+            //l=getSession().createQuery("select c from ComentarioAsignatura c where c.asignatura.nombreAsignatura in(select a.nombreAsignatura from Asignatura a where a.nombreAsignatura like :asignatura) order by c."+campo+"  "+orden).setFirstResult(first).setMaxResults(pageSize).setParameter("asignatura",asignatura).list();
 
             return l;
             

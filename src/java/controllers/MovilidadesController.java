@@ -28,7 +28,7 @@ import model.services.MovilidadService;
 import model.services.UniversidadService;
 import model.utils.email;
 import org.apache.commons.mail.EmailException;
-import org.primefaces.event.data.FilterEvent;
+
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -96,7 +96,7 @@ public class MovilidadesController implements Serializable{
        
        listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
        
-       if(sessionController.correoConf.getPageToPage()==true){
+       
        
        model=new LazyDataModel<Movilidad>(){
           
@@ -134,7 +134,7 @@ public class MovilidadesController implements Serializable{
         
     };
            
-       }else{
+      
            
            
            
@@ -142,7 +142,7 @@ public class MovilidadesController implements Serializable{
          
          
         
-        boolean todosNulos=true;
+       /* boolean todosNulos=true;
         Map<String,String> m=new HashMap<String,String>();
         
         if(sessionController.getFiltroEstado().equals("todos")==false){
@@ -187,7 +187,7 @@ public class MovilidadesController implements Serializable{
             listaMovilidades=(ArrayList<Movilidad>)movilidadService.listarMovilidadPorFiltro(m);
         }
        
-       }
+       }*/
     }
 
     public SessionController getSessionController() {

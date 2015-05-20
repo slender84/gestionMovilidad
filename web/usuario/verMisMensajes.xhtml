@@ -97,9 +97,9 @@
             
             <h:form id="enviados">
             <p:growl id="msgsEnviados" />
-            <p:dataTable id="t2" var="mensaje" value="#{mensajesEnviadosUserController.model}" rowKey="#{mensaje.idmensaje}" rows="10" lazy="true"
+            <p:dataTable id="t2" var="mensaje2" value="#{mensajesEnviadosUserController.model}" rowKey="#{mensaje2.idmensaje}" rows="10" lazy="true"
                          emptyMessage="no hay mensajes"
-                         style="margin-bottom:0"
+                         filteredValue="#{mensajesEnviadosUserController.filteredMensajesEnviados}"
                          selection="#{mensajesEnviadosUserController.selectedMensajesEnviados}"
                          paginator="true"
                          paginatorPosition="bottom"
@@ -108,19 +108,19 @@
                  
                          <f:facet name="header">Mensajes enviados</f:facet>
                              
-                         <p:column headerText="asunto" sortBy="#{mensaje.tema}" styleClass="mandadoPor">
-                                 <h:outputText value="#{mensaje.tema}"/>
+                         <p:column headerText="asunto" sortBy="#{mensaje2.tema}" styleClass="mandadoPor">
+                                 <h:outputText value="#{mensaje2.tema}"/>
                               </p:column>
                          
-                         <p:column  headerText="fecha" sortBy="#{mensaje.fecha}" styleClass="fechaMensaje">
-                                   <h:outputText value="#{mensaje.fecha}">
+                         <p:column  headerText="fecha" sortBy="#{mensaje2.fecha}" styleClass="fechaMensaje">
+                                   <h:outputText value="#{mensaje2.fecha}">
                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="#{sessionController.zonaHoraria}" />
                                    </h:outputText>
                               </p:column>
                         
                          <p:column headerText="leer" styleClass="leerMensaje">
                              <p:commandLink update=":enviados :panelEnviados" action="#{mensajesEnviadosUserController.leerMensajeEnviado}" styleClass="leerEnviados">
-                                      <f:setPropertyActionListener value="#{mensaje}" target="#{mensajesEnviadosUserController.selectedMensajeEnviado}"/>
+                                      <f:setPropertyActionListener value="#{mensaje2}" target="#{mensajesEnviadosUserController.selectedMensajeEnviado}"/>
                                       <h:graphicImage value="/resources/img/lupa24.png" title="leer"/>
                                   </p:commandLink>
                               </p:column>

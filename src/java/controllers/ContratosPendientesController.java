@@ -167,7 +167,7 @@ public class ContratosPendientesController implements Serializable{
         
         listaCursoAcademico=(ArrayList<Cursoacademico>)universidadService.listarCursosAcademicos();
         
-        if(sessionController.correoConf.getPageToPage()==true){
+        
             
        
             
@@ -213,10 +213,10 @@ public class ContratosPendientesController implements Serializable{
 
            
             
-        }else{
         
         
-    boolean todosNulos=true;
+        
+    /*boolean todosNulos=true;
         Map<String,String> m=new HashMap<String,String>();
         
         if(sessionController.getFiltroContratoEstado().equals("todos")==false){
@@ -261,7 +261,7 @@ public class ContratosPendientesController implements Serializable{
             listaContratos=(ArrayList<Contrato>)movilidadService.listarContratosPorFiltro(m);
         }
        
-        }
+        }*/
     }
     
     
