@@ -78,7 +78,7 @@ public class EquivalenciasServiceTest {
     }
     
     @Test(expected = InstanceNotFoundException.class)
-    public void testBuscarEquivalenciaEnContratoEliminado() throws InstanceNotFoundException{
+    public void testCrearYEliminarContrato() throws InstanceNotFoundException{
         
         Contrato c=new Contrato();
         Equivalencia e=new Equivalencia();
@@ -87,12 +87,12 @@ public class EquivalenciasServiceTest {
         equivalenciaService.crearContrato(c);
         equivalenciaService.eliminarContrato(c);
         Contrato aux=equivalenciaService.buscarContrato(c.getIdContrato());
-        Iterator i=aux.getEquivalencias().iterator();
+        //Iterator i=aux.getEquivalencias().iterator();
         
         
     }
     @Test(expected = RuntimeException.class)
-    public void eliminarEquivalenciaCompartida()throws InstanceNotFoundException{
+    public void eliminarEquivalenciaCompartida(){
         
         Contrato c1=new Contrato();
         Contrato c2=new Contrato();

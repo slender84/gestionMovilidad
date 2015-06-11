@@ -3,14 +3,15 @@ package model;
 
 import entities.Asignatura;
 import entities.AsignaturaId;
-import entities.Pais;
 import entities.Universidad;
 import exceptions.InstanceNotFoundException;
+import java.util.Iterator;
 import static junit.framework.Assert.assertEquals;
 import static model.UniversidadServiceTest.SPRING_CONFIG_FILE;
 import model.services.AsignaturaService;
 import model.services.UniversidadService;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,8 @@ public class AsignaturaServiceTest {
     public void setUniversidadService(UniversidadService universidadService) {
         this.universidadService = universidadService;
     }
+    
+    
    
    @Test(expected = InstanceNotFoundException.class)
     public void testCrearAsignaturaConUniversidad()throws InstanceNotFoundException{
@@ -124,20 +127,18 @@ public class AsignaturaServiceTest {
         @Test
         public void crearYEditarAsignaturaTest() throws InstanceNotFoundException{
            
-        Universidad uni1=new Universidad("abc", "cba"); 
-        AsignaturaId asId=new AsignaturaId("asf","abc");
-        Asignatura a=new Asignatura(asId,uni1);
-        uni1.getAsignaturas().add(a);
-        universidadService.insertarUniversidad(uni1);
-
-        asignaturaService.crearAsignatura(a);
-        a.setCreditos(new Float(12));
+       // Universidad uni1=new Universidad("uniTest", "codTest"); 
+       // AsignaturaId asId=new AsignaturaId("asf","uniTest");
+        
+        AsignaturaId id=new AsignaturaId("z","abc");
+        Asignatura a=asignaturaService.buscarAsignatura(id);
+        Asignatura b=asignaturaService.buscarAsignatura(id);
+        a.setCurso("MASTER");
         asignaturaService.actualizarAsignatura(a);
-        Universidad uni2=universidadService.buscarUniversidad("abc");
-        //Assert.assertTrue(uni2.getAsignaturas().size()==1);
-
-            Asignatura a2=uni2.getAsignaturas().iterator().next();
-        Assert.assertTrue(a2.getCreditos().equals(a.getCreditos()));
+        
+        //asignaturaService.crearAsignatura(a);
+       
+        Assert.assertEquals(a.getCurso(), "MASTER");
         
         
     }

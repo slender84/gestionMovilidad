@@ -91,7 +91,7 @@ public class CrearIdiomaController {
             listaIdiomas.add(i);
             
             
-        }catch(org.springframework.dao.DataIntegrityViolationException ex){
+        }catch(RuntimeException ex){
             
             sessionController.creaMensaje("ya existe ese idioma", FacesMessage.SEVERITY_ERROR);
             idioma="";

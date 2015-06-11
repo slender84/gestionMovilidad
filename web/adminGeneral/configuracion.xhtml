@@ -55,12 +55,7 @@
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnos}"/>
                 <p:outputLabel value="Permitir edición de las asignaturas de destino"/>
                 <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.permitirAlumnosDestino}"/>
-                <p:outputLabel value="Cargar todas las movilidades si no hay filtros" />
-                <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.cargarTodasMovilidades}" disabled="#{sessionController.correoConf.pageToPage eq 'true'}"/>
-                <p:outputLabel value="Cargar todos los contratos si no hay filtros" />
-                <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.cargarTodosContratos}" disabled="#{sessionController.correoConf.pageToPage eq 'true'}"/>
-                <p:outputLabel value="Utilizar page-by-page iterator"/>
-                <p:selectBooleanCheckbox value="#{configuracionCorreoController.correoConf.pageToPage}"/>
+                
             </h:panelGrid> 
                 <p:separator/>
                 
