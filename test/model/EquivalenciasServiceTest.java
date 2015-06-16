@@ -5,6 +5,7 @@ import entities.Contrato;
 import entities.Equivalencia;
 import exceptions.InstanceNotFoundException;
 import java.util.Iterator;
+
 import junit.framework.Assert;
 import static junit.framework.Assert.assertEquals;
 import static model.EquivalenciasServiceTest.SPRING_CONFIG_FILE;
@@ -81,42 +82,43 @@ public class EquivalenciasServiceTest {
     public void testCrearYEliminarContrato() throws InstanceNotFoundException{
         
         Contrato c=new Contrato();
-        Equivalencia e=new Equivalencia();
-        c.getEquivalencias().add(e);
-        e.getContratos().add(c);
         equivalenciaService.crearContrato(c);
         equivalenciaService.eliminarContrato(c);
         Contrato aux=equivalenciaService.buscarContrato(c.getIdContrato());
-        //Iterator i=aux.getEquivalencias().iterator();
+        
         
         
     }
-    @Test(expected = RuntimeException.class)
-    public void eliminarEquivalenciaCompartida(){
+    @Test
+    public void crearEquiavalenciaEnContrato () throws InstanceNotFoundException{
         
-        Contrato c1=new Contrato();
-        Contrato c2=new Contrato();
+        Contrato c1=equivalenciaService.buscarContrato(14);
+        
+        
         Equivalencia e=new Equivalencia();
-        equivalenciaService.crearEquivalencia(e);
-        
         c1.getEquivalencias().add(e);
-        c2.getEquivalencias().add(e);
         e.getContratos().add(c1);
-        e.getContratos().add(c2);
-        equivalenciaService.crearContrato(c1);
-        equivalenciaService.crearContrato(c2);
-        equivalenciaService.eliminarEquivalencia(e);
-        e.setContratos(null);
-        equivalenciaService.actualizarEquivalencia(e);
+        equivalenciaService.crearEquivalencia(e);
+        equivalenciaService.modificarContrato(c1);
         
+        c1=equivalenciaService.buscarContrato(14);
         
-        assertEquals(c1.getEquivalencias().size(), c2.getEquivalencias().size());
-       
+        assertEquals(c1.getEquivalencias().size(), 2);
         
     }
     
-    
-   
+    @Test(expected = InstanceNotFoundException.class)
+   public void eliminarContrato() throws InstanceNotFoundException{
+       
+       Contrato c1=equivalenciaService.buscarContrato(14);
+       equivalenciaService.eliminarContrato(c1);
+       c1=equivalenciaService.buscarContrato(14);
+
+       
+       
+       
+       
+   }
     
     
     
